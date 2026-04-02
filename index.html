@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+  <meta name="theme-color" content="#080c18"/>
+  <title>UBOX 安博盒子 Taiwan｜官方售後服務中心</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --p:#00d4ff;--pd:#0099cc;--pdim:rgba(0,212,255,.14);
+      --a:#ff6b35;--ad:#cc4400;--a2:#ffd700;
+      --bg:#080c18;--bg2:#0f1628;--bg3:#161e32;
+      --s:#1a2540;--s2:#203058;
+      --bd:rgba(0,212,255,.18);--bds:rgba(255,255,255,.06);
+      --t:#ddeeff;--tm:#6a8aaa;--td:#3a5070;
+      --ok:#00e676;--er:#ff5252;--wa:#ffc107;--pu:#b47dff;
+      --r:12px;--rl:18px;--sh:0 8px 40px rgba(0,0,0,.5);
+      --glow:0 0 24px rgba(0,212,255,.25);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+      background:radial-gradient(ellipse 70% 60% at 10% 10%,rgba(0,212,255,.07) 0%,transparent 65%),
+                 radial-gradient(ellipse 50% 40% at 90% 85%,rgba(255,107,53,.05) 0%,transparent 60%)}
+    body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.022;
+      background-image:linear-gradient(rgba(0,212,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,1) 1px,transparent 1px);
+      background-size:60px 60px}
+
+    /* LOADER */
+    #loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
+    #loader.hide{opacity:0;visibility:hidden}
+    .ld-brand{display:flex;align-items:center;gap:14px;margin-bottom:32px}
+    .ld-box{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--pd));display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:900;color:var(--bg);box-shadow:var(--glow);animation:ldF 2s ease-in-out infinite}
+    .ld-txt{font-family:'Orbitron',monospace;font-size:1.9rem;font-weight:900;color:var(--p);letter-spacing:4px}
+    .ld-txt em{color:var(--a);font-style:normal}
+    @keyframes ldF{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    .ld-dots{display:flex;gap:9px}
+    .ld-dot{width:9px;height:9px;border-radius:50%;animation:ldB 1.2s ease-in-out infinite}
+    .ld-dot:nth-child(1){background:var(--p)}
+    .ld-dot:nth-child(2){background:var(--pd);animation-delay:.2s}
+    .ld-dot:nth-child(3){background:var(--a);animation-delay:.4s}
+    @keyframes ldB{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1.3);opacity:1}}
+
+    /* ANNOUNCE */
+    #annBar{background:linear-gradient(90deg,var(--a),var(--ad));color:#fff;text-align:center;font-size:.78rem;padding:8px 16px;font-weight:500;display:none}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:200;background:rgba(8,12,24,.9);backdrop-filter:blur(20px) saturate(1.8);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd)}
+    .nav-in{max-width:1020px;margin:0 auto;height:56px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0}
+    .nav-logo-box{width:33px;height:33px;border-radius:10px;background:linear-gradient(135deg,var(--p),var(--pd));display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:.78rem;font-weight:900;color:var(--bg);box-shadow:0 0 12px rgba(0,212,255,.4)}
+    .nav-logo-txt{font-family:'Orbitron',monospace;font-size:.95rem;font-weight:900;color:var(--t);letter-spacing:2px}
+    .nav-logo-txt em{color:var(--p);font-style:normal}
+    .nav-links{display:flex;gap:2px;flex:1;justify-content:center}
+    .nav-btn{background:none;border:none;color:var(--tm);font-family:'Noto Sans TC',sans-serif;font-size:.8rem;padding:7px 11px;border-radius:var(--r);cursor:pointer;transition:all .2s;white-space:nowrap}
+    .nav-btn:hover{color:var(--t);background:rgba(255,255,255,.06)}
+    .nav-btn.active{color:var(--p);background:rgba(0,212,255,.1);font-weight:600}
+    .nav-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+    #adminBtn{background:linear-gradient(135deg,var(--a),var(--ad));color:#fff;border:none;padding:6px 12px;border-radius:var(--r);font-size:.76rem;cursor:pointer;display:none;font-family:'Noto Sans TC',sans-serif;font-weight:600}
+    .nav-ava{width:30px;height:30px;border-radius:50%;border:2px solid var(--p);object-fit:cover;display:none}
+    .nav-cart{position:relative;background:rgba(255,255,255,.05);border:1px solid var(--bds);border-radius:var(--r);color:var(--tm);padding:6px 10px;cursor:pointer;font-size:.95rem;transition:all .2s;display:none}
+    .nav-cart:hover{background:var(--pdim);color:var(--p)}
+    .nav-cart-badge{position:absolute;top:-6px;right:-6px;background:var(--a);color:#fff;width:16px;height:16px;border-radius:50%;font-size:.6rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+    /* PAGES */
+    .page{display:none;padding:22px 16px 80px;max-width:1020px;margin:0 auto;position:relative;z-index:1;animation:pgIn .3s ease}
+    .page.active{display:block}
+    @keyframes pgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .pg-title{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:700;color:var(--p);margin-bottom:4px;text-shadow:var(--glow)}
+    .pg-sub{color:var(--tm);font-size:.86rem;margin-bottom:22px;line-height:1.6}
+
+    /* HERO */
+    .hero{text-align:center;padding:48px 0 34px}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--pdim);border:1px solid var(--bd);color:var(--p);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:20px}
+    .hero-badge::before{content:'●';font-size:.45rem;animation:blink 2s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+    .hero-title{font-family:'Orbitron',monospace;font-size:clamp(1.7rem,7vw,3.1rem);font-weight:900;line-height:1.15;margin-bottom:16px}
+    .c1{color:var(--p)}.c2{color:var(--a)}
+    .hero-desc{color:var(--tm);font-size:.93rem;line-height:1.8;max-width:520px;margin:0 auto 26px}
+    .hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .hero-stats{display:flex;gap:24px;justify-content:center;margin-top:38px;flex-wrap:wrap}
+    .h-stat{text-align:center}
+    .h-stat-val{font-family:'Orbitron',monospace;font-size:1.5rem;font-weight:900;color:var(--p)}
+    .h-stat-lbl{font-size:.72rem;color:var(--tm);margin-top:3px}
+    .h-div{width:1px;background:var(--bds);align-self:stretch}
+
+    /* FEAT CARDS */
+    .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px;margin:38px 0 30px}
+    .feat-card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:20px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+    .feat-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .25s;background:radial-gradient(circle at 30% 30%,rgba(0,212,255,.07),transparent 70%)}
+    .feat-card:hover{border-color:var(--p);transform:translateY(-4px);box-shadow:var(--glow)}
+    .feat-card:hover::before{opacity:1}
+    .feat-icon{font-size:2rem;margin-bottom:11px}
+    .feat-title{font-weight:700;margin-bottom:6px;font-size:.93rem}
+    .feat-desc{color:var(--tm);font-size:.8rem;line-height:1.65}
+    .feat-arr{position:absolute;bottom:14px;right:14px;color:var(--td);font-size:.78rem;transition:color .2s}
+    .feat-card:hover .feat-arr{color:var(--p)}
+
+    /* BUTTONS */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 20px;border-radius:var(--r);font-size:.86rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-decoration:none;font-family:'Noto Sans TC',sans-serif;white-space:nowrap}
+    .btn-p{background:linear-gradient(135deg,var(--p),var(--pd));color:var(--bg);box-shadow:0 4px 14px rgba(0,212,255,.28)}
+    .btn-p:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,212,255,.42)}
+    .btn-a{background:linear-gradient(135deg,var(--a),var(--ad));color:#fff;box-shadow:0 4px 14px rgba(255,107,53,.28)}
+    .btn-a:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,107,53,.42)}
+    .btn-ok{background:linear-gradient(135deg,var(--ok),#00c853);color:var(--bg);font-weight:700}
+    .btn-ok:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,230,118,.32)}
+    .btn-o{background:transparent;color:var(--p);border:1px solid var(--bd)}
+    .btn-o:hover:not(:disabled){background:var(--pdim);border-color:var(--p)}
+    .btn-g{background:rgba(255,255,255,.04);color:var(--tm);border:1px solid var(--bds)}
+    .btn-g:hover{background:rgba(255,255,255,.08);color:var(--t)}
+    .btn-danger{background:rgba(255,82,82,.12);color:var(--er);border:1px solid rgba(255,82,82,.28)}
+    .btn-danger:hover{background:rgba(255,82,82,.22)}
+    .btn-blk{width:100%}.btn-sm{padding:7px 13px;font-size:.78rem}.btn-lg{padding:13px 26px;font-size:.96rem}
+    .btn:disabled{opacity:.42;cursor:not-allowed;transform:none!important}
+
+    /* CARDS */
+    .card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:18px;margin-bottom:13px}
+    .card-hl{border-color:var(--bd);background:linear-gradient(135deg,var(--s),var(--s2))}
+    .card-title{font-weight:700;font-size:.93rem}
+
+    /* BADGES */
+    .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;font-size:.7rem;font-weight:600}
+    .b-blue{background:rgba(0,212,255,.12);color:var(--p)}
+    .b-orange{background:rgba(255,107,53,.12);color:var(--a)}
+    .b-green{background:rgba(0,230,118,.12);color:var(--ok)}
+    .b-yellow{background:rgba(255,193,7,.12);color:var(--wa)}
+    .b-red{background:rgba(255,82,82,.12);color:var(--er)}
+    .b-purple{background:rgba(180,125,255,.12);color:var(--pu)}
+    .b-gray{background:rgba(255,255,255,.07);color:var(--tm)}
+
+    /* FORM */
+    .fg{margin-bottom:14px}
+    .fl{display:flex;align-items:center;gap:4px;font-size:.8rem;color:var(--tm);margin-bottom:6px}
+    .req{color:var(--a)}
+    .fc{width:100%;background:var(--bg3);border:1px solid rgba(255,255,255,.08);border-radius:10px;color:var(--t);font-family:'Noto Sans TC',sans-serif;font-size:.86rem;padding:10px 13px;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none}
+    .fc:focus{outline:none;border-color:var(--p);box-shadow:0 0 0 3px rgba(0,212,255,.1)}
+    .fc::placeholder{color:var(--td)}
+    select.fc{cursor:pointer}
+    select.fc option{background:var(--bg2);color:var(--t)}
+    textarea.fc{resize:vertical;min-height:82px}
+    .fr{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+    .fh{font-size:.74rem;color:var(--tm);margin-top:4px;line-height:1.5}
+    .fs-ttl{font-weight:700;font-size:.82rem;color:var(--p);margin:18px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--bds)}
+    @media(max-width:500px){.fr{grid-template-columns:1fr}}
+
+    /* TABS */
+    .tabs{display:flex;gap:3px;margin-bottom:18px;background:var(--bg2);padding:4px;border-radius:13px}
+    .tab{flex:1;padding:8px 10px;border:none;background:none;color:var(--tm);border-radius:10px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;font-size:.8rem;transition:all .2s}
+    .tab.active{background:var(--s2);color:var(--p);font-weight:600}
+    .tab:hover:not(.active){color:var(--t);background:rgba(255,255,255,.04)}
+
+    /* PRODUCTS */
+    .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:13px}
+    .prod-card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
+    .prod-card:hover{border-color:var(--p);transform:translateY(-4px);box-shadow:var(--glow)}
+    .prod-thumb{width:100%;height:170px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:4.2rem;position:relative;overflow:hidden}
+    .prod-thumb img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+    .prod-tag-abs{position:absolute;top:10px;left:10px;background:rgba(8,12,24,.85);backdrop-filter:blur(6px)}
+    .prod-body{padding:15px;flex:1;display:flex;flex-direction:column}
+    .prod-name{font-weight:700;margin-bottom:2px;font-size:.92rem}
+    .prod-model{color:var(--tm);font-size:.75rem;margin-bottom:5px}
+    .prod-desc{color:var(--tm);font-size:.78rem;line-height:1.6;margin-bottom:11px;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .prod-price{font-size:1.3rem;font-weight:900;color:var(--a);margin-bottom:10px;font-family:'Orbitron',monospace}
+    .prod-price small{font-size:.72rem;color:var(--tm);font-weight:400;font-family:'Noto Sans TC',sans-serif}
+
+    /* SHOP FILTER */
+    .shop-filter{display:flex;gap:7px;margin-bottom:16px;overflow-x:auto;padding-bottom:3px}
+    .fchip{padding:5px 13px;border-radius:99px;font-size:.78rem;border:1px solid var(--bds);background:none;color:var(--tm);cursor:pointer;transition:all .2s;white-space:nowrap;font-family:'Noto Sans TC',sans-serif}
+    .fchip.active{background:var(--pdim);border-color:var(--p);color:var(--p);font-weight:600}
+
+    /* CART */
+    .cart-item{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--bds)}
+    .cart-item:last-child{border-bottom:none}
+    .cart-thumb{width:54px;height:54px;border-radius:11px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.7rem;flex-shrink:0;overflow:hidden}
+    .cart-thumb img{width:100%;height:100%;object-fit:cover}
+    .cart-info{flex:1;min-width:0}
+    .cart-name{font-weight:600;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .cart-price{color:var(--a);font-size:.83rem;font-weight:700}
+    .qty-ctrl{display:flex;align-items:center;gap:7px}
+    .qty-btn{width:27px;height:27px;border-radius:8px;background:var(--bg3);border:1px solid var(--bds);color:var(--t);cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;transition:all .15s}
+    .qty-btn:hover{background:var(--s2);border-color:var(--bd)}
+    .qty-val{font-weight:700;font-size:.88rem;min-width:18px;text-align:center}
+    .sum-wrap{background:var(--bg2);border-radius:13px;padding:16px;margin-top:14px}
+    .sum-row{display:flex;justify-content:space-between;padding:5px 0;font-size:.86rem}
+    .sum-row.total{font-weight:700;font-size:1.03rem;color:var(--p);border-top:1px solid var(--bds);margin-top:7px;padding-top:10px}
+    .ship-opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0}
+    .ship-opt{border:2px solid var(--bds);border-radius:var(--rl);padding:13px 11px;cursor:pointer;transition:all .2s;text-align:center}
+    .ship-opt.sel{border-color:var(--p);background:rgba(0,212,255,.06)}
+    .s-icon{font-size:1.7rem;margin-bottom:5px}
+    .s-name{font-weight:700;font-size:.85rem;margin-bottom:2px}
+    .s-fee{color:var(--tm);font-size:.76rem}
+    .cpn-bar{display:flex;gap:8px}
+    .cpn-bar .fc{flex:1}
+    .cpn-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,215,0,.08);border:1px dashed rgba(255,215,0,.32);color:var(--a2);padding:4px 11px;border-radius:8px;font-size:.8rem}
+
+    /* MEMBER */
+    .lwall{text-align:center;padding:48px 20px}
+    .lwall-icon{font-size:3.8rem;margin-bottom:14px;display:block}
+    .lwall h2{font-family:'Orbitron',monospace;color:var(--p);margin-bottom:9px;font-size:1.25rem}
+    .lwall p{color:var(--tm);margin-bottom:24px;line-height:1.75;font-size:.88rem}
+    .mem-hero{background:linear-gradient(135deg,var(--s),var(--s2));border:1px solid var(--bd);border-radius:var(--rl);padding:20px;margin-bottom:16px;display:flex;gap:14px;align-items:center}
+    .mem-ava{width:64px;height:64px;border-radius:50%;flex-shrink:0;border:3px solid var(--p);overflow:hidden;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.7rem;box-shadow:var(--glow)}
+    .mem-ava img{width:100%;height:100%;object-fit:cover}
+    .mem-name{font-size:1.1rem;font-weight:700;margin-bottom:2px}
+    .mem-phone{color:var(--tm);font-size:.8rem;margin-bottom:7px}
+    .m-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:16px}
+    .m-stat{background:var(--s);border:1px solid var(--bds);border-radius:12px;padding:13px;text-align:center}
+    .m-stat-val{font-family:'Orbitron',monospace;font-size:1.35rem;font-weight:700;color:var(--p)}
+    .m-stat-lbl{font-size:.7rem;color:var(--tm);margin-top:3px}
+    .wtag{display:inline-flex;align-items:center;gap:5px;background:rgba(0,230,118,.1);border:1px solid rgba(0,230,118,.22);color:var(--ok);padding:3px 11px;border-radius:99px;font-size:.75rem;font-weight:600}
+
+    /* REPAIR */
+    .r-prog{display:flex;margin-bottom:26px}
+    .rp-step{flex:1;text-align:center;position:relative}
+    .rp-step::after{content:'';position:absolute;top:12px;left:50%;width:100%;height:2px;background:var(--bds);z-index:0}
+    .rp-step:last-child::after{display:none}
+    .rp-step.s-done::after{background:var(--p)}
+    .rp-dot{width:25px;height:25px;border-radius:50%;background:var(--bg2);border:2px solid var(--bds);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-size:.68rem;font-weight:700;position:relative;z-index:1}
+    .rp-step.s-active .rp-dot{border-color:var(--p);background:var(--p);color:var(--bg);box-shadow:var(--glow)}
+    .rp-step.s-done .rp-dot{border-color:var(--p);background:var(--p);color:var(--bg)}
+    .rp-lbl{font-size:.65rem;color:var(--td)}
+    .rp-step.s-active .rp-lbl{color:var(--p);font-weight:600}
+    .r-notice{background:rgba(255,107,53,.05);border:1px solid rgba(255,107,53,.17);border-radius:var(--rl);padding:15px;font-size:.81rem;line-height:1.85;color:var(--tm);margin-top:13px}
+    .r-notice strong{color:var(--t)}
+    .trk-item{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:15px;margin-bottom:11px}
+    .sf{display:flex;gap:5px;margin-top:11px;flex-wrap:wrap}
+    .sf-dot{padding:3px 9px;border-radius:99px;font-size:.7rem;background:var(--bg2);color:var(--td)}
+    .sf-done{background:rgba(0,230,118,.09);color:var(--ok)}
+    .sf-cur{background:rgba(0,212,255,.11);color:var(--p);font-weight:700}
+
+    /* ADMIN */
+    .a-nav{display:flex;gap:5px;margin-bottom:20px;overflow-x:auto;padding-bottom:3px}
+    .a-tab{flex-shrink:0;padding:7px 14px;border-radius:99px;border:1px solid var(--bds);background:none;color:var(--tm);cursor:pointer;font-size:.78rem;font-family:'Noto Sans TC',sans-serif;transition:all .2s}
+    .a-tab.active{background:var(--p);color:var(--bg);border-color:var(--p);font-weight:700}
+    .a-sec{display:none}
+    .a-sec.active{display:block}
+    .big-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:11px;margin-bottom:18px}
+    .big-stat{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:16px}
+    .big-stat-val{font-family:'Orbitron',monospace;font-size:1.8rem;font-weight:700;color:var(--p)}
+    .big-stat-lbl{font-size:.76rem;color:var(--tm);margin-top:3px}
+    .big-stat.acc .big-stat-val{color:var(--a)}.big-stat.ok .big-stat-val{color:var(--ok)}.big-stat.pu .big-stat-val{color:var(--pu)}
+    .tbl-wrap{overflow-x:auto;border-radius:var(--rl)}
+    table{width:100%;border-collapse:collapse;font-size:.78rem}
+    th{background:var(--bg2);color:var(--tm);padding:9px 12px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--bds)}
+    td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.03);vertical-align:middle}
+    tr:hover td{background:rgba(255,255,255,.013)}
+    .tbl-bar{display:flex;gap:9px;align-items:center;margin-bottom:13px}
+    .prod-a-item{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--bds)}
+    .prod-a-thumb{width:42px;height:42px;border-radius:10px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+    .prod-a-info{flex:1;min-width:0}
+    .prod-a-name{font-weight:600;font-size:.86rem}
+    .prod-a-meta{font-size:.76rem;color:var(--tm)}
+    .icon-btn{width:31px;height:31px;border-radius:8px;border:1px solid var(--bds);background:none;color:var(--tm);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.86rem;transition:all .15s}
+    .icon-btn:hover{background:rgba(255,255,255,.06);color:var(--t)}
+    .act-row{display:flex;gap:5px}
+
+    /* MODAL */
+    .overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center;padding:14px}
+    .overlay.open{display:flex}
+    @media(min-width:600px){.overlay{align-items:center}}
+    .modal{background:var(--bg2);border:1px solid var(--bd);border-radius:var(--rl);padding:22px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;animation:modIn .25s ease}
+    @keyframes modIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .modal-title{font-family:'Orbitron',monospace;font-size:.96rem;color:var(--p)}
+    .modal-close{background:none;border:none;color:var(--tm);font-size:1.25rem;cursor:pointer;padding:4px;line-height:1}
+    .modal-close:hover{color:var(--t)}
+
+    /* TOAST */
+    #toast{position:fixed;bottom:18px;left:50%;z-index:9000;transform:translateX(-50%) translateY(70px);opacity:0;background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:12px 20px;font-size:.86rem;max-width:340px;text-align:center;box-shadow:var(--sh);transition:all .3s ease;pointer-events:none}
+    #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+    #toast.success{border-color:var(--ok);color:var(--ok)}
+    #toast.error{border-color:var(--er);color:var(--er)}
+    #toast.warn{border-color:var(--wa);color:var(--wa)}
+
+    /* UTILS */
+    .divider{height:1px;background:var(--bds);margin:16px 0}
+    .flex{display:flex}.ic{align-items:center}.jb{justify-content:space-between}
+    .g8{gap:8px}.g10{gap:10px}.g12{gap:12px}
+    .mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}
+    .mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}
+    .tc{text-align:center}.fw7{font-weight:700}.fw9{font-weight:900}
+    .cp{color:var(--p)}.ca{color:var(--a)}.cok{color:var(--ok)}.cer{color:var(--er)}.cm{color:var(--tm)}.cd{color:var(--td)}
+    .mono{font-family:'Orbitron',monospace}
+    .fsm{font-size:.8rem}.fxs{font-size:.73rem}
+    .empty{text-align:center;padding:40px 20px;color:var(--tm)}
+    .empty-icon{font-size:2.8rem;margin-bottom:11px}
+    ::-webkit-scrollbar{width:4px;height:4px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:rgba(0,212,255,.16);border-radius:99px}
+    @media(max-width:480px){.hero-title{font-size:1.6rem}.nav-btn span{display:none}}
+  </style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-brand">
+    <div class="ld-box">U</div>
+    <div class="ld-txt">UBOX <em>TW</em></div>
+  </div>
+  <div class="ld-dots">
+    <div class="ld-dot"></div><div class="ld-dot"></div><div class="ld-dot"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<div id="annBar"><span id="annTxt"></span></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <div class="nav-logo" onclick="showPage('home')">
+      <div class="nav-logo-box">U</div>
+      <div class="nav-logo-txt">UBOX <em>TW</em></div>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="showPage('home')">🏠 <span>首頁</span></button>
+      <button class="nav-btn" onclick="showPage('shop')">🛒 <span>商城</span></button>
+      <button class="nav-btn" onclick="showPage('repair')">🔧 <span>維修</span></button>
+      <button class="nav-btn" onclick="showPage('member')">👤 <span>會員</span></button>
+    </div>
+    <div class="nav-r">
+      <button id="navCart" class="nav-cart" onclick="showPage('cart')">🛒<span class="nav-cart-badge" id="cartBadge">0</span></button>
+      <button id="adminBtn" onclick="showPage('admin')">⚙️ 管理</button>
+      <img id="navAva" class="nav-ava" src="" alt=""/>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HOME ═══ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-badge">台灣 UBOX 安博盒子 官方授權售後</div>
+    <div class="hero-title"><span class="c1">UBOX</span> 安博盒子<br/><span class="c2">官方售後服務中心</span></div>
+    <p class="hero-desc">全台最專業的 UBOX 安博盒子銷售與維修服務平台。<br/>正品保障、透明報價、7-11 超商免費寄件。</p>
+    <div class="hero-btns">
+      <button class="btn btn-p btn-lg" onclick="showPage('shop')">🛒 會員商城</button>
+      <button class="btn btn-a btn-lg" onclick="showPage('repair')">🔧 申請維修</button>
+      <button class="btn btn-g" onclick="openLine()">💬 LINE 諮詢</button>
+    </div>
+    <div class="hero-stats">
+      <div class="h-stat"><div class="h-stat-val">5,000+</div><div class="h-stat-lbl">服務用戶</div></div>
+      <div class="h-div"></div>
+      <div class="h-stat"><div class="h-stat-val">7天</div><div class="h-stat-lbl">快速維修</div></div>
+      <div class="h-div"></div>
+      <div class="h-stat"><div class="h-stat-val">1年</div><div class="h-stat-lbl">購機保固</div></div>
+      <div class="h-div"></div>
+      <div class="h-stat"><div class="h-stat-val">99%</div><div class="h-stat-lbl">好評率</div></div>
+    </div>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-card" onclick="showPage('shop')"><div class="feat-icon">📦</div><div class="feat-title">正品銷售</div><div class="feat-desc">UBOX 全系列正品，宅配 / 超商貨到付款，安全有保障。</div><div class="feat-arr">→</div></div>
+    <div class="feat-card" onclick="showPage('repair')"><div class="feat-icon">🔧</div><div class="feat-title">超商寄修</div><div class="feat-desc">7-11 超商取件，寄件免運費，維修含來回運費，報價後才施修。</div><div class="feat-arr">→</div></div>
+    <div class="feat-card" onclick="showPage('member')"><div class="feat-icon">👑</div><div class="feat-title">會員專屬</div><div class="feat-desc">加入即享折扣，訂單維修一站查詢，LINE 即時通知。</div><div class="feat-arr">→</div></div>
+    <div class="feat-card" onclick="showPage('repair')"><div class="feat-icon">🛡️</div><div class="feat-title">一年保固</div><div class="feat-desc">購機起算一年原廠保固，保固內零件費全免，安心無憂。</div><div class="feat-arr">→</div></div>
+  </div>
+  <div class="flex jb ic mb12 mt20">
+    <div class="card-title cp mono">🔥 熱門商品</div>
+    <button class="btn btn-g btn-sm" onclick="showPage('shop')">查看全部 →</button>
+  </div>
+  <div class="prod-grid" id="homeProds"></div>
+  <div class="card card-hl mt20 tc">
+    <div class="fsm cm mb8">💬 維修進度查詢 / 客服諮詢</div>
+    <div class="fw7" style="font-size:1.02rem;margin-bottom:3px">LINE@ 官方帳號</div>
+    <div class="cp mono fw7" style="font-size:1.12rem;margin-bottom:13px">@uboxtw</div>
+    <button class="btn btn-o" onclick="openLine()">加入 LINE 開始諮詢</button>
+  </div>
+</div>
+
+<!-- ═══ SHOP ═══ -->
+<div id="page-shop" class="page">
+  <div id="shopWall" class="lwall" style="display:none">
+    <span class="lwall-icon">🔒</span>
+    <h2>會員專屬商城</h2>
+    <p>本商城為會員專屬私密頁面，<br/>請先登入 LINE 完成會員註冊，<br/>即可解鎖所有 UBOX 商品與優惠。</p>
+    <button class="btn btn-p btn-lg" onclick="showPage('member')">📋 立即加入會員</button>
+  </div>
+  <div id="shopContent" style="display:none">
+    <div class="pg-title">UBOX 商城</div>
+    <p class="pg-sub">會員獨享定價 ｜ 宅配 / 超商貨到付款</p>
+    <div class="card mb16">
+      <div class="card-title mb12">🎫 優惠碼</div>
+      <div class="cpn-bar"><input class="fc" id="cpnInput" placeholder="輸入優惠碼（如 UBOX100）"/><button class="btn btn-o" onclick="applyCoupon()">套用</button></div>
+      <div id="cpnResult" class="mt8"></div>
+    </div>
+    <div class="shop-filter">
+      <button class="fchip active" onclick="filterProds('all',this)">全部</button>
+      <button class="fchip" onclick="filterProds('box',this)">📺 安博盒子</button>
+      <button class="fchip" onclick="filterProds('remote',this)">🎮 遙控器</button>
+      <button class="fchip" onclick="filterProds('acc',this)">🔌 配件</button>
+    </div>
+    <div class="prod-grid" id="shopGrid"></div>
+  </div>
+</div>
+
+<!-- ═══ CART ═══ -->
+<div id="page-cart" class="page">
+  <div class="flex ic g10 mb16">
+    <button class="btn btn-g btn-sm" onclick="showPage('shop')">← 繼續購物</button>
+    <div class="pg-title" style="margin-bottom:0">購物車</div>
+  </div>
+  <div id="emptyCart" class="empty" style="display:none"><div class="empty-icon">🛒</div><p>購物車是空的</p><button class="btn btn-p mt16" onclick="showPage('shop')">去購物</button></div>
+  <div id="cartBody">
+    <div class="card" id="cartItems"></div>
+    <div class="card">
+      <div class="card-title mb12">選擇配送方式</div>
+      <div class="ship-opts">
+        <div class="ship-opt sel" id="shipD" onclick="selShip('delivery')"><div class="s-icon">🚚</div><div class="s-name">宅配到府</div><div class="s-fee" id="dFeeLabel">運費 $100</div></div>
+        <div class="ship-opt" id="shipC" onclick="selShip('cvs')"><div class="s-icon">🏪</div><div class="s-name">超商取貨付款</div><div class="s-fee" id="cFeeLabel">運費 $60</div></div>
+      </div>
+      <div id="dFields"><div class="fg"><label class="fl">收件地址 <span class="req">*</span></label><input class="fc" id="dAddr" placeholder="縣市區路號（例：台南市永康區中正路1號）"/></div></div>
+      <div id="cFields" style="display:none"><div class="fg"><label class="fl">7-11 門市名稱 <span class="req">*</span></label><input class="fc" id="cStore" placeholder="例：台南文化門市"/></div></div>
+      <div class="fg"><label class="fl">訂單備注</label><textarea class="fc" id="orderNote" rows="2" placeholder="特殊需求請備注"></textarea></div>
+      <div id="cpnApplied" style="display:none" class="mb12"><div class="cpn-tag">🎫 已套用：<span id="cpnCode"></span></div></div>
+      <div class="sum-wrap">
+        <div class="sum-row"><span>商品小計</span><span id="sumSub">$0</span></div>
+        <div class="sum-row"><span>運費</span><span id="sumFee">$0</span></div>
+        <div class="sum-row"><span>優惠折扣</span><span id="sumDisc" class="cok">$0</span></div>
+        <div class="sum-row total"><span>訂單總計</span><span id="sumTotal">$0</span></div>
+      </div>
+      <button class="btn btn-ok btn-blk btn-lg mt16" id="orderBtn" onclick="submitOrder()">✅ 確認下單（貨到付款）</button>
+      <p class="tc fxs cd mt8">下單後請等候客服確認，貨到現場付款</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ REPAIR ═══ -->
+<div id="page-repair" class="page">
+  <div class="pg-title">🔧 申請維修</div>
+  <p class="pg-sub">填寫完成後我們提供 7-11 超商寄件代碼，維修費用含來回運費</p>
+  <div class="tabs">
+    <button class="tab active" onclick="switchRepTab('form',this)">📝 填寫維修單</button>
+    <button class="tab" onclick="switchRepTab('track',this)">📋 查詢進度</button>
+  </div>
+  <div id="repForm">
+    <div class="r-prog">
+      <div class="rp-step s-active"><div class="rp-dot">1</div><div class="rp-lbl">填表</div></div>
+      <div class="rp-step"><div class="rp-dot">2</div><div class="rp-lbl">等待代碼</div></div>
+      <div class="rp-step"><div class="rp-dot">3</div><div class="rp-lbl">超商寄件</div></div>
+      <div class="rp-step"><div class="rp-dot">4</div><div class="rp-lbl">維修中</div></div>
+      <div class="rp-step"><div class="rp-dot">5</div><div class="rp-lbl">完成取件</div></div>
+    </div>
+    <div class="card">
+      <div class="fs-ttl">📱 聯絡方式（報價與進度通知）</div>
+      <div class="fg"><label class="fl">FB / LINE 帳號名稱 <span class="req">*</span></label><input class="fc" id="r_contact" placeholder="填好後請聯絡我們領取超商代碼"/><p class="fh">⚠️ 報價與進度均透過此帳號回覆，請務必正確</p></div>
+      <div class="fs-ttl">🔍 故障資訊</div>
+      <div class="fg"><label class="fl">維修問題描述 <span class="req">*</span></label><textarea class="fc" id="r_problem" placeholder="請詳述故障現象、何時發生等&#10;例：開機後畫面全黑，遙控器有反應但螢幕不顯示"></textarea></div>
+      <div class="fr">
+        <div class="fg"><label class="fl">序號 / MAC 編號 <span class="req">*</span></label><input class="fc" id="r_serial" placeholder="主機背面貼紙"/><p class="fh">主機背面貼紙上的 S/N 或 MAC</p></div>
+        <div class="fg"><label class="fl">UBOX 型號</label><select class="fc" id="r_model"><option value="">— 選擇型號 —</option><option>UBOX9 Pro Max</option><option>UBOX9 Pro</option><option>UBOX9</option><option>UBOX8 Plus</option><option>UBOX8</option><option>UBOX7</option><option>其他型號</option></select></div>
+      </div>
+      <div class="fs-ttl">👤 寄件資訊</div>
+      <div class="fr">
+        <div class="fg"><label class="fl">姓名 <span class="req">*</span></label><input class="fc" id="r_name" placeholder="真實姓名"/></div>
+        <div class="fg"><label class="fl">手機號碼 <span class="req">*</span></label><input class="fc" id="r_phone" placeholder="09xxxxxxxx" type="tel"/></div>
+      </div>
+      <div class="fg"><label class="fl">7-11 取件門市 <span class="req">*</span></label><input class="fc" id="r_store" placeholder="請填寫您方便取件的7-11門市名稱（例：台南文化門市）"/></div>
+      <div class="fs-ttl">🛡️ 保固查詢（選填）</div>
+      <div class="fg">
+        <label class="fl">訂單編號</label>
+        <div class="flex g8"><input class="fc" id="r_orderId" placeholder="UBOX-XXXXXXXX（有購機紀錄可填）" style="flex:1"/><button class="btn btn-o" onclick="checkWarranty()" style="white-space:nowrap">查保固</button></div>
+        <div id="wResult" class="mt8"></div>
+      </div>
+      <button class="btn btn-a btn-blk btn-lg mt8" onclick="submitRepair()" id="repBtn">📤 送出維修申請</button>
+    </div>
+    <div class="r-notice mt16">
+      📌 <strong>重要說明</strong><br/>
+      ・ 寄件完全<strong>不需先付運費</strong>，我們提供免費寄件代碼<br/>
+      ・ 維修前會先報價，同意後才施修<br/>
+      ・ 維修費用<strong>含來回運費</strong><br/>
+      ・ <strong>保固內（購機1年內）</strong>零件費全免，僅酌收工本費<br/>
+      ・ 收到代碼後請於 <strong>3天內</strong> 至7-11寄出
+    </div>
+  </div>
+  <div id="repTrack" style="display:none">
+    <div class="card">
+      <div class="fg"><label class="fl">手機號碼查詢</label><div class="flex g8"><input class="fc" id="trackPhone" placeholder="09xxxxxxxx" type="tel" style="flex:1"/><button class="btn btn-p" onclick="trackRepair()">查詢</button></div></div>
+    </div>
+    <div id="trackResults"></div>
+  </div>
+</div>
+
+<!-- ═══ MEMBER ═══ -->
+<div id="page-member" class="page">
+  <div id="memWall" style="display:none">
+    <div class="lwall">
+      <span class="lwall-icon">👤</span>
+      <h2>加入 UBOX 會員</h2>
+      <p>使用 LINE 帳號登入，享有會員專屬商城、<br/>訂單追蹤、維修查詢、LINE 即時通知等完整服務。</p>
+      <button class="btn btn-p btn-lg" onclick="liffLogin()">🟢 LINE 登入</button>
+    </div>
+  </div>
+  <div id="memReg" style="display:none">
+    <div class="pg-title">完成會員資料</div><p class="pg-sub">填寫後即可解鎖所有會員功能</p>
+    <div class="card">
+      <div class="fs-ttl">個人資料</div>
+      <div class="fr">
+        <div class="fg"><label class="fl">真實姓名 <span class="req">*</span></label><input class="fc" id="reg_name" placeholder="姓名"/></div>
+        <div class="fg"><label class="fl">出生年月日 <span class="req">*</span></label><input class="fc" id="reg_birth" type="date"/></div>
+      </div>
+      <div class="fg"><label class="fl">手機號碼 <span class="req">*</span></label><input class="fc" id="reg_phone" placeholder="09xxxxxxxx" type="tel"/></div>
+      <div class="fg"><label class="fl">預設收件地址 <span class="req">*</span></label><input class="fc" id="reg_addr" placeholder="縣市區路號"/></div>
+      <div class="fg"><label class="fl">電子信箱</label><input class="fc" id="reg_email" placeholder="email@example.com" type="email"/></div>
+      <button class="btn btn-p btn-blk btn-lg mt8" onclick="submitReg()">✅ 完成加入會員</button>
+    </div>
+  </div>
+  <div id="memProfile" style="display:none">
+    <div class="mem-hero">
+      <div class="mem-ava" id="memAva">👤</div>
+      <div style="flex:1;min-width:0">
+        <div class="mem-name" id="memName">—</div>
+        <div class="mem-phone" id="memPhone">—</div>
+        <div><span class="badge b-blue" id="memLevel">一般會員</span> <span class="wtag" id="memWtag" style="display:none">🛡️ 保固中</span></div>
+      </div>
+    </div>
+    <div class="m-stats">
+      <div class="m-stat"><div class="m-stat-val" id="ms_o">0</div><div class="m-stat-lbl">訂單數</div></div>
+      <div class="m-stat"><div class="m-stat-val" id="ms_r">0</div><div class="m-stat-lbl">維修次數</div></div>
+      <div class="m-stat"><div class="m-stat-val" id="ms_w">—</div><div class="m-stat-lbl">保固至</div></div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchMemTab('orders',this)">📦 訂單</button>
+      <button class="tab" onclick="switchMemTab('repairs',this)">🔧 維修</button>
+      <button class="tab" onclick="switchMemTab('profile',this)">⚙️ 設定</button>
+    </div>
+    <div id="mt-orders"><div id="memOrdList"></div></div>
+    <div id="mt-repairs" style="display:none"><div id="memRepList"></div></div>
+    <div id="mt-profile" style="display:none">
+      <div class="card">
+        <div class="fs-ttl">修改資料</div>
+        <div class="fg"><label class="fl">收件地址</label><input class="fc" id="edit_addr"/></div>
+        <div class="fg"><label class="fl">電子信箱</label><input class="fc" id="edit_email"/></div>
+        <button class="btn btn-p btn-blk" onclick="updateProfile()">💾 儲存變更</button>
+        <div class="divider"></div>
+        <button class="btn btn-danger btn-blk" onclick="doLogout()">登出帳號</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ADMIN ═══ -->
+<div id="page-admin" class="page">
+  <div id="adminLogin" style="display:none">
+    <div class="lwall">
+      <span class="lwall-icon">🔐</span>
+      <h2>管理員後台</h2>
+      <div class="card" style="text-align:left;max-width:340px;margin:0 auto">
+        <div class="fg"><label class="fl">管理員門號</label><input class="fc" id="adm_phone" placeholder="09xxxxxxxx" type="tel"/></div>
+        <div class="fg"><label class="fl">密碼</label><input class="fc" id="adm_pass" type="password" placeholder="密碼" onkeydown="if(event.key==='Enter')adminLogin()"/></div>
+        <button class="btn btn-p btn-blk" onclick="adminLogin()">🔓 登入後台</button>
+      </div>
+    </div>
+  </div>
+  <div id="adminPanel" style="display:none">
+    <div class="flex jb ic mb16">
+      <div><div class="pg-title">⚙️ 管理後台</div><p class="pg-sub" style="margin:0">UBOX Taiwan 後台管理系統</p></div>
+      <button class="btn btn-g btn-sm" onclick="adminLogout()">登出</button>
+    </div>
+    <div class="a-nav">
+      <button class="a-tab active" onclick="switchAdmin('overview',this)">📊 總覽</button>
+      <button class="a-tab" onclick="switchAdmin('members',this)">👥 會員</button>
+      <button class="a-tab" onclick="switchAdmin('orders',this)">📦 訂單</button>
+      <button class="a-tab" onclick="switchAdmin('repairs',this)">🔧 維修</button>
+      <button class="a-tab" onclick="switchAdmin('products',this)">🛒 商品</button>
+      <button class="a-tab" onclick="switchAdmin('coupons',this)">🎫 優惠碼</button>
+      <button class="a-tab" onclick="switchAdmin('announce',this)">📢 公告</button>
+      <button class="a-tab" onclick="switchAdmin('settings',this)">⚙️ 設定</button>
+    </div>
+
+    <div class="a-sec active" id="a-overview">
+      <div class="big-stats">
+        <div class="big-stat"><div class="big-stat-val" id="adm_mem">—</div><div class="big-stat-lbl">👥 總會員</div></div>
+        <div class="big-stat acc"><div class="big-stat-val" id="adm_ord">—</div><div class="big-stat-lbl">📦 總訂單</div></div>
+        <div class="big-stat ok"><div class="big-stat-val" id="adm_rev">—</div><div class="big-stat-lbl">💰 月營收</div></div>
+        <div class="big-stat pu"><div class="big-stat-val" id="adm_rep">—</div><div class="big-stat-lbl">🔧 維修案件</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px">
+        <div class="card"><div class="card-title mb12">🔧 最新維修</div><div id="dashRep"></div></div>
+        <div class="card"><div class="card-title mb12">📦 最新訂單</div><div id="dashOrd"></div></div>
+      </div>
+    </div>
+
+    <div class="a-sec" id="a-members">
+      <div class="tbl-bar"><input class="fc" id="memSearch" placeholder="🔍 搜尋姓名 / 電話" oninput="filterMems()" style="flex:1"/><button class="btn btn-g btn-sm" onclick="loadMems()">重整</button></div>
+      <div class="tbl-wrap"><table><thead><tr><th>姓名</th><th>電話</th><th>生日</th><th>地址</th><th>訂單</th><th>維修</th><th>保固至</th><th>等級</th><th>加入日</th></tr></thead><tbody id="memTbody"></tbody></table></div>
+    </div>
+
+    <div class="a-sec" id="a-orders">
+      <div class="tbl-bar"><input class="fc" id="ordSearch" placeholder="🔍 搜尋訂單號 / 會員" oninput="filterOrds()" style="flex:1"/><button class="btn btn-g btn-sm" onclick="loadOrds()">重整</button></div>
+      <div class="tbl-wrap"><table><thead><tr><th>訂單編號</th><th>會員</th><th>商品</th><th>金額</th><th>配送</th><th>地址</th><th>保固至</th><th>日期</th><th>狀態</th></tr></thead><tbody id="ordTbody"></tbody></table></div>
+    </div>
+
+    <div class="a-sec" id="a-repairs">
+      <div class="tbl-bar">
+        <input class="fc" id="repSearch" placeholder="🔍 搜尋維修單號 / 電話" oninput="filterReps()" style="flex:1"/>
+        <select class="fc" id="repStFilter" onchange="filterReps()" style="width:120px"><option value="">全部狀態</option><option>待寄件</option><option>已寄件</option><option>維修中</option><option>待取件</option><option>已完成</option></select>
+        <button class="btn btn-g btn-sm" onclick="loadReps()">重整</button>
+      </div>
+      <div class="tbl-wrap"><table><thead><tr><th>維修單號</th><th>姓名</th><th>電話</th><th>型號</th><th>序號</th><th>問題</th><th>保固</th><th>狀態</th><th>申請日</th><th>操作</th></tr></thead><tbody id="repTbody"></tbody></table></div>
+    </div>
+
+    <div class="a-sec" id="a-products">
+      <button class="btn btn-p mb16" onclick="openProdMod()">+ 新增商品</button>
+      <div id="admProdList"></div>
+    </div>
+
+    <div class="a-sec" id="a-coupons">
+      <button class="btn btn-p mb16" onclick="openCpnMod()">+ 新增優惠碼</button>
+      <div class="tbl-wrap"><table><thead><tr><th>優惠碼</th><th>類型</th><th>折扣</th><th>有效期</th><th>已用/上限</th><th>狀態</th><th>操作</th></tr></thead><tbody id="cpnTbody"></tbody></table></div>
+    </div>
+
+    <div class="a-sec" id="a-announce">
+      <div class="card"><div class="card-title mb12">📢 公告橫幅</div><div class="fg"><label class="fl">公告文字（留空則隱藏）</label><input class="fc" id="annInput" placeholder="例：🎉 五月特賣，優惠碼 UBOX500 折500元！"/></div><button class="btn btn-p" onclick="saveAnn()">💾 發布</button> <button class="btn btn-g" style="margin-left:8px" onclick="clearAnn()">清除</button></div>
+      <div class="card"><div class="card-title mb12">📲 LINE 廣播（謹慎使用）</div><div class="fg"><label class="fl">廣播訊息</label><textarea class="fc" id="bcMsg" rows="3" placeholder="輸入要廣播給所有用戶的訊息"></textarea></div><button class="btn btn-a" onclick="sendBC()">📨 發送廣播</button><p class="fh mt8">⚠️ 此功能將廣播給所有已關注用戶，請謹慎使用</p></div>
+    </div>
+
+    <div class="a-sec" id="a-settings">
+      <div class="card"><div class="card-title mb16">🚚 運費設定</div><div class="fr"><div class="fg"><label class="fl">宅配運費（元）</label><input class="fc" id="set_d" type="number" value="100"/></div><div class="fg"><label class="fl">超商運費（元）</label><input class="fc" id="set_c" type="number" value="60"/></div></div><button class="btn btn-p" onclick="saveSettings()">💾 儲存運費</button></div>
+      <div class="card"><div class="card-title mb16">🔑 管理員密碼</div><div class="fr"><div class="fg"><label class="fl">新密碼</label><input class="fc" id="set_np" type="password" placeholder="新密碼"/></div><div class="fg"><label class="fl">確認密碼</label><input class="fc" id="set_cp" type="password" placeholder="再輸入一次"/></div></div><button class="btn btn-o" onclick="changePass()">更新密碼</button></div>
+      <div class="card"><div class="card-title mb16">🔗 系統連結</div><div class="fg"><label class="fl">GAS 部署 URL</label><input class="fc" id="set_gas" placeholder="https://script.google.com/macros/s/..."/></div><div class="fg"><label class="fl">Vercel 網址</label><input class="fc" id="set_vercel" placeholder="https://your-project.vercel.app"/></div><button class="btn btn-p" onclick="saveSys()">💾 儲存</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODALS ═══ -->
+<div class="overlay" id="prodMod">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-title" id="prodModTitle">新增商品</div><button class="modal-close" onclick="closeModal('prodMod')">✕</button></div>
+    <div class="fg"><label class="fl">商品名稱 <span class="req">*</span></label><input class="fc" id="pm_name"/></div>
+    <div class="fr"><div class="fg"><label class="fl">型號</label><input class="fc" id="pm_model"/></div><div class="fg"><label class="fl">分類</label><select class="fc" id="pm_cat"><option value="box">📺 安博盒子</option><option value="remote">🎮 遙控器</option><option value="acc">🔌 配件</option></select></div></div>
+    <div class="fr"><div class="fg"><label class="fl">定價 <span class="req">*</span></label><input class="fc" id="pm_price" type="number"/></div><div class="fg"><label class="fl">庫存</label><input class="fc" id="pm_stock" type="number" value="0"/></div></div>
+    <div class="fg"><label class="fl">商品描述</label><textarea class="fc" id="pm_desc" rows="2"></textarea></div>
+    <div class="fr"><div class="fg"><label class="fl">圖片 URL</label><input class="fc" id="pm_img" placeholder="https://..."/></div><div class="fg"><label class="fl">表情符號</label><input class="fc" id="pm_emoji" placeholder="📦" maxlength="2" style="font-size:1.2rem"/></div></div>
+    <button class="btn btn-p btn-blk mt12" onclick="saveProduct()">💾 儲存商品</button>
+  </div>
+</div>
+
+<div class="overlay" id="cpnMod">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-title">新增優惠碼</div><button class="modal-close" onclick="closeModal('cpnMod')">✕</button></div>
+    <div class="fg"><label class="fl">優惠碼 <span class="req">*</span></label><input class="fc" id="cm_code" placeholder="例：UBOX500" style="text-transform:uppercase"/></div>
+    <div class="fr"><div class="fg"><label class="fl">折扣類型</label><select class="fc" id="cm_type"><option value="fixed">固定折扣（元）</option><option value="percent">百分比折扣（%）</option></select></div><div class="fg"><label class="fl">折扣值 <span class="req">*</span></label><input class="fc" id="cm_value" type="number"/></div></div>
+    <div class="fr"><div class="fg"><label class="fl">有效期至</label><input class="fc" id="cm_expire" type="date"/></div><div class="fg"><label class="fl">最大使用次數</label><input class="fc" id="cm_max" type="number" placeholder="0=無限"/></div></div>
+    <button class="btn btn-p btn-blk mt12" onclick="saveCoupon()">💾 建立優惠碼</button>
+  </div>
+</div>
+
+<div class="overlay" id="repMod">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-title">🔧 維修單管理</div><button class="modal-close" onclick="closeModal('repMod')">✕</button></div>
+    <div id="repModInfo" class="mb16"></div>
+    <div class="fg"><label class="fl">更新維修狀態</label><select class="fc" id="repStatusSel"><option>待寄件</option><option>已寄件</option><option>維修中</option><option>待取件</option><option>已完成</option><option>無法維修</option></select></div>
+    <div class="fg"><label class="fl">7-11 超商寄件代碼</label><input class="fc" id="repShipCode" placeholder="寄件代碼（客戶收到 LINE 通知）"/></div>
+    <div class="fg"><label class="fl">報價 / 維修備注</label><textarea class="fc" id="repNote" rows="3" placeholder="報價金額、維修說明等&#10;存入後自動推播 LINE 通知給客戶"></textarea></div>
+    <button class="btn btn-p btn-blk" onclick="updateRepair()">🔔 更新並通知客戶 LINE</button>
+  </div>
+</div>
+
+<!-- ═══ SCRIPT ═══ -->
+<script>
+// ── CONFIG ──────────────────────────────────────────
+const CFG = {
+  LIFF_ID:    'YOUR_LIFF_ID',   // ★ 填入您的 LIFF ID
+  ADMIN_PHONE:'0937942582',
+  LINE_OA:    '@uboxtw',
+};
+const gasUrl = () => localStorage.getItem('ubox_gas') || '';
+
+// ── STATE ────────────────────────────────────────────
+const S = {
+  user:null, member:null, isAdmin:false,
+  cart:    JSON.parse(localStorage.getItem('ubox_cart')     || '[]'),
+  settings:JSON.parse(localStorage.getItem('ubox_settings') || '{"deliveryFee":100,"cvsFee":60}'),
+  coupon:null, shipMode:'delivery',
+  prods:[], allMems:[], allOrds:[], allReps:[],
+  editProdId:null, currentRepId:null,
+};
+
+// ── HELPERS ──────────────────────────────────────────
+const g = id => document.getElementById(id);
+const show = id => { const e=g(id); if(e) e.style.display='block'; };
+const hide = id => { const e=g(id); if(e) e.style.display='none'; };
+const rbc = s => ({待寄件:'b-yellow',已寄件:'b-blue',維修中:'b-orange',待取件:'b-purple',已完成:'b-green',無法維修:'b-red'}[s]||'b-gray');
+const ts = (date) => String(date||'').slice(0,10);
+
+function toast(msg, type=''){
+  const el=g('toast');
+  el.textContent=msg; el.className='show '+(type||'');
+  clearTimeout(window._toast);
+  window._toast=setTimeout(()=>el.className='',3200);
+}
+function openModal(id){ g(id).classList.add('open'); }
+function closeModal(id){ g(id).classList.remove('open'); }
+document.querySelectorAll('.overlay').forEach(el=>{
+  el.addEventListener('click',e=>{ if(e.target===el) el.classList.remove('open'); });
+});
+
+// ── GAS API ──────────────────────────────────────────
+async function callGAS(action, params={}){
+  const u=gasUrl(); if(!u) throw new Error('請先在後台設定→填入 GAS URL');
+  const qs=new URLSearchParams({action,...params}).toString();
+  const r=await fetch(`${u}?${qs}`);
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  return r.json();
+}
+async function postGAS(action, data={}){
+  const u=gasUrl(); if(!u) throw new Error('請先在後台設定→填入 GAS URL');
+  const r=await fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,...data})});
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  return r.json();
+}
+
+// ── INIT ─────────────────────────────────────────────
+async function init(){
+  loadProds(); renderHomeProds(); updateBadge(); loadAnn();
+  const gs=localStorage.getItem('ubox_gas'); if(gs) g('set_gas').value=gs;
+  applySettings();
+  try{
+    await liff.init({liffId:CFG.LIFF_ID});
+    if(liff.isLoggedIn()){
+      const p=await liff.getProfile(); S.user=p;
+      const av=g('navAva'); av.src=p.pictureUrl||''; av.style.display='block';
+      await fetchMember();
+    }
+  }catch(e){ console.warn('LIFF:',e.message); }
+  if(localStorage.getItem('ubox_admin')==='true'){
+    S.isAdmin=true; g('adminBtn').style.display='inline-block';
+  }
+  g('loader').classList.add('hide');
+}
+
+// ── PRODUCTS ─────────────────────────────────────────
+function loadProds(){
+  const sv=localStorage.getItem('ubox_prods');
+  if(sv){ S.prods=JSON.parse(sv); return; }
+  S.prods=[
+    {id:'P001',name:'UBOX9 Pro Max 旗艦版',model:'UBOX9 Pro Max',cat:'box',price:5290,stock:8, desc:'8K HDR，8GB RAM+256GB，極致旗艦體驗',img:'',emoji:'📺'},
+    {id:'P002',name:'UBOX9 Pro 安博盒子',  model:'UBOX9 Pro',    cat:'box',price:4290,stock:15,desc:'4K HDR，6GB RAM+128GB，流暢穩定',    img:'',emoji:'📺'},
+    {id:'P003',name:'UBOX8 Plus 安博盒子', model:'UBOX8+',       cat:'box',price:3290,stock:20,desc:'4K，4GB RAM+64GB，超值入門首選',      img:'',emoji:'📺'},
+    {id:'P004',name:'UBOX 語音遙控器 V3',  model:'Remote V3',    cat:'remote',price:490,stock:30,desc:'藍牙語音搜尋，背光防水設計',         img:'',emoji:'🎮'},
+    {id:'P005',name:'HDMI 2.1 高速線 2M',  model:'HDMI-2M',      cat:'acc',price:220,stock:50,desc:'支援8K@60Hz，高速傳輸不衰減',         img:'',emoji:'🔌'},
+    {id:'P006',name:'矽膠保護殼（UBOX9）', model:'Case-9',       cat:'acc',price:180,stock:40,desc:'防刮防塵，精準開孔不卡殼',             img:'',emoji:'🛡️'},
+  ];
+}
+function saveProds(){ localStorage.setItem('ubox_prods',JSON.stringify(S.prods)); }
+
+function prodHTML(p, mini=false){
+  const low=p.stock>0&&p.stock<=5, out=p.stock===0;
+  return `<div class="prod-card">
+    <div class="prod-thumb">
+      ${p.img?`<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'"/>`:''}
+      <span style="position:relative;z-index:1">${p.emoji||'📦'}</span>
+      ${low?`<span class="badge b-yellow prod-tag-abs" style="font-size:.65rem">僅剩${p.stock}台</span>`:''}
+      ${out?`<span class="badge b-red prod-tag-abs" style="font-size:.65rem">已售完</span>`:''}
+    </div>
+    <div class="prod-body">
+      <div class="prod-name">${p.name}</div>
+      <div class="prod-model">${p.model}</div>
+      ${!mini?`<div class="prod-desc">${p.desc}</div>`:''}
+      <div class="prod-price">NT$ ${p.price.toLocaleString()} <small>/ 台</small></div>
+      <button class="btn btn-p btn-blk" onclick="addCart('${p.id}')" ${out?'disabled':''}>
+        ${out?'已售完':'🛒 加入購物車'}
+      </button>
+    </div>
+  </div>`;
+}
+
+function renderHomeProds(){
+  const el=g('homeProds'); if(!el) return;
+  el.innerHTML=S.prods.slice(0,3).map(p=>prodHTML(p,true)).join('');
+}
+
+function filterProds(cat, btn){
+  document.querySelectorAll('.fchip').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  const list = cat==='all' ? S.prods : S.prods.filter(p=>p.cat===cat);
+  g('shopGrid').innerHTML = list.map(p=>prodHTML(p,false)).join('');
+}
+
+// ── NAVIGATION ───────────────────────────────────────
+function showPage(pg){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const el=g('page-'+pg); if(el) el.classList.add('active');
+  const nm={home:0,shop:1,repair:2,member:3};
+  const nb=document.querySelectorAll('.nav-links .nav-btn');
+  if(nm[pg]!==undefined && nb[nm[pg]]) nb[nm[pg]].classList.add('active');
+  ({shop:renderShop, member:renderMember, admin:renderAdmin, cart:renderCart})[pg]?.();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── SHOP ─────────────────────────────────────────────
+function renderShop(){
+  const ok = !!S.member;
+  g('shopWall').style.display    = ok ? 'none'  : 'block';
+  g('shopContent').style.display = ok ? 'block' : 'none';
+  if(ok) g('shopGrid').innerHTML = S.prods.map(p=>prodHTML(p,false)).join('');
+}
+
+function addCart(pid){
+  const p=S.prods.find(x=>x.id===pid); if(!p) return;
+  if(!S.member){ toast('請先加入會員才能購物','warn'); showPage('member'); return; }
+  const ex=S.cart.find(i=>i.id===pid);
+  if(ex) ex.qty++; else S.cart.push({...p,qty:1});
+  saveCart(); updateBadge();
+  toast(`✅ 已加入購物車：${p.name}`,'success');
+}
+function saveCart(){ localStorage.setItem('ubox_cart',JSON.stringify(S.cart)); }
+function updateBadge(){
+  const t=S.cart.reduce((s,i)=>s+i.qty,0);
+  g('cartBadge').textContent=t;
+  g('navCart').style.display = t>0 ? 'flex' : 'none';
+}
+
+// ── CART ─────────────────────────────────────────────
+function renderCart(){
+  const empty=g('emptyCart'), body=g('cartBody');
+  if(!S.cart.length){ empty.style.display='block'; body.style.display='none'; return; }
+  empty.style.display='none'; body.style.display='block';
+  g('cartItems').innerHTML = S.cart.map(it=>`
+    <div class="cart-item">
+      <div class="cart-thumb">${it.emoji||'📦'}</div>
+      <div class="cart-info">
+        <div class="cart-name">${it.name}</div>
+        <div class="cart-price">NT$ ${it.price.toLocaleString()}</div>
+      </div>
+      <div class="qty-ctrl">
+        <button class="qty-btn" onclick="chgQty('${it.id}',-1)">−</button>
+        <span class="qty-val">${it.qty}</span>
+        <button class="qty-btn" onclick="chgQty('${it.id}',1)">+</button>
+      </div>
+    </div>`).join('');
+  updateSum(); applySettings();
+}
+
+function chgQty(id,d){
+  const it=S.cart.find(i=>i.id===id); if(!it) return;
+  it.qty+=d; if(it.qty<=0) S.cart=S.cart.filter(i=>i.id!==id);
+  saveCart(); updateBadge(); renderCart();
+}
+
+function selShip(m){
+  S.shipMode=m;
+  g('shipD').classList.toggle('sel', m==='delivery');
+  g('shipC').classList.toggle('sel', m==='cvs');
+  g('dFields').style.display = m==='delivery' ? 'block' : 'none';
+  g('cFields').style.display = m==='cvs'      ? 'block' : 'none';
+  updateSum();
+}
+
+function updateSum(){
+  const sub = S.cart.reduce((s,i)=>s+i.price*i.qty, 0);
+  const fee = S.shipMode==='delivery' ? S.settings.deliveryFee : S.settings.cvsFee;
+  let disc = 0;
+  if(S.coupon) disc = S.coupon.type==='fixed' ? S.coupon.value : Math.round(sub*S.coupon.value/100);
+  const total = Math.max(0, sub+fee-disc);
+  g('sumSub').textContent   = `$${sub.toLocaleString()}`;
+  g('sumFee').textContent   = `$${fee}`;
+  g('sumDisc').textContent  = `-$${disc.toLocaleString()}`;
+  g('sumTotal').textContent = `$${total.toLocaleString()}`;
+}
+
+function applySettings(){
+  g('dFeeLabel').textContent = `運費 $${S.settings.deliveryFee}`;
+  g('cFeeLabel').textContent = `運費 $${S.settings.cvsFee}`;
+}
+
+async function applyCoupon(){
+  const code = g('cpnInput').value.trim().toUpperCase();
+  if(!code) return;
+  const el=g('cpnResult'); el.innerHTML='<span class="cd">驗證中...</span>';
+  try{
+    const r = await callGAS('validateCoupon',{code});
+    if(r.success){
+      S.coupon=r.data;
+      el.innerHTML=`<span class="cpn-tag">✅ 有效：${r.data.type==='fixed'?'-$'+r.data.value:'折'+r.data.value+'%'}</span>`;
+      g('cpnApplied').style.display='block'; g('cpnCode').textContent=code;
+      updateSum();
+    } else {
+      el.innerHTML=`<span class="cer fsm">❌ ${r.message||'優惠碼無效'}</span>`; S.coupon=null;
+    }
+  } catch(e){ el.innerHTML=`<span class="cm fsm">⚠️ ${e.message}</span>`; }
+}
+
+async function submitOrder(){
+  if(!S.member){ toast('請先登入會員','error'); showPage('member'); return; }
+  if(!S.cart.length){ toast('購物車是空的','error'); return; }
+  const addr = S.shipMode==='delivery' ? g('dAddr').value.trim() : g('cStore').value.trim();
+  if(!addr){ toast('請填寫收件資訊','error'); return; }
+  const btn=g('orderBtn'); btn.disabled=true; btn.textContent='下單中...';
+  const sub = S.cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const fee = S.shipMode==='delivery' ? S.settings.deliveryFee : S.settings.cvsFee;
+  let disc=0; if(S.coupon) disc=S.coupon.type==='fixed'?S.coupon.value:Math.round(sub*S.coupon.value/100);
+  try{
+    const r=await postGAS('createOrder',{
+      lineId:S.user?.userId||'', memberName:S.member.name, phone:S.member.phone,
+      items:S.cart.map(i=>`${i.name} ×${i.qty}`).join('、'),
+      subtotal:sub, fee, discount:disc, total:Math.max(0,sub+fee-disc),
+      shipping:S.shipMode, address:addr, couponCode:S.coupon?.code||'',
+      note:g('orderNote').value,
+    });
+    if(r.success){
+      S.cart=[]; S.coupon=null; saveCart(); updateBadge();
+      toast(`🎉 訂單成功！${r.orderId}`,'success');
+      try{ if(liff.isInClient()) await liff.sendMessages([{type:'text',text:`📦 我已下單！\n訂單編號：${r.orderId}\n金額：$${Math.max(0,sub+fee-disc).toLocaleString()}`}]); }catch{}
+      setTimeout(()=>showPage('member'),1200);
+    } else toast(r.message||'下單失敗','error');
+  } catch(e){ toast(e.message,'error'); }
+  finally{ btn.disabled=false; btn.textContent='✅ 確認下單（貨到付款）'; }
+}
+
+// ── REPAIR ───────────────────────────────────────────
+function switchRepTab(t,el){
+  document.querySelectorAll('#page-repair .tab').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  g('repForm').style.display  = t==='form'  ? 'block' : 'none';
+  g('repTrack').style.display = t==='track' ? 'block' : 'none';
+}
+
+async function checkWarranty(){
+  const id=g('r_orderId').value.trim(); if(!id) return;
+  const el=g('wResult'); el.innerHTML='<span class="cd fsm">查詢中...</span>';
+  try{
+    const r=await callGAS('checkWarranty',{orderId:id});
+    if(r.success) el.innerHTML = r.inWarranty
+      ? `<span class="wtag">✅ 保固中（${r.expire} 到期）</span>`
+      : `<span class="badge b-red">❌ 保固已過期（${r.expire}）</span>`;
+    else el.innerHTML='<span class="badge b-gray">查無此訂單</span>';
+  } catch(e){ el.innerHTML=`<span class="cm fsm">⚠️ ${e.message}</span>`; }
+}
+
+async function submitRepair(){
+  const f={
+    contact:g('r_contact').value.trim(), problem:g('r_problem').value.trim(),
+    serial:g('r_serial').value.trim(),   name:g('r_name').value.trim(),
+    phone:g('r_phone').value.trim(),     store:g('r_store').value.trim(),
+  };
+  if(Object.values(f).some(v=>!v)){ toast('請填寫所有必填欄位','error'); return; }
+  if(!/^09\d{8}$/.test(f.phone)){ toast('手機號碼格式錯誤（09xxxxxxxx）','error'); return; }
+  const btn=g('repBtn'); btn.disabled=true; btn.textContent='送出中...';
+  try{
+    const r=await postGAS('createRepair',{
+      ...f, model:g('r_model').value, orderId:g('r_orderId').value.trim(), lineId:S.user?.userId||'',
+    });
+    if(r.success){
+      toast(`📤 維修申請已送出！單號：${r.repairId}`,'success');
+      try{
+        if(liff.isInClient()) await liff.sendMessages([{type:'text',
+          text:`🔧 維修申請送出\n維修單號：${r.repairId}\n${r.inWarranty?'✅ 保固內':'保固外'}\n我們將盡快提供超商寄件代碼！`}]);
+      }catch{}
+      ['r_contact','r_problem','r_serial','r_name','r_phone','r_store','r_orderId'].forEach(id=>{ g(id).value=''; });
+      g('wResult').innerHTML='';
+    } else toast(r.message||'送出失敗','error');
+  } catch(e){ toast(e.message,'error'); }
+  finally{ btn.disabled=false; btn.textContent='📤 送出維修申請'; }
+}
+
+async function trackRepair(){
+  const ph=g('trackPhone').value.trim();
+  if(!/^09\d{8}$/.test(ph)){ toast('請輸入正確手機號碼','error'); return; }
+  const el=g('trackResults'); el.innerHTML='<p class="cd tc fsm" style="padding:14px">查詢中...</p>';
+  try{
+    const r=await callGAS('getRepairsByPhone',{phone:ph});
+    const flow=['待寄件','已寄件','維修中','待取件','已完成'];
+    if(r.success && r.data?.length){
+      el.innerHTML=r.data.map(x=>`
+        <div class="trk-item">
+          <div class="flex jb ic">
+            <span class="badge b-blue">${x.repairId}</span>
+            <span class="badge ${rbc(x.status)}">${x.status}</span>
+          </div>
+          <div class="fsm mt8">${x.problem||''}</div>
+          <div class="cd fxs mt4">序號：${x.serial} ｜ ${ts(x.date)}</div>
+          ${x.shipCode?`<div class="mt8"><span class="wtag">📦 寄件代碼：${x.shipCode}</span></div>`:''}
+          ${x.adminNote?`<div class="fsm cm mt8">📋 ${x.adminNote}</div>`:''}
+          <div class="sf">${flow.map(s=>{
+            const i=flow.indexOf(s), c=flow.indexOf(x.status);
+            return `<span class="sf-dot ${s===x.status?'sf-cur':i<c?'sf-done':''}">${s}</span>`;
+          }).join('')}</div>
+        </div>`).join('');
+    } else el.innerHTML='<div class="empty"><div class="empty-icon">🔍</div><p>查無維修記錄</p></div>';
+  } catch(e){ el.innerHTML=`<p class="cer tc fsm" style="padding:14px">${e.message}</p>`; }
+}
+
+// ── MEMBER ───────────────────────────────────────────
+function liffLogin(){
+  try{ if(!liff.isLoggedIn()) liff.login(); } catch(e){ toast('LINE 登入失敗：'+e.message,'error'); }
+}
+async function fetchMember(){
+  if(!S.user) return;
+  try{
+    const r=await callGAS('getMember',{lineId:S.user.userId});
+    if(r.success && r.data) S.member=r.data;
+  } catch{}
+}
+function renderMember(){
+  if(!S.user){ show('memWall'); hide('memReg'); hide('memProfile'); return; }
+  if(!S.member){ hide('memWall'); show('memReg'); hide('memProfile'); return; }
+  hide('memWall'); hide('memReg'); show('memProfile');
+  fillMemProfile(); loadMemOrders();
+}
+function fillMemProfile(){
+  const m=S.member;
+  if(S.user?.pictureUrl) g('memAva').innerHTML=`<img src="${S.user.pictureUrl}" alt=""/>`;
+  g('memName').textContent  = m.name;
+  g('memPhone').textContent = m.phone;
+  g('ms_o').textContent = m.orderCount  || 0;
+  g('ms_r').textContent = m.repairCount || 0;
+  g('ms_w').textContent = m.warrantyExpire || '—';
+  if(m.warrantyExpire && new Date(m.warrantyExpire)>=new Date()) g('memWtag').style.display='inline-flex';
+  g('edit_addr').value  = m.address || '';
+  g('edit_email').value = m.email   || '';
+}
+async function loadMemOrders(){
+  if(!S.user) return;
+  const el=g('memOrdList');
+  el.innerHTML='<p class="cd tc fsm" style="padding:14px">載入中...</p>';
+  try{
+    const r=await callGAS('getMemberOrders',{lineId:S.user.userId});
+    if(r.success && r.data?.length){
+      el.innerHTML=r.data.map(o=>`
+        <div class="card">
+          <div class="flex jb ic mb8">
+            <span class="badge b-blue mono">${o.orderId}</span>
+            <span class="badge ${rbc(o.status)}">${o.status||'處理中'}</span>
+          </div>
+          <div class="fsm mb8">${o.items}</div>
+          <div class="flex jb">
+            <span class="cd fxs">${ts(o.date)} ｜ ${o.shipping==='delivery'?'🚚 宅配':'🏪 超商'}</span>
+            <span class="ca fw7">NT$ ${parseInt(o.total||0).toLocaleString()}</span>
+          </div>
+          ${o.inWarranty?'<div class="mt8"><span class="wtag">🛡️ 保固中</span></div>':''}
+        </div>`).join('');
+    } else el.innerHTML='<div class="empty"><div class="empty-icon">📦</div><p>尚無訂單記錄</p></div>';
+  } catch(e){ el.innerHTML=`<p class="cer fsm tc" style="padding:14px">${e.message}</p>`; }
+}
+async function loadMemRepairs(){
+  if(!S.member) return;
+  const el=g('memRepList');
+  el.innerHTML='<p class="cd tc fsm" style="padding:14px">載入中...</p>';
+  try{
+    const r=await callGAS('getRepairsByPhone',{phone:S.member.phone});
+    if(r.success && r.data?.length){
+      el.innerHTML=r.data.map(x=>`
+        <div class="trk-item">
+          <div class="flex jb ic">
+            <span class="badge b-blue">${x.repairId}</span>
+            <span class="badge ${rbc(x.status)}">${x.status}</span>
+          </div>
+          <div class="fsm mt8">${x.problem||''}</div>
+          <div class="cd fxs mt4">序號：${x.serial} ｜ ${ts(x.date)}</div>
+          ${x.shipCode?`<div class="mt8"><span class="wtag">📦 ${x.shipCode}</span></div>`:''}
+        </div>`).join('');
+    } else el.innerHTML='<div class="empty"><div class="empty-icon">🔧</div><p>尚無維修記錄</p></div>';
+  } catch(e){ el.innerHTML=`<p class="cer fsm tc" style="padding:14px">${e.message}</p>`; }
+}
+function switchMemTab(tab,btn){
+  document.querySelectorAll('#page-member .tabs .tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  ['orders','repairs','profile'].forEach(t=>{ g('mt-'+t).style.display=t===tab?'block':'none'; });
+  if(tab==='repairs') loadMemRepairs();
+}
+async function submitReg(){
+  const name=g('reg_name').value.trim(), birth=g('reg_birth').value,
+        phone=g('reg_phone').value.trim(), addr=g('reg_addr').value.trim(),
+        email=g('reg_email').value.trim();
+  if(!name||!birth||!phone||!addr){ toast('請填寫所有必填欄位','error'); return; }
+  if(!/^09\d{8}$/.test(phone)){ toast('手機號碼格式錯誤','error'); return; }
+  try{
+    const r=await postGAS('registerMember',{
+      lineId:S.user.userId, displayName:S.user.displayName,
+      pictureUrl:S.user.pictureUrl, name, birth, phone, address:addr, email,
+    });
+    if(r.success){ S.member=r.data; toast('🎉 會員加入成功！','success'); renderMember(); }
+    else toast(r.message||'註冊失敗','error');
+  } catch(e){ toast(e.message,'error'); }
+}
+async function updateProfile(){
+  try{
+    const r=await postGAS('updateMember',{
+      lineId:S.user.userId, address:g('edit_addr').value.trim(), email:g('edit_email').value.trim(),
+    });
+    if(r.success) toast('✅ 資料已更新','success');
+    else toast(r.message,'error');
+  } catch(e){ toast(e.message,'error'); }
+}
+function doLogout(){
+  if(!confirm('確定要登出？')) return;
+  try{ if(liff.isLoggedIn()) liff.logout(); }catch{}
+  S.user=null; S.member=null;
+  g('navAva').style.display='none';
+  g('adminBtn').style.display='none';
+  localStorage.removeItem('ubox_admin'); S.isAdmin=false;
+  renderMember(); toast('已登出','success');
+}
+
+// ── ADMIN ────────────────────────────────────────────
+function renderAdmin(){
+  const ok=localStorage.getItem('ubox_admin')==='true';
+  g('adminLogin').style.display = ok ? 'none'  : 'block';
+  g('adminPanel').style.display = ok ? 'block' : 'none';
+  if(ok){ loadOverview(); initSettings(); }
+}
+function initSettings(){
+  g('set_d').value = S.settings.deliveryFee;
+  g('set_c').value = S.settings.cvsFee;
+  const gs=localStorage.getItem('ubox_gas')||''; if(gs) g('set_gas').value=gs;
+  g('annInput').value = localStorage.getItem('ubox_ann')||'';
+}
+async function adminLogin(){
+  const phone=g('adm_phone').value.trim(), pass=g('adm_pass').value;
+  if(!phone||!pass){ toast('請填寫帳號與密碼','error'); return; }
+  try{
+    const r=await callGAS('adminLogin',{phone,pass});
+    if(r.success){ doAdminIn(); }
+    else toast(r.message||'帳號或密碼錯誤','error');
+  } catch{
+    // offline fallback
+    if(phone===CFG.ADMIN_PHONE && pass==='123456') doAdminIn();
+    else toast('帳號或密碼錯誤','error');
+  }
+}
+function doAdminIn(){
+  localStorage.setItem('ubox_admin','true'); S.isAdmin=true;
+  g('adminBtn').style.display='inline-block';
+  renderAdmin(); toast('✅ 管理員登入成功','success');
+}
+function adminLogout(){
+  localStorage.removeItem('ubox_admin'); S.isAdmin=false;
+  g('adminBtn').style.display='none'; renderAdmin();
+}
+function switchAdmin(tab,btn){
+  document.querySelectorAll('.a-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.a-sec').forEach(s=>s.classList.remove('active'));
+  g('a-'+tab)?.classList.add('active');
+  ({members:loadMems, orders:loadOrds, repairs:loadReps, products:loadProdsAdmin, coupons:loadCoupons})[tab]?.();
+}
+
+async function loadOverview(){
+  try{
+    const r=await callGAS('getDashboard');
+    if(r.success){
+      const d=r.data;
+      g('adm_mem').textContent = d.memberCount  || 0;
+      g('adm_ord').textContent = d.orderCount   || 0;
+      g('adm_rep').textContent = d.repairCount  || 0;
+      g('adm_rev').textContent = `$${(d.monthRevenue||0).toLocaleString()}`;
+      g('dashRep').innerHTML=(d.latestRepairs||[]).slice(0,6).map(r=>`
+        <div class="flex jb ic" style="padding:7px 0;border-bottom:1px solid var(--bds)">
+          <div><span class="cp fsm">${r.repairId}</span> <span class="cd fxs">｜${r.name}</span></div>
+          <span class="badge ${rbc(r.status)}">${r.status}</span>
+        </div>`).join('');
+      g('dashOrd').innerHTML=(d.latestOrders||[]).slice(0,6).map(o=>`
+        <div class="flex jb ic" style="padding:7px 0;border-bottom:1px solid var(--bds)">
+          <div><span class="cp fsm">${o.orderId}</span> <span class="cd fxs">｜${o.memberName}</span></div>
+          <span class="ca fw7 fsm">$${parseInt(o.total||0).toLocaleString()}</span>
+        </div>`).join('');
+    }
+  } catch(e){ console.warn('Overview:',e.message); }
+}
+
+async function loadMems(){
+  try{
+    const r=await callGAS('getAllMembers');
+    if(r.success){ S.allMems=r.data||[]; renderMemTbl(S.allMems); }
+  } catch(e){ toast(e.message,'error'); }
+}
+function renderMemTbl(data){
+  g('memTbody').innerHTML=data.map(m=>`
+    <tr>
+      <td><b>${m.name}</b></td><td>${m.phone}</td><td>${m.birth||'—'}</td>
+      <td class="cd" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${m.address||'—'}</td>
+      <td>${m.orderCount||0}</td><td>${m.repairCount||0}</td>
+      <td>${m.warrantyExpire?`<span class="badge ${new Date(m.warrantyExpire)>=new Date()?'b-green':'b-gray'}">${m.warrantyExpire}</span>`:'—'}</td>
+      <td><span class="badge b-blue">${m.level||'一般會員'}</span></td>
+      <td class="cd">${ts(m.regDate)}</td>
+    </tr>`).join('');
+}
+function filterMems(){
+  const q=g('memSearch').value.toLowerCase();
+  renderMemTbl(S.allMems.filter(m=>(m.name||'').toLowerCase().includes(q)||(m.phone||'').includes(q)));
+}
+
+async function loadOrds(){
+  try{
+    const r=await callGAS('getAllOrders');
+    if(r.success){ S.allOrds=r.data||[]; renderOrdTbl(S.allOrds); }
+  } catch(e){ toast(e.message,'error'); }
+}
+function renderOrdTbl(data){
+  g('ordTbody').innerHTML=data.map(o=>`
+    <tr>
+      <td><b class="cp">${o.orderId}</b></td>
+      <td>${o.memberName}</td>
+      <td class="cd" style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${o.items}">${(o.items||'').slice(0,18)}…</td>
+      <td><b class="ca">$${parseInt(o.total||0).toLocaleString()}</b></td>
+      <td><span class="badge b-blue">${o.shipping==='delivery'?'🚚 宅配':'🏪 超商'}</span></td>
+      <td class="cd" style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.address||'—'}</td>
+      <td>${o.warrantyExpire?`<span class="badge b-green fxs">${o.warrantyExpire}</span>`:'—'}</td>
+      <td class="cd">${ts(o.date)}</td>
+      <td><select onchange="updOrdStatus('${o.orderId}',this.value)" style="background:var(--bg3);color:var(--t);border:1px solid var(--bds);border-radius:8px;padding:4px 6px;font-size:.75rem;cursor:pointer">
+        ${['處理中','已出貨','已到店','已完成','已取消'].map(s=>`<option${o.status===s?' selected':''}>${s}</option>`).join('')}
+      </select></td>
+    </tr>`).join('');
+}
+function filterOrds(){
+  const q=g('ordSearch').value.toLowerCase();
+  renderOrdTbl(S.allOrds.filter(o=>(o.orderId||'').toLowerCase().includes(q)||(o.memberName||'').toLowerCase().includes(q)));
+}
+async function updOrdStatus(orderId,status){
+  try{ await postGAS('updateOrderStatus',{orderId,status}); toast('訂單狀態已更新','success'); }
+  catch(e){ toast(e.message,'error'); }
+}
+
+async function loadReps(){
+  try{
+    const r=await callGAS('getAllRepairs');
+    if(r.success){ S.allReps=r.data||[]; renderRepTbl(S.allReps); }
+  } catch(e){ toast(e.message,'error'); }
+}
+function renderRepTbl(data){
+  g('repTbody').innerHTML=data.map(r=>`
+    <tr>
+      <td><b class="cp">${r.repairId}</b></td>
+      <td>${r.name}</td><td>${r.phone}</td>
+      <td class="cd">${r.model||'—'}</td>
+      <td class="cd">${r.serial}</td>
+      <td class="cd" style="max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.problem}">${(r.problem||'').slice(0,14)}…</td>
+      <td><span class="badge ${r.inWarranty?'b-green':'b-gray'}">${r.inWarranty?'保固內':'保固外'}</span></td>
+      <td><span class="badge ${rbc(r.status)}">${r.status}</span></td>
+      <td class="cd">${ts(r.date)}</td>
+      <td><button class="btn btn-o btn-sm" onclick="openRepMod('${r.repairId}')">管理</button></td>
+    </tr>`).join('');
+}
+function filterReps(){
+  const q=g('repSearch').value.toLowerCase(), st=g('repStFilter').value;
+  renderRepTbl(S.allReps.filter(r=>
+    ((r.repairId||'').toLowerCase().includes(q)||(r.phone||'').includes(q)) &&
+    (!st||r.status===st)
+  ));
+}
+function openRepMod(id){
+  S.currentRepId=id;
+  const r=S.allReps.find(x=>x.repairId===id)||{};
+  g('repModInfo').innerHTML=`
+    <div class="card" style="background:var(--bg3)">
+      <div class="flex jb mb8"><span class="cp fw7">${id}</span><span class="badge ${rbc(r.status)}">${r.status}</span></div>
+      <div class="fsm"><b>${r.name}</b> ｜ ${r.phone}</div>
+      <div class="fsm cm mt4">問題：${r.problem||'—'}</div>
+      <div class="fsm cm mt2">序號：${r.serial} ｜ ${r.model||'—'}</div>
+      <div class="fsm cm mt2">取件門市：${r.store||'—'}</div>
+      <div class="mt4"><span class="badge ${r.inWarranty?'b-green':'b-gray'}">${r.inWarranty?'✅ 保固內':'❌ 保固外'}</span></div>
+    </div>`;
+  g('repStatusSel').value = r.status||'待寄件';
+  g('repShipCode').value  = r.shipCode||'';
+  g('repNote').value      = '';
+  openModal('repMod');
+}
+async function updateRepair(){
+  const status=g('repStatusSel').value, shipCode=g('repShipCode').value, note=g('repNote').value;
+  try{
+    const r=await postGAS('updateRepairStatus',{repairId:S.currentRepId,status,shipCode,note});
+    if(r.success){ closeModal('repMod'); loadReps(); toast('✅ 已更新並通知客戶 LINE','success'); }
+    else toast(r.message,'error');
+  } catch(e){ toast(e.message,'error'); }
+}
+
+function loadProdsAdmin(){
+  g('admProdList').innerHTML=S.prods.map(p=>`
+    <div class="prod-a-item">
+      <div class="prod-a-thumb">${p.emoji||'📦'}</div>
+      <div class="prod-a-info">
+        <div class="prod-a-name">${p.name}</div>
+        <div class="prod-a-meta">${p.model} ｜ NT$ ${p.price.toLocaleString()} ｜ 庫存 ${p.stock}</div>
+      </div>
+      <div class="act-row">
+        <button class="icon-btn" onclick="editProd('${p.id}')">✏️</button>
+        <button class="icon-btn" onclick="delProd('${p.id}')">🗑️</button>
+      </div>
+    </div>`).join('');
+}
+function openProdMod(id){
+  S.editProdId=id||null;
+  const p=id?S.prods.find(x=>x.id===id):null;
+  g('prodModTitle').textContent=p?'編輯商品':'新增商品';
+  g('pm_name').value =p?.name ||''; g('pm_model').value=p?.model||'';
+  g('pm_price').value=p?.price||''; g('pm_stock').value=p?.stock||0;
+  g('pm_desc').value =p?.desc ||''; g('pm_img').value  =p?.img  ||'';
+  g('pm_emoji').value=p?.emoji||'📦'; g('pm_cat').value=p?.cat||'box';
+  openModal('prodMod');
+}
+function editProd(id){ openProdMod(id); }
+async function saveProduct(){
+  const name=g('pm_name').value.trim(), price=parseInt(g('pm_price').value);
+  if(!name||!price){ toast('請填寫商品名稱和定價','error'); return; }
+  const data={
+    id:S.editProdId||'P'+Date.now(), name, model:g('pm_model').value.trim(),
+    cat:g('pm_cat').value, price, stock:parseInt(g('pm_stock').value)||0,
+    desc:g('pm_desc').value.trim(), img:g('pm_img').value.trim(),
+    emoji:g('pm_emoji').value||'📦',
+  };
+  if(S.editProdId) S.prods=S.prods.map(p=>p.id===data.id?data:p);
+  else S.prods.push(data);
+  saveProds();
+  try{ await postGAS('saveProduct',data); }catch{}
+  closeModal('prodMod'); loadProdsAdmin(); renderHomeProds();
+  toast('✅ 商品已儲存','success');
+}
+function delProd(id){
+  if(!confirm('確定刪除此商品？')) return;
+  S.prods=S.prods.filter(p=>p.id!==id); saveProds();
+  postGAS('deleteProduct',{id}).catch(()=>{});
+  loadProdsAdmin(); renderHomeProds(); toast('商品已刪除');
+}
+
+async function loadCoupons(){
+  try{
+    const r=await callGAS('getAllCoupons');
+    if(r.success) g('cpnTbody').innerHTML=(r.data||[]).map(c=>`
+      <tr>
+        <td><b class="cp">${c.code}</b></td>
+        <td><span class="badge b-blue">${c.type==='fixed'?'固定折扣':'百分比'}</span></td>
+        <td>${c.type==='fixed'?'-$'+c.value:'折'+c.value+'%'}</td>
+        <td>${c.expire||'無限期'}</td>
+        <td>${c.usedCount||0} / ${c.maxCount||'∞'}</td>
+        <td><span class="badge ${c.active?'b-green':'b-gray'}">${c.active?'啟用':'停用'}</span></td>
+        <td><button class="btn btn-g btn-sm" onclick="toggleCpn('${c.code}',${!c.active})">${c.active?'停用':'啟用'}</button></td>
+      </tr>`).join('');
+  } catch(e){ toast(e.message,'error'); }
+}
+function openCpnMod(){ openModal('cpnMod'); }
+async function saveCoupon(){
+  const code=g('cm_code').value.trim().toUpperCase(), val=parseFloat(g('cm_value').value);
+  if(!code||!val){ toast('請填寫優惠碼和折扣值','error'); return; }
+  try{
+    const r=await postGAS('createCoupon',{
+      code, type:g('cm_type').value, value:val,
+      expire:g('cm_expire').value, maxCount:parseInt(g('cm_max').value)||0, active:true,
+    });
+    if(r.success){ closeModal('cpnMod'); loadCoupons(); toast('✅ 優惠碼已建立','success'); }
+    else toast(r.message,'error');
+  } catch(e){ toast(e.message,'error'); }
+}
+async function toggleCpn(code,active){
+  try{ await postGAS('updateCoupon',{code,active}); loadCoupons(); }catch(e){ toast(e.message,'error'); }
+}
+
+// SETTINGS
+function saveSettings(){
+  S.settings.deliveryFee=parseInt(g('set_d').value)||100;
+  S.settings.cvsFee=parseInt(g('set_c').value)||60;
+  localStorage.setItem('ubox_settings',JSON.stringify(S.settings));
+  applySettings(); postGAS('saveSettings',S.settings).catch(()=>{});
+  toast('✅ 運費設定已儲存','success');
+}
+async function changePass(){
+  const np=g('set_np').value, cp=g('set_cp').value;
+  if(!np){ toast('請輸入新密碼','error'); return; }
+  if(np!==cp){ toast('兩次密碼不一致','error'); return; }
+  try{
+    await postGAS('changeAdminPass',{phone:CFG.ADMIN_PHONE,pass:np});
+    toast('✅ 密碼已更新','success');
+    g('set_np').value=''; g('set_cp').value='';
+  } catch(e){ toast(e.message,'error'); }
+}
+function saveSys(){
+  const u=g('set_gas').value.trim();
+  if(u){ localStorage.setItem('ubox_gas',u); toast('✅ GAS URL 已儲存','success'); }
+}
+
+// ANNOUNCE
+function saveAnn(){
+  const t=g('annInput').value.trim();
+  localStorage.setItem('ubox_ann',t); loadAnn(); toast('✅ 公告已發布','success');
+}
+function clearAnn(){
+  localStorage.removeItem('ubox_ann'); g('annInput').value=''; loadAnn();
+}
+function loadAnn(){
+  const t=localStorage.getItem('ubox_ann')||'';
+  const bar=g('annBar');
+  if(t){ g('annTxt').textContent=t; bar.style.display='block'; }
+  else bar.style.display='none';
+}
+async function sendBC(){
+  const msg=g('bcMsg').value.trim(); if(!msg){ toast('請輸入訊息','error'); return; }
+  if(!confirm(`確定廣播以下訊息給所有用戶？\n\n${msg}`)) return;
+  try{
+    const r=await postGAS('broadcastMessage',{message:msg});
+    if(r.success){ toast('✅ 廣播已送出','success'); g('bcMsg').value=''; }
+    else toast(r.message,'error');
+  } catch(e){ toast(e.message,'error'); }
+}
+
+// ── LINE ─────────────────────────────────────────────
+function openLine(){ window.open(`https://line.me/R/ti/p/${CFG.LINE_OA}`,'_blank'); }
+
+// ── START ────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
