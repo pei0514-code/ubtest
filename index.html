@@ -41,9 +41,7 @@
     @keyframes ldF{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
     .ld-dots{display:flex;gap:9px}
     .ld-dot{width:9px;height:9px;border-radius:50%;animation:ldB 1.2s ease-in-out infinite}
-    .ld-dot:nth-child(1){background:var(--p)}
-    .ld-dot:nth-child(2){background:var(--pd);animation-delay:.2s}
-    .ld-dot:nth-child(3){background:var(--a);animation-delay:.4s}
+    .ld-dot:nth-child(1){background:var(--p)}.ld-dot:nth-child(2){background:var(--pd);animation-delay:.2s}.ld-dot:nth-child(3){background:var(--a);animation-delay:.4s}
     @keyframes ldB{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1.3);opacity:1}}
 
     /* ANNOUNCE */
@@ -68,11 +66,15 @@
     .nav-cart-badge{position:absolute;top:-6px;right:-6px;background:var(--a);color:#fff;width:16px;height:16px;border-radius:50%;font-size:.6rem;font-weight:700;display:flex;align-items:center;justify-content:center}
 
     /* PAGES */
-    .page{display:none;padding:22px 16px 80px;max-width:1020px;margin:0 auto;position:relative;z-index:1;animation:pgIn .3s ease}
+    .page{display:none;padding:22px 16px 30px;max-width:1020px;margin:0 auto;position:relative;z-index:1;animation:pgIn .3s ease}
     .page.active{display:block}
     @keyframes pgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
     .pg-title{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:700;color:var(--p);margin-bottom:4px;text-shadow:var(--glow)}
     .pg-sub{color:var(--tm);font-size:.86rem;margin-bottom:22px;line-height:1.6}
+
+    /* FOOTER DISCLAIMER */
+    .site-footer{background:var(--bg2);border-top:1px solid var(--bds);padding:18px 16px;text-align:center;font-size:.75rem;color:var(--td);line-height:1.8;position:relative;z-index:1}
+    .site-footer strong{color:var(--tm)}
 
     /* HERO */
     .hero{text-align:center;padding:48px 0 34px}
@@ -154,9 +156,9 @@
     .tab.active{background:var(--s2);color:var(--p);font-weight:600}
     .tab:hover:not(.active){color:var(--t);background:rgba(255,255,255,.04)}
 
-    /* PRODUCTS */
-    .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:13px}
-    .prod-card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
+    /* PRODUCT CARDS (home - no cart button) */
+    .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:13px}
+    .prod-card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);overflow:hidden;transition:all .25s;display:flex;flex-direction:column;cursor:pointer}
     .prod-card:hover{border-color:var(--p);transform:translateY(-4px);box-shadow:var(--glow)}
     .prod-thumb{width:100%;height:170px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:4.2rem;position:relative;overflow:hidden}
     .prod-thumb img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
@@ -167,11 +169,37 @@
     .prod-desc{color:var(--tm);font-size:.78rem;line-height:1.6;margin-bottom:11px;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
     .prod-price{font-size:1.3rem;font-weight:900;color:var(--a);margin-bottom:10px;font-family:'Orbitron',monospace}
     .prod-price small{font-size:.72rem;color:var(--tm);font-weight:400;font-family:'Noto Sans TC',sans-serif}
+    .prod-info-btn{display:inline-flex;align-items:center;gap:6px;color:var(--p);font-size:.82rem;font-weight:600;margin-top:auto}
+
+    /* PRODUCT DETAIL PAGE */
+    .detail-back{display:flex;align-items:center;gap:8px;color:var(--tm);font-size:.84rem;cursor:pointer;margin-bottom:18px;background:none;border:none;font-family:'Noto Sans TC',sans-serif}
+    .detail-back:hover{color:var(--p)}
+    .detail-img-wrap{width:100%;max-height:320px;border-radius:var(--rl);overflow:hidden;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:6rem;margin-bottom:20px;position:relative}
+    .detail-img-wrap img{width:100%;height:100%;object-fit:contain;max-height:320px}
+    .detail-title{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:900;color:var(--p);margin-bottom:6px}
+    .detail-model{color:var(--tm);font-size:.86rem;margin-bottom:14px}
+    .detail-price{font-size:1.8rem;font-weight:900;color:var(--a);font-family:'Orbitron',monospace;margin-bottom:16px}
+    .spec-table{width:100%;font-size:.84rem;border-collapse:collapse;margin-bottom:16px}
+    .spec-table tr{border-bottom:1px solid var(--bds)}
+    .spec-table td:first-child{color:var(--tm);padding:9px 12px 9px 0;width:35%;vertical-align:top;font-weight:600}
+    .spec-table td:last-child{padding:9px 0;color:var(--t)}
+    .ncc-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.2);color:var(--ok);padding:5px 13px;border-radius:99px;font-size:.78rem;font-weight:600;margin-bottom:16px}
 
     /* SHOP FILTER */
     .shop-filter{display:flex;gap:7px;margin-bottom:16px;overflow-x:auto;padding-bottom:3px}
     .fchip{padding:5px 13px;border-radius:99px;font-size:.78rem;border:1px solid var(--bds);background:none;color:var(--tm);cursor:pointer;transition:all .2s;white-space:nowrap;font-family:'Noto Sans TC',sans-serif}
     .fchip.active{background:var(--pdim);border-color:var(--p);color:var(--p);font-weight:600}
+
+    /* PARTS GRID */
+    .parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+    .part-card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
+    .part-card:hover{border-color:var(--p);transform:translateY(-3px);box-shadow:var(--glow)}
+    .part-thumb{width:100%;height:130px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:3rem}
+    .part-thumb img{width:100%;height:100%;object-fit:cover}
+    .part-body{padding:12px;flex:1;display:flex;flex-direction:column}
+    .part-name{font-weight:700;font-size:.88rem;margin-bottom:3px}
+    .part-desc{color:var(--tm);font-size:.76rem;margin-bottom:8px;flex:1}
+    .part-price{font-size:1.1rem;font-weight:900;color:var(--a);margin-bottom:8px;font-family:'Orbitron',monospace}
 
     /* CART */
     .cart-item{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--bds)}
@@ -251,7 +279,8 @@
     tr:hover td{background:rgba(255,255,255,.013)}
     .tbl-bar{display:flex;gap:9px;align-items:center;margin-bottom:13px}
     .prod-a-item{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--bds)}
-    .prod-a-thumb{width:42px;height:42px;border-radius:10px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+    .prod-a-thumb{width:42px;height:42px;border-radius:10px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;overflow:hidden}
+    .prod-a-thumb img{width:100%;height:100%;object-fit:cover}
     .prod-a-info{flex:1;min-width:0}
     .prod-a-name{font-weight:600;font-size:.86rem}
     .prod-a-meta{font-size:.76rem;color:var(--tm)}
@@ -263,7 +292,7 @@
     .overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center;padding:14px}
     .overlay.open{display:flex}
     @media(min-width:600px){.overlay{align-items:center}}
-    .modal{background:var(--bg2);border:1px solid var(--bd);border-radius:var(--rl);padding:22px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;animation:modIn .25s ease}
+    .modal{background:var(--bg2);border:1px solid var(--bd);border-radius:var(--rl);padding:22px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;animation:modIn .25s ease}
     @keyframes modIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
     .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
     .modal-title{font-family:'Orbitron',monospace;font-size:.96rem;color:var(--p)}
@@ -283,7 +312,7 @@
     .g8{gap:8px}.g10{gap:10px}.g12{gap:12px}
     .mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}
     .mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}
-    .tc{text-align:center}.fw7{font-weight:700}.fw9{font-weight:900}
+    .tc{text-align:center}.fw7{font-weight:700}
     .cp{color:var(--p)}.ca{color:var(--a)}.cok{color:var(--ok)}.cer{color:var(--er)}.cm{color:var(--tm)}.cd{color:var(--td)}
     .mono{font-family:'Orbitron',monospace}
     .fsm{font-size:.8rem}.fxs{font-size:.73rem}
@@ -299,15 +328,9 @@
 
 <!-- LOADER -->
 <div id="loader">
-  <div class="ld-brand">
-    <div class="ld-box">U</div>
-    <div class="ld-txt">UBOX <em>TW</em></div>
-  </div>
-  <div class="ld-dots">
-    <div class="ld-dot"></div><div class="ld-dot"></div><div class="ld-dot"></div>
-  </div>
+  <div class="ld-brand"><div class="ld-box">U</div><div class="ld-txt">UBOX <em>TW</em></div></div>
+  <div class="ld-dots"><div class="ld-dot"></div><div class="ld-dot"></div><div class="ld-dot"></div></div>
 </div>
-
 <div id="toast"></div>
 <div id="annBar"><span id="annTxt"></span></div>
 
@@ -321,6 +344,7 @@
     <div class="nav-links">
       <button class="nav-btn active" onclick="showPage('home')">🏠 <span>首頁</span></button>
       <button class="nav-btn" onclick="showPage('shop')">🛒 <span>商城</span></button>
+      <button class="nav-btn" onclick="showPage('parts')">🔩 <span>零件</span></button>
       <button class="nav-btn" onclick="showPage('repair')">🔧 <span>維修</span></button>
       <button class="nav-btn" onclick="showPage('member')">👤 <span>會員</span></button>
     </div>
@@ -339,7 +363,7 @@
     <div class="hero-title"><span class="c1">UBOX</span> 安博盒子<br/><span class="c2">官方售後服務中心</span></div>
     <p class="hero-desc">全台最專業的 UBOX 安博盒子銷售與維修服務平台。<br/>正品保障、透明報價、7-11 超商免費寄件。</p>
     <div class="hero-btns">
-      <button class="btn btn-p btn-lg" onclick="showPage('shop')">🛒 會員商城</button>
+      <button class="btn btn-p btn-lg" onclick="showPage('shop')">🛒 查看商品</button>
       <button class="btn btn-a btn-lg" onclick="showPage('repair')">🔧 申請維修</button>
       <button class="btn btn-g" onclick="openLine()">💬 LINE 諮詢</button>
     </div>
@@ -354,16 +378,18 @@
     </div>
   </div>
   <div class="feat-grid">
-    <div class="feat-card" onclick="showPage('shop')"><div class="feat-icon">📦</div><div class="feat-title">正品銷售</div><div class="feat-desc">UBOX 全系列正品，宅配 / 超商貨到付款，安全有保障。</div><div class="feat-arr">→</div></div>
-    <div class="feat-card" onclick="showPage('repair')"><div class="feat-icon">🔧</div><div class="feat-title">超商寄修</div><div class="feat-desc">7-11 超商取件，寄件免運費，維修含來回運費，報價後才施修。</div><div class="feat-arr">→</div></div>
-    <div class="feat-card" onclick="showPage('member')"><div class="feat-icon">👑</div><div class="feat-title">會員專屬</div><div class="feat-desc">加入即享折扣，訂單維修一站查詢，LINE 即時通知。</div><div class="feat-arr">→</div></div>
-    <div class="feat-card" onclick="showPage('repair')"><div class="feat-icon">🛡️</div><div class="feat-title">一年保固</div><div class="feat-desc">購機起算一年原廠保固，保固內零件費全免，安心無憂。</div><div class="feat-arr">→</div></div>
+    <div class="feat-card" onclick="showPage('shop')"><div class="feat-icon">📦</div><div class="feat-title">正品銷售</div><div class="feat-desc">UBOX 全系列正品，宅配 / 超商貨到付款，加入會員即可選購。</div><div class="feat-arr">→</div></div>
+    <div class="feat-card" onclick="showPage('parts')"><div class="feat-icon">🔩</div><div class="feat-title">零件選購</div><div class="feat-desc">電源、HDMI線、遙控器、滑鼠等原廠配件，一站購齊。</div><div class="feat-arr">→</div></div>
+    <div class="feat-card" onclick="showPage('repair')"><div class="feat-icon">🔧</div><div class="feat-title">超商寄修</div><div class="feat-desc">7-11 超商取件，寄件免運費，維修含來回運費。</div><div class="feat-arr">→</div></div>
+    <div class="feat-card" onclick="showPage('member')"><div class="feat-icon">🛡️</div><div class="feat-title">一年保固</div><div class="feat-desc">購機起算一年原廠保固，保固內零件費全免。</div><div class="feat-arr">→</div></div>
   </div>
+  <!-- 首頁熱門商品：只顯示介紹，無購物車按鈕 -->
   <div class="flex jb ic mb12 mt20">
     <div class="card-title cp mono">🔥 熱門商品</div>
     <button class="btn btn-g btn-sm" onclick="showPage('shop')">查看全部 →</button>
   </div>
   <div class="prod-grid" id="homeProds"></div>
+
   <div class="card card-hl mt20 tc">
     <div class="fsm cm mb8">💬 維修進度查詢 / 客服諮詢</div>
     <div class="fw7" style="font-size:1.02rem;margin-bottom:3px">LINE@ 官方帳號</div>
@@ -372,36 +398,45 @@
   </div>
 </div>
 
+<!-- ═══ PRODUCT DETAIL ═══ -->
+<div id="page-detail" class="page">
+  <button class="detail-back" id="detailBack" onclick="showPage('shop')">← 返回商城</button>
+  <div id="detailContent"></div>
+</div>
+
 <!-- ═══ SHOP ═══ -->
 <div id="page-shop" class="page">
-  <div id="shopWall" class="lwall" style="display:none">
-    <span class="lwall-icon">🔒</span>
-    <h2>會員專屬商城</h2>
-    <p>本商城為會員專屬私密頁面，<br/>請先登入 LINE 完成會員註冊，<br/>即可解鎖所有 UBOX 商品與優惠。</p>
-    <button class="btn btn-p btn-lg" onclick="showPage('member')">📋 立即加入會員</button>
+  <div class="pg-title">UBOX 商城</div>
+  <p class="pg-sub">點擊商品查看詳情 ｜ 加入會員後即可購買</p>
+  <div class="shop-filter">
+    <button class="fchip active" onclick="filterProds('all',this)">全部</button>
+    <button class="fchip" onclick="filterProds('box',this)">📺 安博盒子</button>
+    <button class="fchip" onclick="filterProds('remote',this)">🎮 遙控器</button>
+    <button class="fchip" onclick="filterProds('acc',this)">🔌 配件</button>
   </div>
-  <div id="shopContent" style="display:none">
-    <div class="pg-title">UBOX 商城</div>
-    <p class="pg-sub">會員獨享定價 ｜ 宅配 / 超商貨到付款</p>
-    <div class="card mb16">
-      <div class="card-title mb12">🎫 優惠碼</div>
-      <div class="cpn-bar"><input class="fc" id="cpnInput" placeholder="輸入優惠碼（如 UBOX100）"/><button class="btn btn-o" onclick="applyCoupon()">套用</button></div>
-      <div id="cpnResult" class="mt8"></div>
-    </div>
-    <div class="shop-filter">
-      <button class="fchip active" onclick="filterProds('all',this)">全部</button>
-      <button class="fchip" onclick="filterProds('box',this)">📺 安博盒子</button>
-      <button class="fchip" onclick="filterProds('remote',this)">🎮 遙控器</button>
-      <button class="fchip" onclick="filterProds('acc',this)">🔌 配件</button>
-    </div>
-    <div class="prod-grid" id="shopGrid"></div>
+  <div class="prod-grid" id="shopGrid"></div>
+  <!-- 未登入提示 -->
+  <div id="shopMemberHint" class="card card-hl mt20 tc" style="display:none">
+    <div class="fsm cm mb8">🔒 加入會員即可購買</div>
+    <button class="btn btn-p" onclick="showPage('member')">立即加入會員</button>
+  </div>
+</div>
+
+<!-- ═══ PARTS ═══ -->
+<div id="page-parts" class="page">
+  <div class="pg-title">🔩 零件配件選購</div>
+  <p class="pg-sub">原廠配件 ｜ 加入會員後即可加入購物車</p>
+  <div class="parts-grid" id="partsGrid"></div>
+  <div id="partsMemberHint" class="card card-hl mt20 tc" style="display:none">
+    <div class="fsm cm mb8">🔒 加入會員即可購買配件</div>
+    <button class="btn btn-p" onclick="showPage('member')">立即加入會員</button>
   </div>
 </div>
 
 <!-- ═══ CART ═══ -->
 <div id="page-cart" class="page">
   <div class="flex ic g10 mb16">
-    <button class="btn btn-g btn-sm" onclick="showPage('shop')">← 繼續購物</button>
+    <button class="btn btn-g btn-sm" id="cartBackBtn" onclick="showPage('shop')">← 繼續購物</button>
     <div class="pg-title" style="margin-bottom:0">購物車</div>
   </div>
   <div id="emptyCart" class="empty" style="display:none"><div class="empty-icon">🛒</div><p>購物車是空的</p><button class="btn btn-p mt16" onclick="showPage('shop')">去購物</button></div>
@@ -422,6 +457,11 @@
         <div class="sum-row"><span>運費</span><span id="sumFee">$0</span></div>
         <div class="sum-row"><span>優惠折扣</span><span id="sumDisc" class="cok">$0</span></div>
         <div class="sum-row total"><span>訂單總計</span><span id="sumTotal">$0</span></div>
+      </div>
+      <div class="card" style="background:var(--bg3);margin-top:14px">
+        <div class="card-title mb12">🎫 優惠碼</div>
+        <div class="cpn-bar"><input class="fc" id="cpnInput" placeholder="輸入優惠碼"/><button class="btn btn-o" onclick="applyCoupon()">套用</button></div>
+        <div id="cpnResult" class="mt8"></div>
       </div>
       <button class="btn btn-ok btn-blk btn-lg mt16" id="orderBtn" onclick="submitOrder()">✅ 確認下單（貨到付款）</button>
       <p class="tc fxs cd mt8">下單後請等候客服確認，貨到現場付款</p>
@@ -446,7 +486,7 @@
       <div class="rp-step"><div class="rp-dot">5</div><div class="rp-lbl">完成取件</div></div>
     </div>
     <div class="card">
-      <div class="fs-ttl">📱 聯絡方式（報價與進度通知）</div>
+      <div class="fs-ttl">📱 聯絡方式</div>
       <div class="fg"><label class="fl">FB / LINE 帳號名稱 <span class="req">*</span></label><input class="fc" id="r_contact" placeholder="填好後請聯絡我們領取超商代碼"/><p class="fh">⚠️ 報價與進度均透過此帳號回覆，請務必正確</p></div>
       <div class="fs-ttl">🔍 故障資訊</div>
       <div class="fg"><label class="fl">維修問題描述 <span class="req">*</span></label><textarea class="fc" id="r_problem" placeholder="請詳述故障現象、何時發生等&#10;例：開機後畫面全黑，遙控器有反應但螢幕不顯示"></textarea></div>
@@ -478,9 +518,7 @@
     </div>
   </div>
   <div id="repTrack" style="display:none">
-    <div class="card">
-      <div class="fg"><label class="fl">手機號碼查詢</label><div class="flex g8"><input class="fc" id="trackPhone" placeholder="09xxxxxxxx" type="tel" style="flex:1"/><button class="btn btn-p" onclick="trackRepair()">查詢</button></div></div>
-    </div>
+    <div class="card"><div class="fg"><label class="fl">手機號碼查詢</label><div class="flex g8"><input class="fc" id="trackPhone" placeholder="09xxxxxxxx" type="tel" style="flex:1"/><button class="btn btn-p" onclick="trackRepair()">查詢</button></div></div></div>
     <div id="trackResults"></div>
   </div>
 </div>
@@ -566,7 +604,8 @@
       <button class="a-tab" onclick="switchAdmin('members',this)">👥 會員</button>
       <button class="a-tab" onclick="switchAdmin('orders',this)">📦 訂單</button>
       <button class="a-tab" onclick="switchAdmin('repairs',this)">🔧 維修</button>
-      <button class="a-tab" onclick="switchAdmin('products',this)">🛒 商品</button>
+      <button class="a-tab" onclick="switchAdmin('products',this)">📺 商品</button>
+      <button class="a-tab" onclick="switchAdmin('parts',this)">🔩 零件</button>
       <button class="a-tab" onclick="switchAdmin('coupons',this)">🎫 優惠碼</button>
       <button class="a-tab" onclick="switchAdmin('announce',this)">📢 公告</button>
       <button class="a-tab" onclick="switchAdmin('settings',this)">⚙️ 設定</button>
@@ -584,62 +623,95 @@
         <div class="card"><div class="card-title mb12">📦 最新訂單</div><div id="dashOrd"></div></div>
       </div>
     </div>
-
     <div class="a-sec" id="a-members">
       <div class="tbl-bar"><input class="fc" id="memSearch" placeholder="🔍 搜尋姓名 / 電話" oninput="filterMems()" style="flex:1"/><button class="btn btn-g btn-sm" onclick="loadMems()">重整</button></div>
-      <div class="tbl-wrap"><table><thead><tr><th>姓名</th><th>電話</th><th>生日</th><th>地址</th><th>訂單</th><th>維修</th><th>保固至</th><th>等級</th><th>加入日</th></tr></thead><tbody id="memTbody"></tbody></table></div>
+      <div class="tbl-wrap"><table><thead><tr><th>姓名</th><th>電話</th><th>生日</th><th>地址</th><th>訂單數</th><th>維修次數</th><th>保固至</th><th>會員等級</th><th>加入日期</th></tr></thead><tbody id="memTbody"></tbody></table></div>
     </div>
-
     <div class="a-sec" id="a-orders">
       <div class="tbl-bar"><input class="fc" id="ordSearch" placeholder="🔍 搜尋訂單號 / 會員" oninput="filterOrds()" style="flex:1"/><button class="btn btn-g btn-sm" onclick="loadOrds()">重整</button></div>
-      <div class="tbl-wrap"><table><thead><tr><th>訂單編號</th><th>會員</th><th>商品</th><th>金額</th><th>配送</th><th>地址</th><th>保固至</th><th>日期</th><th>狀態</th></tr></thead><tbody id="ordTbody"></tbody></table></div>
+      <div class="tbl-wrap"><table><thead><tr><th>訂單編號</th><th>會員姓名</th><th>商品清單</th><th>訂單金額</th><th>配送方式</th><th>收件地址</th><th>保固到期</th><th>下單日期</th><th>訂單狀態</th></tr></thead><tbody id="ordTbody"></tbody></table></div>
     </div>
-
     <div class="a-sec" id="a-repairs">
       <div class="tbl-bar">
         <input class="fc" id="repSearch" placeholder="🔍 搜尋維修單號 / 電話" oninput="filterReps()" style="flex:1"/>
         <select class="fc" id="repStFilter" onchange="filterReps()" style="width:120px"><option value="">全部狀態</option><option>待寄件</option><option>已寄件</option><option>維修中</option><option>待取件</option><option>已完成</option></select>
         <button class="btn btn-g btn-sm" onclick="loadReps()">重整</button>
       </div>
-      <div class="tbl-wrap"><table><thead><tr><th>維修單號</th><th>姓名</th><th>電話</th><th>型號</th><th>序號</th><th>問題</th><th>保固</th><th>狀態</th><th>申請日</th><th>操作</th></tr></thead><tbody id="repTbody"></tbody></table></div>
+      <div class="tbl-wrap"><table><thead><tr><th>維修單號</th><th>客戶姓名</th><th>聯絡電話</th><th>產品型號</th><th>序號MAC</th><th>故障描述</th><th>保固狀態</th><th>維修狀態</th><th>申請日期</th><th>操作</th></tr></thead><tbody id="repTbody"></tbody></table></div>
     </div>
-
     <div class="a-sec" id="a-products">
       <button class="btn btn-p mb16" onclick="openProdMod()">+ 新增商品</button>
       <div id="admProdList"></div>
     </div>
-
+    <div class="a-sec" id="a-parts">
+      <button class="btn btn-p mb16" onclick="openPartMod()">+ 新增零件</button>
+      <div id="admPartList"></div>
+    </div>
     <div class="a-sec" id="a-coupons">
       <button class="btn btn-p mb16" onclick="openCpnMod()">+ 新增優惠碼</button>
-      <div class="tbl-wrap"><table><thead><tr><th>優惠碼</th><th>類型</th><th>折扣</th><th>有效期</th><th>已用/上限</th><th>狀態</th><th>操作</th></tr></thead><tbody id="cpnTbody"></tbody></table></div>
+      <div class="tbl-wrap"><table><thead><tr><th>優惠碼</th><th>折扣類型</th><th>折扣金額</th><th>有效日期</th><th>已用/上限</th><th>啟用狀態</th><th>操作</th></tr></thead><tbody id="cpnTbody"></tbody></table></div>
     </div>
-
     <div class="a-sec" id="a-announce">
       <div class="card"><div class="card-title mb12">📢 公告橫幅</div><div class="fg"><label class="fl">公告文字（留空則隱藏）</label><input class="fc" id="annInput" placeholder="例：🎉 五月特賣，優惠碼 UBOX500 折500元！"/></div><button class="btn btn-p" onclick="saveAnn()">💾 發布</button> <button class="btn btn-g" style="margin-left:8px" onclick="clearAnn()">清除</button></div>
       <div class="card"><div class="card-title mb12">📲 LINE 廣播（謹慎使用）</div><div class="fg"><label class="fl">廣播訊息</label><textarea class="fc" id="bcMsg" rows="3" placeholder="輸入要廣播給所有用戶的訊息"></textarea></div><button class="btn btn-a" onclick="sendBC()">📨 發送廣播</button><p class="fh mt8">⚠️ 此功能將廣播給所有已關注用戶，請謹慎使用</p></div>
     </div>
-
     <div class="a-sec" id="a-settings">
       <div class="card"><div class="card-title mb16">🚚 運費設定</div><div class="fr"><div class="fg"><label class="fl">宅配運費（元）</label><input class="fc" id="set_d" type="number" value="100"/></div><div class="fg"><label class="fl">超商運費（元）</label><input class="fc" id="set_c" type="number" value="60"/></div></div><button class="btn btn-p" onclick="saveSettings()">💾 儲存運費</button></div>
       <div class="card"><div class="card-title mb16">🔑 管理員密碼</div><div class="fr"><div class="fg"><label class="fl">新密碼</label><input class="fc" id="set_np" type="password" placeholder="新密碼"/></div><div class="fg"><label class="fl">確認密碼</label><input class="fc" id="set_cp" type="password" placeholder="再輸入一次"/></div></div><button class="btn btn-o" onclick="changePass()">更新密碼</button></div>
-      <div class="card"><div class="card-title mb16">🔗 系統連結</div><div class="fg"><label class="fl">GAS 部署 URL</label><input class="fc" id="set_gas" placeholder="https://script.google.com/macros/s/..."/></div><div class="fg"><label class="fl">Vercel 網址</label><input class="fc" id="set_vercel" placeholder="https://your-project.vercel.app"/></div><button class="btn btn-p" onclick="saveSys()">💾 儲存</button></div>
+      <div class="card"><div class="card-title mb16">🔗 系統連結</div><div class="fg"><label class="fl">GAS 部署 URL</label><input class="fc" id="set_gas" placeholder="https://script.google.com/macros/s/..."/></div><button class="btn btn-p" onclick="saveSys()">💾 儲存</button></div>
     </div>
   </div>
 </div>
 
 <!-- ═══ MODALS ═══ -->
+<!-- 商品 Modal（含規格、NCC、圖片）-->
 <div class="overlay" id="prodMod">
   <div class="modal">
     <div class="modal-head"><div class="modal-title" id="prodModTitle">新增商品</div><button class="modal-close" onclick="closeModal('prodMod')">✕</button></div>
     <div class="fg"><label class="fl">商品名稱 <span class="req">*</span></label><input class="fc" id="pm_name"/></div>
-    <div class="fr"><div class="fg"><label class="fl">型號</label><input class="fc" id="pm_model"/></div><div class="fg"><label class="fl">分類</label><select class="fc" id="pm_cat"><option value="box">📺 安博盒子</option><option value="remote">🎮 遙控器</option><option value="acc">🔌 配件</option></select></div></div>
-    <div class="fr"><div class="fg"><label class="fl">定價 <span class="req">*</span></label><input class="fc" id="pm_price" type="number"/></div><div class="fg"><label class="fl">庫存</label><input class="fc" id="pm_stock" type="number" value="0"/></div></div>
-    <div class="fg"><label class="fl">商品描述</label><textarea class="fc" id="pm_desc" rows="2"></textarea></div>
-    <div class="fr"><div class="fg"><label class="fl">圖片 URL</label><input class="fc" id="pm_img" placeholder="https://..."/></div><div class="fg"><label class="fl">表情符號</label><input class="fc" id="pm_emoji" placeholder="📦" maxlength="2" style="font-size:1.2rem"/></div></div>
+    <div class="fr">
+      <div class="fg"><label class="fl">型號 <span class="req">*</span></label><input class="fc" id="pm_model"/></div>
+      <div class="fg"><label class="fl">分類</label><select class="fc" id="pm_cat"><option value="box">📺 安博盒子</option><option value="remote">🎮 遙控器</option><option value="acc">🔌 配件</option></select></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label class="fl">定價（NT$）<span class="req">*</span></label><input class="fc" id="pm_price" type="number"/></div>
+      <div class="fg"><label class="fl">庫存數量</label><input class="fc" id="pm_stock" type="number" value="0"/></div>
+    </div>
+    <div class="fg"><label class="fl">NCC 授權碼</label><input class="fc" id="pm_ncc" placeholder="例：CCAJ23LP1760T3"/></div>
+    <div class="fg"><label class="fl">商品規格（每行一項，如：RAM：8GB）</label><textarea class="fc" id="pm_spec" rows="4" placeholder="作業系統：Android 12.0&#10;RAM：8GB&#10;儲存空間：128GB&#10;解析度：4K HDR&#10;處理器：四核心 2.0GHz"></textarea></div>
+    <div class="fg"><label class="fl">商品介紹（詳細描述）</label><textarea class="fc" id="pm_desc" rows="3" placeholder="詳細商品說明..."></textarea></div>
+    <div class="fg"><label class="fl">主圖 URL（直接填入圖片網址）</label><input class="fc" id="pm_img" placeholder="https://i.imgur.com/xxxx.jpg"/></div>
+    <div class="fg"><label class="fl">表情符號（備用圖示）</label><input class="fc" id="pm_emoji" placeholder="📺" maxlength="2" style="font-size:1.2rem;width:80px"/></div>
     <button class="btn btn-p btn-blk mt12" onclick="saveProduct()">💾 儲存商品</button>
   </div>
 </div>
 
+<!-- 零件 Modal -->
+<div class="overlay" id="partMod">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-title" id="partModTitle">新增零件</div><button class="modal-close" onclick="closeModal('partMod')">✕</button></div>
+    <div class="fg"><label class="fl">零件名稱 <span class="req">*</span></label><input class="fc" id="pt_name"/></div>
+    <div class="fg"><label class="fl">零件類型</label><select class="fc" id="pt_cat">
+      <option value="power">🔌 電源供應器</option>
+      <option value="hdmi">📺 HDMI 線材</option>
+      <option value="remote">🎮 安博遙控器</option>
+      <option value="mouse">🖱️ 滑鼠</option>
+      <option value="cursor">🖱️ 鼠標（光學）</option>
+      <option value="cable">🔗 傳輸線</option>
+      <option value="other">🔩 其他配件</option>
+    </select></div>
+    <div class="fr">
+      <div class="fg"><label class="fl">定價（NT$）<span class="req">*</span></label><input class="fc" id="pt_price" type="number"/></div>
+      <div class="fg"><label class="fl">庫存數量</label><input class="fc" id="pt_stock" type="number" value="0"/></div>
+    </div>
+    <div class="fg"><label class="fl">規格描述</label><input class="fc" id="pt_spec" placeholder="例：12V 2A，適用 UBOX9 系列"/></div>
+    <div class="fg"><label class="fl">圖片 URL</label><input class="fc" id="pt_img" placeholder="https://..."/></div>
+    <div class="fg"><label class="fl">表情符號</label><input class="fc" id="pt_emoji" placeholder="🔌" maxlength="2" style="font-size:1.2rem;width:80px"/></div>
+    <button class="btn btn-p btn-blk mt12" onclick="savePart()">💾 儲存零件</button>
+  </div>
+</div>
+
+<!-- 優惠碼 Modal -->
 <div class="overlay" id="cpnMod">
   <div class="modal">
     <div class="modal-head"><div class="modal-title">新增優惠碼</div><button class="modal-close" onclick="closeModal('cpnMod')">✕</button></div>
@@ -650,6 +722,7 @@
   </div>
 </div>
 
+<!-- 維修管理 Modal -->
 <div class="overlay" id="repMod">
   <div class="modal">
     <div class="modal-head"><div class="modal-title">🔧 維修單管理</div><button class="modal-close" onclick="closeModal('repMod')">✕</button></div>
@@ -661,38 +734,45 @@
   </div>
 </div>
 
+<!-- ═══ FOOTER DISCLAIMER ═══ -->
+<footer class="site-footer">
+  <strong>⚠️ 重要聲明</strong><br/>
+  本網站銷售之商品為機上盒類商品（盒子），所有盒子均為<strong>純淨版本（Pure Android）</strong>，<br/>
+  恕無法提供任何第三方軟體安裝、頻道設定或教學服務。<br/>
+  購買前請確認您已了解純淨盒子之使用方式。如有疑問，歡迎先透過 LINE@ 諮詢後再行下單。<br/><br/>
+  © 2025 UBOX Taiwan 安博科技台灣授權服務中心　｜　服務電話請洽 LINE@ <strong>@uboxtw</strong>
+</footer>
+
 <!-- ═══ SCRIPT ═══ -->
 <script>
-// ── CONFIG ──────────────────────────────────────────
+// ── CONFIG ─────────────────────────────────────────────
 const CFG = {
-  LIFF_ID:    'YOUR_LIFF_ID',   // ★ 填入您的 LIFF ID
+  LIFF_ID:    '2009660559-Wwxi1Ze5',  // LIFF ID
   ADMIN_PHONE:'0937942582',
   LINE_OA:    '@uboxtw',
+  SS_ID:      '1qMfKCrM5bymZK1HIl07kaM0nHYDbXi9Dy8pODxVAyrI',
 };
 const gasUrl = () => localStorage.getItem('ubox_gas') || '';
 
-// ── STATE ────────────────────────────────────────────
+// ── STATE ──────────────────────────────────────────────
 const S = {
   user:null, member:null, isAdmin:false,
   cart:    JSON.parse(localStorage.getItem('ubox_cart')     || '[]'),
   settings:JSON.parse(localStorage.getItem('ubox_settings') || '{"deliveryFee":100,"cvsFee":60}'),
   coupon:null, shipMode:'delivery',
-  prods:[], allMems:[], allOrds:[], allReps:[],
-  editProdId:null, currentRepId:null,
+  prods:[], parts:[], allMems:[], allOrds:[], allReps:[],
+  editProdId:null, editPartId:null, currentRepId:null,
+  prevPage:'shop',
 };
 
-// ── HELPERS ──────────────────────────────────────────
-const g = id => document.getElementById(id);
-const show = id => { const e=g(id); if(e) e.style.display='block'; };
-const hide = id => { const e=g(id); if(e) e.style.display='none'; };
+// ── HELPERS ────────────────────────────────────────────
+const g  = id => document.getElementById(id);
+const ts = d  => String(d||'').slice(0,10);
 const rbc = s => ({待寄件:'b-yellow',已寄件:'b-blue',維修中:'b-orange',待取件:'b-purple',已完成:'b-green',無法維修:'b-red'}[s]||'b-gray');
-const ts = (date) => String(date||'').slice(0,10);
 
-function toast(msg, type=''){
-  const el=g('toast');
-  el.textContent=msg; el.className='show '+(type||'');
-  clearTimeout(window._toast);
-  window._toast=setTimeout(()=>el.className='',3200);
+function toast(msg,type=''){
+  const el=g('toast'); el.textContent=msg; el.className='show '+(type||'');
+  clearTimeout(window._t); window._t=setTimeout(()=>el.className='',3200);
 }
 function openModal(id){ g(id).classList.add('open'); }
 function closeModal(id){ g(id).classList.remove('open'); }
@@ -700,25 +780,23 @@ document.querySelectorAll('.overlay').forEach(el=>{
   el.addEventListener('click',e=>{ if(e.target===el) el.classList.remove('open'); });
 });
 
-// ── GAS API ──────────────────────────────────────────
-async function callGAS(action, params={}){
-  const u=gasUrl(); if(!u) throw new Error('請先在後台設定→填入 GAS URL');
-  const qs=new URLSearchParams({action,...params}).toString();
-  const r=await fetch(`${u}?${qs}`);
-  if(!r.ok) throw new Error('HTTP '+r.status);
-  return r.json();
+// ── GAS ────────────────────────────────────────────────
+async function callGAS(action,params={}){
+  const u=gasUrl(); if(!u) throw new Error('請先在後台設定 → 填入 GAS URL');
+  const r=await fetch(`${u}?${new URLSearchParams({action,...params})}`);
+  if(!r.ok) throw new Error('HTTP '+r.status); return r.json();
 }
-async function postGAS(action, data={}){
-  const u=gasUrl(); if(!u) throw new Error('請先在後台設定→填入 GAS URL');
+async function postGAS(action,data={}){
+  const u=gasUrl(); if(!u) throw new Error('請先在後台設定 → 填入 GAS URL');
   const r=await fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,...data})});
-  if(!r.ok) throw new Error('HTTP '+r.status);
-  return r.json();
+  if(!r.ok) throw new Error('HTTP '+r.status); return r.json();
 }
 
-// ── INIT ─────────────────────────────────────────────
+// ── INIT ───────────────────────────────────────────────
 async function init(){
-  loadProds(); renderHomeProds(); updateBadge(); loadAnn();
-  const gs=localStorage.getItem('ubox_gas'); if(gs) g('set_gas').value=gs;
+  loadLocalProds(); loadLocalParts();
+  renderHomeProds(); updateBadge(); loadAnn();
+  const gs=localStorage.getItem('ubox_gas'); if(gs && g('set_gas')) g('set_gas').value=gs;
   applySettings();
   try{
     await liff.init({liffId:CFG.LIFF_ID});
@@ -734,24 +812,124 @@ async function init(){
   g('loader').classList.add('hide');
 }
 
-// ── PRODUCTS ─────────────────────────────────────────
-function loadProds(){
+// ── LOCAL DATA ─────────────────────────────────────────
+function loadLocalProds(){
   const sv=localStorage.getItem('ubox_prods');
   if(sv){ S.prods=JSON.parse(sv); return; }
   S.prods=[
-    {id:'P001',name:'UBOX9 Pro Max 旗艦版',model:'UBOX9 Pro Max',cat:'box',price:5290,stock:8, desc:'8K HDR，8GB RAM+256GB，極致旗艦體驗',img:'',emoji:'📺'},
-    {id:'P002',name:'UBOX9 Pro 安博盒子',  model:'UBOX9 Pro',    cat:'box',price:4290,stock:15,desc:'4K HDR，6GB RAM+128GB，流暢穩定',    img:'',emoji:'📺'},
-    {id:'P003',name:'UBOX8 Plus 安博盒子', model:'UBOX8+',       cat:'box',price:3290,stock:20,desc:'4K，4GB RAM+64GB，超值入門首選',      img:'',emoji:'📺'},
-    {id:'P004',name:'UBOX 語音遙控器 V3',  model:'Remote V3',    cat:'remote',price:490,stock:30,desc:'藍牙語音搜尋，背光防水設計',         img:'',emoji:'🎮'},
-    {id:'P005',name:'HDMI 2.1 高速線 2M',  model:'HDMI-2M',      cat:'acc',price:220,stock:50,desc:'支援8K@60Hz，高速傳輸不衰減',         img:'',emoji:'🔌'},
-    {id:'P006',name:'矽膠保護殼（UBOX9）', model:'Case-9',       cat:'acc',price:180,stock:40,desc:'防刮防塵，精準開孔不卡殼',             img:'',emoji:'🛡️'},
+    {id:'P001',name:'UBOX9 Pro Max 旗艦版',model:'UBOX9 Pro Max',cat:'box',price:5290,stock:8,
+     ncc:'CCAJ23LP1760T3',
+     spec:'作業系統：Android 12.0\nRAM：8GB\n儲存空間：256GB\n解析度：8K HDR\n處理器：四核心 2.0GHz\n藍牙：5.0\nWiFi：雙頻 2.4G/5G',
+     desc:'UBOX9 Pro Max 是目前安博最高規格旗艦機種，支援 8K 超高清輸出，8GB RAM + 256GB 大容量儲存，極致流暢體驗。',
+     img:'',emoji:'📺'},
+    {id:'P002',name:'UBOX9 Pro 安博盒子',model:'UBOX9 Pro',cat:'box',price:4290,stock:15,
+     ncc:'CCAJ22LP1234T2',
+     spec:'作業系統：Android 12.0\nRAM：6GB\n儲存空間：128GB\n解析度：4K HDR\n處理器：四核心 1.8GHz\nWiFi：雙頻 2.4G/5G',
+     desc:'UBOX9 Pro 強大效能旗艦機，4K HDR 輸出，6GB RAM，流暢穩定是最佳選擇。',
+     img:'',emoji:'📺'},
+    {id:'P003',name:'UBOX8 Plus 安博盒子',model:'UBOX8+',cat:'box',price:3290,stock:20,
+     ncc:'CCAJ21LP0987T1',
+     spec:'作業系統：Android 11.0\nRAM：4GB\n儲存空間：64GB\n解析度：4K\n處理器：四核心 1.5GHz\nWiFi：2.4G/5G',
+     desc:'UBOX8 Plus 超值入門首選，4K 畫質清晰，4GB RAM 流暢運行。',
+     img:'',emoji:'📺'},
+    {id:'P004',name:'UBOX 語音遙控器 V3',model:'Remote V3',cat:'remote',price:490,stock:30,
+     ncc:'',spec:'連接方式：藍牙 5.0\n電池：AA×2\n防水等級：IPX3\n背光：七色背光',
+     desc:'原廠語音遙控器，支援語音搜尋，七色背光設計，防潑水。',
+     img:'',emoji:'🎮'},
   ];
 }
 function saveProds(){ localStorage.setItem('ubox_prods',JSON.stringify(S.prods)); }
 
-function prodHTML(p, mini=false){
-  const low=p.stock>0&&p.stock<=5, out=p.stock===0;
-  return `<div class="prod-card">
+function loadLocalParts(){
+  const sv=localStorage.getItem('ubox_parts');
+  if(sv){ S.parts=JSON.parse(sv); return; }
+  S.parts=[
+    {id:'PT001',cat:'power',name:'UBOX 原廠電源供應器',spec:'12V / 2A，適用 UBOX8/9 系列',price:290,stock:20,img:'',emoji:'🔌'},
+    {id:'PT002',cat:'hdmi',name:'HDMI 2.1 高速線 2M',spec:'支援 8K@60Hz，鍍金接頭',price:220,stock:40,img:'',emoji:'📺'},
+    {id:'PT003',cat:'hdmi',name:'HDMI 延長線 3M',spec:'HDMI 2.0，高速傳輸',price:180,stock:35,img:'',emoji:'📺'},
+    {id:'PT004',cat:'remote',name:'安博遙控器（相容版）',spec:'紅外線，適用 UBOX7/8',price:350,stock:25,img:'',emoji:'🎮'},
+    {id:'PT005',cat:'mouse',name:'USB 無線滑鼠',spec:'2.4GHz 無線，1600DPI',price:280,stock:30,img:'',emoji:'🖱️'},
+    {id:'PT006',cat:'cursor',name:'飛鼠空中滑鼠',spec:'體感操控，適用電視盒',price:420,stock:15,img:'',emoji:'🖱️'},
+    {id:'PT007',cat:'cable',name:'USB-C 傳輸線 1M',spec:'USB 3.1，快充支援',price:120,stock:50,img:'',emoji:'🔗'},
+    {id:'PT008',cat:'other',name:'矽膠保護殼（UBOX9）',spec:'防刮防塵，精準開孔',price:180,stock:40,img:'',emoji:'🛡️'},
+  ];
+}
+function saveParts(){ localStorage.setItem('ubox_parts',JSON.stringify(S.parts)); }
+
+// ── NAV ────────────────────────────────────────────────
+function showPage(pg){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const el=g('page-'+pg); if(el) el.classList.add('active');
+  const nm={home:0,shop:1,parts:2,repair:3,member:4};
+  const nb=document.querySelectorAll('.nav-links .nav-btn');
+  if(nm[pg]!==undefined && nb[nm[pg]]) nb[nm[pg]].classList.add('active');
+  ({shop:renderShop, parts:renderParts, member:renderMember, admin:renderAdmin, cart:renderCart})[pg]?.();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── HOME PRODUCTS (介紹用，無購物車) ───────────────────
+function renderHomeProds(){
+  const el=g('homeProds'); if(!el) return;
+  el.innerHTML=S.prods.slice(0,3).map(p=>`
+    <div class="prod-card" onclick="showDetail('${p.id}','home')">
+      <div class="prod-thumb">
+        ${p.img?`<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'"/>`:''}
+        <span style="position:relative;z-index:1">${p.emoji||'📦'}</span>
+        ${p.stock===0?`<span class="badge b-red prod-tag-abs" style="font-size:.65rem">已售完</span>`:''}
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-model">${p.model}</div>
+        <div class="prod-desc">${p.desc}</div>
+        <div class="prod-price">NT$ ${p.price.toLocaleString()} <small>/ 台</small></div>
+        <div class="prod-info-btn">查看商品介紹 →</div>
+      </div>
+    </div>`).join('');
+}
+
+// ── PRODUCT DETAIL PAGE ─────────────────────────────────
+function showDetail(pid, fromPage='shop'){
+  S.prevPage=fromPage;
+  const p=S.prods.find(x=>x.id===pid); if(!p) return;
+  g('detailBack').onclick=()=>showPage(fromPage);
+  const specs=(p.spec||'').split('\n').filter(Boolean).map(line=>{
+    const [k,...v]=line.split('：'); return `<tr><td>${k}</td><td>${v.join('：')}</td></tr>`;
+  }).join('');
+  const canBuy=!!S.member && p.stock>0;
+  g('detailContent').innerHTML=`
+    <div class="detail-img-wrap">
+      ${p.img?`<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'"/>`:''}
+      <span style="${p.img?'display:none':''};position:relative;z-index:1;font-size:6rem">${p.emoji||'📦'}</span>
+    </div>
+    ${p.ncc?`<div class="ncc-tag">🏛️ NCC 授權認證：${p.ncc}</div>`:''}
+    <div class="detail-title">${p.name}</div>
+    <div class="detail-model">型號：${p.model} ${p.cat==='box'?'｜ UBOX 安博盒子':p.cat==='remote'?'｜ 遙控器':'｜ 配件'}</div>
+    <div class="detail-price">NT$ ${p.price.toLocaleString()}</div>
+    ${specs?`<table class="spec-table">${specs}</table>`:''}
+    <div class="card" style="background:var(--bg3)">
+      <div class="fs-ttl" style="margin-top:0">商品介紹</div>
+      <p style="font-size:.88rem;line-height:1.85;color:var(--tm)">${(p.desc||'').replace(/\n/g,'<br/>')}</p>
+    </div>
+    ${canBuy
+      ? `<button class="btn btn-ok btn-blk btn-lg mt16" onclick="addCart('${p.id}');showPage('cart')">🛒 加入購物車</button>`
+      : !S.member
+        ? `<div class="card mt16 tc"><p class="cm fsm mb12">加入會員後即可購買</p><button class="btn btn-p" onclick="showPage('member')">立即加入會員</button></div>`
+        : `<button class="btn btn-g btn-blk mt16" disabled>已售完</button>`
+    }
+  `;
+  showPage('detail');
+}
+
+// ── SHOP ───────────────────────────────────────────────
+function renderShop(){
+  const hasMem=!!S.member;
+  g('shopMemberHint').style.display=hasMem?'none':'block';
+  g('shopGrid').innerHTML=S.prods.map(p=>shopProdHTML(p)).join('');
+}
+function shopProdHTML(p){
+  const out=p.stock===0, low=p.stock>0&&p.stock<=5;
+  return `<div class="prod-card" onclick="showDetail('${p.id}','shop')">
     <div class="prod-thumb">
       ${p.img?`<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'"/>`:''}
       <span style="position:relative;z-index:1">${p.emoji||'📦'}</span>
@@ -761,68 +939,69 @@ function prodHTML(p, mini=false){
     <div class="prod-body">
       <div class="prod-name">${p.name}</div>
       <div class="prod-model">${p.model}</div>
-      ${!mini?`<div class="prod-desc">${p.desc}</div>`:''}
+      <div class="prod-desc">${p.desc}</div>
       <div class="prod-price">NT$ ${p.price.toLocaleString()} <small>/ 台</small></div>
-      <button class="btn btn-p btn-blk" onclick="addCart('${p.id}')" ${out?'disabled':''}>
-        ${out?'已售完':'🛒 加入購物車'}
-      </button>
+      <div class="prod-info-btn">查看詳情 →</div>
     </div>
   </div>`;
 }
-
-function renderHomeProds(){
-  const el=g('homeProds'); if(!el) return;
-  el.innerHTML=S.prods.slice(0,3).map(p=>prodHTML(p,true)).join('');
-}
-
-function filterProds(cat, btn){
+function filterProds(cat,btn){
   document.querySelectorAll('.fchip').forEach(c=>c.classList.remove('active'));
   btn.classList.add('active');
-  const list = cat==='all' ? S.prods : S.prods.filter(p=>p.cat===cat);
-  g('shopGrid').innerHTML = list.map(p=>prodHTML(p,false)).join('');
+  const list=cat==='all'?S.prods:S.prods.filter(p=>p.cat===cat);
+  g('shopGrid').innerHTML=list.map(p=>shopProdHTML(p)).join('');
 }
 
-// ── NAVIGATION ───────────────────────────────────────
-function showPage(pg){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  const el=g('page-'+pg); if(el) el.classList.add('active');
-  const nm={home:0,shop:1,repair:2,member:3};
-  const nb=document.querySelectorAll('.nav-links .nav-btn');
-  if(nm[pg]!==undefined && nb[nm[pg]]) nb[nm[pg]].classList.add('active');
-  ({shop:renderShop, member:renderMember, admin:renderAdmin, cart:renderCart})[pg]?.();
-  window.scrollTo({top:0,behavior:'smooth'});
+// ── PARTS ──────────────────────────────────────────────
+const catIcon={power:'🔌',hdmi:'📺',remote:'🎮',mouse:'🖱️',cursor:'🖱️',cable:'🔗',other:'🔩'};
+const catName={power:'電源供應器',hdmi:'HDMI線材',remote:'安博遙控器',mouse:'無線滑鼠',cursor:'飛鼠/空中鼠',cable:'傳輸線',other:'其他配件'};
+
+function renderParts(){
+  const hasMem=!!S.member;
+  g('partsMemberHint').style.display=hasMem?'none':'block';
+  g('partsGrid').innerHTML=S.parts.map(pt=>{
+    const out=pt.stock===0;
+    return `<div class="part-card">
+      <div class="part-thumb">
+        ${pt.img?`<img src="${pt.img}" alt="${pt.name}" onerror="this.style.display='none'"/>`:''}
+        ${!pt.img?`<span>${pt.emoji||catIcon[pt.cat]||'🔩'}</span>`:''}
+      </div>
+      <div class="part-body">
+        <div class="part-name">${pt.name}</div>
+        <div class="part-desc">${pt.spec||''}</div>
+        <div class="part-price">NT$ ${pt.price.toLocaleString()}</div>
+        ${hasMem
+          ? `<button class="btn btn-p btn-blk btn-sm" onclick="addCart('${pt.id}','part')" ${out?'disabled':''}>
+               ${out?'已售完':'🛒 加入購物車'}
+             </button>`
+          : `<button class="btn btn-o btn-blk btn-sm" onclick="showPage('member')">加入會員購買</button>`
+        }
+      </div>
+    </div>`;
+  }).join('');
 }
 
-// ── SHOP ─────────────────────────────────────────────
-function renderShop(){
-  const ok = !!S.member;
-  g('shopWall').style.display    = ok ? 'none'  : 'block';
-  g('shopContent').style.display = ok ? 'block' : 'none';
-  if(ok) g('shopGrid').innerHTML = S.prods.map(p=>prodHTML(p,false)).join('');
-}
-
-function addCart(pid){
-  const p=S.prods.find(x=>x.id===pid); if(!p) return;
+// ── CART ───────────────────────────────────────────────
+function addCart(id, type='prod'){
   if(!S.member){ toast('請先加入會員才能購物','warn'); showPage('member'); return; }
-  const ex=S.cart.find(i=>i.id===pid);
-  if(ex) ex.qty++; else S.cart.push({...p,qty:1});
+  const list = type==='part' ? S.parts : S.prods;
+  const item = list.find(x=>x.id===id); if(!item) return;
+  const ex=S.cart.find(i=>i.id===id);
+  if(ex) ex.qty++; else S.cart.push({...item,qty:1,itemType:type});
   saveCart(); updateBadge();
-  toast(`✅ 已加入購物車：${p.name}`,'success');
+  toast(`✅ 已加入購物車：${item.name}`,'success');
 }
 function saveCart(){ localStorage.setItem('ubox_cart',JSON.stringify(S.cart)); }
 function updateBadge(){
   const t=S.cart.reduce((s,i)=>s+i.qty,0);
   g('cartBadge').textContent=t;
-  g('navCart').style.display = t>0 ? 'flex' : 'none';
+  g('navCart').style.display=t>0?'flex':'none';
 }
-
-// ── CART ─────────────────────────────────────────────
 function renderCart(){
-  const empty=g('emptyCart'), body=g('cartBody');
-  if(!S.cart.length){ empty.style.display='block'; body.style.display='none'; return; }
+  const empty=g('emptyCart'),body=g('cartBody');
+  if(!S.cart.length){ empty.style.display='block';body.style.display='none';return; }
   empty.style.display='none'; body.style.display='block';
-  g('cartItems').innerHTML = S.cart.map(it=>`
+  g('cartItems').innerHTML=S.cart.map(it=>`
     <div class="cart-item">
       <div class="cart-thumb">${it.emoji||'📦'}</div>
       <div class="cart-info">
@@ -837,64 +1016,54 @@ function renderCart(){
     </div>`).join('');
   updateSum(); applySettings();
 }
-
 function chgQty(id,d){
   const it=S.cart.find(i=>i.id===id); if(!it) return;
   it.qty+=d; if(it.qty<=0) S.cart=S.cart.filter(i=>i.id!==id);
   saveCart(); updateBadge(); renderCart();
 }
-
 function selShip(m){
   S.shipMode=m;
-  g('shipD').classList.toggle('sel', m==='delivery');
-  g('shipC').classList.toggle('sel', m==='cvs');
-  g('dFields').style.display = m==='delivery' ? 'block' : 'none';
-  g('cFields').style.display = m==='cvs'      ? 'block' : 'none';
+  g('shipD').classList.toggle('sel',m==='delivery');
+  g('shipC').classList.toggle('sel',m==='cvs');
+  g('dFields').style.display=m==='delivery'?'block':'none';
+  g('cFields').style.display=m==='cvs'?'block':'none';
   updateSum();
 }
-
 function updateSum(){
-  const sub = S.cart.reduce((s,i)=>s+i.price*i.qty, 0);
-  const fee = S.shipMode==='delivery' ? S.settings.deliveryFee : S.settings.cvsFee;
-  let disc = 0;
-  if(S.coupon) disc = S.coupon.type==='fixed' ? S.coupon.value : Math.round(sub*S.coupon.value/100);
-  const total = Math.max(0, sub+fee-disc);
-  g('sumSub').textContent   = `$${sub.toLocaleString()}`;
-  g('sumFee').textContent   = `$${fee}`;
-  g('sumDisc').textContent  = `-$${disc.toLocaleString()}`;
-  g('sumTotal').textContent = `$${total.toLocaleString()}`;
+  const sub=S.cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const fee=S.shipMode==='delivery'?S.settings.deliveryFee:S.settings.cvsFee;
+  let disc=0;
+  if(S.coupon) disc=S.coupon.type==='fixed'?S.coupon.value:Math.round(sub*S.coupon.value/100);
+  g('sumSub').textContent=`$${sub.toLocaleString()}`;
+  g('sumFee').textContent=`$${fee}`;
+  g('sumDisc').textContent=`-$${disc.toLocaleString()}`;
+  g('sumTotal').textContent=`$${Math.max(0,sub+fee-disc).toLocaleString()}`;
 }
-
 function applySettings(){
-  g('dFeeLabel').textContent = `運費 $${S.settings.deliveryFee}`;
-  g('cFeeLabel').textContent = `運費 $${S.settings.cvsFee}`;
+  if(g('dFeeLabel')) g('dFeeLabel').textContent=`運費 $${S.settings.deliveryFee}`;
+  if(g('cFeeLabel')) g('cFeeLabel').textContent=`運費 $${S.settings.cvsFee}`;
 }
-
 async function applyCoupon(){
-  const code = g('cpnInput').value.trim().toUpperCase();
-  if(!code) return;
+  const code=g('cpnInput').value.trim().toUpperCase(); if(!code) return;
   const el=g('cpnResult'); el.innerHTML='<span class="cd">驗證中...</span>';
   try{
-    const r = await callGAS('validateCoupon',{code});
+    const r=await callGAS('validateCoupon',{code});
     if(r.success){
       S.coupon=r.data;
       el.innerHTML=`<span class="cpn-tag">✅ 有效：${r.data.type==='fixed'?'-$'+r.data.value:'折'+r.data.value+'%'}</span>`;
       g('cpnApplied').style.display='block'; g('cpnCode').textContent=code;
       updateSum();
-    } else {
-      el.innerHTML=`<span class="cer fsm">❌ ${r.message||'優惠碼無效'}</span>`; S.coupon=null;
-    }
+    } else { el.innerHTML=`<span class="cer fsm">❌ ${r.message||'優惠碼無效'}</span>`; S.coupon=null; }
   } catch(e){ el.innerHTML=`<span class="cm fsm">⚠️ ${e.message}</span>`; }
 }
-
 async function submitOrder(){
   if(!S.member){ toast('請先登入會員','error'); showPage('member'); return; }
   if(!S.cart.length){ toast('購物車是空的','error'); return; }
-  const addr = S.shipMode==='delivery' ? g('dAddr').value.trim() : g('cStore').value.trim();
+  const addr=S.shipMode==='delivery'?g('dAddr').value.trim():g('cStore').value.trim();
   if(!addr){ toast('請填寫收件資訊','error'); return; }
   const btn=g('orderBtn'); btn.disabled=true; btn.textContent='下單中...';
-  const sub = S.cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const fee = S.shipMode==='delivery' ? S.settings.deliveryFee : S.settings.cvsFee;
+  const sub=S.cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const fee=S.shipMode==='delivery'?S.settings.deliveryFee:S.settings.cvsFee;
   let disc=0; if(S.coupon) disc=S.coupon.type==='fixed'?S.coupon.value:Math.round(sub*S.coupon.value/100);
   try{
     const r=await postGAS('createOrder',{
@@ -914,52 +1083,39 @@ async function submitOrder(){
   finally{ btn.disabled=false; btn.textContent='✅ 確認下單（貨到付款）'; }
 }
 
-// ── REPAIR ───────────────────────────────────────────
+// ── REPAIR ─────────────────────────────────────────────
 function switchRepTab(t,el){
   document.querySelectorAll('#page-repair .tab').forEach(x=>x.classList.remove('active'));
   el.classList.add('active');
-  g('repForm').style.display  = t==='form'  ? 'block' : 'none';
-  g('repTrack').style.display = t==='track' ? 'block' : 'none';
+  g('repForm').style.display=t==='form'?'block':'none';
+  g('repTrack').style.display=t==='track'?'block':'none';
 }
-
 async function checkWarranty(){
   const id=g('r_orderId').value.trim(); if(!id) return;
   const el=g('wResult'); el.innerHTML='<span class="cd fsm">查詢中...</span>';
   try{
     const r=await callGAS('checkWarranty',{orderId:id});
-    if(r.success) el.innerHTML = r.inWarranty
-      ? `<span class="wtag">✅ 保固中（${r.expire} 到期）</span>`
-      : `<span class="badge b-red">❌ 保固已過期（${r.expire}）</span>`;
-    else el.innerHTML='<span class="badge b-gray">查無此訂單</span>';
+    el.innerHTML=r.success
+      ?(r.inWarranty?`<span class="wtag">✅ 保固中（${r.expire} 到期）</span>`:`<span class="badge b-red">❌ 已過期（${r.expire}）</span>`)
+      :'<span class="badge b-gray">查無此訂單</span>';
   } catch(e){ el.innerHTML=`<span class="cm fsm">⚠️ ${e.message}</span>`; }
 }
-
 async function submitRepair(){
-  const f={
-    contact:g('r_contact').value.trim(), problem:g('r_problem').value.trim(),
-    serial:g('r_serial').value.trim(),   name:g('r_name').value.trim(),
-    phone:g('r_phone').value.trim(),     store:g('r_store').value.trim(),
-  };
+  const f={contact:g('r_contact').value.trim(),problem:g('r_problem').value.trim(),serial:g('r_serial').value.trim(),name:g('r_name').value.trim(),phone:g('r_phone').value.trim(),store:g('r_store').value.trim()};
   if(Object.values(f).some(v=>!v)){ toast('請填寫所有必填欄位','error'); return; }
-  if(!/^09\d{8}$/.test(f.phone)){ toast('手機號碼格式錯誤（09xxxxxxxx）','error'); return; }
+  if(!/^09\d{8}$/.test(f.phone)){ toast('手機號碼格式錯誤','error'); return; }
   const btn=g('repBtn'); btn.disabled=true; btn.textContent='送出中...';
   try{
-    const r=await postGAS('createRepair',{
-      ...f, model:g('r_model').value, orderId:g('r_orderId').value.trim(), lineId:S.user?.userId||'',
-    });
+    const r=await postGAS('createRepair',{...f,model:g('r_model').value,orderId:g('r_orderId').value.trim(),lineId:S.user?.userId||''});
     if(r.success){
       toast(`📤 維修申請已送出！單號：${r.repairId}`,'success');
-      try{
-        if(liff.isInClient()) await liff.sendMessages([{type:'text',
-          text:`🔧 維修申請送出\n維修單號：${r.repairId}\n${r.inWarranty?'✅ 保固內':'保固外'}\n我們將盡快提供超商寄件代碼！`}]);
-      }catch{}
-      ['r_contact','r_problem','r_serial','r_name','r_phone','r_store','r_orderId'].forEach(id=>{ g(id).value=''; });
+      try{ if(liff.isInClient()) await liff.sendMessages([{type:'text',text:`🔧 維修申請送出\n維修單號：${r.repairId}\n${r.inWarranty?'✅ 保固內':'保固外'}\n我們將盡快提供超商寄件代碼！`}]); }catch{}
+      ['r_contact','r_problem','r_serial','r_name','r_phone','r_store','r_orderId'].forEach(id=>{g(id).value='';});
       g('wResult').innerHTML='';
     } else toast(r.message||'送出失敗','error');
   } catch(e){ toast(e.message,'error'); }
   finally{ btn.disabled=false; btn.textContent='📤 送出維修申請'; }
 }
-
 async function trackRepair(){
   const ph=g('trackPhone').value.trim();
   if(!/^09\d{8}$/.test(ph)){ toast('請輸入正確手機號碼','error'); return; }
@@ -967,73 +1123,54 @@ async function trackRepair(){
   try{
     const r=await callGAS('getRepairsByPhone',{phone:ph});
     const flow=['待寄件','已寄件','維修中','待取件','已完成'];
-    if(r.success && r.data?.length){
+    if(r.success&&r.data?.length){
       el.innerHTML=r.data.map(x=>`
         <div class="trk-item">
-          <div class="flex jb ic">
-            <span class="badge b-blue">${x.repairId}</span>
-            <span class="badge ${rbc(x.status)}">${x.status}</span>
-          </div>
+          <div class="flex jb ic"><span class="badge b-blue">${x.repairId}</span><span class="badge ${rbc(x.status)}">${x.status}</span></div>
           <div class="fsm mt8">${x.problem||''}</div>
           <div class="cd fxs mt4">序號：${x.serial} ｜ ${ts(x.date)}</div>
           ${x.shipCode?`<div class="mt8"><span class="wtag">📦 寄件代碼：${x.shipCode}</span></div>`:''}
           ${x.adminNote?`<div class="fsm cm mt8">📋 ${x.adminNote}</div>`:''}
-          <div class="sf">${flow.map(s=>{
-            const i=flow.indexOf(s), c=flow.indexOf(x.status);
-            return `<span class="sf-dot ${s===x.status?'sf-cur':i<c?'sf-done':''}">${s}</span>`;
-          }).join('')}</div>
+          <div class="sf">${flow.map(s=>{const i=flow.indexOf(s),c=flow.indexOf(x.status);return`<span class="sf-dot ${s===x.status?'sf-cur':i<c?'sf-done':''}">${s}</span>`;}).join('')}</div>
         </div>`).join('');
     } else el.innerHTML='<div class="empty"><div class="empty-icon">🔍</div><p>查無維修記錄</p></div>';
   } catch(e){ el.innerHTML=`<p class="cer tc fsm" style="padding:14px">${e.message}</p>`; }
 }
 
-// ── MEMBER ───────────────────────────────────────────
-function liffLogin(){
-  try{ if(!liff.isLoggedIn()) liff.login(); } catch(e){ toast('LINE 登入失敗：'+e.message,'error'); }
-}
+// ── MEMBER ─────────────────────────────────────────────
+function liffLogin(){ try{ if(!liff.isLoggedIn()) liff.login(); }catch(e){ toast('LINE 登入失敗','error'); } }
 async function fetchMember(){
   if(!S.user) return;
-  try{
-    const r=await callGAS('getMember',{lineId:S.user.userId});
-    if(r.success && r.data) S.member=r.data;
-  } catch{}
+  try{ const r=await callGAS('getMember',{lineId:S.user.userId}); if(r.success&&r.data) S.member=r.data; }catch{}
 }
 function renderMember(){
-  if(!S.user){ show('memWall'); hide('memReg'); hide('memProfile'); return; }
-  if(!S.member){ hide('memWall'); show('memReg'); hide('memProfile'); return; }
-  hide('memWall'); hide('memReg'); show('memProfile');
-  fillMemProfile(); loadMemOrders();
+  const hasUser=!!S.user, hasMem=!!S.member;
+  g('memWall').style.display    = !hasUser   ? 'block' : 'none';
+  g('memReg').style.display     = hasUser&&!hasMem ? 'block' : 'none';
+  g('memProfile').style.display = hasMem     ? 'block' : 'none';
+  if(hasMem){ fillMemProfile(); loadMemOrders(); }
 }
 function fillMemProfile(){
   const m=S.member;
   if(S.user?.pictureUrl) g('memAva').innerHTML=`<img src="${S.user.pictureUrl}" alt=""/>`;
-  g('memName').textContent  = m.name;
-  g('memPhone').textContent = m.phone;
-  g('ms_o').textContent = m.orderCount  || 0;
-  g('ms_r').textContent = m.repairCount || 0;
-  g('ms_w').textContent = m.warrantyExpire || '—';
-  if(m.warrantyExpire && new Date(m.warrantyExpire)>=new Date()) g('memWtag').style.display='inline-flex';
-  g('edit_addr').value  = m.address || '';
-  g('edit_email').value = m.email   || '';
+  g('memName').textContent=m.name; g('memPhone').textContent=m.phone;
+  g('ms_o').textContent=m.orderCount||0; g('ms_r').textContent=m.repairCount||0;
+  g('ms_w').textContent=m.warrantyExpire||'—';
+  if(m.warrantyExpire&&new Date(m.warrantyExpire)>=new Date()) g('memWtag').style.display='inline-flex';
+  if(g('edit_addr')) g('edit_addr').value=m.address||'';
+  if(g('edit_email')) g('edit_email').value=m.email||'';
 }
 async function loadMemOrders(){
   if(!S.user) return;
-  const el=g('memOrdList');
-  el.innerHTML='<p class="cd tc fsm" style="padding:14px">載入中...</p>';
+  const el=g('memOrdList'); el.innerHTML='<p class="cd tc fsm" style="padding:14px">載入中...</p>';
   try{
     const r=await callGAS('getMemberOrders',{lineId:S.user.userId});
-    if(r.success && r.data?.length){
+    if(r.success&&r.data?.length){
       el.innerHTML=r.data.map(o=>`
         <div class="card">
-          <div class="flex jb ic mb8">
-            <span class="badge b-blue mono">${o.orderId}</span>
-            <span class="badge ${rbc(o.status)}">${o.status||'處理中'}</span>
-          </div>
+          <div class="flex jb ic mb8"><span class="badge b-blue mono">${o.orderId}</span><span class="badge ${rbc(o.status)}">${o.status||'處理中'}</span></div>
           <div class="fsm mb8">${o.items}</div>
-          <div class="flex jb">
-            <span class="cd fxs">${ts(o.date)} ｜ ${o.shipping==='delivery'?'🚚 宅配':'🏪 超商'}</span>
-            <span class="ca fw7">NT$ ${parseInt(o.total||0).toLocaleString()}</span>
-          </div>
+          <div class="flex jb"><span class="cd fxs">${ts(o.date)} ｜ ${o.shipping==='delivery'?'🚚 宅配':'🏪 超商'}</span><span class="ca fw7">NT$ ${parseInt(o.total||0).toLocaleString()}</span></div>
           ${o.inWarranty?'<div class="mt8"><span class="wtag">🛡️ 保固中</span></div>':''}
         </div>`).join('');
     } else el.innerHTML='<div class="empty"><div class="empty-icon">📦</div><p>尚無訂單記錄</p></div>';
@@ -1041,17 +1178,13 @@ async function loadMemOrders(){
 }
 async function loadMemRepairs(){
   if(!S.member) return;
-  const el=g('memRepList');
-  el.innerHTML='<p class="cd tc fsm" style="padding:14px">載入中...</p>';
+  const el=g('memRepList'); el.innerHTML='<p class="cd tc fsm" style="padding:14px">載入中...</p>';
   try{
     const r=await callGAS('getRepairsByPhone',{phone:S.member.phone});
-    if(r.success && r.data?.length){
+    if(r.success&&r.data?.length){
       el.innerHTML=r.data.map(x=>`
         <div class="trk-item">
-          <div class="flex jb ic">
-            <span class="badge b-blue">${x.repairId}</span>
-            <span class="badge ${rbc(x.status)}">${x.status}</span>
-          </div>
+          <div class="flex jb ic"><span class="badge b-blue">${x.repairId}</span><span class="badge ${rbc(x.status)}">${x.status}</span></div>
           <div class="fsm mt8">${x.problem||''}</div>
           <div class="cd fxs mt4">序號：${x.serial} ｜ ${ts(x.date)}</div>
           ${x.shipCode?`<div class="mt8"><span class="wtag">📦 ${x.shipCode}</span></div>`:''}
@@ -1062,95 +1195,73 @@ async function loadMemRepairs(){
 function switchMemTab(tab,btn){
   document.querySelectorAll('#page-member .tabs .tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  ['orders','repairs','profile'].forEach(t=>{ g('mt-'+t).style.display=t===tab?'block':'none'; });
+  ['orders','repairs','profile'].forEach(t=>{g('mt-'+t).style.display=t===tab?'block':'none';});
   if(tab==='repairs') loadMemRepairs();
 }
 async function submitReg(){
-  const name=g('reg_name').value.trim(), birth=g('reg_birth').value,
-        phone=g('reg_phone').value.trim(), addr=g('reg_addr').value.trim(),
-        email=g('reg_email').value.trim();
+  const name=g('reg_name').value.trim(),birth=g('reg_birth').value,phone=g('reg_phone').value.trim(),addr=g('reg_addr').value.trim(),email=g('reg_email').value.trim();
   if(!name||!birth||!phone||!addr){ toast('請填寫所有必填欄位','error'); return; }
   if(!/^09\d{8}$/.test(phone)){ toast('手機號碼格式錯誤','error'); return; }
   try{
-    const r=await postGAS('registerMember',{
-      lineId:S.user.userId, displayName:S.user.displayName,
-      pictureUrl:S.user.pictureUrl, name, birth, phone, address:addr, email,
-    });
+    const r=await postGAS('registerMember',{lineId:S.user.userId,displayName:S.user.displayName,pictureUrl:S.user.pictureUrl,name,birth,phone,address:addr,email});
     if(r.success){ S.member=r.data; toast('🎉 會員加入成功！','success'); renderMember(); }
     else toast(r.message||'註冊失敗','error');
   } catch(e){ toast(e.message,'error'); }
 }
 async function updateProfile(){
   try{
-    const r=await postGAS('updateMember',{
-      lineId:S.user.userId, address:g('edit_addr').value.trim(), email:g('edit_email').value.trim(),
-    });
-    if(r.success) toast('✅ 資料已更新','success');
-    else toast(r.message,'error');
+    const r=await postGAS('updateMember',{lineId:S.user.userId,address:g('edit_addr').value.trim(),email:g('edit_email').value.trim()});
+    if(r.success) toast('✅ 資料已更新','success'); else toast(r.message,'error');
   } catch(e){ toast(e.message,'error'); }
 }
 function doLogout(){
   if(!confirm('確定要登出？')) return;
   try{ if(liff.isLoggedIn()) liff.logout(); }catch{}
   S.user=null; S.member=null;
-  g('navAva').style.display='none';
-  g('adminBtn').style.display='none';
+  g('navAva').style.display='none'; g('adminBtn').style.display='none';
   localStorage.removeItem('ubox_admin'); S.isAdmin=false;
   renderMember(); toast('已登出','success');
 }
 
-// ── ADMIN ────────────────────────────────────────────
+// ── ADMIN ──────────────────────────────────────────────
 function renderAdmin(){
   const ok=localStorage.getItem('ubox_admin')==='true';
-  g('adminLogin').style.display = ok ? 'none'  : 'block';
-  g('adminPanel').style.display = ok ? 'block' : 'none';
+  g('adminLogin').style.display=ok?'none':'block';
+  g('adminPanel').style.display=ok?'block':'none';
   if(ok){ loadOverview(); initSettings(); }
 }
 function initSettings(){
-  g('set_d').value = S.settings.deliveryFee;
-  g('set_c').value = S.settings.cvsFee;
-  const gs=localStorage.getItem('ubox_gas')||''; if(gs) g('set_gas').value=gs;
-  g('annInput').value = localStorage.getItem('ubox_ann')||'';
+  if(g('set_d')) g('set_d').value=S.settings.deliveryFee;
+  if(g('set_c')) g('set_c').value=S.settings.cvsFee;
+  const gs=localStorage.getItem('ubox_gas')||''; if(gs&&g('set_gas')) g('set_gas').value=gs;
+  if(g('annInput')) g('annInput').value=localStorage.getItem('ubox_ann')||'';
 }
 async function adminLogin(){
-  const phone=g('adm_phone').value.trim(), pass=g('adm_pass').value;
+  const phone=g('adm_phone').value.trim(),pass=g('adm_pass').value;
   if(!phone||!pass){ toast('請填寫帳號與密碼','error'); return; }
   try{
     const r=await callGAS('adminLogin',{phone,pass});
-    if(r.success){ doAdminIn(); }
-    else toast(r.message||'帳號或密碼錯誤','error');
+    if(r.success) doAdminIn(); else toast(r.message||'帳號或密碼錯誤','error');
   } catch{
-    // offline fallback
-    if(phone===CFG.ADMIN_PHONE && pass==='123456') doAdminIn();
-    else toast('帳號或密碼錯誤','error');
+    if(phone===CFG.ADMIN_PHONE&&pass==='123456') doAdminIn(); else toast('帳號或密碼錯誤','error');
   }
 }
-function doAdminIn(){
-  localStorage.setItem('ubox_admin','true'); S.isAdmin=true;
-  g('adminBtn').style.display='inline-block';
-  renderAdmin(); toast('✅ 管理員登入成功','success');
-}
-function adminLogout(){
-  localStorage.removeItem('ubox_admin'); S.isAdmin=false;
-  g('adminBtn').style.display='none'; renderAdmin();
-}
+function doAdminIn(){ localStorage.setItem('ubox_admin','true'); S.isAdmin=true; g('adminBtn').style.display='inline-block'; renderAdmin(); toast('✅ 管理員登入成功','success'); }
+function adminLogout(){ localStorage.removeItem('ubox_admin'); S.isAdmin=false; g('adminBtn').style.display='none'; renderAdmin(); }
 function switchAdmin(tab,btn){
   document.querySelectorAll('.a-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.a-sec').forEach(s=>s.classList.remove('active'));
   g('a-'+tab)?.classList.add('active');
-  ({members:loadMems, orders:loadOrds, repairs:loadReps, products:loadProdsAdmin, coupons:loadCoupons})[tab]?.();
+  ({members:loadMems,orders:loadOrds,repairs:loadReps,products:loadProdsAdm,parts:loadPartsAdm,coupons:loadCoupons})[tab]?.();
 }
-
 async function loadOverview(){
   try{
     const r=await callGAS('getDashboard');
     if(r.success){
       const d=r.data;
-      g('adm_mem').textContent = d.memberCount  || 0;
-      g('adm_ord').textContent = d.orderCount   || 0;
-      g('adm_rep').textContent = d.repairCount  || 0;
-      g('adm_rev').textContent = `$${(d.monthRevenue||0).toLocaleString()}`;
+      g('adm_mem').textContent=d.memberCount||0; g('adm_ord').textContent=d.orderCount||0;
+      g('adm_rep').textContent=d.repairCount||0; g('adm_rev').textContent=`$${(d.monthRevenue||0).toLocaleString()}`;
       g('dashRep').innerHTML=(d.latestRepairs||[]).slice(0,6).map(r=>`
         <div class="flex jb ic" style="padding:7px 0;border-bottom:1px solid var(--bds)">
           <div><span class="cp fsm">${r.repairId}</span> <span class="cd fxs">｜${r.name}</span></div>
@@ -1165,11 +1276,10 @@ async function loadOverview(){
   } catch(e){ console.warn('Overview:',e.message); }
 }
 
+// MEMBERS
 async function loadMems(){
-  try{
-    const r=await callGAS('getAllMembers');
-    if(r.success){ S.allMems=r.data||[]; renderMemTbl(S.allMems); }
-  } catch(e){ toast(e.message,'error'); }
+  try{ const r=await callGAS('getAllMembers'); if(r.success){ S.allMems=r.data||[]; renderMemTbl(S.allMems); } }
+  catch(e){ toast(e.message,'error'); }
 }
 function renderMemTbl(data){
   g('memTbody').innerHTML=data.map(m=>`
@@ -1182,23 +1292,19 @@ function renderMemTbl(data){
       <td class="cd">${ts(m.regDate)}</td>
     </tr>`).join('');
 }
-function filterMems(){
-  const q=g('memSearch').value.toLowerCase();
-  renderMemTbl(S.allMems.filter(m=>(m.name||'').toLowerCase().includes(q)||(m.phone||'').includes(q)));
-}
+function filterMems(){ const q=g('memSearch').value.toLowerCase(); renderMemTbl(S.allMems.filter(m=>(m.name||'').toLowerCase().includes(q)||(m.phone||'').includes(q))); }
 
+// ORDERS
 async function loadOrds(){
-  try{
-    const r=await callGAS('getAllOrders');
-    if(r.success){ S.allOrds=r.data||[]; renderOrdTbl(S.allOrds); }
-  } catch(e){ toast(e.message,'error'); }
+  try{ const r=await callGAS('getAllOrders'); if(r.success){ S.allOrds=r.data||[]; renderOrdTbl(S.allOrds); } }
+  catch(e){ toast(e.message,'error'); }
 }
 function renderOrdTbl(data){
   g('ordTbody').innerHTML=data.map(o=>`
     <tr>
       <td><b class="cp">${o.orderId}</b></td>
       <td>${o.memberName}</td>
-      <td class="cd" style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${o.items}">${(o.items||'').slice(0,18)}…</td>
+      <td class="cd" style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${o.items}">${(o.items||'').slice(0,16)}…</td>
       <td><b class="ca">$${parseInt(o.total||0).toLocaleString()}</b></td>
       <td><span class="badge b-blue">${o.shipping==='delivery'?'🚚 宅配':'🏪 超商'}</span></td>
       <td class="cd" style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.address||'—'}</td>
@@ -1209,29 +1315,23 @@ function renderOrdTbl(data){
       </select></td>
     </tr>`).join('');
 }
-function filterOrds(){
-  const q=g('ordSearch').value.toLowerCase();
-  renderOrdTbl(S.allOrds.filter(o=>(o.orderId||'').toLowerCase().includes(q)||(o.memberName||'').toLowerCase().includes(q)));
-}
+function filterOrds(){ const q=g('ordSearch').value.toLowerCase(); renderOrdTbl(S.allOrds.filter(o=>(o.orderId||'').toLowerCase().includes(q)||(o.memberName||'').toLowerCase().includes(q))); }
 async function updOrdStatus(orderId,status){
   try{ await postGAS('updateOrderStatus',{orderId,status}); toast('訂單狀態已更新','success'); }
   catch(e){ toast(e.message,'error'); }
 }
 
+// REPAIRS
 async function loadReps(){
-  try{
-    const r=await callGAS('getAllRepairs');
-    if(r.success){ S.allReps=r.data||[]; renderRepTbl(S.allReps); }
-  } catch(e){ toast(e.message,'error'); }
+  try{ const r=await callGAS('getAllRepairs'); if(r.success){ S.allReps=r.data||[]; renderRepTbl(S.allReps); } }
+  catch(e){ toast(e.message,'error'); }
 }
 function renderRepTbl(data){
   g('repTbody').innerHTML=data.map(r=>`
     <tr>
-      <td><b class="cp">${r.repairId}</b></td>
-      <td>${r.name}</td><td>${r.phone}</td>
-      <td class="cd">${r.model||'—'}</td>
-      <td class="cd">${r.serial}</td>
-      <td class="cd" style="max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.problem}">${(r.problem||'').slice(0,14)}…</td>
+      <td><b class="cp">${r.repairId}</b></td><td>${r.name}</td><td>${r.phone}</td>
+      <td class="cd">${r.model||'—'}</td><td class="cd">${r.serial}</td>
+      <td class="cd" style="max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.problem}">${(r.problem||'').slice(0,12)}…</td>
       <td><span class="badge ${r.inWarranty?'b-green':'b-gray'}">${r.inWarranty?'保固內':'保固外'}</span></td>
       <td><span class="badge ${rbc(r.status)}">${r.status}</span></td>
       <td class="cd">${ts(r.date)}</td>
@@ -1239,11 +1339,8 @@ function renderRepTbl(data){
     </tr>`).join('');
 }
 function filterReps(){
-  const q=g('repSearch').value.toLowerCase(), st=g('repStFilter').value;
-  renderRepTbl(S.allReps.filter(r=>
-    ((r.repairId||'').toLowerCase().includes(q)||(r.phone||'').includes(q)) &&
-    (!st||r.status===st)
-  ));
+  const q=g('repSearch').value.toLowerCase(),st=g('repStFilter').value;
+  renderRepTbl(S.allReps.filter(r=>((r.repairId||'').toLowerCase().includes(q)||(r.phone||'').includes(q))&&(!st||r.status===st)));
 }
 function openRepMod(id){
   S.currentRepId=id;
@@ -1253,31 +1350,30 @@ function openRepMod(id){
       <div class="flex jb mb8"><span class="cp fw7">${id}</span><span class="badge ${rbc(r.status)}">${r.status}</span></div>
       <div class="fsm"><b>${r.name}</b> ｜ ${r.phone}</div>
       <div class="fsm cm mt4">問題：${r.problem||'—'}</div>
-      <div class="fsm cm mt2">序號：${r.serial} ｜ ${r.model||'—'}</div>
-      <div class="fsm cm mt2">取件門市：${r.store||'—'}</div>
+      <div class="fsm cm mt4">序號：${r.serial} ｜ 型號：${r.model||'—'}</div>
+      <div class="fsm cm mt4">取件門市：${r.store||'—'}</div>
       <div class="mt4"><span class="badge ${r.inWarranty?'b-green':'b-gray'}">${r.inWarranty?'✅ 保固內':'❌ 保固外'}</span></div>
     </div>`;
-  g('repStatusSel').value = r.status||'待寄件';
-  g('repShipCode').value  = r.shipCode||'';
-  g('repNote').value      = '';
+  g('repStatusSel').value=r.status||'待寄件';
+  g('repShipCode').value=r.shipCode||''; g('repNote').value='';
   openModal('repMod');
 }
 async function updateRepair(){
-  const status=g('repStatusSel').value, shipCode=g('repShipCode').value, note=g('repNote').value;
   try{
-    const r=await postGAS('updateRepairStatus',{repairId:S.currentRepId,status,shipCode,note});
+    const r=await postGAS('updateRepairStatus',{repairId:S.currentRepId,status:g('repStatusSel').value,shipCode:g('repShipCode').value,note:g('repNote').value});
     if(r.success){ closeModal('repMod'); loadReps(); toast('✅ 已更新並通知客戶 LINE','success'); }
     else toast(r.message,'error');
   } catch(e){ toast(e.message,'error'); }
 }
 
-function loadProdsAdmin(){
+// PRODUCTS (ADMIN)
+function loadProdsAdm(){
   g('admProdList').innerHTML=S.prods.map(p=>`
     <div class="prod-a-item">
-      <div class="prod-a-thumb">${p.emoji||'📦'}</div>
+      <div class="prod-a-thumb">${p.img?`<img src="${p.img}" onerror="this.src=''"/>`:(p.emoji||'📺')}</div>
       <div class="prod-a-info">
         <div class="prod-a-name">${p.name}</div>
-        <div class="prod-a-meta">${p.model} ｜ NT$ ${p.price.toLocaleString()} ｜ 庫存 ${p.stock}</div>
+        <div class="prod-a-meta">${p.model} ｜ NT$ ${p.price.toLocaleString()} ｜ 庫存 ${p.stock} ${p.ncc?'｜ NCC:'+p.ncc:''}</div>
       </div>
       <div class="act-row">
         <button class="icon-btn" onclick="editProd('${p.id}')">✏️</button>
@@ -1286,39 +1382,71 @@ function loadProdsAdmin(){
     </div>`).join('');
 }
 function openProdMod(id){
-  S.editProdId=id||null;
-  const p=id?S.prods.find(x=>x.id===id):null;
+  S.editProdId=id||null; const p=id?S.prods.find(x=>x.id===id):null;
   g('prodModTitle').textContent=p?'編輯商品':'新增商品';
-  g('pm_name').value =p?.name ||''; g('pm_model').value=p?.model||'';
-  g('pm_price').value=p?.price||''; g('pm_stock').value=p?.stock||0;
-  g('pm_desc').value =p?.desc ||''; g('pm_img').value  =p?.img  ||'';
-  g('pm_emoji').value=p?.emoji||'📦'; g('pm_cat').value=p?.cat||'box';
+  ['pm_name','pm_model','pm_price','pm_stock','pm_ncc','pm_spec','pm_desc','pm_img','pm_emoji'].forEach(fid=>{ g(fid).value=''; });
+  if(p){ g('pm_name').value=p.name||''; g('pm_model').value=p.model||''; g('pm_price').value=p.price||''; g('pm_stock').value=p.stock||0; g('pm_ncc').value=p.ncc||''; g('pm_spec').value=p.spec||''; g('pm_desc').value=p.desc||''; g('pm_img').value=p.img||''; g('pm_emoji').value=p.emoji||'📺'; g('pm_cat').value=p.cat||'box'; }
   openModal('prodMod');
 }
 function editProd(id){ openProdMod(id); }
 async function saveProduct(){
-  const name=g('pm_name').value.trim(), price=parseInt(g('pm_price').value);
+  const name=g('pm_name').value.trim(),price=parseInt(g('pm_price').value);
   if(!name||!price){ toast('請填寫商品名稱和定價','error'); return; }
-  const data={
-    id:S.editProdId||'P'+Date.now(), name, model:g('pm_model').value.trim(),
-    cat:g('pm_cat').value, price, stock:parseInt(g('pm_stock').value)||0,
-    desc:g('pm_desc').value.trim(), img:g('pm_img').value.trim(),
-    emoji:g('pm_emoji').value||'📦',
-  };
-  if(S.editProdId) S.prods=S.prods.map(p=>p.id===data.id?data:p);
-  else S.prods.push(data);
+  const data={id:S.editProdId||'P'+Date.now(),name,model:g('pm_model').value.trim(),cat:g('pm_cat').value,price,stock:parseInt(g('pm_stock').value)||0,ncc:g('pm_ncc').value.trim(),spec:g('pm_spec').value.trim(),desc:g('pm_desc').value.trim(),img:g('pm_img').value.trim(),emoji:g('pm_emoji').value||'📺'};
+  if(S.editProdId) S.prods=S.prods.map(p=>p.id===data.id?data:p); else S.prods.push(data);
   saveProds();
   try{ await postGAS('saveProduct',data); }catch{}
-  closeModal('prodMod'); loadProdsAdmin(); renderHomeProds();
+  closeModal('prodMod'); loadProdsAdm(); renderHomeProds();
   toast('✅ 商品已儲存','success');
 }
 function delProd(id){
   if(!confirm('確定刪除此商品？')) return;
   S.prods=S.prods.filter(p=>p.id!==id); saveProds();
   postGAS('deleteProduct',{id}).catch(()=>{});
-  loadProdsAdmin(); renderHomeProds(); toast('商品已刪除');
+  loadProdsAdm(); renderHomeProds(); toast('商品已刪除');
 }
 
+// PARTS (ADMIN)
+function loadPartsAdm(){
+  g('admPartList').innerHTML=S.parts.map(pt=>`
+    <div class="prod-a-item">
+      <div class="prod-a-thumb">${pt.img?`<img src="${pt.img}" onerror="this.src=''"/>`:(pt.emoji||catIcon[pt.cat]||'🔩')}</div>
+      <div class="prod-a-info">
+        <div class="prod-a-name">${pt.name}</div>
+        <div class="prod-a-meta">${catName[pt.cat]||pt.cat} ｜ NT$ ${pt.price.toLocaleString()} ｜ 庫存 ${pt.stock}</div>
+      </div>
+      <div class="act-row">
+        <button class="icon-btn" onclick="editPart('${pt.id}')">✏️</button>
+        <button class="icon-btn" onclick="delPart('${pt.id}')">🗑️</button>
+      </div>
+    </div>`).join('');
+}
+function openPartMod(id){
+  S.editPartId=id||null; const pt=id?S.parts.find(x=>x.id===id):null;
+  g('partModTitle').textContent=pt?'編輯零件':'新增零件';
+  ['pt_name','pt_price','pt_stock','pt_spec','pt_img','pt_emoji'].forEach(fid=>{g(fid).value='';});
+  if(pt){ g('pt_name').value=pt.name||''; g('pt_price').value=pt.price||''; g('pt_stock').value=pt.stock||0; g('pt_spec').value=pt.spec||''; g('pt_img').value=pt.img||''; g('pt_emoji').value=pt.emoji||'🔩'; g('pt_cat').value=pt.cat||'other'; }
+  openModal('partMod');
+}
+function editPart(id){ openPartMod(id); }
+async function savePart(){
+  const name=g('pt_name').value.trim(),price=parseInt(g('pt_price').value);
+  if(!name||!price){ toast('請填寫零件名稱和定價','error'); return; }
+  const data={id:S.editPartId||'PT'+Date.now(),name,cat:g('pt_cat').value,price,stock:parseInt(g('pt_stock').value)||0,spec:g('pt_spec').value.trim(),img:g('pt_img').value.trim(),emoji:g('pt_emoji').value||catIcon[g('pt_cat').value]||'🔩'};
+  if(S.editPartId) S.parts=S.parts.map(p=>p.id===data.id?data:p); else S.parts.push(data);
+  saveParts();
+  try{ await postGAS('savePart',data); }catch{}
+  closeModal('partMod'); loadPartsAdm();
+  toast('✅ 零件已儲存','success');
+}
+function delPart(id){
+  if(!confirm('確定刪除此零件？')) return;
+  S.parts=S.parts.filter(p=>p.id!==id); saveParts();
+  postGAS('deletePart',{id}).catch(()=>{});
+  loadPartsAdm(); toast('零件已刪除');
+}
+
+// COUPONS
 async function loadCoupons(){
   try{
     const r=await callGAS('getAllCoupons');
@@ -1336,20 +1464,15 @@ async function loadCoupons(){
 }
 function openCpnMod(){ openModal('cpnMod'); }
 async function saveCoupon(){
-  const code=g('cm_code').value.trim().toUpperCase(), val=parseFloat(g('cm_value').value);
+  const code=g('cm_code').value.trim().toUpperCase(),val=parseFloat(g('cm_value').value);
   if(!code||!val){ toast('請填寫優惠碼和折扣值','error'); return; }
   try{
-    const r=await postGAS('createCoupon',{
-      code, type:g('cm_type').value, value:val,
-      expire:g('cm_expire').value, maxCount:parseInt(g('cm_max').value)||0, active:true,
-    });
+    const r=await postGAS('createCoupon',{code,type:g('cm_type').value,value:val,expire:g('cm_expire').value,maxCount:parseInt(g('cm_max').value)||0,active:true});
     if(r.success){ closeModal('cpnMod'); loadCoupons(); toast('✅ 優惠碼已建立','success'); }
     else toast(r.message,'error');
   } catch(e){ toast(e.message,'error'); }
 }
-async function toggleCpn(code,active){
-  try{ await postGAS('updateCoupon',{code,active}); loadCoupons(); }catch(e){ toast(e.message,'error'); }
-}
+async function toggleCpn(code,active){ try{ await postGAS('updateCoupon',{code,active}); loadCoupons(); }catch(e){ toast(e.message,'error'); } }
 
 // SETTINGS
 function saveSettings(){
@@ -1360,48 +1483,37 @@ function saveSettings(){
   toast('✅ 運費設定已儲存','success');
 }
 async function changePass(){
-  const np=g('set_np').value, cp=g('set_cp').value;
+  const np=g('set_np').value,cp=g('set_cp').value;
   if(!np){ toast('請輸入新密碼','error'); return; }
   if(np!==cp){ toast('兩次密碼不一致','error'); return; }
-  try{
-    await postGAS('changeAdminPass',{phone:CFG.ADMIN_PHONE,pass:np});
-    toast('✅ 密碼已更新','success');
-    g('set_np').value=''; g('set_cp').value='';
-  } catch(e){ toast(e.message,'error'); }
+  try{ await postGAS('changeAdminPass',{phone:CFG.ADMIN_PHONE,pass:np}); toast('✅ 密碼已更新','success'); g('set_np').value=''; g('set_cp').value=''; }
+  catch(e){ toast(e.message,'error'); }
 }
 function saveSys(){
-  const u=g('set_gas').value.trim();
-  if(u){ localStorage.setItem('ubox_gas',u); toast('✅ GAS URL 已儲存','success'); }
+  const u=g('set_gas').value.trim(); if(u){ localStorage.setItem('ubox_gas',u); toast('✅ GAS URL 已儲存','success'); }
 }
 
 // ANNOUNCE
-function saveAnn(){
-  const t=g('annInput').value.trim();
-  localStorage.setItem('ubox_ann',t); loadAnn(); toast('✅ 公告已發布','success');
-}
-function clearAnn(){
-  localStorage.removeItem('ubox_ann'); g('annInput').value=''; loadAnn();
-}
+function saveAnn(){ const t=g('annInput').value.trim(); localStorage.setItem('ubox_ann',t); loadAnn(); toast('✅ 公告已發布','success'); }
+function clearAnn(){ localStorage.removeItem('ubox_ann'); g('annInput').value=''; loadAnn(); }
 function loadAnn(){
   const t=localStorage.getItem('ubox_ann')||'';
   const bar=g('annBar');
-  if(t){ g('annTxt').textContent=t; bar.style.display='block'; }
-  else bar.style.display='none';
+  if(t){ g('annTxt').textContent=t; bar.style.display='block'; } else bar.style.display='none';
 }
 async function sendBC(){
   const msg=g('bcMsg').value.trim(); if(!msg){ toast('請輸入訊息','error'); return; }
   if(!confirm(`確定廣播以下訊息給所有用戶？\n\n${msg}`)) return;
   try{
     const r=await postGAS('broadcastMessage',{message:msg});
-    if(r.success){ toast('✅ 廣播已送出','success'); g('bcMsg').value=''; }
-    else toast(r.message,'error');
+    if(r.success){ toast('✅ 廣播已送出','success'); g('bcMsg').value=''; } else toast(r.message,'error');
   } catch(e){ toast(e.message,'error'); }
 }
 
-// ── LINE ─────────────────────────────────────────────
+// LINE
 function openLine(){ window.open(`https://line.me/R/ti/p/${CFG.LINE_OA}`,'_blank'); }
 
-// ── START ────────────────────────────────────────────
+// START
 init();
 </script>
 </body>
