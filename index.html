@@ -27,10 +27,10 @@
     body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
       background:radial-gradient(ellipse 70% 60% at 10% 10%,rgba(0,212,255,.07) 0%,transparent 65%),
                  radial-gradient(ellipse 50% 40% at 90% 85%,rgba(255,107,53,.05) 0%,transparent 60%)}
-    body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.022;
+    body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.018;
       background-image:linear-gradient(rgba(0,212,255,1) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,1) 1px,transparent 1px);background-size:60px 60px}
 
-    /* LOADER */
+    /* ── LOADER ── */
     #loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
     #loader.hide{opacity:0;visibility:hidden}
     .ld-brand{display:flex;align-items:center;gap:14px;margin-bottom:32px}
@@ -43,10 +43,10 @@
     .ld-dot:nth-child(1){background:var(--p)}.ld-dot:nth-child(2){background:var(--pd);animation-delay:.2s}.ld-dot:nth-child(3){background:var(--a);animation-delay:.4s}
     @keyframes ldB{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1.3);opacity:1}}
 
-    /* ANNOUNCE */
-    #annBar{background:linear-gradient(90deg,var(--a),var(--ad));color:#fff;text-align:center;font-size:.78rem;padding:8px 16px;font-weight:500;display:none}
+    /* ── ANNOUNCE ── */
+    #annBar{background:linear-gradient(90deg,var(--a),var(--ad));color:#fff;text-align:center;font-size:.78rem;padding:8px 16px;font-weight:500;display:none;cursor:pointer}
 
-    /* NAV */
+    /* ── NAV ── */
     nav{position:sticky;top:0;z-index:200;background:rgba(8,12,24,.92);backdrop-filter:blur(20px) saturate(1.8);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd)}
     .nav-in{max-width:1020px;margin:0 auto;height:56px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:8px}
     .nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0}
@@ -64,44 +64,44 @@
     .nav-cart:hover{background:var(--pdim);color:var(--p)}
     .nav-cart-badge{position:absolute;top:-6px;right:-6px;background:var(--a);color:#fff;width:16px;height:16px;border-radius:50%;font-size:.6rem;font-weight:700;display:flex;align-items:center;justify-content:center}
 
-    /* PAGES */
+    /* ── PAGES ── */
     .page{display:none;padding:22px 16px 30px;max-width:1020px;margin:0 auto;position:relative;z-index:1;animation:pgIn .3s ease}
     .page.active{display:block}
     @keyframes pgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
     .pg-title{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:700;color:var(--p);margin-bottom:4px;text-shadow:var(--glow)}
     .pg-sub{color:var(--tm);font-size:.86rem;margin-bottom:22px;line-height:1.6}
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     .site-footer{background:var(--bg2);border-top:1px solid var(--bds);padding:18px 16px;text-align:center;font-size:.74rem;color:var(--td);line-height:1.85;position:relative;z-index:1}
     .site-footer strong{color:var(--tm)}
 
-    /* HERO */
-    .hero{text-align:center;padding:48px 0 34px}
-    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--pdim);border:1px solid var(--bd);color:var(--p);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:20px}
+    /* ── HERO ── */
+    .hero{text-align:center;padding:40px 0 28px}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--pdim);border:1px solid var(--bd);color:var(--p);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:18px}
     .hero-badge::before{content:'●';font-size:.45rem;animation:blink 2s infinite}
     @keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
-    .hero-title{font-family:'Orbitron',monospace;font-size:clamp(1.7rem,7vw,3.1rem);font-weight:900;line-height:1.15;margin-bottom:16px}
+    .hero-title{font-family:'Orbitron',monospace;font-size:clamp(1.6rem,6vw,2.9rem);font-weight:900;line-height:1.15;margin-bottom:14px}
     .c1{color:var(--p)}.c2{color:var(--a)}
-    .hero-desc{color:var(--tm);font-size:.93rem;line-height:1.8;max-width:520px;margin:0 auto 26px}
+    .hero-desc{color:var(--tm);font-size:.9rem;line-height:1.8;max-width:500px;margin:0 auto 22px}
     .hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-    .hero-stats{display:flex;gap:24px;justify-content:center;margin-top:38px;flex-wrap:wrap}
+    .hero-stats{display:flex;gap:20px;justify-content:center;margin-top:32px;flex-wrap:wrap}
     .h-stat{text-align:center}
-    .h-stat-val{font-family:'Orbitron',monospace;font-size:1.5rem;font-weight:900;color:var(--p)}
-    .h-stat-lbl{font-size:.72rem;color:var(--tm);margin-top:3px}
+    .h-stat-val{font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;color:var(--p)}
+    .h-stat-lbl{font-size:.7rem;color:var(--tm);margin-top:2px}
     .h-div{width:1px;background:var(--bds);align-self:stretch}
 
-    /* FEAT CARDS */
-    .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:13px;margin:36px 0 28px}
-    .feat-card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:20px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+    /* ── FEAT CARDS ── */
+    .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:12px;margin:30px 0 24px}
+    .feat-card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:18px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
     .feat-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .25s;background:radial-gradient(circle at 30% 30%,rgba(0,212,255,.07),transparent 70%)}
     .feat-card:hover{border-color:var(--p);transform:translateY(-4px);box-shadow:var(--glow)}
     .feat-card:hover::before{opacity:1}
-    .feat-icon{font-size:2rem;margin-bottom:11px}.feat-title{font-weight:700;margin-bottom:6px;font-size:.93rem}
-    .feat-desc{color:var(--tm);font-size:.8rem;line-height:1.65}
-    .feat-arr{position:absolute;bottom:14px;right:14px;color:var(--td);font-size:.78rem;transition:color .2s}
+    .feat-icon{font-size:1.8rem;margin-bottom:10px}.feat-title{font-weight:700;margin-bottom:5px;font-size:.9rem}
+    .feat-desc{color:var(--tm);font-size:.78rem;line-height:1.6}
+    .feat-arr{position:absolute;bottom:12px;right:12px;color:var(--td);font-size:.75rem;transition:color .2s}
     .feat-card:hover .feat-arr{color:var(--p)}
 
-    /* BUTTONS */
+    /* ── BUTTONS ── */
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 20px;border-radius:var(--r);font-size:.86rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-decoration:none;font-family:'Noto Sans TC',sans-serif;white-space:nowrap}
     .btn-p{background:linear-gradient(135deg,var(--p),var(--pd));color:var(--bg);box-shadow:0 4px 14px rgba(0,212,255,.28)}
     .btn-p:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,212,255,.42)}
@@ -110,33 +110,29 @@
     .btn-ok{background:linear-gradient(135deg,var(--ok),#00c853);color:var(--bg);font-weight:700}
     .btn-ok:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,230,118,.32)}
     .btn-o{background:transparent;color:var(--p);border:1px solid var(--bd)}
-    .btn-o:hover:not(:disabled){background:var(--pdim);border-color:var(--p)}
+    .btn-o:hover:not(:disabled){background:var(--pdim)}
     .btn-g{background:rgba(255,255,255,.04);color:var(--tm);border:1px solid var(--bds)}
     .btn-g:hover{background:rgba(255,255,255,.08);color:var(--t)}
     .btn-warn{background:rgba(255,193,7,.12);color:var(--wa);border:1px solid rgba(255,193,7,.28)}
     .btn-danger{background:rgba(255,82,82,.12);color:var(--er);border:1px solid rgba(255,82,82,.28)}
-    .btn-danger:hover{background:rgba(255,82,82,.22)}
     .btn-blk{width:100%}.btn-sm{padding:7px 13px;font-size:.78rem}.btn-lg{padding:13px 26px;font-size:.96rem}
     .btn:disabled{opacity:.42;cursor:not-allowed;transform:none!important}
 
-    /* CARDS */
-    .card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:18px;margin-bottom:13px}
+    /* ── CARDS ── */
+    .card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:18px;margin-bottom:12px}
     .card-hl{border-color:var(--bd);background:linear-gradient(135deg,var(--s),var(--s2))}
+    .card-warn{border-color:rgba(255,193,7,.28);background:rgba(255,193,7,.04)}
     .card-title{font-weight:700;font-size:.93rem}
-    .card-warn{border-color:rgba(255,193,7,.3);background:rgba(255,193,7,.04)}
 
-    /* BADGES */
+    /* ── BADGES ── */
     .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;font-size:.7rem;font-weight:600}
-    .b-blue{background:rgba(0,212,255,.12);color:var(--p)}
-    .b-orange{background:rgba(255,107,53,.12);color:var(--a)}
-    .b-green{background:rgba(0,230,118,.12);color:var(--ok)}
-    .b-yellow{background:rgba(255,193,7,.12);color:var(--wa)}
-    .b-red{background:rgba(255,82,82,.12);color:var(--er)}
-    .b-purple{background:rgba(180,125,255,.12);color:var(--pu)}
+    .b-blue{background:rgba(0,212,255,.12);color:var(--p)}.b-orange{background:rgba(255,107,53,.12);color:var(--a)}
+    .b-green{background:rgba(0,230,118,.12);color:var(--ok)}.b-yellow{background:rgba(255,193,7,.12);color:var(--wa)}
+    .b-red{background:rgba(255,82,82,.12);color:var(--er)}.b-purple{background:rgba(180,125,255,.12);color:var(--pu)}
     .b-gray{background:rgba(255,255,255,.07);color:var(--tm)}
 
-    /* FORM */
-    .fg{margin-bottom:14px}
+    /* ── FORM ── */
+    .fg{margin-bottom:13px}
     .fl{display:flex;align-items:center;gap:4px;font-size:.8rem;color:var(--tm);margin-bottom:6px}
     .req{color:var(--a)}
     .fc{width:100%;background:var(--bg3);border:1px solid rgba(255,255,255,.08);border-radius:10px;color:var(--t);font-family:'Noto Sans TC',sans-serif;font-size:.86rem;padding:10px 13px;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none}
@@ -144,187 +140,193 @@
     .fc::placeholder{color:var(--td)}
     select.fc{cursor:pointer}
     select.fc option{background:var(--bg2);color:var(--t)}
-    textarea.fc{resize:vertical;min-height:82px}
+    textarea.fc{resize:vertical;min-height:80px}
     .fr{display:grid;grid-template-columns:1fr 1fr;gap:11px}
     .fh{font-size:.74rem;color:var(--tm);margin-top:4px;line-height:1.5}
-    .fs-ttl{font-weight:700;font-size:.82rem;color:var(--p);margin:18px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--bds)}
+    .fs-ttl{font-weight:700;font-size:.82rem;color:var(--p);margin:16px 0 11px;padding-bottom:7px;border-bottom:1px solid var(--bds)}
     @media(max-width:500px){.fr{grid-template-columns:1fr}}
 
-    /* PHOTO UPLOAD */
-    .photo-upload-area{border:2px dashed rgba(0,212,255,.25);border-radius:var(--rl);padding:20px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
+    /* ── PHOTO UPLOAD ── */
+    .photo-upload-area{border:2px dashed rgba(0,212,255,.25);border-radius:var(--rl);padding:18px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
     .photo-upload-area:hover{border-color:var(--p);background:rgba(0,212,255,.04)}
     .photo-upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-    .photo-preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+    .photo-preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
     .photo-preview{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:1}
     .photo-preview img{width:100%;height:100%;object-fit:cover}
     .photo-del{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(255,82,82,.85);color:#fff;border:none;cursor:pointer;font-size:.7rem;display:flex;align-items:center;justify-content:center}
 
-    /* TABS */
-    .tabs{display:flex;gap:3px;margin-bottom:18px;background:var(--bg2);padding:4px;border-radius:13px}
+    /* ── TABS ── */
+    .tabs{display:flex;gap:3px;margin-bottom:16px;background:var(--bg2);padding:4px;border-radius:13px}
     .tab{flex:1;padding:8px 10px;border:none;background:none;color:var(--tm);border-radius:10px;cursor:pointer;font-family:'Noto Sans TC',sans-serif;font-size:.8rem;transition:all .2s}
     .tab.active{background:var(--s2);color:var(--p);font-weight:600}
     .tab:hover:not(.active){color:var(--t);background:rgba(255,255,255,.04)}
 
-    /* PRODUCTS */
-    .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:13px}
+    /* ── PRODUCTS ── */
+    .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
     .prod-card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);overflow:hidden;transition:all .25s;display:flex;flex-direction:column;cursor:pointer}
     .prod-card:hover{border-color:var(--p);transform:translateY(-4px);box-shadow:var(--glow)}
-    .prod-thumb{width:100%;height:170px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:4.2rem;position:relative;overflow:hidden}
+    .prod-thumb{width:100%;height:160px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;overflow:hidden}
     .prod-thumb img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
     .prod-tag-abs{position:absolute;top:10px;left:10px;background:rgba(8,12,24,.85);backdrop-filter:blur(6px)}
-    .prod-body{padding:15px;flex:1;display:flex;flex-direction:column}
-    .prod-name{font-weight:700;margin-bottom:2px;font-size:.92rem}
-    .prod-model{color:var(--tm);font-size:.75rem;margin-bottom:5px}
-    .prod-desc{color:var(--tm);font-size:.78rem;line-height:1.6;margin-bottom:11px;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .prod-price{font-size:1.3rem;font-weight:900;color:var(--a);margin-bottom:10px;font-family:'Orbitron',monospace}
-    .prod-price small{font-size:.72rem;color:var(--tm);font-weight:400;font-family:'Noto Sans TC',sans-serif}
-    .prod-info-btn{display:inline-flex;align-items:center;gap:6px;color:var(--p);font-size:.82rem;font-weight:600;margin-top:auto}
+    .prod-hot{position:absolute;top:10px;right:10px;background:linear-gradient(135deg,var(--a),var(--ad));color:#fff;padding:3px 10px;border-radius:99px;font-size:.68rem;font-weight:700}
+    .prod-body{padding:14px;flex:1;display:flex;flex-direction:column}
+    .prod-name{font-weight:700;margin-bottom:2px;font-size:.9rem}
+    .prod-model{color:var(--tm);font-size:.73rem;margin-bottom:5px}
+    .prod-desc{color:var(--tm);font-size:.77rem;line-height:1.6;margin-bottom:10px;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .prod-price{font-size:1.25rem;font-weight:900;color:var(--a);margin-bottom:8px;font-family:'Orbitron',monospace}
+    .prod-price small{font-size:.7rem;color:var(--tm);font-weight:400;font-family:'Noto Sans TC',sans-serif}
+    .prod-info-btn{display:inline-flex;align-items:center;gap:6px;color:var(--p);font-size:.8rem;font-weight:600;margin-top:auto}
 
-    /* PRODUCT DETAIL */
-    .detail-back{display:flex;align-items:center;gap:8px;color:var(--tm);font-size:.84rem;cursor:pointer;margin-bottom:18px;background:none;border:none;font-family:'Noto Sans TC',sans-serif}
+    /* ── DETAIL ── */
+    .detail-back{display:flex;align-items:center;gap:8px;color:var(--tm);font-size:.84rem;cursor:pointer;margin-bottom:16px;background:none;border:none;font-family:'Noto Sans TC',sans-serif}
     .detail-back:hover{color:var(--p)}
-    .detail-img-wrap{width:100%;max-height:300px;border-radius:var(--rl);overflow:hidden;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
-    .detail-img-wrap img{width:100%;height:100%;object-fit:contain;max-height:300px}
-    .detail-title{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:900;color:var(--p);margin-bottom:6px}
-    .detail-price{font-size:1.8rem;font-weight:900;color:var(--a);font-family:'Orbitron',monospace;margin-bottom:16px}
-    .spec-table{width:100%;font-size:.84rem;border-collapse:collapse;margin-bottom:16px}
+    .detail-img-wrap{width:100%;max-height:280px;border-radius:var(--rl);overflow:hidden;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+    .detail-img-wrap img{width:100%;height:100%;object-fit:contain;max-height:280px}
+    .detail-title{font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:900;color:var(--p);margin-bottom:5px}
+    .detail-price{font-size:1.7rem;font-weight:900;color:var(--a);font-family:'Orbitron',monospace;margin-bottom:14px}
+    .spec-table{width:100%;font-size:.83rem;border-collapse:collapse;margin-bottom:14px}
     .spec-table tr{border-bottom:1px solid var(--bds)}
-    .spec-table td:first-child{color:var(--tm);padding:9px 12px 9px 0;width:35%;font-weight:600}
-    .spec-table td:last-child{padding:9px 0;color:var(--t)}
-    .ncc-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.2);color:var(--ok);padding:5px 13px;border-radius:99px;font-size:.78rem;font-weight:600;margin-bottom:16px}
+    .spec-table td:first-child{color:var(--tm);padding:8px 12px 8px 0;width:35%;font-weight:600}
+    .spec-table td:last-child{padding:8px 0}
+    .ncc-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.2);color:var(--ok);padding:4px 12px;border-radius:99px;font-size:.76rem;font-weight:600;margin-bottom:14px}
 
-    /* SHOP FILTER */
-    .shop-filter{display:flex;gap:7px;margin-bottom:16px;overflow-x:auto;padding-bottom:3px}
+    /* ── RECOMMENDED ── */
+    .rec-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}
+    .rec-scroll::-webkit-scrollbar{height:4px}
+    .rec-card{flex-shrink:0;width:170px;background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);overflow:hidden;cursor:pointer;transition:all .2s}
+    .rec-card:hover{border-color:var(--p);box-shadow:var(--glow)}
+    .rec-thumb{width:100%;height:110px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:2.8rem}
+    .rec-body{padding:10px}
+    .rec-name{font-weight:700;font-size:.82rem;margin-bottom:3px}
+    .rec-price{color:var(--a);font-weight:700;font-size:.88rem}
+
+    /* ── SHOP FILTER ── */
+    .shop-filter{display:flex;gap:7px;margin-bottom:14px;overflow-x:auto;padding-bottom:3px}
     .fchip{padding:5px 13px;border-radius:99px;font-size:.78rem;border:1px solid var(--bds);background:none;color:var(--tm);cursor:pointer;transition:all .2s;white-space:nowrap;font-family:'Noto Sans TC',sans-serif}
     .fchip.active{background:var(--pdim);border-color:var(--p);color:var(--p);font-weight:600}
 
-    /* PARTS */
-    .parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:12px}
+    /* ── PARTS ── */
+    .parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:11px}
     .part-card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
     .part-card:hover{border-color:var(--p);transform:translateY(-3px);box-shadow:var(--glow)}
-    .part-thumb{width:100%;height:125px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:3rem;overflow:hidden}
+    .part-thumb{width:100%;height:120px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:2.8rem;overflow:hidden}
     .part-thumb img{width:100%;height:100%;object-fit:cover}
-    .part-body{padding:12px;flex:1;display:flex;flex-direction:column}
-    .part-name{font-weight:700;font-size:.86rem;margin-bottom:3px}
-    .part-desc{color:var(--tm);font-size:.75rem;margin-bottom:8px;flex:1}
-    .part-price{font-size:1.1rem;font-weight:900;color:var(--a);margin-bottom:8px;font-family:'Orbitron',monospace}
+    .part-body{padding:11px;flex:1;display:flex;flex-direction:column}
+    .part-name{font-weight:700;font-size:.84rem;margin-bottom:3px}
+    .part-desc{color:var(--tm);font-size:.74rem;margin-bottom:7px;flex:1}
+    .part-price{font-size:1.05rem;font-weight:900;color:var(--a);margin-bottom:7px;font-family:'Orbitron',monospace}
 
-    /* CART / CHECKOUT */
-    .cart-item{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--bds)}
+    /* ── CART ── */
+    .cart-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--bds)}
     .cart-item:last-child{border-bottom:none}
-    .cart-thumb{width:54px;height:54px;border-radius:11px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.7rem;flex-shrink:0;overflow:hidden}
+    .cart-thumb{width:52px;height:52px;border-radius:10px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;overflow:hidden}
     .cart-thumb img{width:100%;height:100%;object-fit:cover}
     .cart-info{flex:1;min-width:0}
-    .cart-name{font-weight:600;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .cart-price{color:var(--a);font-size:.83rem;font-weight:700}
-    .qty-ctrl{display:flex;align-items:center;gap:7px}
-    .qty-btn{width:27px;height:27px;border-radius:8px;background:var(--bg3);border:1px solid var(--bds);color:var(--t);cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;transition:all .15s}
-    .qty-btn:hover{background:var(--s2);border-color:var(--bd)}
-    .qty-val{font-weight:700;font-size:.88rem;min-width:18px;text-align:center}
-    .sum-wrap{background:var(--bg2);border-radius:13px;padding:16px;margin-top:14px}
-    .sum-row{display:flex;justify-content:space-between;padding:5px 0;font-size:.86rem}
-    .sum-row.total{font-weight:700;font-size:1.03rem;color:var(--p);border-top:1px solid var(--bds);margin-top:7px;padding-top:10px}
-
-    /* SHIPPING OPTIONS */
-    .ship-opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0}
-    .ship-opt{border:2px solid var(--bds);border-radius:var(--rl);padding:13px 11px;cursor:pointer;transition:all .2s;text-align:center}
+    .cart-name{font-weight:600;font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .cart-price{color:var(--a);font-size:.82rem;font-weight:700}
+    .qty-ctrl{display:flex;align-items:center;gap:6px}
+    .qty-btn{width:26px;height:26px;border-radius:8px;background:var(--bg3);border:1px solid var(--bds);color:var(--t);cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:all .15s}
+    .qty-btn:hover{background:var(--s2)}
+    .qty-val{font-weight:700;font-size:.86rem;min-width:18px;text-align:center}
+    .sum-wrap{background:var(--bg2);border-radius:13px;padding:14px;margin-top:12px}
+    .sum-row{display:flex;justify-content:space-between;padding:5px 0;font-size:.85rem}
+    .sum-row.total{font-weight:700;font-size:1rem;color:var(--p);border-top:1px solid var(--bds);margin-top:7px;padding-top:10px}
+    .ship-opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0}
+    .ship-opt{border:2px solid var(--bds);border-radius:var(--rl);padding:12px 10px;cursor:pointer;transition:all .2s;text-align:center}
     .ship-opt.sel{border-color:var(--p);background:rgba(0,212,255,.06)}
     .ship-opt.disabled{opacity:.35;cursor:not-allowed;pointer-events:none}
-    .s-icon{font-size:1.7rem;margin-bottom:5px}
-    .s-name{font-weight:700;font-size:.85rem;margin-bottom:2px}
-    .s-fee{color:var(--tm);font-size:.76rem}
-    .s-only{font-size:.68rem;color:var(--p);margin-top:2px}
+    .s-icon{font-size:1.6rem;margin-bottom:4px}.s-name{font-weight:700;font-size:.83rem;margin-bottom:2px}.s-fee{color:var(--tm);font-size:.74rem}.s-only{font-size:.66rem;color:var(--p);margin-top:2px}
+    .cvs-search-wrap{background:var(--bg3);border:1px solid var(--bds);border-radius:var(--rl);padding:12px;margin-top:10px}
+    .cvs-item{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--bds);cursor:pointer}
+    .cvs-item:last-child{border-bottom:none}
+    .cvs-item:hover{background:rgba(0,212,255,.04);padding-left:6px}
+    .cpn-bar{display:flex;gap:8px}.cpn-bar .fc{flex:1}
+    .cpn-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,215,0,.08);border:1px dashed rgba(255,215,0,.32);color:var(--a2);padding:4px 11px;border-radius:8px;font-size:.78rem}
 
-    /* CVS SEARCH */
-    .cvs-search-wrap{background:var(--bg3);border:1px solid var(--bds);border-radius:var(--rl);padding:14px;margin-top:12px}
-    .cvs-result-item{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bds);cursor:pointer;transition:background .15s}
-    .cvs-result-item:hover{background:rgba(0,212,255,.04)}
-    .cvs-result-item:last-child{border-bottom:none}
-    .cvs-store-name{font-weight:600;font-size:.88rem}
-    .cvs-store-addr{font-size:.75rem;color:var(--tm)}
-
-    /* COUPON */
-    .cpn-bar{display:flex;gap:8px}
-    .cpn-bar .fc{flex:1}
-    .cpn-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,215,0,.08);border:1px dashed rgba(255,215,0,.32);color:var(--a2);padding:4px 11px;border-radius:8px;font-size:.8rem}
-
-    /* MEMBER */
-    .lwall{text-align:center;padding:48px 20px}
-    .lwall-icon{font-size:3.8rem;margin-bottom:14px;display:block}
-    .lwall h2{font-family:'Orbitron',monospace;color:var(--p);margin-bottom:9px;font-size:1.25rem}
-    .lwall p{color:var(--tm);margin-bottom:24px;line-height:1.75;font-size:.88rem}
-    .mem-hero{background:linear-gradient(135deg,var(--s),var(--s2));border:1px solid var(--bd);border-radius:var(--rl);padding:20px;margin-bottom:16px;display:flex;gap:14px;align-items:center}
-    .mem-ava{width:64px;height:64px;border-radius:50%;flex-shrink:0;border:3px solid var(--p);overflow:hidden;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.7rem;box-shadow:var(--glow)}
+    /* ── MEMBER ── */
+    .lwall{text-align:center;padding:44px 20px}
+    .lwall-icon{font-size:3.5rem;margin-bottom:12px;display:block}
+    .lwall h2{font-family:'Orbitron',monospace;color:var(--p);margin-bottom:8px;font-size:1.2rem}
+    .lwall p{color:var(--tm);margin-bottom:22px;line-height:1.75;font-size:.86rem}
+    .mem-hero{background:linear-gradient(135deg,var(--s),var(--s2));border:1px solid var(--bd);border-radius:var(--rl);padding:18px;margin-bottom:14px;display:flex;gap:14px;align-items:center}
+    .mem-ava{width:62px;height:62px;border-radius:50%;flex-shrink:0;border:3px solid var(--p);overflow:hidden;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:var(--glow)}
     .mem-ava img{width:100%;height:100%;object-fit:cover}
-    .mem-name{font-size:1.1rem;font-weight:700;margin-bottom:2px}
-    .mem-phone{color:var(--tm);font-size:.8rem;margin-bottom:7px}
-    .m-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:16px}
-    .m-stat{background:var(--s);border:1px solid var(--bds);border-radius:12px;padding:13px;text-align:center}
-    .m-stat-val{font-family:'Orbitron',monospace;font-size:1.35rem;font-weight:700;color:var(--p)}
-    .m-stat-lbl{font-size:.7rem;color:var(--tm);margin-top:3px}
-    .wtag{display:inline-flex;align-items:center;gap:5px;background:rgba(0,230,118,.1);border:1px solid rgba(0,230,118,.22);color:var(--ok);padding:3px 11px;border-radius:99px;font-size:.75rem;font-weight:600}
+    .mem-name{font-size:1.05rem;font-weight:700;margin-bottom:2px}
+    .mem-phone{color:var(--tm);font-size:.78rem;margin-bottom:6px}
 
-    /* ORDER CARD with RETURN BTN */
-    .ord-card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:16px;margin-bottom:12px}
+    /* ── POINTS / LEVEL ── */
+    .level-bar-wrap{margin-top:10px}
+    .level-bar-bg{height:6px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}
+    .level-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--p),var(--pd));transition:width .6s ease}
+    .level-label{display:flex;justify-content:space-between;font-size:.72rem;color:var(--tm);margin-top:4px}
+    .points-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.25);color:var(--a2);padding:4px 12px;border-radius:99px;font-size:.78rem;font-weight:700}
+
+    .m-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}
+    .m-stat{background:var(--s);border:1px solid var(--bds);border-radius:12px;padding:12px;text-align:center}
+    .m-stat-val{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:700;color:var(--p)}
+    .m-stat-lbl{font-size:.68rem;color:var(--tm);margin-top:3px}
+    .wtag{display:inline-flex;align-items:center;gap:5px;background:rgba(0,230,118,.1);border:1px solid rgba(0,230,118,.22);color:var(--ok);padding:3px 10px;border-radius:99px;font-size:.73rem;font-weight:600}
+
+    /* ── NOTIFICATIONS ── */
+    .notif-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--bds)}
+    .notif-item:last-child{border-bottom:none}
+    .notif-icon{font-size:1.4rem;flex-shrink:0}
+    .notif-body{flex:1}
+    .notif-title{font-size:.86rem;font-weight:600;margin-bottom:2px}
+    .notif-time{font-size:.72rem;color:var(--tm)}
+    .notif-unread .notif-title::before{content:'● ';color:var(--p);font-size:.5rem;vertical-align:middle}
+
+    /* ── ORDER CARD ── */
+    .ord-card{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:15px;margin-bottom:11px}
     .ord-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-    .ord-actions{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+    .ord-actions{display:flex;gap:6px;margin-top:11px;flex-wrap:wrap}
 
-    /* RETURN STATUS */
-    .return-status-flow{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap}
-    .ret-dot{padding:3px 9px;border-radius:99px;font-size:.7rem;background:var(--bg2);color:var(--td)}
-    .ret-done{background:rgba(0,230,118,.09);color:var(--ok)}
-    .ret-cur{background:rgba(255,193,7,.1);color:var(--wa);font-weight:700}
-
-    /* REPAIR */
-    .r-prog{display:flex;margin-bottom:26px}
+    /* ── REPAIR ── */
+    .r-prog{display:flex;margin-bottom:24px}
     .rp-step{flex:1;text-align:center;position:relative}
     .rp-step::after{content:'';position:absolute;top:12px;left:50%;width:100%;height:2px;background:var(--bds);z-index:0}
     .rp-step:last-child::after{display:none}
     .rp-step.s-done::after{background:var(--p)}
-    .rp-dot{width:25px;height:25px;border-radius:50%;background:var(--bg2);border:2px solid var(--bds);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-size:.68rem;font-weight:700;position:relative;z-index:1}
+    .rp-dot{width:24px;height:24px;border-radius:50%;background:var(--bg2);border:2px solid var(--bds);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-size:.65rem;font-weight:700;position:relative;z-index:1}
     .rp-step.s-active .rp-dot{border-color:var(--p);background:var(--p);color:var(--bg);box-shadow:var(--glow)}
     .rp-step.s-done .rp-dot{border-color:var(--p);background:var(--p);color:var(--bg)}
-    .rp-lbl{font-size:.65rem;color:var(--td)}
+    .rp-lbl{font-size:.63rem;color:var(--td)}
     .rp-step.s-active .rp-lbl{color:var(--p);font-weight:600}
-    .r-notice{background:rgba(255,107,53,.05);border:1px solid rgba(255,107,53,.17);border-radius:var(--rl);padding:15px;font-size:.81rem;line-height:1.85;color:var(--tm);margin-top:13px}
+    .r-notice{background:rgba(255,107,53,.05);border:1px solid rgba(255,107,53,.17);border-radius:var(--rl);padding:14px;font-size:.8rem;line-height:1.85;color:var(--tm);margin-top:12px}
     .r-notice strong{color:var(--t)}
-    .trk-item{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:15px;margin-bottom:11px}
-    .sf{display:flex;gap:5px;margin-top:11px;flex-wrap:wrap}
+    .trk-item{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:14px;margin-bottom:10px}
+    .sf{display:flex;gap:5px;margin-top:10px;flex-wrap:wrap}
     .sf-dot{padding:3px 9px;border-radius:99px;font-size:.7rem;background:var(--bg2);color:var(--td)}
-    .sf-done{background:rgba(0,230,118,.09);color:var(--ok)}
-    .sf-cur{background:rgba(0,212,255,.11);color:var(--p);font-weight:700}
+    .sf-done{background:rgba(0,230,118,.09);color:var(--ok)}.sf-cur{background:rgba(0,212,255,.11);color:var(--p);font-weight:700}
 
-    /* ADMIN */
-    .a-nav{display:flex;gap:5px;margin-bottom:20px;overflow-x:auto;padding-bottom:3px}
+    /* ── ADMIN ── */
+    .a-nav{display:flex;gap:5px;margin-bottom:18px;overflow-x:auto;padding-bottom:3px}
     .a-tab{flex-shrink:0;padding:7px 14px;border-radius:99px;border:1px solid var(--bds);background:none;color:var(--tm);cursor:pointer;font-size:.78rem;font-family:'Noto Sans TC',sans-serif;transition:all .2s}
     .a-tab.active{background:var(--p);color:var(--bg);border-color:var(--p);font-weight:700}
     .a-sec{display:none}.a-sec.active{display:block}
-    .big-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:11px;margin-bottom:18px}
-    .big-stat{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:16px}
-    .big-stat-val{font-family:'Orbitron',monospace;font-size:1.8rem;font-weight:700;color:var(--p)}
-    .big-stat-lbl{font-size:.76rem;color:var(--tm);margin-top:3px}
+    .big-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin-bottom:16px}
+    .big-stat{background:var(--s);border:1px solid var(--bds);border-radius:var(--rl);padding:15px}
+    .big-stat-val{font-family:'Orbitron',monospace;font-size:1.7rem;font-weight:700;color:var(--p)}
+    .big-stat-lbl{font-size:.74rem;color:var(--tm);margin-top:3px}
     .big-stat.acc .big-stat-val{color:var(--a)}.big-stat.ok .big-stat-val{color:var(--ok)}.big-stat.pu .big-stat-val{color:var(--pu)}
-    .tbl-wrap{overflow-x:auto;border-radius:var(--rl)}
-    table{width:100%;border-collapse:collapse;font-size:.78rem}
-    th{background:var(--bg2);color:var(--tm);padding:9px 12px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--bds)}
-    td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.03);vertical-align:middle}
-    tr:hover td{background:rgba(255,255,255,.013)}
-    .tbl-bar{display:flex;gap:9px;align-items:center;margin-bottom:13px}
-    .prod-a-item{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--bds)}
-    .prod-a-thumb{width:42px;height:42px;border-radius:10px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;overflow:hidden}
+    .tbl-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:.77rem}
+    th{background:var(--bg2);color:var(--tm);padding:8px 11px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--bds)}
+    td{padding:8px 11px;border-bottom:1px solid rgba(255,255,255,.03);vertical-align:middle}
+    tr:hover td{background:rgba(255,255,255,.012)}
+    .tbl-bar{display:flex;gap:8px;align-items:center;margin-bottom:11px}
+    .prod-a-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--bds)}
+    .prod-a-thumb{width:40px;height:40px;border-radius:9px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;overflow:hidden}
     .prod-a-thumb img{width:100%;height:100%;object-fit:cover}
     .prod-a-info{flex:1;min-width:0}
-    .prod-a-name{font-weight:600;font-size:.86rem}
-    .prod-a-meta{font-size:.76rem;color:var(--tm)}
-    .icon-btn{width:31px;height:31px;border-radius:8px;border:1px solid var(--bds);background:none;color:var(--tm);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.86rem;transition:all .15s}
+    .prod-a-name{font-weight:600;font-size:.84rem}
+    .prod-a-meta{font-size:.74rem;color:var(--tm)}
+    .icon-btn{width:30px;height:30px;border-radius:8px;border:1px solid var(--bds);background:none;color:var(--tm);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.84rem;transition:all .15s}
     .icon-btn:hover{background:rgba(255,255,255,.06);color:var(--t)}
-    .act-row{display:flex;gap:5px}
-
-    /* TOGGLE SWITCH */
-    .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--bds)}
+    .act-row{display:flex;gap:4px}
+    .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--bds)}
     .toggle-row:last-child{border-bottom:none}
-    .toggle-label{font-size:.88rem}
-    .toggle-desc{font-size:.75rem;color:var(--tm);margin-top:2px}
+    .toggle-label{font-size:.86rem}.toggle-desc{font-size:.74rem;color:var(--tm);margin-top:2px}
     .toggle{position:relative;width:44px;height:24px;flex-shrink:0}
     .toggle input{opacity:0;width:0;height:0}
     .toggle-slider{position:absolute;inset:0;background:rgba(255,255,255,.12);border-radius:99px;cursor:pointer;transition:.3s}
@@ -332,50 +334,57 @@
     .toggle input:checked+.toggle-slider{background:var(--p)}
     .toggle input:checked+.toggle-slider::before{transform:translateX(20px)}
 
-    /* MODAL */
-    .overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.78);backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center;padding:14px}
+    /* ── CHART (simple bar) ── */
+    .chart-bar-wrap{display:flex;align-items:flex-end;gap:4px;height:80px;margin-top:8px}
+    .chart-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+    .chart-bar{width:100%;background:rgba(0,212,255,.25);border-radius:4px 4px 0 0;transition:height .6s ease;min-height:4px;position:relative}
+    .chart-bar:hover{background:var(--p)}
+    .chart-bar-tooltip{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--bg2);color:var(--p);font-size:.68rem;padding:2px 6px;border-radius:4px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s}
+    .chart-bar:hover .chart-bar-tooltip{opacity:1}
+    .chart-lbl{font-size:.62rem;color:var(--td);text-align:center}
+
+    /* ── MODAL ── */
+    .overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.78);backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center;padding:12px}
     .overlay.open{display:flex}
     @media(min-width:600px){.overlay{align-items:center}}
-    .modal{background:var(--bg2);border:1px solid var(--bd);border-radius:var(--rl);padding:22px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;animation:modIn .25s ease}
+    .modal{background:var(--bg2);border:1px solid var(--bd);border-radius:var(--rl);padding:20px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;animation:modIn .25s ease}
     @keyframes modIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-    .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-    .modal-title{font-family:'Orbitron',monospace;font-size:.96rem;color:var(--p)}
-    .modal-close{background:none;border:none;color:var(--tm);font-size:1.25rem;cursor:pointer;padding:4px;line-height:1}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .modal-title{font-family:'Orbitron',monospace;font-size:.94rem;color:var(--p)}
+    .modal-close{background:none;border:none;color:var(--tm);font-size:1.2rem;cursor:pointer;padding:4px;line-height:1}
     .modal-close:hover{color:var(--t)}
 
-    /* TOAST */
-    #toast{position:fixed;bottom:18px;left:50%;z-index:9000;transform:translateX(-50%) translateY(70px);opacity:0;background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:12px 20px;font-size:.86rem;max-width:340px;text-align:center;box-shadow:var(--sh);transition:all .3s ease;pointer-events:none}
+    /* ── TOAST ── */
+    #toast{position:fixed;bottom:16px;left:50%;z-index:9000;transform:translateX(-50%) translateY(70px);opacity:0;background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:11px 20px;font-size:.84rem;max-width:340px;text-align:center;box-shadow:var(--sh);transition:all .3s ease;pointer-events:none}
     #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
     #toast.success{border-color:var(--ok);color:var(--ok)}
     #toast.error{border-color:var(--er);color:var(--er)}
     #toast.warn{border-color:var(--wa);color:var(--wa)}
 
-    /* UTILS */
-    .divider{height:1px;background:var(--bds);margin:16px 0}
-    .flex{display:flex}.ic{align-items:center}.jb{justify-content:space-between}
-    .g8{gap:8px}.g10{gap:10px}.g12{gap:12px}
+    /* ── UTILS ── */
+    .divider{height:1px;background:var(--bds);margin:14px 0}
+    .flex{display:flex}.ic{align-items:center}.jb{justify-content:space-between}.wrap{flex-wrap:wrap}
+    .g6{gap:6px}.g8{gap:8px}.g10{gap:10px}.g12{gap:12px}
     .mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}
     .mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}
     .tc{text-align:center}.fw7{font-weight:700}
     .cp{color:var(--p)}.ca{color:var(--a)}.cok{color:var(--ok)}.cer{color:var(--er)}.cm{color:var(--tm)}.cd{color:var(--td)}
-    .mono{font-family:'Orbitron',monospace}
-    .fsm{font-size:.8rem}.fxs{font-size:.73rem}
-    .empty{text-align:center;padding:40px 20px;color:var(--tm)}
-    .empty-icon{font-size:2.8rem;margin-bottom:11px}
+    .mono{font-family:'Orbitron',monospace}.fsm{font-size:.8rem}.fxs{font-size:.72rem}
+    .empty{text-align:center;padding:36px 20px;color:var(--tm)}
+    .empty-icon{font-size:2.5rem;margin-bottom:10px}
     ::-webkit-scrollbar{width:4px;height:4px}
     ::-webkit-scrollbar-track{background:transparent}
     ::-webkit-scrollbar-thumb{background:rgba(0,212,255,.16);border-radius:99px}
-    @media(max-width:480px){.hero-title{font-size:1.6rem}.nav-btn span{display:none}.ship-opts{grid-template-columns:1fr}}
+    @media(max-width:480px){.hero-title{font-size:1.55rem}.nav-btn span{display:none}.ship-opts{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-
 <div id="loader">
   <div class="ld-brand"><div class="ld-box">U</div><div class="ld-txt">UBOX <em>TW</em></div></div>
   <div class="ld-dots"><div class="ld-dot"></div><div class="ld-dot"></div><div class="ld-dot"></div></div>
 </div>
 <div id="toast"></div>
-<div id="annBar"><span id="annTxt"></span></div>
+<div id="annBar" onclick="handleAnnClick()"><span id="annTxt"></span></div>
 
 <!-- NAV -->
 <nav>
@@ -404,7 +413,7 @@
   <div class="hero">
     <div class="hero-badge">台灣 UBOX 安博盒子 官方授權售後</div>
     <div class="hero-title"><span class="c1">UBOX</span> 安博盒子<br/><span class="c2">官方售後服務中心</span></div>
-    <p class="hero-desc">全台最專業的 UBOX 安博盒子銷售與維修服務平台。<br/>正品保障、透明報價、7-11 超商免費寄件。</p>
+    <p class="hero-desc">全台最專業的 UBOX 安博盒子銷售與維修服務。正品保障、透明報價、7-11 超商免費寄件。</p>
     <div class="hero-btns">
       <button class="btn btn-p btn-lg" onclick="showPage('shop')">🛒 查看商品</button>
       <button class="btn btn-a btn-lg" onclick="showPage('repair')">🔧 申請維修</button>
@@ -423,18 +432,18 @@
   <div class="feat-grid">
     <div class="feat-card" onclick="showPage('shop')"><div class="feat-icon">📦</div><div class="feat-title">正品銷售</div><div class="feat-desc">UBOX 全系列正品，加入會員即可選購。</div><div class="feat-arr">→</div></div>
     <div class="feat-card" onclick="showPage('parts')"><div class="feat-icon">🔩</div><div class="feat-title">零件選購</div><div class="feat-desc">電源、HDMI、遙控器、滑鼠等原廠配件。</div><div class="feat-arr">→</div></div>
-    <div class="feat-card" onclick="showPage('repair')"><div class="feat-icon">🔧</div><div class="feat-title">超商寄修</div><div class="feat-desc">7-11 超商取件，寄件免運費，維修含來回運費。</div><div class="feat-arr">→</div></div>
+    <div class="feat-card" onclick="showPage('repair')"><div class="feat-icon">🔧</div><div class="feat-title">超商寄修</div><div class="feat-desc">7-11 超商取件，寄件免費，維修含來回運費。</div><div class="feat-arr">→</div></div>
     <div class="feat-card" onclick="showPage('member')"><div class="feat-icon">🛡️</div><div class="feat-title">一年保固</div><div class="feat-desc">購機起算一年原廠保固，保固內零件費全免。</div><div class="feat-arr">→</div></div>
   </div>
-  <div class="flex jb ic mb12 mt20">
+  <div class="flex jb ic mb12 mt16">
     <div class="card-title cp mono">🔥 熱門商品</div>
     <button class="btn btn-g btn-sm" onclick="showPage('shop')">查看全部 →</button>
   </div>
   <div class="prod-grid" id="homeProds"></div>
-  <div class="card card-hl mt20 tc">
-    <div class="fsm cm mb8">💬 維修進度查詢 / 客服諮詢</div>
-    <div class="fw7" style="font-size:1.02rem;margin-bottom:3px">LINE@ 官方帳號</div>
-    <div class="cp mono fw7" style="font-size:1.12rem;margin-bottom:13px">@uboxtw</div>
+  <div class="card card-hl mt16 tc">
+    <div class="fsm cm mb6">💬 維修進度查詢 / 客服諮詢</div>
+    <div class="fw7" style="margin-bottom:3px">LINE@ 官方帳號</div>
+    <div class="cp mono fw7" style="font-size:1.1rem;margin-bottom:12px">@uboxtw</div>
     <button class="btn btn-o" onclick="openLine()">加入 LINE 開始諮詢</button>
   </div>
 </div>
@@ -443,6 +452,10 @@
 <div id="page-detail" class="page">
   <button class="detail-back" id="detailBack">← 返回</button>
   <div id="detailContent"></div>
+  <div id="detailRec" style="display:none" class="mt16">
+    <div class="card-title mb12">🔗 相關推薦商品</div>
+    <div class="rec-scroll" id="recScroll"></div>
+  </div>
 </div>
 
 <!-- ═══ SHOP ═══ -->
@@ -456,7 +469,7 @@
     <button class="fchip" onclick="filterProds('acc',this)">🔌 配件</button>
   </div>
   <div class="prod-grid" id="shopGrid"></div>
-  <div id="shopHint" class="card card-hl mt20 tc" style="display:none">
+  <div id="shopHint" class="card card-hl mt16 tc" style="display:none">
     <div class="fsm cm mb8">🔒 加入會員即可購買</div>
     <button class="btn btn-p" onclick="showPage('member')">立即加入會員</button>
   </div>
@@ -467,15 +480,15 @@
   <div class="pg-title">🔩 零件配件選購</div>
   <p class="pg-sub">原廠配件 ｜ 加入會員後即可加入購物車</p>
   <div class="parts-grid" id="partsGrid"></div>
-  <div id="partsHint" class="card card-hl mt20 tc" style="display:none">
-    <div class="fsm cm mb8">🔒 加入會員即可購買配件</div>
+  <div id="partsHint" class="card card-hl mt16 tc" style="display:none">
+    <div class="fsm cm mb8">🔒 加入會員即可購買</div>
     <button class="btn btn-p" onclick="showPage('member')">立即加入會員</button>
   </div>
 </div>
 
 <!-- ═══ CART ═══ -->
 <div id="page-cart" class="page">
-  <div class="flex ic g10 mb16">
+  <div class="flex ic g10 mb14">
     <button class="btn btn-g btn-sm" onclick="showPage('shop')">← 繼續購物</button>
     <div class="pg-title" style="margin-bottom:0">購物車</div>
   </div>
@@ -484,66 +497,48 @@
     <div class="card" id="cartItems"></div>
     <div class="card">
       <div class="card-title mb12">選擇配送方式</div>
-      <div class="ship-opts" id="shipOpts">
-        <div class="ship-opt sel" id="shipD" onclick="selShip('delivery')">
-          <div class="s-icon">🚚</div><div class="s-name">宅配到府</div>
-          <div class="s-fee" id="dFeeLabel">運費 $150</div>
-        </div>
-        <div class="ship-opt" id="shipC" onclick="selShip('cvs')">
-          <div class="s-icon">🏪</div><div class="s-name">7-11 超商取貨付款</div>
-          <div class="s-fee" id="cFeeLabel">運費 $80</div>
-          <div class="s-only">僅支援 7-11 超商</div>
-        </div>
+      <div class="ship-opts">
+        <div class="ship-opt sel" id="shipD" onclick="selShip('delivery')"><div class="s-icon">🚚</div><div class="s-name">宅配到府</div><div class="s-fee" id="dFeeLabel">運費 $150</div></div>
+        <div class="ship-opt" id="shipC" onclick="selShip('cvs')"><div class="s-icon">🏪</div><div class="s-name">7-11 超商取貨付款</div><div class="s-fee" id="cFeeLabel">運費 $80</div><div class="s-only">僅支援 7-11 超商</div></div>
       </div>
-
-      <!-- 宅配表單 -->
       <div id="dFields">
         <div class="fg"><label class="fl">收件人姓名 <span class="req">*</span></label><input class="fc" id="dName" placeholder="姓名"/></div>
         <div class="fg"><label class="fl">聯絡電話 <span class="req">*</span></label><input class="fc" id="dPhone" placeholder="09xxxxxxxx" type="tel"/></div>
-        <div class="fg"><label class="fl">收件地址 <span class="req">*</span></label><input class="fc" id="dAddr" placeholder="縣市區路號（例：台南市永康區中正路1號）"/></div>
+        <div class="fg"><label class="fl">收件地址 <span class="req">*</span></label><input class="fc" id="dAddr" placeholder="縣市區路號"/></div>
       </div>
-
-      <!-- 超商取貨表單 -->
       <div id="cFields" style="display:none">
         <div class="fg"><label class="fl">取件人姓名 <span class="req">*</span></label><input class="fc" id="cName" placeholder="姓名（自動帶入）"/></div>
-        <div class="fg"><label class="fl">聯絡電話 <span class="req">*</span></label><input class="fc" id="cPhone" placeholder="09xxxxxxxx（自動帶入）" type="tel"/></div>
+        <div class="fg"><label class="fl">聯絡電話 <span class="req">*</span></label><input class="fc" id="cPhone" placeholder="09xxxxxxxx" type="tel"/></div>
         <div class="fg">
           <label class="fl">7-11 取件門市 <span class="req">*</span></label>
           <div class="cvs-search-wrap">
-            <div class="flex g8 mb8">
-              <input class="fc" id="cvsSearchInput" placeholder="輸入門市名稱或地址搜尋..." style="flex:1"/>
-              <button class="btn btn-o btn-sm" onclick="searchCVS()">搜尋</button>
-            </div>
-            <div id="cvsSearchResults"></div>
-            <div id="cvsSelected" style="display:none">
-              <div class="flex ic g8" style="padding:10px;background:rgba(0,212,255,.06);border-radius:10px">
+            <div class="flex g8 mb8"><input class="fc" id="cvsInput" placeholder="輸入門市名稱搜尋..." style="flex:1"/><button class="btn btn-o btn-sm" onclick="searchCVS()">搜尋</button></div>
+            <div id="cvsResults"></div>
+            <div id="cvsChosen" style="display:none">
+              <div class="flex ic g8" style="padding:9px;background:rgba(0,212,255,.06);border-radius:10px">
                 <span>🏪</span>
-                <div style="flex:1">
-                  <div class="fw7 fsm" id="cvsStoreName"></div>
-                  <div class="cd fxs" id="cvsStoreAddr"></div>
-                </div>
+                <div style="flex:1"><div class="fw7 fsm" id="cvsStoreName"></div><div class="cd fxs" id="cvsStoreAddr"></div></div>
                 <button class="btn btn-g btn-sm" onclick="clearCVS()">重選</button>
               </div>
             </div>
           </div>
-          <p class="fh">⚠️ 請確認門市正確，超商取貨付款恕不更改取件門市</p>
+          <p class="fh">⚠️ 超商取貨付款恕不更改取件門市，請確認正確</p>
         </div>
       </div>
-
       <div class="fg"><label class="fl">訂單備注</label><textarea class="fc" id="orderNote" rows="2" placeholder="特殊需求請備注"></textarea></div>
-      <div id="cpnApplied" style="display:none" class="mb12"><div class="cpn-tag">🎫 已套用：<span id="cpnCode"></span></div></div>
+      <div id="cpnApplied" style="display:none" class="mb10"><div class="cpn-tag">🎫 已套用：<span id="cpnCode"></span></div></div>
       <div class="sum-wrap">
         <div class="sum-row"><span>商品小計</span><span id="sumSub">$0</span></div>
         <div class="sum-row"><span>運費</span><span id="sumFee">$0</span></div>
         <div class="sum-row"><span>優惠折扣</span><span id="sumDisc" class="cok">$0</span></div>
         <div class="sum-row total"><span>訂單總計</span><span id="sumTotal">$0</span></div>
       </div>
-      <div class="card" style="background:var(--bg3);margin-top:12px">
+      <div class="card" style="background:var(--bg3);margin-top:10px">
         <div class="card-title mb10">🎫 優惠碼</div>
         <div class="cpn-bar"><input class="fc" id="cpnInput" placeholder="輸入優惠碼"/><button class="btn btn-o" onclick="applyCoupon()">套用</button></div>
         <div id="cpnResult" class="mt8"></div>
       </div>
-      <button class="btn btn-ok btn-blk btn-lg mt16" id="orderBtn" onclick="submitOrder()">✅ 確認下單（貨到付款）</button>
+      <button class="btn btn-ok btn-blk btn-lg mt14" id="orderBtn" onclick="submitOrder()">✅ 確認下單（貨到付款）</button>
       <p class="tc fxs cd mt8">下單後請等候客服確認，貨到現場付款</p>
     </div>
   </div>
@@ -560,14 +555,14 @@
   <div id="repForm">
     <div class="r-prog">
       <div class="rp-step s-active"><div class="rp-dot">1</div><div class="rp-lbl">填表</div></div>
-      <div class="rp-step"><div class="rp-dot">2</div><div class="rp-lbl">等待代碼</div></div>
+      <div class="rp-step"><div class="rp-dot">2</div><div class="rp-lbl">等代碼</div></div>
       <div class="rp-step"><div class="rp-dot">3</div><div class="rp-lbl">超商寄件</div></div>
       <div class="rp-step"><div class="rp-dot">4</div><div class="rp-lbl">維修中</div></div>
       <div class="rp-step"><div class="rp-dot">5</div><div class="rp-lbl">完成取件</div></div>
     </div>
     <div class="card">
       <div class="fs-ttl">📱 聯絡方式</div>
-      <div class="fg"><label class="fl">FB / LINE 帳號名稱 <span class="req">*</span></label><input class="fc" id="r_contact" placeholder="填好後請聯絡我們領取超商代碼"/><p class="fh">⚠️ 報價與進度均透過此帳號回覆，請務必正確</p></div>
+      <div class="fg"><label class="fl">FB / LINE 帳號名稱 <span class="req">*</span></label><input class="fc" id="r_contact" placeholder="報價與進度均透過此帳號回覆，請務必正確"/></div>
       <div class="fs-ttl">🔍 故障資訊</div>
       <div class="fg"><label class="fl">維修問題描述 <span class="req">*</span></label><textarea class="fc" id="r_problem" placeholder="請詳述故障現象、何時發生等"></textarea></div>
       <div class="fr">
@@ -583,17 +578,16 @@
       <div class="fs-ttl">🛡️ 保固查詢（選填）</div>
       <div class="fg">
         <label class="fl">訂單編號</label>
-        <div class="flex g8"><input class="fc" id="r_orderId" placeholder="UBOX-XXXXXXXX（有購機紀錄可填）" style="flex:1"/><button class="btn btn-o" onclick="checkWarranty()" style="white-space:nowrap">查保固</button></div>
+        <div class="flex g8"><input class="fc" id="r_orderId" placeholder="UBOX-XXXXXXXX" style="flex:1"/><button class="btn btn-o" onclick="checkWarranty()">查保固</button></div>
         <div id="wResult" class="mt8"></div>
       </div>
       <button class="btn btn-a btn-blk btn-lg mt8" onclick="submitRepair()" id="repBtn">📤 送出維修申請</button>
     </div>
-    <div class="r-notice mt16">
+    <div class="r-notice mt14">
       📌 <strong>重要說明</strong><br/>
-      ・ 寄件完全<strong>不需先付運費</strong>，我們提供免費 7-11 寄件代碼<br/>
-      ・ 維修前會先報價，同意後才施修<br/>
-      ・ 維修費用<strong>含來回運費</strong><br/>
-      ・ <strong>保固內（購機1年內）</strong>零件費全免，僅酌收工本費<br/>
+      ・ 寄件<strong>不需先付運費</strong>，我們提供免費 7-11 寄件代碼<br/>
+      ・ 維修前先報價，同意後才施修<br/>
+      ・ <strong>保固內</strong>零件費全免，僅酌收工本費<br/>
       ・ 收到代碼後請於 <strong>3天內</strong> 至7-11寄出
     </div>
   </div>
@@ -609,8 +603,10 @@
     <div class="lwall">
       <span class="lwall-icon">👤</span>
       <h2>加入 UBOX 會員</h2>
-      <p>使用 LINE 帳號登入，享有會員專屬商城、<br/>訂單追蹤、維修查詢、LINE 即時通知等完整服務。</p>
+      <p>使用 LINE 帳號登入，享有會員專屬商城、<br/>積分回饋、訂單追蹤、LINE 即時通知。</p>
       <button class="btn btn-p btn-lg" onclick="liffLogin()">🟢 LINE 登入</button>
+      <p class="fxs cm mt12">若要在瀏覽器測試，請點下方按鈕</p>
+      <button class="btn btn-g btn-sm mt8" onclick="guestMode()">🧪 訪客測試模式</button>
     </div>
   </div>
   <div id="memReg" style="display:none">
@@ -624,7 +620,8 @@
       <div class="fg"><label class="fl">手機號碼 <span class="req">*</span></label><input class="fc" id="reg_phone" placeholder="09xxxxxxxx" type="tel"/></div>
       <div class="fg"><label class="fl">預設收件地址 <span class="req">*</span></label><input class="fc" id="reg_addr" placeholder="縣市區路號"/></div>
       <div class="fg"><label class="fl">電子信箱</label><input class="fc" id="reg_email" placeholder="email@example.com" type="email"/></div>
-      <button class="btn btn-p btn-blk btn-lg mt8" onclick="submitReg()">✅ 完成加入會員</button>
+      <button class="btn btn-p btn-blk btn-lg mt8" id="regBtn" onclick="submitReg()">✅ 完成加入會員</button>
+      <p class="fxs cm tc mt8" id="regStatus"></p>
     </div>
   </div>
   <div id="memProfile" style="display:none">
@@ -633,7 +630,16 @@
       <div style="flex:1;min-width:0">
         <div class="mem-name" id="memName">—</div>
         <div class="mem-phone" id="memPhone">—</div>
-        <div><span class="badge b-blue" id="memLevel">一般會員</span> <span class="wtag" id="memWtag" style="display:none">🛡️ 保固中</span></div>
+        <div class="flex ic g8 wrap">
+          <span class="badge b-blue" id="memLevel">一般會員</span>
+          <span class="wtag" id="memWtag" style="display:none">🛡️ 保固中</span>
+          <span class="points-badge" id="memPoints" style="display:none">⭐ 0 點</span>
+        </div>
+        <!-- 等級進度條 -->
+        <div class="level-bar-wrap mt8" id="levelBarWrap" style="display:none">
+          <div class="level-bar-bg"><div class="level-bar-fill" id="levelBarFill" style="width:0%"></div></div>
+          <div class="level-label"><span id="levelCur"></span><span id="levelNext"></span></div>
+        </div>
       </div>
     </div>
     <div class="m-stats">
@@ -644,16 +650,51 @@
     <div class="tabs">
       <button class="tab active" onclick="switchMemTab('orders',this)">📦 訂單</button>
       <button class="tab" onclick="switchMemTab('repairs',this)">🔧 維修</button>
+      <button class="tab" onclick="switchMemTab('notif',this)">🔔 通知</button>
+      <button class="tab" onclick="switchMemTab('points',this)">⭐ 積分</button>
       <button class="tab" onclick="switchMemTab('profile',this)">⚙️ 設定</button>
     </div>
     <div id="mt-orders"><div id="memOrdList"></div></div>
     <div id="mt-repairs" style="display:none"><div id="memRepList"></div></div>
+    <div id="mt-notif" style="display:none"><div id="memNotifList"></div></div>
+    <div id="mt-points" style="display:none">
+      <div class="card card-hl">
+        <div class="flex jb ic mb12">
+          <div class="card-title">⭐ 我的積分</div>
+          <div class="points-badge" id="ptsBadge">0 點</div>
+        </div>
+        <p class="fsm cm" style="line-height:1.8">每消費 NT$100 = 1 積分<br/>積分可於下次結帳折抵（100點 = NT$50）<br/>積分有效期：加入後2年內</p>
+        <div class="divider"></div>
+        <div class="card-title mb10 fsm">積分紀錄</div>
+        <div id="ptsHistory"></div>
+      </div>
+      <div class="card mt0">
+        <div class="card-title mb10">🎁 積分兌換</div>
+        <div class="fg"><label class="fl">使用積分折抵（100點 = NT$50）</label>
+          <div class="flex g8"><input class="fc" id="ptsUseInput" type="number" placeholder="輸入要使用的積分" min="100" step="100" style="flex:1"/><button class="btn btn-o" onclick="usePoints()">兌換折扣</button></div>
+        </div>
+        <p class="fh">最低使用 100 點，可搭配其他優惠碼使用</p>
+      </div>
+    </div>
     <div id="mt-profile" style="display:none">
       <div class="card">
-        <div class="fs-ttl">修改資料</div>
+        <div class="fs-ttl" style="margin-top:0">修改資料</div>
         <div class="fg"><label class="fl">收件地址</label><input class="fc" id="edit_addr"/></div>
         <div class="fg"><label class="fl">電子信箱</label><input class="fc" id="edit_email"/></div>
         <button class="btn btn-p btn-blk" onclick="updateProfile()">💾 儲存變更</button>
+        <div class="divider"></div>
+        <div class="fg"><label class="fl">推薦人邀請碼（填入好友邀請碼可獲100積分）</label>
+          <div class="flex g8"><input class="fc" id="refCode" placeholder="輸入邀請碼" style="flex:1"/><button class="btn btn-o" onclick="useReferral()">確認</button></div>
+        </div>
+        <div class="divider"></div>
+        <div class="card" style="background:var(--bg3)">
+          <div class="card-title mb8">📤 我的邀請碼</div>
+          <div class="flex ic g8">
+            <div class="mono fw7 cp" id="myRefCode" style="font-size:1.1rem">載入中...</div>
+            <button class="btn btn-g btn-sm" onclick="copyRefCode()">複製</button>
+          </div>
+          <p class="fxs cm mt6">分享給朋友，朋友成功加入後雙方各獲 100 積分</p>
+        </div>
         <div class="divider"></div>
         <button class="btn btn-danger btn-blk" onclick="doLogout()">登出帳號</button>
       </div>
@@ -674,7 +715,7 @@
     </div>
   </div>
   <div id="adminPanel" style="display:none">
-    <div class="flex jb ic mb16">
+    <div class="flex jb ic mb14">
       <div><div class="pg-title">⚙️ 管理後台</div><p class="pg-sub" style="margin:0">UBOX Taiwan 後台管理系統</p></div>
       <button class="btn btn-g btn-sm" onclick="adminLogout()">登出</button>
     </div>
@@ -687,10 +728,11 @@
       <button class="a-tab" onclick="switchAdmin('products',this)">📺 商品</button>
       <button class="a-tab" onclick="switchAdmin('parts',this)">🔩 零件</button>
       <button class="a-tab" onclick="switchAdmin('coupons',this)">🎫 優惠碼</button>
-      <button class="a-tab" onclick="switchAdmin('announce',this)">📢 公告</button>
+      <button class="a-tab" onclick="switchAdmin('push',this)">📢 推播</button>
       <button class="a-tab" onclick="switchAdmin('settings',this)">⚙️ 設定</button>
     </div>
 
+    <!-- 總覽 -->
     <div class="a-sec active" id="a-overview">
       <div class="big-stats">
         <div class="big-stat"><div class="big-stat-val" id="adm_mem">—</div><div class="big-stat-lbl">👥 總會員</div></div>
@@ -698,82 +740,146 @@
         <div class="big-stat ok"><div class="big-stat-val" id="adm_rev">—</div><div class="big-stat-lbl">💰 月營收</div></div>
         <div class="big-stat pu"><div class="big-stat-val" id="adm_rep">—</div><div class="big-stat-lbl">🔧 維修案件</div></div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px">
-        <div class="card"><div class="card-title mb12">🔧 最新維修</div><div id="dashRep"></div></div>
-        <div class="card"><div class="card-title mb12">📦 最新訂單</div><div id="dashOrd"></div></div>
+      <!-- 月營收圖表 -->
+      <div class="card mb12">
+        <div class="card-title mb12">📈 近6個月營收</div>
+        <div class="chart-bar-wrap" id="revenueChart"></div>
+        <div style="display:flex;gap:4px;margin-top:2px" id="revenueLabels"></div>
       </div>
-      <div class="card mt0"><div class="card-title mb12">↩️ 待審退貨申請</div><div id="dashRet"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="card"><div class="card-title mb10">🔧 最新維修</div><div id="dashRep"></div></div>
+        <div class="card"><div class="card-title mb10">📦 最新訂單</div><div id="dashOrd"></div></div>
+      </div>
+      <div class="card mt12" id="dashRetCard">
+        <div class="card-title mb10">↩️ 待審退貨</div>
+        <div id="dashRet"></div>
+      </div>
     </div>
 
+    <!-- 會員 -->
     <div class="a-sec" id="a-members">
-      <div class="tbl-bar"><input class="fc" id="memSearch" placeholder="🔍 搜尋姓名 / 電話" oninput="filterMems()" style="flex:1"/><button class="btn btn-g btn-sm" onclick="loadMems()">重整</button></div>
-      <div class="tbl-wrap"><table><thead><tr><th>姓名</th><th>電話</th><th>生日</th><th>地址</th><th>訂單數</th><th>維修數</th><th>保固至</th><th>等級</th><th>加入日</th></tr></thead><tbody id="memTbody"></tbody></table></div>
+      <div class="tbl-bar">
+        <input class="fc" id="memSearch" placeholder="🔍 搜尋姓名 / 電話" oninput="filterMems()" style="flex:1"/>
+        <select class="fc" id="memLevelFilter" onchange="filterMems()" style="width:110px"><option value="">全部等級</option><option>一般會員</option><option>銀卡會員</option><option>金卡會員</option><option>鑽石會員</option></select>
+        <button class="btn btn-g btn-sm" onclick="loadMems()">重整</button>
+        <button class="btn btn-o btn-sm" onclick="exportMemCSV()">📥 匯出</button>
+      </div>
+      <div class="tbl-wrap"><table><thead><tr><th>姓名</th><th>電話</th><th>生日</th><th>地址</th><th>訂單數</th><th>維修數</th><th>積分</th><th>保固至</th><th>等級</th><th>加入日</th><th>操作</th></tr></thead><tbody id="memTbody"></tbody></table></div>
     </div>
 
+    <!-- 訂單 -->
     <div class="a-sec" id="a-orders">
-      <div class="tbl-bar"><input class="fc" id="ordSearch" placeholder="🔍 搜尋訂單號 / 會員" oninput="filterOrds()" style="flex:1"/><button class="btn btn-g btn-sm" onclick="loadOrds()">重整</button></div>
+      <div class="tbl-bar">
+        <input class="fc" id="ordSearch" placeholder="🔍 搜尋訂單號 / 會員" oninput="filterOrds()" style="flex:1"/>
+        <select class="fc" id="ordStatusFilter" onchange="filterOrds()" style="width:110px"><option value="">全部狀態</option><option>處理中</option><option>已出貨</option><option>已到店</option><option>已完成</option><option>已取消</option></select>
+        <button class="btn btn-g btn-sm" onclick="loadOrds()">重整</button>
+      </div>
       <div class="tbl-wrap"><table><thead><tr><th>訂單編號</th><th>會員</th><th>商品</th><th>金額</th><th>配送</th><th>收件地址</th><th>保固至</th><th>日期</th><th>狀態</th></tr></thead><tbody id="ordTbody"></tbody></table></div>
     </div>
 
+    <!-- 維修 -->
     <div class="a-sec" id="a-repairs">
       <div class="tbl-bar">
         <input class="fc" id="repSearch" placeholder="🔍 搜尋維修單號 / 電話" oninput="filterReps()" style="flex:1"/>
-        <select class="fc" id="repStFilter" onchange="filterReps()" style="width:120px"><option value="">全部狀態</option><option>待寄件</option><option>已寄件</option><option>維修中</option><option>待取件</option><option>已完成</option></select>
+        <select class="fc" id="repStFilter" onchange="filterReps()" style="width:110px"><option value="">全部狀態</option><option>待寄件</option><option>已寄件</option><option>維修中</option><option>待取件</option><option>已完成</option></select>
         <button class="btn btn-g btn-sm" onclick="loadReps()">重整</button>
       </div>
       <div class="tbl-wrap"><table><thead><tr><th>維修單號</th><th>姓名</th><th>電話</th><th>型號</th><th>序號</th><th>問題</th><th>保固</th><th>狀態</th><th>申請日</th><th>操作</th></tr></thead><tbody id="repTbody"></tbody></table></div>
     </div>
 
-    <!-- 退貨管理 -->
+    <!-- 退貨 -->
     <div class="a-sec" id="a-returns">
       <div class="tbl-bar">
         <input class="fc" id="retSearch" placeholder="🔍 搜尋退貨單號 / 訂單號" oninput="filterRets()" style="flex:1"/>
-        <select class="fc" id="retStFilter" onchange="filterRets()" style="width:130px"><option value="">全部狀態</option><option>待審核</option><option>審核通過</option><option>已退貨</option><option>退貨完成</option><option>審核拒絕</option></select>
+        <select class="fc" id="retStFilter" onchange="filterRets()" style="width:120px"><option value="">全部狀態</option><option>待審核</option><option>審核通過</option><option>已退貨</option><option>退貨完成</option><option>審核拒絕</option></select>
         <button class="btn btn-g btn-sm" onclick="loadRets()">重整</button>
       </div>
-      <div class="tbl-wrap"><table><thead><tr><th>退貨單號</th><th>訂單號</th><th>姓名</th><th>電話</th><th>退貨原因</th><th>照片</th><th>退貨碼</th><th>狀態</th><th>申請日</th><th>操作</th></tr></thead><tbody id="retTbody"></tbody></table></div>
+      <div class="tbl-wrap"><table><thead><tr><th>退貨單號</th><th>訂單號</th><th>姓名</th><th>電話</th><th>原因</th><th>照片</th><th>退貨碼</th><th>狀態</th><th>日期</th><th>操作</th></tr></thead><tbody id="retTbody"></tbody></table></div>
     </div>
 
+    <!-- 商品 -->
     <div class="a-sec" id="a-products">
-      <button class="btn btn-p mb16" onclick="openProdMod()">+ 新增商品</button>
+      <div class="flex jb ic mb12">
+        <button class="btn btn-p" onclick="openProdMod()">+ 新增商品</button>
+        <div class="flex g8">
+          <input class="fc" id="prodSearch" placeholder="搜尋商品" oninput="filterProdsAdm()" style="width:160px"/>
+        </div>
+      </div>
       <div id="admProdList"></div>
     </div>
 
+    <!-- 零件 -->
     <div class="a-sec" id="a-parts">
-      <button class="btn btn-p mb16" onclick="openPartMod()">+ 新增零件</button>
+      <button class="btn btn-p mb12" onclick="openPartMod()">+ 新增零件</button>
       <div id="admPartList"></div>
     </div>
 
+    <!-- 優惠碼 -->
     <div class="a-sec" id="a-coupons">
-      <button class="btn btn-p mb16" onclick="openCpnMod()">+ 新增優惠碼</button>
+      <button class="btn btn-p mb12" onclick="openCpnMod()">+ 新增優惠碼</button>
       <div class="tbl-wrap"><table><thead><tr><th>優惠碼</th><th>類型</th><th>折扣</th><th>有效期</th><th>已用/上限</th><th>狀態</th><th>操作</th></tr></thead><tbody id="cpnTbody"></tbody></table></div>
     </div>
 
-    <div class="a-sec" id="a-announce">
-      <div class="card"><div class="card-title mb12">📢 公告橫幅</div><div class="fg"><label class="fl">公告文字（留空則隱藏）</label><input class="fc" id="annInput" placeholder="例：🎉 五月特賣，優惠碼 UBOX500 折500元！"/></div><button class="btn btn-p" onclick="saveAnn()">💾 發布</button> <button class="btn btn-g" style="margin-left:8px" onclick="clearAnn()">清除</button></div>
-      <div class="card"><div class="card-title mb12">📲 LINE 廣播</div><div class="fg"><label class="fl">廣播訊息</label><textarea class="fc" id="bcMsg" rows="3" placeholder="輸入要廣播給所有用戶的訊息"></textarea></div><button class="btn btn-a" onclick="sendBC()">📨 發送廣播</button><p class="fh mt8">⚠️ 將廣播給所有已關注用戶，請謹慎使用</p></div>
+    <!-- 推播公告 -->
+    <div class="a-sec" id="a-push">
+      <div class="card"><div class="card-title mb12">📢 公告橫幅</div>
+        <div class="fg"><label class="fl">公告文字（留空隱藏）</label><input class="fc" id="annInput" placeholder="例：🎉 五月特賣！"/></div>
+        <div class="fg"><label class="fl">點擊跳轉頁面（選填）</label>
+          <select class="fc" id="annLink"><option value="">無跳轉</option><option value="shop">商城</option><option value="parts">零件</option><option value="member">會員中心</option></select>
+        </div>
+        <button class="btn btn-p" onclick="saveAnn()">💾 發布</button> <button class="btn btn-g" style="margin-left:8px" onclick="clearAnn()">清除</button>
+      </div>
+      <div class="card"><div class="card-title mb12">📲 LINE 廣播訊息</div>
+        <div class="fg"><label class="fl">廣播訊息</label><textarea class="fc" id="bcMsg" rows="4" placeholder="輸入要廣播給所有用戶的訊息"></textarea></div>
+        <button class="btn btn-a" onclick="sendBC()">📨 發送廣播</button>
+        <p class="fh mt8">⚠️ 將廣播給所有已關注用戶，謹慎使用</p>
+      </div>
+      <div class="card"><div class="card-title mb12">🎯 指定推播</div>
+        <div class="fg"><label class="fl">推播目標</label>
+          <select class="fc" id="targetGroup">
+            <option value="all">所有會員</option>
+            <option value="warranty_expiring">保固即將到期（7天內）</option>
+            <option value="inactive">30天未購買</option>
+            <option value="vip">金卡/鑽石會員</option>
+          </select>
+        </div>
+        <div class="fg"><label class="fl">推播內容</label><textarea class="fc" id="targetMsg" rows="3" placeholder="輸入推播訊息"></textarea></div>
+        <button class="btn btn-p" onclick="sendTargetPush()">🚀 發送指定推播</button>
+      </div>
     </div>
 
+    <!-- 設定 -->
     <div class="a-sec" id="a-settings">
-      <!-- 配送方式開關 -->
-      <div class="card">
-        <div class="card-title mb16">🚚 配送方式設定</div>
+      <div class="card"><div class="card-title mb14">🚚 配送方式設定</div>
         <div class="toggle-row">
-          <div><div class="toggle-label">宅配到府</div><div class="toggle-desc">允許用戶選擇宅配到府</div></div>
+          <div><div class="toggle-label">宅配到府</div><div class="toggle-desc">允許用戶選擇宅配</div></div>
           <label class="toggle"><input type="checkbox" id="tog_delivery" checked onchange="saveShipSettings()"/><span class="toggle-slider"></span></label>
         </div>
         <div class="toggle-row">
-          <div><div class="toggle-label">7-11 超商取貨付款</div><div class="toggle-desc">允許用戶選擇超商取貨付款（僅支援7-11）</div></div>
+          <div><div class="toggle-label">7-11 超商取貨付款</div><div class="toggle-desc">允許用戶選擇超商（僅支援7-11）</div></div>
           <label class="toggle"><input type="checkbox" id="tog_cvs" checked onchange="saveShipSettings()"/><span class="toggle-slider"></span></label>
         </div>
-        <div class="fr mt16">
+        <div class="fr mt14">
           <div class="fg"><label class="fl">宅配運費（元）</label><input class="fc" id="set_d" type="number" value="150"/></div>
           <div class="fg"><label class="fl">超商運費（元）</label><input class="fc" id="set_c" type="number" value="80"/></div>
         </div>
         <button class="btn btn-p" onclick="saveSettings()">💾 儲存運費</button>
       </div>
-      <div class="card"><div class="card-title mb16">🔑 管理員密碼</div><div class="fr"><div class="fg"><label class="fl">新密碼</label><input class="fc" id="set_np" type="password" placeholder="新密碼"/></div><div class="fg"><label class="fl">確認密碼</label><input class="fc" id="set_cp" type="password" placeholder="再輸入一次"/></div></div><button class="btn btn-o" onclick="changePass()">更新密碼</button></div>
-      <div class="card"><div class="card-title mb16">🔗 系統設定</div>
+      <div class="card"><div class="card-title mb14">⭐ 積分設定</div>
+        <div class="fr">
+          <div class="fg"><label class="fl">每消費N元獲1積分</label><input class="fc" id="set_pts_rate" type="number" value="100" placeholder="100"/></div>
+          <div class="fg"><label class="fl">積分兌換率（N點=NT$1）</label><input class="fc" id="set_pts_redeem" type="number" value="2" placeholder="2"/></div>
+        </div>
+        <button class="btn btn-p" onclick="savePointsSettings()">💾 儲存積分設定</button>
+      </div>
+      <div class="card"><div class="card-title mb14">🔑 管理員密碼</div>
+        <div class="fr">
+          <div class="fg"><label class="fl">新密碼</label><input class="fc" id="set_np" type="password" placeholder="新密碼"/></div>
+          <div class="fg"><label class="fl">確認密碼</label><input class="fc" id="set_cp" type="password" placeholder="確認"/></div>
+        </div>
+        <button class="btn btn-o" onclick="changePass()">更新密碼</button>
+      </div>
+      <div class="card"><div class="card-title mb14">🔗 系統設定</div>
         <div class="fg"><label class="fl">GAS 部署 URL</label><input class="fc" id="set_gas" value="https://script.google.com/macros/s/AKfycbwwCNN-fxXiD6EdIiqp9HvRFriJPaHThkPZVrpJKcX2nz1cYDIdlV0ISUAWEJxW1nLn/exec"/></div>
         <button class="btn btn-p" onclick="saveSys()">💾 儲存</button>
       </div>
@@ -782,71 +888,54 @@
 </div>
 
 <!-- ═══ MODALS ═══ -->
-
-<!-- 退貨申請 Modal（用戶端） -->
+<!-- 退貨申請 -->
 <div class="overlay" id="returnMod">
   <div class="modal">
     <div class="modal-head"><div class="modal-title">↩️ 申請退貨</div><button class="modal-close" onclick="closeModal('returnMod')">✕</button></div>
-    <div class="card-warn card" style="font-size:.82rem;line-height:1.8;margin-bottom:16px">
-      📋 <strong>退貨說明</strong><br/>
-      ・ 退貨申請需由管理員審核<br/>
-      ・ 審核通過後您將收到<strong>退貨代碼</strong>（LINE通知）<br/>
-      ・ 憑退貨代碼前往 7-11 超商辦理退貨寄件<br/>
-      ・ 請確保商品包裝完整，附上所有配件
+    <div class="card-warn card" style="font-size:.8rem;line-height:1.8;margin-bottom:14px">
+      📋 退貨審核通過後提供 7-11 退貨代碼，憑代碼至超商辦理寄件。<br/>
+      商品需<strong>原包裝完整</strong>且<strong>收貨7日內</strong>申請。
     </div>
     <div id="retOrderInfo" class="mb12"></div>
-    <div class="fg">
-      <label class="fl">退貨原因 <span class="req">*</span></label>
-      <select class="fc" id="ret_reason_type" onchange="toggleRetReasonOther()">
-        <option value="">— 請選擇退貨原因 —</option>
+    <div class="fg"><label class="fl">退貨原因 <span class="req">*</span></label>
+      <select class="fc" id="ret_reason_type">
+        <option value="">— 請選擇 —</option>
         <option value="品質問題">品質問題（商品有瑕疵/損壞）</option>
         <option value="商品不符">商品與描述不符</option>
         <option value="收到錯誤商品">收到錯誤商品</option>
-        <option value="不想買了">不想買了（需運費自付）</option>
+        <option value="不想買了">不想買了（需自付退貨運費）</option>
         <option value="其他">其他原因</option>
       </select>
     </div>
+    <div class="fg"><label class="fl">詳細說明 <span class="req">*</span></label><textarea class="fc" id="ret_detail" rows="4" placeholder="請詳細說明退貨原因..."></textarea></div>
     <div class="fg">
-      <label class="fl">詳細說明 <span class="req">*</span></label>
-      <textarea class="fc" id="ret_detail" rows="4" placeholder="請詳細說明退貨原因，如：收到時盒子已損壞、顏色與圖片不符等..."></textarea>
-    </div>
-    <div class="fg">
-      <label class="fl">商品照片 <span class="req">*</span>（請上傳商品實際狀況照片，最多3張）</label>
-      <div class="photo-upload-area" id="retPhotoArea">
-        <input type="file" id="retPhotoInput" accept="image/*" multiple onchange="handleReturnPhotos(this)"/>
-        <div>📷 點擊或拖拽上傳商品照片</div>
-        <div class="fxs cm mt8">支援 JPG、PNG，每張最大 5MB</div>
+      <label class="fl">商品照片 <span class="req">*</span>（最多3張，需包含商品現況）</label>
+      <div class="photo-upload-area"><input type="file" id="retPhotoInput" accept="image/*" multiple onchange="handleRetPhotos(this)"/>
+        <div>📷 點擊上傳商品照片</div><div class="fxs cm mt6">JPG/PNG，每張最大5MB</div>
       </div>
       <div class="photo-preview-grid" id="retPhotoPreview"></div>
     </div>
-    <button class="btn btn-a btn-blk mt12" onclick="submitReturn()" id="retBtn">📤 送出退貨申請</button>
+    <button class="btn btn-a btn-blk mt10" onclick="submitReturn()" id="retBtn">📤 送出退貨申請</button>
   </div>
 </div>
 
-<!-- 退貨管理（管理員）Modal -->
+<!-- 退貨管理（管理員） -->
 <div class="overlay" id="retAdminMod">
   <div class="modal">
-    <div class="modal-head"><div class="modal-title">↩️ 退貨單審核</div><button class="modal-close" onclick="closeModal('retAdminMod')">✕</button></div>
-    <div id="retAdminInfo" class="mb16"></div>
-    <div class="fg">
-      <label class="fl">審核結果</label>
+    <div class="modal-head"><div class="modal-title">↩️ 退貨審核</div><button class="modal-close" onclick="closeModal('retAdminMod')">✕</button></div>
+    <div id="retAdminInfo" class="mb14"></div>
+    <div class="fg"><label class="fl">審核結果</label>
       <select class="fc" id="retStatusSel">
         <option value="待審核">待審核</option>
-        <option value="審核通過">審核通過（將提供退貨代碼）</option>
+        <option value="審核通過">審核通過（提供退貨代碼）</option>
         <option value="已退貨">已退貨（用戶已超商寄出）</option>
-        <option value="退貨完成">退貨完成（已收到並退款）</option>
+        <option value="退貨完成">退貨完成（已退款）</option>
         <option value="審核拒絕">審核拒絕</option>
       </select>
     </div>
-    <div class="fg" id="retCodeField">
-      <label class="fl">退貨代碼（審核通過後提供）</label>
-      <input class="fc" id="retAdminCode" placeholder="7-11 退貨代碼（用戶持此至超商辦理）"/>
-    </div>
-    <div class="fg">
-      <label class="fl">管理員備注（會 LINE 推播給用戶）</label>
-      <textarea class="fc" id="retAdminNote" rows="3" placeholder="審核結果說明、退款方式等..."></textarea>
-    </div>
-    <button class="btn btn-p btn-blk" onclick="updateReturn()">🔔 更新並通知用戶</button>
+    <div class="fg"><label class="fl">7-11 退貨代碼</label><input class="fc" id="retAdminCode" placeholder="審核通過後填入，系統自動 LINE 通知用戶"/></div>
+    <div class="fg"><label class="fl">備注說明</label><textarea class="fc" id="retAdminNote" rows="3" placeholder="審核說明、退款方式等（會通知用戶）"></textarea></div>
+    <button class="btn btn-p btn-blk" onclick="updateReturn()">🔔 更新並 LINE 通知用戶</button>
   </div>
 </div>
 
@@ -855,14 +944,14 @@
   <div class="modal">
     <div class="modal-head"><div class="modal-title" id="prodModTitle">新增商品</div><button class="modal-close" onclick="closeModal('prodMod')">✕</button></div>
     <div class="fg"><label class="fl">商品名稱 <span class="req">*</span></label><input class="fc" id="pm_name"/></div>
-    <div class="fr"><div class="fg"><label class="fl">型號 <span class="req">*</span></label><input class="fc" id="pm_model"/></div><div class="fg"><label class="fl">分類</label><select class="fc" id="pm_cat"><option value="box">📺 安博盒子</option><option value="remote">🎮 遙控器</option><option value="acc">🔌 配件</option></select></div></div>
-    <div class="fr"><div class="fg"><label class="fl">定價（NT$）<span class="req">*</span></label><input class="fc" id="pm_price" type="number"/></div><div class="fg"><label class="fl">庫存</label><input class="fc" id="pm_stock" type="number" value="0"/></div></div>
-    <div class="fg"><label class="fl">NCC 授權碼</label><input class="fc" id="pm_ncc" placeholder="例：CCAJ23LP1760T3"/></div>
-    <div class="fg"><label class="fl">規格（每行一項，格式：項目：值）</label><textarea class="fc" id="pm_spec" rows="4" placeholder="作業系統：Android 12.0&#10;RAM：8GB&#10;儲存空間：256GB&#10;解析度：4K HDR"></textarea></div>
+    <div class="fr"><div class="fg"><label class="fl">型號</label><input class="fc" id="pm_model"/></div><div class="fg"><label class="fl">分類</label><select class="fc" id="pm_cat"><option value="box">📺 安博盒子</option><option value="remote">🎮 遙控器</option><option value="acc">🔌 配件</option></select></div></div>
+    <div class="fr"><div class="fg"><label class="fl">定價 <span class="req">*</span></label><input class="fc" id="pm_price" type="number"/></div><div class="fg"><label class="fl">庫存</label><input class="fc" id="pm_stock" type="number" value="0"/></div></div>
+    <div class="fr"><div class="fg"><label class="fl">NCC 授權碼</label><input class="fc" id="pm_ncc"/></div><div class="fg"><label class="fl">是否推薦商品</label><select class="fc" id="pm_hot"><option value="false">否</option><option value="true">✅ 是（顯示熱門標籤）</option></select></div></div>
+    <div class="fg"><label class="fl">規格（每行一項，格式：項目：值）</label><textarea class="fc" id="pm_spec" rows="4" placeholder="作業系統：Android 12&#10;RAM：8GB&#10;儲存空間：256GB&#10;解析度：4K HDR"></textarea></div>
     <div class="fg"><label class="fl">商品介紹</label><textarea class="fc" id="pm_desc" rows="3"></textarea></div>
     <div class="fg"><label class="fl">圖片 URL</label><input class="fc" id="pm_img" placeholder="https://i.imgur.com/xxxx.jpg"/></div>
-    <div class="fg"><label class="fl">表情符號</label><input class="fc" id="pm_emoji" placeholder="📺" maxlength="2" style="font-size:1.2rem;width:80px"/></div>
-    <button class="btn btn-p btn-blk mt12" onclick="saveProduct()">💾 儲存商品</button>
+    <div class="fg"><label class="fl">表情符號（備用）</label><input class="fc" id="pm_emoji" placeholder="📺" maxlength="2" style="font-size:1.2rem;width:80px"/></div>
+    <button class="btn btn-p btn-blk mt10" onclick="saveProduct()">💾 儲存商品</button>
   </div>
 </div>
 
@@ -871,17 +960,12 @@
   <div class="modal">
     <div class="modal-head"><div class="modal-title" id="partModTitle">新增零件</div><button class="modal-close" onclick="closeModal('partMod')">✕</button></div>
     <div class="fg"><label class="fl">零件名稱 <span class="req">*</span></label><input class="fc" id="pt_name"/></div>
-    <div class="fg"><label class="fl">零件類型</label><select class="fc" id="pt_cat">
-      <option value="power">🔌 電源供應器</option><option value="hdmi">📺 HDMI 線材</option>
-      <option value="remote">🎮 安博遙控器</option><option value="mouse">🖱️ 滑鼠</option>
-      <option value="cursor">🖱️ 飛鼠/空中鼠</option><option value="cable">🔗 傳輸線</option>
-      <option value="other">🔩 其他配件</option>
-    </select></div>
-    <div class="fr"><div class="fg"><label class="fl">定價（NT$）<span class="req">*</span></label><input class="fc" id="pt_price" type="number"/></div><div class="fg"><label class="fl">庫存</label><input class="fc" id="pt_stock" type="number" value="0"/></div></div>
-    <div class="fg"><label class="fl">規格描述</label><input class="fc" id="pt_spec" placeholder="例：12V 2A，適用 UBOX9 系列"/></div>
+    <div class="fg"><label class="fl">零件類型</label><select class="fc" id="pt_cat"><option value="power">🔌 電源供應器</option><option value="hdmi">📺 HDMI線材</option><option value="remote">🎮 安博遙控器</option><option value="mouse">🖱️ 滑鼠</option><option value="cursor">🖱️ 飛鼠/空中鼠</option><option value="cable">🔗 傳輸線</option><option value="other">🔩 其他配件</option></select></div>
+    <div class="fr"><div class="fg"><label class="fl">定價 <span class="req">*</span></label><input class="fc" id="pt_price" type="number"/></div><div class="fg"><label class="fl">庫存</label><input class="fc" id="pt_stock" type="number" value="0"/></div></div>
+    <div class="fg"><label class="fl">規格描述</label><input class="fc" id="pt_spec" placeholder="例：12V 2A，適用 UBOX9"/></div>
     <div class="fg"><label class="fl">圖片 URL</label><input class="fc" id="pt_img" placeholder="https://..."/></div>
     <div class="fg"><label class="fl">表情符號</label><input class="fc" id="pt_emoji" placeholder="🔌" maxlength="2" style="font-size:1.2rem;width:80px"/></div>
-    <button class="btn btn-p btn-blk mt12" onclick="savePart()">💾 儲存零件</button>
+    <button class="btn btn-p btn-blk mt10" onclick="savePart()">💾 儲存零件</button>
   </div>
 </div>
 
@@ -890,9 +974,9 @@
   <div class="modal">
     <div class="modal-head"><div class="modal-title">新增優惠碼</div><button class="modal-close" onclick="closeModal('cpnMod')">✕</button></div>
     <div class="fg"><label class="fl">優惠碼 <span class="req">*</span></label><input class="fc" id="cm_code" placeholder="例：UBOX500" style="text-transform:uppercase"/></div>
-    <div class="fr"><div class="fg"><label class="fl">折扣類型</label><select class="fc" id="cm_type"><option value="fixed">固定折扣（元）</option><option value="percent">百分比折扣（%）</option></select></div><div class="fg"><label class="fl">折扣值 <span class="req">*</span></label><input class="fc" id="cm_value" type="number"/></div></div>
+    <div class="fr"><div class="fg"><label class="fl">折扣類型</label><select class="fc" id="cm_type"><option value="fixed">固定折扣（元）</option><option value="percent">百分比（%）</option></select></div><div class="fg"><label class="fl">折扣值 <span class="req">*</span></label><input class="fc" id="cm_value" type="number"/></div></div>
     <div class="fr"><div class="fg"><label class="fl">有效期至</label><input class="fc" id="cm_expire" type="date"/></div><div class="fg"><label class="fl">最大使用次數</label><input class="fc" id="cm_max" type="number" placeholder="0=無限"/></div></div>
-    <button class="btn btn-p btn-blk mt12" onclick="saveCoupon()">💾 建立優惠碼</button>
+    <button class="btn btn-p btn-blk mt10" onclick="saveCoupon()">💾 建立</button>
   </div>
 </div>
 
@@ -900,11 +984,28 @@
 <div class="overlay" id="repMod">
   <div class="modal">
     <div class="modal-head"><div class="modal-title">🔧 維修單管理</div><button class="modal-close" onclick="closeModal('repMod')">✕</button></div>
-    <div id="repModInfo" class="mb16"></div>
-    <div class="fg"><label class="fl">更新維修狀態</label><select class="fc" id="repStatusSel"><option>待寄件</option><option>已寄件</option><option>維修中</option><option>待取件</option><option>已完成</option><option>無法維修</option></select></div>
-    <div class="fg"><label class="fl">7-11 超商寄件代碼</label><input class="fc" id="repShipCode" placeholder="寄件代碼（客戶收到 LINE 通知）"/></div>
-    <div class="fg"><label class="fl">報價 / 維修備注</label><textarea class="fc" id="repNote" rows="3" placeholder="報價金額、維修說明（自動 LINE 通知客戶）"></textarea></div>
-    <button class="btn btn-p btn-blk" onclick="updateRepair()">🔔 更新並通知客戶 LINE</button>
+    <div id="repModInfo" class="mb14"></div>
+    <div class="fg"><label class="fl">更新狀態</label><select class="fc" id="repStatusSel"><option>待寄件</option><option>已寄件</option><option>維修中</option><option>待取件</option><option>已完成</option><option>無法維修</option></select></div>
+    <div class="fg"><label class="fl">7-11 超商寄件代碼</label><input class="fc" id="repShipCode" placeholder="寄件代碼（LINE 通知客戶）"/></div>
+    <div class="fg"><label class="fl">報價 / 備注</label><textarea class="fc" id="repNote" rows="3" placeholder="報價金額、說明（自動 LINE 通知）"></textarea></div>
+    <button class="btn btn-p btn-blk" onclick="updateRepair()">🔔 更新並通知</button>
+  </div>
+</div>
+
+<!-- 會員等級調整 Modal -->
+<div class="overlay" id="memEditMod">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-title">👥 會員管理</div><button class="modal-close" onclick="closeModal('memEditMod')">✕</button></div>
+    <div id="memEditInfo" class="mb14"></div>
+    <div class="fg"><label class="fl">會員等級</label>
+      <select class="fc" id="memEditLevel"><option>一般會員</option><option>銀卡會員</option><option>金卡會員</option><option>鑽石會員</option><option>黑名單</option></select>
+    </div>
+    <div class="fg"><label class="fl">積分調整（正數增加，負數扣除）</label><input class="fc" id="memEditPoints" type="number" placeholder="0"/></div>
+    <div class="fg"><label class="fl">內部備注</label><input class="fc" id="memEditNote" placeholder="管理備注（不顯示給用戶）"/></div>
+    <button class="btn btn-p btn-blk" onclick="saveMemberEdit()">💾 儲存變更</button>
+    <div class="divider"></div>
+    <button class="btn btn-a btn-blk" onclick="sendMemberMsg()">📨 傳訊息給此用戶</button>
+    <textarea class="fc mt8" id="memMsgInput" rows="2" placeholder="輸入要傳給此用戶的 LINE 訊息"></textarea>
   </div>
 </div>
 
@@ -913,8 +1014,7 @@
   <strong>⚠️ 重要聲明</strong><br/>
   本網站銷售之商品為機上盒類商品（盒子），所有盒子均為<strong>純淨版本（Pure Android）</strong>，<br/>
   恕無法提供任何第三方軟體安裝、頻道設定或使用教學服務。<br/>
-  購買前請確認您已了解純淨盒子之使用方式。如有疑問，歡迎先透過 LINE@ 諮詢後再行下單。<br/>
-  退貨需於<strong>收貨7日內</strong>申請，商品需維持原包裝且未使用。<br/><br/>
+  退貨需於收貨<strong>7日內</strong>申請，商品需維持原包裝且未使用。<br/><br/>
   © 2025 UBOX Taiwan 安博科技台灣授權服務中心 ｜ LINE@ <strong>@uboxtw</strong>
 </footer>
 
@@ -934,14 +1034,15 @@ const gasUrl = () => localStorage.getItem('ubox_gas') || CFG.GAS_URL;
 //  STATE
 // ════════════════════════════════════════════════════
 const S = {
-  user:null, member:null, isAdmin:false,
-  cart:    JSON.parse(localStorage.getItem('ubox_cart')     || '[]'),
-  settings:JSON.parse(localStorage.getItem('ubox_settings') || '{"deliveryFee":150,"cvsFee":80,"enableDelivery":true,"enableCvs":true}'),
-  coupon:null, shipMode:'delivery',
+  user: null, member: null, isAdmin: false, isGuest: false,
+  cart:     JSON.parse(localStorage.getItem('ubox_cart')     || '[]'),
+  settings: JSON.parse(localStorage.getItem('ubox_settings') || '{"deliveryFee":150,"cvsFee":80,"enableDelivery":true,"enableCvs":true,"ptsRate":100,"ptsRedeem":2}'),
+  coupon: null, pointsDiscount: 0, shipMode: 'delivery',
   prods:[], parts:[], allMems:[], allOrds:[], allReps:[], allRets:[],
   editProdId:null, editPartId:null, currentRepId:null, currentRetId:null,
   currentReturnOrderId:null, retPhotos:[],
-  prevPage:'shop',
+  currentEditMemId:null, annLink:'',
+  notifications: [],
 };
 
 // ════════════════════════════════════════════════════
@@ -951,8 +1052,9 @@ const g   = id => document.getElementById(id);
 const ts  = d  => String(d||'').slice(0,10);
 const rbc = s  => ({待寄件:'b-yellow',已寄件:'b-blue',維修中:'b-orange',待取件:'b-purple',已完成:'b-green',無法維修:'b-red'}[s]||'b-gray');
 const retbc = s => ({待審核:'b-yellow',審核通過:'b-blue',已退貨:'b-orange',退貨完成:'b-green',審核拒絕:'b-red'}[s]||'b-gray');
+const levelColor = l => ({一般會員:'b-blue',銀卡會員:'b-gray',金卡會員:'b-yellow',鑽石會員:'b-purple'}[l]||'b-blue');
 
-function toast(msg,type=''){
+function toast(msg, type=''){
   const el=g('toast'); el.textContent=msg; el.className='show '+(type||'');
   clearTimeout(window._t); window._t=setTimeout(()=>el.className='',3500);
 }
@@ -963,211 +1065,241 @@ document.querySelectorAll('.overlay').forEach(el=>{
 });
 
 // ════════════════════════════════════════════════════
-//  GAS API
+//  GAS API — 修復 CORS / Load Failed 問題
+//  使用 no-cors 不行；正確解法：確保 GAS 部署「所有人」存取
+//  並用 text/plain Content-Type 繞過 preflight
 // ════════════════════════════════════════════════════
 async function callGAS(action, params={}) {
   const u = gasUrl();
-  const r = await fetch(`${u}?${new URLSearchParams({action,...params})}`);
-  if(!r.ok) throw new Error('連線失敗 HTTP '+r.status);
-  const data = await r.json();
-  return data;
+  const url = new URL(u);
+  url.searchParams.set('action', action);
+  Object.entries(params).forEach(([k,v]) => url.searchParams.set(k, v));
+  const res = await fetch(url.toString(), {
+    method: 'GET',
+    redirect: 'follow',
+  });
+  if (!res.ok) throw new Error('伺服器連線失敗 ('+res.status+')');
+  const text = await res.text();
+  try { return JSON.parse(text); }
+  catch { throw new Error('回應格式錯誤'); }
 }
+
+// ★ POST 改用 application/x-www-form-urlencoded 避免 preflight CORS
 async function postGAS(action, data={}) {
   const u = gasUrl();
-  const r = await fetch(u, {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({action,...data})
+  const body = new URLSearchParams({ action });
+  Object.entries(data).forEach(([k,v]) => body.set(k, v===null||v===undefined?'':String(v)));
+  const res = await fetch(u, {
+    method: 'POST',
+    redirect: 'follow',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body.toString(),
   });
-  if(!r.ok) throw new Error('連線失敗 HTTP '+r.status);
-  return r.json();
+  if (!res.ok) throw new Error('伺服器連線失敗 ('+res.status+')');
+  const text = await res.text();
+  try { return JSON.parse(text); }
+  catch { throw new Error('回應格式錯誤：'+text.slice(0,100)); }
 }
 
 // ════════════════════════════════════════════════════
 //  INIT
 // ════════════════════════════════════════════════════
 async function init() {
-  // 預設填入 GAS URL
-  if(g('set_gas')) g('set_gas').value = localStorage.getItem('ubox_gas') || CFG.GAS_URL;
   loadLocalProds(); loadLocalParts();
   renderHomeProds(); updateBadge(); loadAnn();
   applySettings();
+  if(g('set_gas')) g('set_gas').value = localStorage.getItem('ubox_gas') || CFG.GAS_URL;
 
-  try{
-    await liff.init({liffId: CFG.LIFF_ID});
-    if(liff.isLoggedIn()){
+  try {
+    await liff.init({ liffId: CFG.LIFF_ID });
+    if (liff.isLoggedIn()) {
       const p = await liff.getProfile();
       S.user = p;
       const av = g('navAva'); av.src = p.pictureUrl||''; av.style.display='block';
       await fetchMember();
     }
-  }catch(e){ console.warn('LIFF:',e.message); }
+  } catch(e) { console.warn('LIFF:', e.message); }
 
-  if(localStorage.getItem('ubox_admin')==='true'){
-    S.isAdmin=true; g('adminBtn').style.display='inline-block';
+  if (localStorage.getItem('ubox_admin') === 'true') {
+    S.isAdmin = true; g('adminBtn').style.display = 'inline-block';
   }
   g('loader').classList.add('hide');
 }
 
 // ════════════════════════════════════════════════════
-//  PRODUCTS
+//  GUEST MODE（瀏覽器測試用）
 // ════════════════════════════════════════════════════
-function loadLocalProds(){
-  const sv=localStorage.getItem('ubox_prods');
-  if(sv){ S.prods=JSON.parse(sv); return; }
-  S.prods=[
-    {id:'P001',name:'UBOX9 Pro Max 旗艦版',model:'UBOX9 Pro Max',cat:'box',price:5290,stock:8,
-     ncc:'CCAJ23LP1760T3',spec:'作業系統：Android 12.0\nRAM：8GB\n儲存空間：256GB\n解析度：8K HDR\n處理器：四核心 2.0GHz\n藍牙：5.0\nWiFi：雙頻 2.4G/5G',
-     desc:'UBOX9 Pro Max 目前安博最高規格旗艦機種，支援 8K 超高清輸出，8GB RAM + 256GB 大容量儲存。',img:'',emoji:'📺'},
-    {id:'P002',name:'UBOX9 Pro 安博盒子',model:'UBOX9 Pro',cat:'box',price:4290,stock:15,
-     ncc:'CCAJ22LP1234T2',spec:'作業系統：Android 12.0\nRAM：6GB\n儲存空間：128GB\n解析度：4K HDR\n處理器：四核心 1.8GHz\nWiFi：雙頻 2.4G/5G',
-     desc:'UBOX9 Pro 強大效能旗艦機，4K HDR 輸出，6GB RAM，流暢穩定首選。',img:'',emoji:'📺'},
-    {id:'P003',name:'UBOX8 Plus 安博盒子',model:'UBOX8+',cat:'box',price:3290,stock:20,
-     ncc:'CCAJ21LP0987T1',spec:'作業系統：Android 11.0\nRAM：4GB\n儲存空間：64GB\n解析度：4K\n處理器：四核心 1.5GHz\nWiFi：2.4G/5G',
-     desc:'UBOX8 Plus 超值入門首選，4K 畫質清晰，4GB RAM 流暢運行。',img:'',emoji:'📺'},
-    {id:'P004',name:'UBOX 語音遙控器 V3',model:'Remote V3',cat:'remote',price:490,stock:30,
-     ncc:'',spec:'連接方式：藍牙 5.0\n電池：AA×2\n防水等級：IPX3\n背光：七色背光',
-     desc:'原廠語音遙控器，支援語音搜尋，七色背光設計。',img:'',emoji:'🎮'},
+function guestMode() {
+  S.isGuest = true;
+  S.user = { userId: 'guest_' + Date.now(), displayName: '訪客測試', pictureUrl: '' };
+  g('navAva').style.display = 'block';
+  renderMember();
+  toast('已進入訪客測試模式', 'warn');
+}
+
+// ════════════════════════════════════════════════════
+//  LOCAL DATA
+// ════════════════════════════════════════════════════
+function loadLocalProds() {
+  const sv = localStorage.getItem('ubox_prods');
+  if (sv) { S.prods = JSON.parse(sv); return; }
+  S.prods = [
+    {id:'P001',name:'UBOX9 Pro Max 旗艦版',model:'UBOX9 Pro Max',cat:'box',price:5290,stock:8,hot:true,
+     ncc:'CCAJ23LP1760T3',spec:'作業系統：Android 12.0\nRAM：8GB\n儲存空間：256GB\n解析度：8K HDR\n處理器：四核心 2.0GHz\nWiFi：雙頻 2.4G/5G',
+     desc:'UBOX9 Pro Max 安博最高規格旗艦機，8K HDR，8GB RAM+256GB。',img:'',emoji:'📺'},
+    {id:'P002',name:'UBOX9 Pro 安博盒子',model:'UBOX9 Pro',cat:'box',price:4290,stock:15,hot:true,
+     ncc:'CCAJ22LP1234T2',spec:'作業系統：Android 12.0\nRAM：6GB\n儲存空間：128GB\n解析度：4K HDR\nWiFi：雙頻 2.4G/5G',
+     desc:'UBOX9 Pro 強大效能旗艦機，4K HDR，6GB RAM。',img:'',emoji:'📺'},
+    {id:'P003',name:'UBOX8 Plus 安博盒子',model:'UBOX8+',cat:'box',price:3290,stock:20,hot:false,
+     ncc:'CCAJ21LP0987T1',spec:'作業系統：Android 11.0\nRAM：4GB\n儲存空間：64GB\n解析度：4K',
+     desc:'UBOX8 Plus 超值入門首選，4K畫質，4GB RAM。',img:'',emoji:'📺'},
+    {id:'P004',name:'UBOX 語音遙控器 V3',model:'Remote V3',cat:'remote',price:490,stock:30,hot:false,
+     ncc:'',spec:'連接：藍牙 5.0\n電池：AA×2\n背光：七色背光',
+     desc:'原廠語音遙控器，藍牙語音搜尋，七色背光。',img:'',emoji:'🎮'},
   ];
 }
-function saveProds(){ localStorage.setItem('ubox_prods',JSON.stringify(S.prods)); }
+function saveProds(){ localStorage.setItem('ubox_prods', JSON.stringify(S.prods)); }
 
-function loadLocalParts(){
-  const sv=localStorage.getItem('ubox_parts');
-  if(sv){ S.parts=JSON.parse(sv); return; }
-  S.parts=[
-    {id:'PT001',cat:'power',name:'UBOX 原廠電源供應器',spec:'12V / 2A，適用 UBOX8/9 系列',price:290,stock:20,img:'',emoji:'🔌'},
-    {id:'PT002',cat:'hdmi',name:'HDMI 2.1 高速線 2M',spec:'支援 8K@60Hz，鍍金接頭',price:220,stock:40,img:'',emoji:'📺'},
+function loadLocalParts() {
+  const sv = localStorage.getItem('ubox_parts');
+  if (sv) { S.parts = JSON.parse(sv); return; }
+  S.parts = [
+    {id:'PT001',cat:'power',name:'UBOX 原廠電源供應器',spec:'12V/2A，適用UBOX8/9',price:290,stock:20,img:'',emoji:'🔌'},
+    {id:'PT002',cat:'hdmi',name:'HDMI 2.1 高速線 2M',spec:'支援8K@60Hz，鍍金接頭',price:220,stock:40,img:'',emoji:'📺'},
     {id:'PT003',cat:'hdmi',name:'HDMI 延長線 3M',spec:'HDMI 2.0，高速傳輸',price:180,stock:35,img:'',emoji:'📺'},
-    {id:'PT004',cat:'remote',name:'安博遙控器（相容版）',spec:'紅外線，適用 UBOX7/8',price:350,stock:25,img:'',emoji:'🎮'},
-    {id:'PT005',cat:'mouse',name:'USB 無線滑鼠',spec:'2.4GHz 無線，1600DPI',price:280,stock:30,img:'',emoji:'🖱️'},
+    {id:'PT004',cat:'remote',name:'安博遙控器（相容版）',spec:'紅外線，適用UBOX7/8',price:350,stock:25,img:'',emoji:'🎮'},
+    {id:'PT005',cat:'mouse',name:'USB 無線滑鼠',spec:'2.4GHz，1600DPI',price:280,stock:30,img:'',emoji:'🖱️'},
     {id:'PT006',cat:'cursor',name:'飛鼠空中滑鼠',spec:'體感操控，適用電視盒',price:420,stock:15,img:'',emoji:'🖱️'},
     {id:'PT007',cat:'cable',name:'USB-C 傳輸線 1M',spec:'USB 3.1，快充支援',price:120,stock:50,img:'',emoji:'🔗'},
     {id:'PT008',cat:'other',name:'矽膠保護殼（UBOX9）',spec:'防刮防塵，精準開孔',price:180,stock:40,img:'',emoji:'🛡️'},
   ];
 }
-function saveParts(){ localStorage.setItem('ubox_parts',JSON.stringify(S.parts)); }
+function saveParts(){ localStorage.setItem('ubox_parts', JSON.stringify(S.parts)); }
 
 // ════════════════════════════════════════════════════
 //  NAVIGATION
 // ════════════════════════════════════════════════════
-function showPage(pg){
+function showPage(pg) {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  const el=g('page-'+pg); if(el) el.classList.add('active');
-  const nm={home:0,shop:1,parts:2,repair:3,member:4};
-  const nb=document.querySelectorAll('.nav-links .nav-btn');
-  if(nm[pg]!==undefined&&nb[nm[pg]]) nb[nm[pg]].classList.add('active');
-  ({shop:renderShop,parts:renderParts,member:renderMember,admin:renderAdmin,cart:renderCart})[pg]?.();
+  const el = g('page-'+pg); if(el) el.classList.add('active');
+  const nm = {home:0,shop:1,parts:2,repair:3,member:4};
+  const nb = document.querySelectorAll('.nav-links .nav-btn');
+  if(nm[pg]!==undefined && nb[nm[pg]]) nb[nm[pg]].classList.add('active');
+  ({shop:renderShop, parts:renderParts, member:renderMember, admin:renderAdmin, cart:renderCart})[pg]?.();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
 // ════════════════════════════════════════════════════
-//  HOME
+//  HOME & PRODUCTS
 // ════════════════════════════════════════════════════
-function renderHomeProds(){
-  const el=g('homeProds'); if(!el) return;
-  el.innerHTML=S.prods.slice(0,3).map(p=>`
-    <div class="prod-card" onclick="showDetail('${p.id}','home')">
-      <div class="prod-thumb">
-        ${p.img?`<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'"/>`:''}
-        <span style="position:relative;z-index:1">${p.emoji||'📦'}</span>
-        ${p.stock===0?`<span class="badge b-red prod-tag-abs" style="font-size:.65rem">已售完</span>`:''}
-      </div>
-      <div class="prod-body">
-        <div class="prod-name">${p.name}</div>
-        <div class="prod-model">${p.model}</div>
-        <div class="prod-desc">${p.desc}</div>
-        <div class="prod-price">NT$ ${p.price.toLocaleString()} <small>/ 台</small></div>
-        <div class="prod-info-btn">查看商品介紹 →</div>
-      </div>
-    </div>`).join('');
+function renderHomeProds() {
+  const el = g('homeProds'); if(!el) return;
+  const hotProds = S.prods.filter(p=>p.hot).slice(0,3);
+  const showProds = hotProds.length >= 3 ? hotProds : S.prods.slice(0,3);
+  el.innerHTML = showProds.map(p => homeProdCard(p)).join('');
 }
 
-// ════════════════════════════════════════════════════
-//  PRODUCT DETAIL
-// ════════════════════════════════════════════════════
-function showDetail(pid, fromPage='shop'){
-  S.prevPage=fromPage;
-  const p=S.prods.find(x=>x.id===pid); if(!p) return;
-  g('detailBack').onclick=()=>showPage(fromPage);
-  const specs=(p.spec||'').split('\n').filter(Boolean).map(line=>{
-    const idx=line.indexOf('：');
-    if(idx<0) return `<tr><td colspan="2">${line}</td></tr>`;
-    return `<tr><td>${line.slice(0,idx)}</td><td>${line.slice(idx+1)}</td></tr>`;
-  }).join('');
-  const canBuy=!!S.member && p.stock>0;
-  g('detailContent').innerHTML=`
-    <div class="detail-img-wrap">
-      ${p.img?`<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'"/>`:`<span style="font-size:6rem">${p.emoji||'📦'}</span>`}
+function homeProdCard(p) {
+  return `<div class="prod-card" onclick="showDetail('${p.id}','home')">
+    <div class="prod-thumb">
+      ${p.img?`<img src="${p.img}" onerror="this.style.display='none'"/>`:''}
+      <span style="position:relative;z-index:1">${p.emoji||'📦'}</span>
+      ${p.hot?'<div class="prod-hot">🔥 熱門</div>':''}
+      ${p.stock===0?`<span class="badge b-red prod-tag-abs" style="font-size:.65rem">已售完</span>`:''}
     </div>
-    ${p.ncc?`<div class="ncc-tag">🏛️ NCC 授權認證：${p.ncc}</div>`:''}
+    <div class="prod-body">
+      <div class="prod-name">${p.name}</div>
+      <div class="prod-model">${p.model}</div>
+      <div class="prod-desc">${p.desc}</div>
+      <div class="prod-price">NT$ ${p.price.toLocaleString()} <small>/ 台</small></div>
+      <div class="prod-info-btn">查看商品介紹 →</div>
+    </div>
+  </div>`;
+}
+
+function showDetail(pid, fromPage='shop') {
+  const p = S.prods.find(x=>x.id===pid); if(!p) return;
+  g('detailBack').onclick = ()=>showPage(fromPage);
+  const specs = (p.spec||'').split('\n').filter(Boolean).map(line=>{
+    const idx = line.indexOf('：');
+    return idx<0 ? `<tr><td colspan="2">${line}</td></tr>` : `<tr><td>${line.slice(0,idx)}</td><td>${line.slice(idx+1)}</td></tr>`;
+  }).join('');
+  const canBuy = !!S.member && p.stock>0;
+  g('detailContent').innerHTML = `
+    <div class="detail-img-wrap">
+      ${p.img?`<img src="${p.img}" onerror="this.style.display='none'"/>`:`<span style="font-size:5rem">${p.emoji||'📦'}</span>`}
+    </div>
+    ${p.ncc?`<div class="ncc-tag">🏛️ NCC 授權：${p.ncc}</div>`:''}
     <div class="detail-title">${p.name}</div>
-    <div style="color:var(--tm);font-size:.86rem;margin-bottom:14px">型號：${p.model}</div>
+    <div class="cm fsm mb12">型號：${p.model}</div>
     <div class="detail-price">NT$ ${p.price.toLocaleString()}</div>
     ${specs?`<table class="spec-table">${specs}</table>`:''}
     <div class="card" style="background:var(--bg3)">
       <div class="fs-ttl" style="margin-top:0">商品介紹</div>
-      <p style="font-size:.88rem;line-height:1.85;color:var(--tm)">${(p.desc||'').replace(/\n/g,'<br/>')}</p>
+      <p style="font-size:.86rem;line-height:1.85;color:var(--tm)">${(p.desc||'').replace(/\n/g,'<br/>')}</p>
     </div>
     ${canBuy
-      ? `<button class="btn btn-ok btn-blk btn-lg mt16" onclick="addCart('${p.id}');toast('✅ 已加入購物車','success')">🛒 加入購物車</button>`
+      ? `<button class="btn btn-ok btn-blk btn-lg mt14" onclick="addCart('${p.id}');toast('✅ 已加入購物車','success')">🛒 加入購物車</button>`
       : !S.member
-        ? `<div class="card mt16 tc"><p class="cm fsm mb12">加入會員後即可購買</p><button class="btn btn-p" onclick="showPage('member')">立即加入會員</button></div>`
-        : `<button class="btn btn-g btn-blk mt16" disabled>已售完</button>`
-    }
-  `;
+        ? `<div class="card mt14 tc"><p class="cm fsm mb10">加入會員後即可購買</p><button class="btn btn-p" onclick="showPage('member')">立即加入會員</button></div>`
+        : `<button class="btn btn-g btn-blk mt14" disabled>已售完</button>`
+    }`;
+  // 推薦商品（同類別）
+  const rec = S.prods.filter(x=>x.id!==pid && x.cat===p.cat).slice(0,6);
+  if(rec.length > 0){
+    g('detailRec').style.display='block';
+    g('recScroll').innerHTML = rec.map(r=>`
+      <div class="rec-card" onclick="showDetail('${r.id}','${fromPage}')">
+        <div class="rec-thumb">${r.img?`<img src="${r.img}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'"/>`:''}${r.emoji||'📦'}</div>
+        <div class="rec-body"><div class="rec-name">${r.name}</div><div class="rec-price">$${r.price.toLocaleString()}</div></div>
+      </div>`).join('');
+  } else { g('detailRec').style.display='none'; }
   showPage('detail');
 }
 
-// ════════════════════════════════════════════════════
-//  SHOP
-// ════════════════════════════════════════════════════
-function renderShop(){
-  const hasMem=!!S.member;
-  g('shopHint').style.display=hasMem?'none':'block';
-  g('shopGrid').innerHTML=S.prods.map(p=>{
-    const out=p.stock===0, low=p.stock>0&&p.stock<=5;
-    return `<div class="prod-card" onclick="showDetail('${p.id}','shop')">
-      <div class="prod-thumb">
-        ${p.img?`<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none'"/>`:''}
-        <span style="position:relative;z-index:1">${p.emoji||'📦'}</span>
-        ${low?`<span class="badge b-yellow prod-tag-abs" style="font-size:.65rem">僅剩${p.stock}台</span>`:''}
-        ${out?`<span class="badge b-red prod-tag-abs" style="font-size:.65rem">已售完</span>`:''}
-      </div>
-      <div class="prod-body">
-        <div class="prod-name">${p.name}</div>
-        <div class="prod-model">${p.model}</div>
-        <div class="prod-desc">${p.desc}</div>
-        <div class="prod-price">NT$ ${p.price.toLocaleString()} <small>/ 台</small></div>
-        <div class="prod-info-btn">查看詳情 →</div>
-      </div>
-    </div>`;
-  }).join('');
+function renderShop() {
+  const hasMem = !!S.member;
+  g('shopHint').style.display = hasMem ? 'none' : 'block';
+  g('shopGrid').innerHTML = S.prods.map(p => shopCard(p)).join('');
 }
-function filterProds(cat,btn){
+function shopCard(p) {
+  const out=p.stock===0, low=p.stock>0&&p.stock<=5;
+  return `<div class="prod-card" onclick="showDetail('${p.id}','shop')">
+    <div class="prod-thumb">
+      ${p.img?`<img src="${p.img}" onerror="this.style.display='none'"/>`:''}
+      <span style="position:relative;z-index:1">${p.emoji||'📦'}</span>
+      ${p.hot?'<div class="prod-hot">🔥 熱門</div>':''}
+      ${low?`<span class="badge b-yellow prod-tag-abs" style="font-size:.65rem">僅剩${p.stock}台</span>`:''}
+      ${out?`<span class="badge b-red prod-tag-abs" style="font-size:.65rem">已售完</span>`:''}
+    </div>
+    <div class="prod-body">
+      <div class="prod-name">${p.name}</div>
+      <div class="prod-model">${p.model}</div>
+      <div class="prod-desc">${p.desc}</div>
+      <div class="prod-price">NT$ ${p.price.toLocaleString()}</div>
+      <div class="prod-info-btn">查看詳情 →</div>
+    </div>
+  </div>`;
+}
+function filterProds(cat, btn) {
   document.querySelectorAll('.fchip').forEach(c=>c.classList.remove('active'));
   btn.classList.add('active');
-  const list=cat==='all'?S.prods:S.prods.filter(p=>p.cat===cat);
-  g('shopGrid').innerHTML=list.map(p=>{
-    const out=p.stock===0;
-    return `<div class="prod-card" onclick="showDetail('${p.id}','shop')">
-      <div class="prod-thumb"><span style="position:relative;z-index:1">${p.emoji||'📦'}</span>${out?`<span class="badge b-red prod-tag-abs" style="font-size:.65rem">已售完</span>`:''}</div>
-      <div class="prod-body"><div class="prod-name">${p.name}</div><div class="prod-model">${p.model}</div><div class="prod-desc">${p.desc}</div><div class="prod-price">NT$ ${p.price.toLocaleString()}</div><div class="prod-info-btn">查看詳情 →</div></div>
-    </div>`;
-  }).join('');
+  const list = cat==='all' ? S.prods : S.prods.filter(p=>p.cat===cat);
+  g('shopGrid').innerHTML = list.map(p=>shopCard(p)).join('');
 }
 
 // ════════════════════════════════════════════════════
 //  PARTS
 // ════════════════════════════════════════════════════
-const catIcon={power:'🔌',hdmi:'📺',remote:'🎮',mouse:'🖱️',cursor:'🖱️',cable:'🔗',other:'🔩'};
-const catName={power:'電源供應器',hdmi:'HDMI線材',remote:'安博遙控器',mouse:'無線滑鼠',cursor:'飛鼠/空中鼠',cable:'傳輸線',other:'其他配件'};
+const catIcon = {power:'🔌',hdmi:'📺',remote:'🎮',mouse:'🖱️',cursor:'🖱️',cable:'🔗',other:'🔩'};
+const catName  = {power:'電源供應器',hdmi:'HDMI線材',remote:'安博遙控器',mouse:'無線滑鼠',cursor:'飛鼠/空中鼠',cable:'傳輸線',other:'其他配件'};
 
-function renderParts(){
-  const hasMem=!!S.member;
-  g('partsHint').style.display=hasMem?'none':'block';
-  g('partsGrid').innerHTML=S.parts.map(pt=>{
-    const out=pt.stock===0;
+function renderParts() {
+  const hasMem = !!S.member;
+  g('partsHint').style.display = hasMem ? 'none' : 'block';
+  g('partsGrid').innerHTML = S.parts.map(pt=>{
+    const out = pt.stock===0;
     return `<div class="part-card">
       <div class="part-thumb">${pt.img?`<img src="${pt.img}" onerror="this.style.display='none'"/>`:''}${!pt.img?`<span>${pt.emoji||catIcon[pt.cat]||'🔩'}</span>`:''}</div>
       <div class="part-body">
@@ -1185,26 +1317,26 @@ function renderParts(){
 // ════════════════════════════════════════════════════
 //  CART
 // ════════════════════════════════════════════════════
-function addCart(id, type='prod'){
+function addCart(id, type='prod') {
   if(!S.member){ toast('請先加入會員才能購物','warn'); showPage('member'); return; }
-  const list=type==='part'?S.parts:S.prods;
-  const item=list.find(x=>x.id===id); if(!item) return;
-  const ex=S.cart.find(i=>i.id===id);
-  if(ex) ex.qty++; else S.cart.push({...item,qty:1,itemType:type});
+  const list = type==='part' ? S.parts : S.prods;
+  const item = list.find(x=>x.id===id); if(!item) return;
+  const ex = S.cart.find(i=>i.id===id);
+  if(ex) ex.qty++; else S.cart.push({...item, qty:1, itemType:type});
   saveCart(); updateBadge();
-  toast(`✅ 已加入購物車：${item.name}`,'success');
+  toast(`✅ 已加入購物車：${item.name}`, 'success');
 }
-function saveCart(){ localStorage.setItem('ubox_cart',JSON.stringify(S.cart)); }
+function saveCart(){ localStorage.setItem('ubox_cart', JSON.stringify(S.cart)); }
 function updateBadge(){
-  const t=S.cart.reduce((s,i)=>s+i.qty,0);
-  g('cartBadge').textContent=t;
-  g('navCart').style.display=t>0?'flex':'none';
+  const t = S.cart.reduce((s,i)=>s+i.qty, 0);
+  g('cartBadge').textContent = t;
+  g('navCart').style.display = t>0 ? 'flex' : 'none';
 }
-function renderCart(){
-  const empty=g('emptyCart'),body=g('cartBody');
-  if(!S.cart.length){ empty.style.display='block';body.style.display='none';return; }
-  empty.style.display='none';body.style.display='block';
-  g('cartItems').innerHTML=S.cart.map(it=>`
+function renderCart() {
+  const empty=g('emptyCart'), body=g('cartBody');
+  if(!S.cart.length){ empty.style.display='block'; body.style.display='none'; return; }
+  empty.style.display='none'; body.style.display='block';
+  g('cartItems').innerHTML = S.cart.map(it=>`
     <div class="cart-item">
       <div class="cart-thumb">${it.emoji||'📦'}</div>
       <div class="cart-info"><div class="cart-name">${it.name}</div><div class="cart-price">NT$ ${it.price.toLocaleString()}</div></div>
@@ -1216,44 +1348,39 @@ function renderCart(){
     </div>`).join('');
   // 自動帶入會員資料
   if(S.member){
-    if(g('cName')&&!g('cName').value) g('cName').value=S.member.name||'';
-    if(g('cPhone')&&!g('cPhone').value) g('cPhone').value=S.member.phone||'';
-    if(g('dName')&&!g('dName').value) g('dName').value=S.member.name||'';
-    if(g('dPhone')&&!g('dPhone').value) g('dPhone').value=S.member.phone||'';
-    if(g('dAddr')&&!g('dAddr').value) g('dAddr').value=S.member.address||'';
+    if(g('dName')&&!g('dName').value)   g('dName').value  = S.member.name||'';
+    if(g('dPhone')&&!g('dPhone').value) g('dPhone').value = S.member.phone||'';
+    if(g('dAddr')&&!g('dAddr').value)   g('dAddr').value  = S.member.address||'';
+    if(g('cName')&&!g('cName').value)   g('cName').value  = S.member.name||'';
+    if(g('cPhone')&&!g('cPhone').value) g('cPhone').value = S.member.phone||'';
   }
   applyShipUI(); updateSum();
 }
-function chgQty(id,d){
-  const it=S.cart.find(i=>i.id===id); if(!it) return;
+function chgQty(id, d) {
+  const it = S.cart.find(i=>i.id===id); if(!it) return;
   it.qty+=d; if(it.qty<=0) S.cart=S.cart.filter(i=>i.id!==id);
-  saveCart();updateBadge();renderCart();
+  saveCart(); updateBadge(); renderCart();
 }
 
 // ════════════════════════════════════════════════════
 //  SHIPPING
 // ════════════════════════════════════════════════════
-function applySettings(){
-  if(g('dFeeLabel')) g('dFeeLabel').textContent=`運費 $${S.settings.deliveryFee||150}`;
-  if(g('cFeeLabel')) g('cFeeLabel').textContent=`運費 $${S.settings.cvsFee||80}`;
+function applySettings() {
+  if(g('dFeeLabel')) g('dFeeLabel').textContent = `運費 $${S.settings.deliveryFee||150}`;
+  if(g('cFeeLabel')) g('cFeeLabel').textContent = `運費 $${S.settings.cvsFee||80}`;
   applyShipUI();
 }
-function applyShipUI(){
-  const enableD = S.settings.enableDelivery!==false;
-  const enableC = S.settings.enableCvs!==false;
-  const shipD=g('shipD'), shipC=g('shipC');
-  if(!shipD||!shipC) return;
-  shipD.classList.toggle('disabled',!enableD);
-  shipC.classList.toggle('disabled',!enableC);
-  // 若當前選擇的方式被關閉，自動切換
-  if(S.shipMode==='delivery'&&!enableD&&enableC) selShip('cvs');
-  else if(S.shipMode==='cvs'&&!enableC&&enableD) selShip('delivery');
+function applyShipUI() {
+  const eD=S.settings.enableDelivery!==false, eC=S.settings.enableCvs!==false;
+  g('shipD')?.classList.toggle('disabled',!eD);
+  g('shipC')?.classList.toggle('disabled',!eC);
+  if(S.shipMode==='delivery'&&!eD&&eC) selShip('cvs');
+  else if(S.shipMode==='cvs'&&!eC&&eD) selShip('delivery');
 }
-function selShip(m){
-  const enableD=S.settings.enableDelivery!==false;
-  const enableC=S.settings.enableCvs!==false;
-  if(m==='delivery'&&!enableD){ toast('宅配到府目前暫停服務','warn'); return; }
-  if(m==='cvs'&&!enableC){ toast('超商取貨目前暫停服務','warn'); return; }
+function selShip(m) {
+  const eD=S.settings.enableDelivery!==false, eC=S.settings.enableCvs!==false;
+  if(m==='delivery'&&!eD){toast('宅配目前暫停','warn');return;}
+  if(m==='cvs'&&!eC){toast('超商取貨目前暫停','warn');return;}
   S.shipMode=m;
   g('shipD').classList.toggle('sel',m==='delivery');
   g('shipC').classList.toggle('sel',m==='cvs');
@@ -1261,51 +1388,43 @@ function selShip(m){
   g('cFields').style.display=m==='cvs'?'block':'none';
   updateSum();
 }
-function updateSum(){
-  const sub=S.cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const fee=S.shipMode==='delivery'?(S.settings.deliveryFee||150):(S.settings.cvsFee||80);
+function updateSum() {
+  const sub  = S.cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const fee  = S.shipMode==='delivery'?(S.settings.deliveryFee||150):(S.settings.cvsFee||80);
   let disc=0;
   if(S.coupon) disc=S.coupon.type==='fixed'?S.coupon.value:Math.round(sub*S.coupon.value/100);
-  g('sumSub').textContent=`$${sub.toLocaleString()}`;
-  g('sumFee').textContent=`$${fee}`;
-  g('sumDisc').textContent=`-$${disc.toLocaleString()}`;
-  g('sumTotal').textContent=`$${Math.max(0,sub+fee-disc).toLocaleString()}`;
+  disc += S.pointsDiscount;
+  g('sumSub').textContent   = `$${sub.toLocaleString()}`;
+  g('sumFee').textContent   = `$${fee}`;
+  g('sumDisc').textContent  = `-$${disc.toLocaleString()}`;
+  g('sumTotal').textContent = `$${Math.max(0,sub+fee-disc).toLocaleString()}`;
 }
 
-// CVS SEARCH (7-11 門市模擬搜尋)
-function searchCVS(){
-  const kw=g('cvsSearchInput').value.trim();
-  if(!kw){ toast('請輸入門市名稱或地址','warn'); return; }
-  // 實際環境可接 7-11 API；此處為示範資料
-  const demo=[
+// 7-11 門市搜尋
+function searchCVS() {
+  const kw = g('cvsInput').value.trim(); if(!kw){toast('請輸入門市名稱','warn');return;}
+  // 示範門市資料，實際可接 7-11 API
+  const demo = [
     {name:'台南文化門市',addr:'台南市永康區中正路100號'},
     {name:'台南成功門市',addr:'台南市東區成功路200號'},
     {name:'台南大學門市',addr:'台南市北區大學路300號'},
-    {name:'台北信義門市',addr:'台北市信義區忠孝東路400號'},
-    {name:'高雄三民門市',addr:'高雄市三民區九如一路500號'},
+    {name:'高雄三多門市',addr:'高雄市三民區三多路400號'},
+    {name:'台北信義門市',addr:'台北市信義區忠孝東路500號'},
+    {name:'台中中港門市',addr:'台中市西屯區中港路600號'},
+    {name:'桃園中正門市',addr:'桃園市中壢區中正路700號'},
+    {name:'新北板橋門市',addr:'新北市板橋區文化路800號'},
   ].filter(s=>s.name.includes(kw)||s.addr.includes(kw));
+  g('cvsResults').innerHTML = demo.length
+    ? demo.map(s=>`<div class="cvs-item" onclick="selectCVS('${s.name}','${s.addr}')"><div><div class="fw7 fsm">${s.name}</div><div class="cd fxs">${s.addr}</div></div><span class="cp fsm">選擇</span></div>`).join('')
+    : '<p class="cd fxs" style="padding:8px">查無門市，請嘗試其他關鍵字</p>';
+}
+function selectCVS(name,addr) {
+  g('cvsStoreName').textContent=name; g('cvsStoreAddr').textContent=addr;
+  g('cvsChosen').style.display='block'; g('cvsResults').innerHTML=''; g('cvsInput').value='';
+}
+function clearCVS() { g('cvsChosen').style.display='none'; g('cvsStoreName').textContent=''; }
 
-  if(!demo.length){ g('cvsSearchResults').innerHTML='<p class="cd fxs" style="padding:8px">查無符合門市，請嘗試其他關鍵字</p>'; return; }
-  g('cvsSearchResults').innerHTML=demo.map(s=>`
-    <div class="cvs-result-item" onclick="selectCVS('${s.name}','${s.addr}')">
-      <div><div class="cvs-store-name">${s.name}</div><div class="cvs-store-addr">${s.addr}</div></div>
-      <span class="cp fsm">選擇</span>
-    </div>`).join('');
-}
-function selectCVS(name,addr){
-  g('cvsStoreName').textContent=name;
-  g('cvsStoreAddr').textContent=addr;
-  g('cvsSelected').style.display='block';
-  g('cvsSearchResults').innerHTML='';
-  g('cvsSearchInput').value='';
-}
-function clearCVS(){
-  g('cvsSelected').style.display='none';
-  g('cvsStoreName').textContent='';
-  g('cvsStoreAddr').textContent='';
-}
-
-async function applyCoupon(){
+async function applyCoupon() {
   const code=g('cpnInput').value.trim().toUpperCase(); if(!code) return;
   const el=g('cpnResult'); el.innerHTML='<span class="cd">驗證中...</span>';
   try{
@@ -1319,63 +1438,69 @@ async function applyCoupon(){
   } catch(e){ el.innerHTML=`<span class="cm fsm">⚠️ ${e.message}</span>`; }
 }
 
-async function submitOrder(){
+// ════════════════════════════════════════════════════
+//  POINTS 積分折抵
+// ════════════════════════════════════════════════════
+function usePoints() {
+  const pts = parseInt(g('ptsUseInput').value)||0;
+  if(!S.member || pts<100){ toast('最低使用 100 積分','warn'); return; }
+  const maxPts = parseInt(S.member.points||0);
+  if(pts > maxPts){ toast(`積分不足（目前 ${maxPts} 點）`,'warn'); return; }
+  const rate = S.settings.ptsRedeem||2; // N點=NT$1
+  const discount = Math.floor(pts/rate);
+  S.pointsDiscount = discount;
+  toast(`⭐ ${pts} 積分已套用，折抵 NT$ ${discount}`, 'success');
+  updateSum();
+}
+
+async function submitOrder() {
   if(!S.member){ toast('請先登入會員','error'); showPage('member'); return; }
   if(!S.cart.length){ toast('購物車是空的','error'); return; }
-
-  let recipientName='', recipientPhone='', address='';
+  let rName='',rPhone='',address='';
   if(S.shipMode==='delivery'){
-    recipientName=g('dName').value.trim();
-    recipientPhone=g('dPhone').value.trim();
-    address=g('dAddr').value.trim();
+    rName=g('dName').value.trim(); rPhone=g('dPhone').value.trim(); address=g('dAddr').value.trim();
   } else {
-    recipientName=g('cName').value.trim();
-    recipientPhone=g('cPhone').value.trim();
-    const storeName=g('cvsStoreName').textContent;
-    address=storeName||'';
+    rName=g('cName').value.trim(); rPhone=g('cPhone').value.trim();
+    address=g('cvsStoreName').textContent;
   }
-  if(!recipientName||!recipientPhone||!address){ toast('請填寫完整收件資訊','error'); return; }
-  if(!/^09\d{8}$/.test(recipientPhone)){ toast('手機號碼格式錯誤','error'); return; }
-
+  if(!rName||!rPhone||!address){ toast('請填寫完整收件資訊','error'); return; }
+  if(!/^09\d{8}$/.test(rPhone)){ toast('手機號碼格式錯誤','error'); return; }
   const btn=g('orderBtn'); btn.disabled=true; btn.textContent='下單中...';
   const sub=S.cart.reduce((s,i)=>s+i.price*i.qty,0);
   const fee=S.shipMode==='delivery'?(S.settings.deliveryFee||150):(S.settings.cvsFee||80);
   let disc=0; if(S.coupon) disc=S.coupon.type==='fixed'?S.coupon.value:Math.round(sub*S.coupon.value/100);
+  disc+=S.pointsDiscount;
+  const total=Math.max(0,sub+fee-disc);
   try{
     const r=await postGAS('createOrder',{
       lineId:S.user?.userId||'', memberName:S.member.name, phone:S.member.phone,
-      recipientName, recipientPhone,
+      recipientName:rName, recipientPhone:rPhone,
       items:S.cart.map(i=>`${i.name} ×${i.qty}`).join('、'),
-      subtotal:sub, fee, discount:disc, total:Math.max(0,sub+fee-disc),
+      subtotal:sub, fee, discount:disc, total,
       shipping:S.shipMode, address,
-      couponCode:S.coupon?.code||'', note:g('orderNote').value,
+      couponCode:S.coupon?.code||'', pointsUsed:S.pointsDiscount*( S.settings.ptsRedeem||2),
+      note:g('orderNote').value,
     });
     if(r.success){
-      S.cart=[]; S.coupon=null; saveCart(); updateBadge();
-      toast(`🎉 訂單成功！${r.orderId}`,'success');
-      try{ if(liff.isInClient()) await liff.sendMessages([{type:'text',text:`📦 我已下單！\n訂單編號：${r.orderId}\n金額：$${Math.max(0,sub+fee-disc).toLocaleString()}`}]); }catch{}
+      S.cart=[]; S.coupon=null; S.pointsDiscount=0; saveCart(); updateBadge();
+      toast(`🎉 訂單成功！${r.orderId}`, 'success');
+      addNotif('📦 訂單建立成功', `訂單編號 ${r.orderId}，金額 NT$${total.toLocaleString()}`, 'order');
+      try{ if(liff.isInClient()) await liff.sendMessages([{type:'text',text:`📦 我已下單！\n訂單編號：${r.orderId}\n金額：NT$${total.toLocaleString()}`}]); }catch{}
       setTimeout(()=>showPage('member'),1200);
     } else toast(r.message||'下單失敗','error');
-  } catch(e){ toast(e.message,'error'); }
+  } catch(e){ toast('連線失敗：'+e.message,'error'); }
   finally{ btn.disabled=false; btn.textContent='✅ 確認下單（貨到付款）'; }
 }
 
 // ════════════════════════════════════════════════════
 //  REPAIR
 // ════════════════════════════════════════════════════
-function switchRepTab(t,el){
-  document.querySelectorAll('#page-repair .tab').forEach(x=>x.classList.remove('active'));
-  el.classList.add('active');
-  g('repForm').style.display=t==='form'?'block':'none';
-  g('repTrack').style.display=t==='track'?'block':'none';
-}
+function switchRepTab(t,el){ document.querySelectorAll('#page-repair .tab').forEach(x=>x.classList.remove('active')); el.classList.add('active'); g('repForm').style.display=t==='form'?'block':'none'; g('repTrack').style.display=t==='track'?'block':'none'; }
 async function checkWarranty(){
   const id=g('r_orderId').value.trim(); if(!id) return;
   const el=g('wResult'); el.innerHTML='<span class="cd fsm">查詢中...</span>';
-  try{
-    const r=await callGAS('checkWarranty',{orderId:id});
-    el.innerHTML=r.success?(r.inWarranty?`<span class="wtag">✅ 保固中（${r.expire} 到期）</span>`:`<span class="badge b-red">❌ 已過期（${r.expire}）</span>`):'<span class="badge b-gray">查無此訂單</span>';
-  } catch(e){ el.innerHTML=`<span class="cm fsm">⚠️ ${e.message}</span>`; }
+  try{ const r=await callGAS('checkWarranty',{orderId:id}); el.innerHTML=r.success?(r.inWarranty?`<span class="wtag">✅ 保固中（${r.expire} 到期）</span>`:`<span class="badge b-red">❌ 已過期（${r.expire}）</span>`):'<span class="badge b-gray">查無訂單</span>'; }
+  catch(e){ el.innerHTML=`<span class="cm fsm">⚠️ ${e.message}</span>`; }
 }
 async function submitRepair(){
   const f={contact:g('r_contact').value.trim(),problem:g('r_problem').value.trim(),serial:g('r_serial').value.trim(),name:g('r_name').value.trim(),phone:g('r_phone').value.trim(),store:g('r_store').value.trim()};
@@ -1384,19 +1509,16 @@ async function submitRepair(){
   const btn=g('repBtn'); btn.disabled=true; btn.textContent='送出中...';
   try{
     const r=await postGAS('createRepair',{...f,model:g('r_model').value,orderId:g('r_orderId').value.trim(),lineId:S.user?.userId||''});
-    if(r.success){
-      toast(`📤 維修申請已送出！單號：${r.repairId}`,'success');
-      try{ if(liff.isInClient()) await liff.sendMessages([{type:'text',text:`🔧 維修申請送出\n維修單號：${r.repairId}\n${r.inWarranty?'✅ 保固內':'保固外'}\n我們將盡快提供超商寄件代碼！`}]); }catch{}
-      ['r_contact','r_problem','r_serial','r_name','r_phone','r_store','r_orderId'].forEach(id=>{g(id).value='';});
-      g('wResult').innerHTML='';
-    } else toast(r.message||'送出失敗','error');
-  } catch(e){ toast(e.message,'error'); }
+    if(r.success){ toast(`📤 維修申請已送出！${r.repairId}`,'success'); ['r_contact','r_problem','r_serial','r_name','r_phone','r_store','r_orderId'].forEach(id=>{g(id).value='';});
+      try{ if(liff.isInClient()) await liff.sendMessages([{type:'text',text:`🔧 維修申請送出\n${r.repairId}\n${r.inWarranty?'✅ 保固內':'保固外'}`}]); }catch{}
+    } else toast(r.message,'error');
+  } catch(e){ toast('連線失敗：'+e.message,'error'); }
   finally{ btn.disabled=false; btn.textContent='📤 送出維修申請'; }
 }
 async function trackRepair(){
   const ph=g('trackPhone').value.trim();
   if(!/^09\d{8}$/.test(ph)){ toast('請輸入正確手機號碼','error'); return; }
-  const el=g('trackResults'); el.innerHTML='<p class="cd tc fsm" style="padding:14px">查詢中...</p>';
+  const el=g('trackResults'); el.innerHTML='<p class="cd tc fsm" style="padding:12px">查詢中...</p>';
   try{
     const r=await callGAS('getRepairsByPhone',{phone:ph});
     const flow=['待寄件','已寄件','維修中','待取件','已完成'];
@@ -1407,122 +1529,132 @@ async function trackRepair(){
           <div class="fsm mt8">${x.problem||''}</div>
           <div class="cd fxs mt4">序號：${x.serial} ｜ ${ts(x.date)}</div>
           ${x.shipCode?`<div class="mt8"><span class="wtag">📦 寄件代碼：${x.shipCode}</span></div>`:''}
-          ${x.adminNote?`<div class="fsm cm mt8">📋 ${x.adminNote}</div>`:''}
+          ${x.adminNote?`<div class="fsm cm mt6">📋 ${x.adminNote}</div>`:''}
           <div class="sf">${flow.map(s=>{const i=flow.indexOf(s),c=flow.indexOf(x.status);return`<span class="sf-dot ${s===x.status?'sf-cur':i<c?'sf-done':''}">${s}</span>`;}).join('')}</div>
         </div>`).join('');
     } else el.innerHTML='<div class="empty"><div class="empty-icon">🔍</div><p>查無維修記錄</p></div>';
-  } catch(e){ el.innerHTML=`<p class="cer tc fsm" style="padding:14px">${e.message}</p>`; }
-}
-
-// ════════════════════════════════════════════════════
-//  RETURN / REFUND
-// ════════════════════════════════════════════════════
-function openReturnModal(orderId, orderItems){
-  S.currentReturnOrderId=orderId;
-  S.retPhotos=[];
-  g('ret_reason_type').value='';
-  g('ret_detail').value='';
-  g('retPhotoPreview').innerHTML='';
-  g('retOrderInfo').innerHTML=`
-    <div style="background:var(--bg3);border-radius:10px;padding:12px">
-      <div class="fxs cm">申請退貨的訂單</div>
-      <div class="fsm fw7 mt4 cp mono">${orderId}</div>
-      <div class="fsm cm mt4">${orderItems}</div>
-    </div>`;
-  openModal('returnMod');
-}
-
-function toggleRetReasonOther(){}
-
-function handleReturnPhotos(input){
-  const files=Array.from(input.files);
-  if(S.retPhotos.length + files.length > 3){ toast('最多只能上傳3張照片','warn'); return; }
-  files.forEach(file=>{
-    if(file.size > 5*1024*1024){ toast(`${file.name} 超過5MB限制`,'warn'); return; }
-    const reader=new FileReader();
-    reader.onload=e=>{
-      S.retPhotos.push({name:file.name, dataUrl:e.target.result, type:file.type});
-      renderRetPhotos();
-    };
-    reader.readAsDataURL(file);
-  });
-  input.value='';
-}
-
-function renderRetPhotos(){
-  g('retPhotoPreview').innerHTML=S.retPhotos.map((ph,i)=>`
-    <div class="photo-preview">
-      <img src="${ph.dataUrl}" alt="照片${i+1}"/>
-      <button class="photo-del" onclick="removeRetPhoto(${i})">✕</button>
-    </div>`).join('');
-}
-
-function removeRetPhoto(i){
-  S.retPhotos.splice(i,1);
-  renderRetPhotos();
-}
-
-async function submitReturn(){
-  const reasonType=g('ret_reason_type').value;
-  const detail=g('ret_detail').value.trim();
-  if(!reasonType){ toast('請選擇退貨原因','error'); return; }
-  if(!detail){ toast('請填寫詳細說明','error'); return; }
-  if(S.retPhotos.length===0){ toast('請至少上傳1張商品照片','error'); return; }
-
-  const btn=g('retBtn'); btn.disabled=true; btn.textContent='送出中...';
-  try{
-    const r=await postGAS('createReturn',{
-      orderId:S.currentReturnOrderId,
-      lineId:S.user?.userId||'',
-      memberName:S.member?.name||'',
-      phone:S.member?.phone||'',
-      reasonType, detail,
-      photos:JSON.stringify(S.retPhotos.map(p=>p.dataUrl)),
-    });
-    if(r.success){
-      closeModal('returnMod');
-      toast(`↩️ 退貨申請已送出！單號：${r.returnId}`,'success');
-      loadMemOrders();
-    } else toast(r.message||'送出失敗','error');
-  } catch(e){ toast(e.message,'error'); }
-  finally{ btn.disabled=false; btn.textContent='📤 送出退貨申請'; }
+  } catch(e){ el.innerHTML=`<p class="cer tc fsm" style="padding:12px">${e.message}</p>`; }
 }
 
 // ════════════════════════════════════════════════════
 //  MEMBER
 // ════════════════════════════════════════════════════
-function liffLogin(){ try{ if(!liff.isLoggedIn()) liff.login(); }catch(e){ toast('LINE 登入失敗','error'); } }
+function liffLogin(){ try{ if(!liff.isLoggedIn()) liff.login(); }catch(e){ toast('LINE 登入失敗：'+e.message,'error'); } }
+
 async function fetchMember(){
   if(!S.user) return;
   try{
-    const r=await callGAS('getMember',{lineId:S.user.userId});
-    if(r.success&&r.data) S.member=r.data;
-  } catch(e){ console.warn('fetchMember:',e.message); }
+    const r = await callGAS('getMember',{lineId:S.user.userId});
+    if(r.success && r.data) S.member = r.data;
+  } catch(e){ console.warn('fetchMember:', e.message); }
 }
+
 function renderMember(){
   const hasUser=!!S.user, hasMem=!!S.member;
-  g('memWall').style.display=!hasUser?'block':'none';
-  g('memReg').style.display=(hasUser&&!hasMem)?'block':'none';
-  g('memProfile').style.display=hasMem?'block':'none';
+  g('memWall').style.display    = !hasUser   ? 'block' : 'none';
+  g('memReg').style.display     = (hasUser&&!hasMem) ? 'block' : 'none';
+  g('memProfile').style.display = hasMem     ? 'block' : 'none';
   if(hasMem){ fillMemProfile(); loadMemOrders(); }
 }
+
 function fillMemProfile(){
-  const m=S.member;
+  const m = S.member;
   if(S.user?.pictureUrl) g('memAva').innerHTML=`<img src="${S.user.pictureUrl}" alt=""/>`;
-  g('memName').textContent=m.name; g('memPhone').textContent=m.phone;
-  g('ms_o').textContent=m.orderCount||0; g('ms_r').textContent=m.repairCount||0;
-  g('ms_w').textContent=m.warrantyExpire||'—';
+  g('memName').textContent  = m.name;
+  g('memPhone').textContent = m.phone;
+  g('ms_o').textContent = m.orderCount||0;
+  g('ms_r').textContent = m.repairCount||0;
+  g('ms_w').textContent = m.warrantyExpire||'—';
   if(m.warrantyExpire&&new Date(m.warrantyExpire)>=new Date()) g('memWtag').style.display='inline-flex';
-  if(g('edit_addr')) g('edit_addr').value=m.address||'';
-  if(g('edit_email')) g('edit_email').value=m.email||'';
+  // 積分 & 等級
+  const pts = parseInt(m.points||0);
+  g('memPoints').textContent = `⭐ ${pts} 點`;
+  g('memPoints').style.display = 'inline-flex';
+  g('ptsBadge').textContent = `${pts} 點`;
+  // 等級進度條
+  const levels = [{name:'一般會員',min:0,max:999},{name:'銀卡會員',min:1000,max:2999},{name:'金卡會員',min:3000,max:9999},{name:'鑽石會員',min:10000,max:Infinity}];
+  const spend = parseInt(m.totalSpend||0);
+  const curLv = levels.findIndex((l,i)=>spend<l.max)||(levels.length-1);
+  const lv = levels[Math.min(curLv,levels.length-1)];
+  const nextLv = levels[Math.min(curLv+1,levels.length-1)];
+  g('memLevel').textContent = lv.name;
+  g('memLevel').className = `badge ${levelColor(lv.name)}`;
+  if(curLv < levels.length-1){
+    const pct = Math.min(100,Math.round((spend-lv.min)/(nextLv.min-lv.min)*100));
+    g('levelBarWrap').style.display='block';
+    g('levelBarFill').style.width = pct+'%';
+    g('levelCur').textContent = lv.name;
+    g('levelNext').textContent = `${nextLv.name} (NT$${(nextLv.min-spend).toLocaleString()} 可升級)`;
+  }
+  if(g('edit_addr')) g('edit_addr').value = m.address||'';
+  if(g('edit_email')) g('edit_email').value = m.email||'';
+  // 邀請碼
+  if(g('myRefCode')) g('myRefCode').textContent = m.refCode || ('UBOX'+m.phone.slice(-4));
+  renderNotifications();
+  renderPointsHistory();
 }
+
+// ── 通知系統 ──
+function addNotif(title, body, type='info'){
+  S.notifications.unshift({ title, body, type, time: new Date().toISOString(), read: false });
+  localStorage.setItem('ubox_notifs', JSON.stringify(S.notifications.slice(0,50)));
+}
+function renderNotifications(){
+  S.notifications = JSON.parse(localStorage.getItem('ubox_notifs')||'[]');
+  const el=g('memNotifList');
+  if(!S.notifications.length){ el.innerHTML='<div class="empty"><div class="empty-icon">🔔</div><p>暫無通知</p></div>'; return; }
+  el.innerHTML=`<button class="btn btn-g btn-sm mb10" onclick="markAllRead()">全部標為已讀</button>`
+    +S.notifications.slice(0,20).map(n=>`
+      <div class="notif-item ${n.read?'':'notif-unread'}">
+        <div class="notif-icon">${{order:'📦',repair:'🔧',return:'↩️',info:'🔔'}[n.type]||'🔔'}</div>
+        <div class="notif-body"><div class="notif-title">${n.title}</div><div class="fsm cm">${n.body}</div><div class="notif-time">${ts(n.time)}</div></div>
+      </div>`).join('');
+}
+function markAllRead(){
+  S.notifications.forEach(n=>n.read=true);
+  localStorage.setItem('ubox_notifs',JSON.stringify(S.notifications));
+  renderNotifications();
+}
+
+// ── 積分紀錄 ──
+function renderPointsHistory(){
+  const el=g('ptsHistory'); if(!el) return;
+  const hist=JSON.parse(localStorage.getItem('ubox_pts_hist')||'[]');
+  if(!hist.length){ el.innerHTML='<p class="fsm cm">暫無積分紀錄</p>'; return; }
+  el.innerHTML=hist.slice(0,10).map(h=>`
+    <div class="sum-row">
+      <span class="fsm">${h.desc}</span>
+      <span class="${h.pts>0?'cok':'cer'} fw7 fsm">${h.pts>0?'+':''} ${h.pts} 點</span>
+    </div>`).join('');
+}
+function addPtsHistory(desc, pts){
+  const hist=JSON.parse(localStorage.getItem('ubox_pts_hist')||'[]');
+  hist.unshift({desc,pts,date:new Date().toISOString()});
+  localStorage.setItem('ubox_pts_hist',JSON.stringify(hist.slice(0,50)));
+}
+
+// ── 邀請碼 ──
+async function useReferral(){
+  const code=g('refCode').value.trim(); if(!code){ toast('請輸入邀請碼','warn'); return; }
+  if(code===('UBOX'+(S.member?.phone||'').slice(-4))){ toast('不能使用自己的邀請碼','warn'); return; }
+  try{
+    const r=await postGAS('useReferral',{lineId:S.user.userId,code});
+    if(r.success){ toast('✅ 邀請碼套用成功！雙方各獲100積分','success'); addPtsHistory('邀請碼獎勵',100); g('refCode').value=''; }
+    else toast(r.message,'error');
+  } catch(e){ toast('連線失敗','error'); }
+}
+function copyRefCode(){
+  const code = g('myRefCode').textContent;
+  navigator.clipboard.writeText(code).then(()=>toast('邀請碼已複製！','success')).catch(()=>{});
+}
+
 async function loadMemOrders(){
   if(!S.user) return;
-  const el=g('memOrdList'); el.innerHTML='<p class="cd tc fsm" style="padding:14px">載入中...</p>';
+  const el=g('memOrdList'); el.innerHTML='<p class="cd tc fsm" style="padding:12px">載入中...</p>';
   try{
-    const r=await callGAS('getMemberOrders',{lineId:S.user.userId});
+    const r = await callGAS('getMemberOrders',{lineId:S.user.userId});
     if(r.success&&r.data?.length){
-      el.innerHTML=r.data.map(o=>`
+      el.innerHTML = r.data.map(o=>`
         <div class="ord-card">
           <div class="ord-card-head">
             <span class="badge b-blue mono">${o.orderId}</span>
@@ -1536,17 +1668,16 @@ async function loadMemOrders(){
           ${o.inWarranty?'<div class="mt8"><span class="wtag">🛡️ 保固中</span></div>':''}
           <div class="ord-actions">
             ${(o.status==='已完成'||o.status==='已到店')&&!o.hasReturn
-              ?`<button class="btn btn-warn btn-sm" onclick="openReturnModal('${o.orderId}','${(o.items||'').replace(/'/g,'')}')">↩️ 申請退貨</button>`
-              :''}
+              ?`<button class="btn btn-warn btn-sm" onclick="openReturnModal('${o.orderId}','${(o.items||'').replace(/'/g,'')}')">↩️ 申請退貨</button>`:''}
             ${o.returnId?`<span class="badge ${retbc(o.returnStatus)}" style="padding:6px 10px">↩️ 退貨${o.returnStatus}</span>`:''}
           </div>
         </div>`).join('');
-    } else el.innerHTML='<div class="empty"><div class="empty-icon">📦</div><p>尚無訂單記錄</p></div>';
-  } catch(e){ el.innerHTML=`<p class="cer fsm tc" style="padding:14px">載入失敗：${e.message}<br/><button class="btn btn-g btn-sm mt8" onclick="loadMemOrders()">重試</button></p>`; }
+    } else el.innerHTML='<div class="empty"><div class="empty-icon">📦</div><p>尚無訂單</p><button class="btn btn-p mt12" onclick="showPage(\'shop\')">去購物</button></div>';
+  } catch(e){ el.innerHTML=`<div class="empty"><div class="empty-icon">⚠️</div><p class="cer">${e.message}</p><button class="btn btn-g btn-sm mt10" onclick="loadMemOrders()">重試</button></div>`; }
 }
 async function loadMemRepairs(){
   if(!S.member) return;
-  const el=g('memRepList'); el.innerHTML='<p class="cd tc fsm" style="padding:14px">載入中...</p>';
+  const el=g('memRepList'); el.innerHTML='<p class="cd tc fsm" style="padding:12px">載入中...</p>';
   try{
     const r=await callGAS('getRepairsByPhone',{phone:S.member.phone});
     if(r.success&&r.data?.length){
@@ -1558,40 +1689,106 @@ async function loadMemRepairs(){
           ${x.shipCode?`<div class="mt8"><span class="wtag">📦 ${x.shipCode}</span></div>`:''}
         </div>`).join('');
     } else el.innerHTML='<div class="empty"><div class="empty-icon">🔧</div><p>尚無維修記錄</p></div>';
-  } catch(e){ el.innerHTML=`<p class="cer fsm tc" style="padding:14px">${e.message}</p>`; }
+  } catch(e){ el.innerHTML=`<p class="cer fsm tc" style="padding:12px">${e.message}</p>`; }
 }
-function switchMemTab(tab,btn){
+function switchMemTab(tab, btn){
   document.querySelectorAll('#page-member .tabs .tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  ['orders','repairs','profile'].forEach(t=>{g('mt-'+t).style.display=t===tab?'block':'none';});
+  ['orders','repairs','notif','points','profile'].forEach(t=>{g('mt-'+t).style.display=t===tab?'block':'none';});
   if(tab==='repairs') loadMemRepairs();
+  if(tab==='notif') renderNotifications();
+  if(tab==='points') renderPointsHistory();
 }
+
+// ★ 修復後的 submitReg — 解決 LOAD FAILED
 async function submitReg(){
-  const name=g('reg_name').value.trim(),birth=g('reg_birth').value,phone=g('reg_phone').value.trim(),addr=g('reg_addr').value.trim(),email=g('reg_email').value.trim();
+  const name  = g('reg_name').value.trim();
+  const birth = g('reg_birth').value;
+  const phone = g('reg_phone').value.trim();
+  const addr  = g('reg_addr').value.trim();
+  const email = g('reg_email').value.trim();
   if(!name||!birth||!phone||!addr){ toast('請填寫所有必填欄位','error'); return; }
-  if(!/^09\d{8}$/.test(phone)){ toast('手機號碼格式錯誤','error'); return; }
-  try{
-    const r=await postGAS('registerMember',{
-      lineId:S.user.userId, displayName:S.user.displayName,
-      pictureUrl:S.user.pictureUrl, name, birth, phone, address:addr, email,
+  if(!/^09\d{8}$/.test(phone)){ toast('手機號碼格式不正確（09xxxxxxxx）','error'); return; }
+
+  const btn = g('regBtn'), status = g('regStatus');
+  btn.disabled = true; btn.textContent = '註冊中...';
+  status.textContent = '⏳ 正在連線到伺服器，請稍候...';
+
+  try {
+    const r = await postGAS('registerMember',{
+      lineId:      S.user?.userId || ('guest_'+Date.now()),
+      displayName: S.user?.displayName || name,
+      pictureUrl:  S.user?.pictureUrl  || '',
+      name, birth, phone, address:addr, email,
     });
-    if(r.success){ S.member=r.data; toast('🎉 會員加入成功！','success'); renderMember(); }
-    else toast(r.message||'註冊失敗','error');
-  } catch(e){ toast('連線失敗：'+e.message,'error'); }
+    if(r.success){
+      S.member = r.data;
+      addPtsHistory('加入會員獎勵', 50);
+      addNotif('🎉 歡迎加入 UBOX 會員！', '成功加入會員，獲得 50 積分', 'info');
+      toast('🎉 會員加入成功！', 'success');
+      status.textContent = '';
+      renderMember();
+    } else {
+      toast(r.message||'註冊失敗', 'error');
+      status.textContent = '❌ '+( r.message||'請稍後再試');
+    }
+  } catch(e){
+    toast('連線失敗：'+e.message, 'error');
+    status.textContent = '❌ 連線失敗：'+e.message+'\n請確認網路連線後再試，或聯絡 LINE@ 客服協助。';
+  } finally {
+    btn.disabled = false; btn.textContent = '✅ 完成加入會員';
+  }
 }
 async function updateProfile(){
   try{
     const r=await postGAS('updateMember',{lineId:S.user.userId,address:g('edit_addr').value.trim(),email:g('edit_email').value.trim()});
     if(r.success) toast('✅ 資料已更新','success'); else toast(r.message,'error');
-  } catch(e){ toast(e.message,'error'); }
+  } catch(e){ toast('連線失敗：'+e.message,'error'); }
 }
 function doLogout(){
   if(!confirm('確定要登出？')) return;
   try{ if(liff.isLoggedIn()) liff.logout(); }catch{}
-  S.user=null; S.member=null;
+  S.user=null; S.member=null; S.isGuest=false;
   g('navAva').style.display='none'; g('adminBtn').style.display='none';
   localStorage.removeItem('ubox_admin'); S.isAdmin=false;
   renderMember(); toast('已登出','success');
+}
+
+// ════════════════════════════════════════════════════
+//  RETURN
+// ════════════════════════════════════════════════════
+function openReturnModal(orderId, items){
+  S.currentReturnOrderId=orderId; S.retPhotos=[];
+  g('ret_reason_type').value=''; g('ret_detail').value=''; g('retPhotoPreview').innerHTML='';
+  g('retOrderInfo').innerHTML=`<div style="background:var(--bg3);border-radius:10px;padding:11px"><div class="fxs cm">申請退貨的訂單</div><div class="fsm fw7 mt4 cp mono">${orderId}</div><div class="fsm cm mt4">${items}</div></div>`;
+  openModal('returnMod');
+}
+function handleRetPhotos(input){
+  const files=Array.from(input.files);
+  if(S.retPhotos.length+files.length>3){toast('最多3張','warn');return;}
+  files.forEach(f=>{
+    if(f.size>5*1024*1024){toast(f.name+' 超過5MB','warn');return;}
+    const rd=new FileReader(); rd.onload=e=>{ S.retPhotos.push({dataUrl:e.target.result}); renderRetPhotos(); }; rd.readAsDataURL(f);
+  }); input.value='';
+}
+function renderRetPhotos(){ g('retPhotoPreview').innerHTML=S.retPhotos.map((p,i)=>`<div class="photo-preview"><img src="${p.dataUrl}"/><button class="photo-del" onclick="S.retPhotos.splice(${i},1);renderRetPhotos()">✕</button></div>`).join(''); }
+async function submitReturn(){
+  const rt=g('ret_reason_type').value, dt=g('ret_detail').value.trim();
+  if(!rt){toast('請選擇退貨原因','error');return;}
+  if(!dt){toast('請填寫詳細說明','error');return;}
+  if(!S.retPhotos.length){toast('請上傳至少1張照片','error');return;}
+  const btn=g('retBtn'); btn.disabled=true; btn.textContent='送出中...';
+  try{
+    const r=await postGAS('createReturn',{
+      orderId:S.currentReturnOrderId, lineId:S.user?.userId||'',
+      memberName:S.member?.name||'', phone:S.member?.phone||'',
+      reasonType:rt, detail:dt,
+      photoCount:S.retPhotos.length, // 照片另存或 base64（注意大小限制）
+    });
+    if(r.success){ closeModal('returnMod'); toast(`↩️ 退貨申請送出！${r.returnId}`,'success'); addNotif('↩️ 退貨申請送出','請等候管理員審核','return'); loadMemOrders(); }
+    else toast(r.message,'error');
+  } catch(e){ toast('連線失敗：'+e.message,'error'); }
+  finally{ btn.disabled=false; btn.textContent='📤 送出退貨申請'; }
 }
 
 // ════════════════════════════════════════════════════
@@ -1601,20 +1798,22 @@ function renderAdmin(){
   const ok=localStorage.getItem('ubox_admin')==='true';
   g('adminLogin').style.display=ok?'none':'block';
   g('adminPanel').style.display=ok?'block':'none';
-  if(ok){ loadOverview(); initAdminSettings(); }
+  if(ok){ loadOverview(); initAdmSettings(); }
 }
-function initAdminSettings(){
-  if(g('set_d')) g('set_d').value=S.settings.deliveryFee||150;
-  if(g('set_c')) g('set_c').value=S.settings.cvsFee||80;
-  if(g('tog_delivery')) g('tog_delivery').checked=S.settings.enableDelivery!==false;
-  if(g('tog_cvs')) g('tog_cvs').checked=S.settings.enableCvs!==false;
+function initAdmSettings(){
+  if(g('set_d'))  g('set_d').value = S.settings.deliveryFee||150;
+  if(g('set_c'))  g('set_c').value = S.settings.cvsFee||80;
+  if(g('tog_delivery')) g('tog_delivery').checked = S.settings.enableDelivery!==false;
+  if(g('tog_cvs'))      g('tog_cvs').checked = S.settings.enableCvs!==false;
+  if(g('set_pts_rate'))   g('set_pts_rate').value   = S.settings.ptsRate||100;
+  if(g('set_pts_redeem')) g('set_pts_redeem').value = S.settings.ptsRedeem||2;
   const gs=localStorage.getItem('ubox_gas')||CFG.GAS_URL;
   if(g('set_gas')) g('set_gas').value=gs;
   if(g('annInput')) g('annInput').value=localStorage.getItem('ubox_ann')||'';
 }
 async function adminLogin(){
-  const phone=g('adm_phone').value.trim(),pass=g('adm_pass').value;
-  if(!phone||!pass){ toast('請填寫帳號與密碼','error'); return; }
+  const phone=g('adm_phone').value.trim(), pass=g('adm_pass').value;
+  if(!phone||!pass){toast('請填寫帳號與密碼','error');return;}
   try{
     const r=await callGAS('adminLogin',{phone,pass});
     if(r.success) doAdminIn(); else toast(r.message||'帳號或密碼錯誤','error');
@@ -1634,72 +1833,131 @@ function switchAdmin(tab,btn){
 async function loadOverview(){
   try{
     const r=await callGAS('getDashboard');
-    if(r.success){
-      const d=r.data;
-      g('adm_mem').textContent=d.memberCount||0; g('adm_ord').textContent=d.orderCount||0;
-      g('adm_rep').textContent=d.repairCount||0; g('adm_rev').textContent=`$${(d.monthRevenue||0).toLocaleString()}`;
-      g('dashRep').innerHTML=(d.latestRepairs||[]).slice(0,5).map(r=>`
-        <div class="flex jb ic" style="padding:7px 0;border-bottom:1px solid var(--bds)">
-          <div><span class="cp fsm">${r.repairId}</span> <span class="cd fxs">｜${r.name}</span></div>
-          <span class="badge ${rbc(r.status)}">${r.status}</span>
-        </div>`).join('');
-      g('dashOrd').innerHTML=(d.latestOrders||[]).slice(0,5).map(o=>`
-        <div class="flex jb ic" style="padding:7px 0;border-bottom:1px solid var(--bds)">
-          <div><span class="cp fsm">${o.orderId}</span> <span class="cd fxs">｜${o.memberName}</span></div>
-          <span class="ca fw7 fsm">$${parseInt(o.total||0).toLocaleString()}</span>
-        </div>`).join('');
-      // 待審退貨
-      const pendingRet=d.pendingReturns||[];
-      g('dashRet').innerHTML=pendingRet.length
-        ?pendingRet.map(r=>`
-          <div class="flex jb ic" style="padding:7px 0;border-bottom:1px solid var(--bds)">
-            <div><span class="ca fsm">${r.returnId}</span> <span class="cd fxs">｜${r.memberName} | 訂單：${r.orderId}</span></div>
-            <button class="btn btn-warn btn-sm" onclick="switchAdmin('returns',document.querySelector('[onclick*=returns]'))">審核</button>
-          </div>`).join('')
-        :'<p class="cd fxs" style="padding:8px">目前無待審退貨申請</p>';
-    }
+    if(!r.success) return;
+    const d=r.data;
+    g('adm_mem').textContent=d.memberCount||0; g('adm_ord').textContent=d.orderCount||0;
+    g('adm_rep').textContent=d.repairCount||0; g('adm_rev').textContent=`$${(d.monthRevenue||0).toLocaleString()}`;
+    // 圖表
+    renderRevenueChart(d.monthlyRevenue||[]);
+    g('dashRep').innerHTML=(d.latestRepairs||[]).slice(0,5).map(r=>`
+      <div class="flex jb ic" style="padding:6px 0;border-bottom:1px solid var(--bds)">
+        <div><span class="cp fsm">${r.repairId}</span> <span class="cd fxs">｜${r.name}</span></div>
+        <span class="badge ${rbc(r.status)}">${r.status}</span>
+      </div>`).join('');
+    g('dashOrd').innerHTML=(d.latestOrders||[]).slice(0,5).map(o=>`
+      <div class="flex jb ic" style="padding:6px 0;border-bottom:1px solid var(--bds)">
+        <div><span class="cp fsm">${o.orderId}</span> <span class="cd fxs">｜${o.memberName}</span></div>
+        <span class="ca fw7 fsm">$${parseInt(o.total||0).toLocaleString()}</span>
+      </div>`).join('');
+    const pr=d.pendingReturns||[];
+    g('dashRet').innerHTML=pr.length?pr.map(r=>`<div class="flex jb ic" style="padding:6px 0;border-bottom:1px solid var(--bds)"><div><span class="ca fsm">${r.returnId}</span><span class="cd fxs"> ｜${r.memberName}</span></div><button class="btn btn-warn btn-sm" onclick="switchAdmin('returns',document.querySelector('.a-tab:nth-child(5)'))">審核</button></div>`).join(''):'<p class="cd fxs" style="padding:8px">目前無待審退貨</p>';
   } catch(e){ console.warn('Overview:',e.message); }
 }
 
+// 月營收圖表
+function renderRevenueChart(monthlyData) {
+  // monthlyData: [{month:'2025-01',revenue:12000},...]
+  if(!monthlyData.length){
+    // 產生示範數據
+    monthlyData=Array.from({length:6},(_,i)=>{const d=new Date();d.setMonth(d.getMonth()-5+i);return{month:d.toISOString().slice(0,7),revenue:Math.floor(Math.random()*80000+20000)};});
+  }
+  const max=Math.max(...monthlyData.map(m=>m.revenue),1);
+  const chart=g('revenueChart'), labels=g('revenueLabels');
+  if(!chart||!labels) return;
+  chart.innerHTML=monthlyData.map(m=>{
+    const pct=Math.round((m.revenue/max)*100);
+    return `<div class="chart-bar-col"><div class="chart-bar" style="height:${Math.max(pct,4)}%"><div class="chart-bar-tooltip">$${m.revenue.toLocaleString()}</div></div></div>`;
+  }).join('');
+  labels.innerHTML=monthlyData.map(m=>`<div class="chart-lbl" style="flex:1">${m.month.slice(5)}月</div>`).join('');
+}
+
+// 會員管理
 async function loadMems(){
-  try{ const r=await callGAS('getAllMembers'); if(r.success){ S.allMems=r.data||[]; renderMemTbl(S.allMems); } }
+  try{ const r=await callGAS('getAllMembers'); if(r.success){S.allMems=r.data||[];renderMemTbl(S.allMems);} }
   catch(e){ toast(e.message,'error'); }
 }
 function renderMemTbl(data){
   g('memTbody').innerHTML=data.map(m=>`
-    <tr><td><b>${m.name}</b></td><td>${m.phone}</td><td>${m.birth||'—'}</td>
-    <td class="cd" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${m.address||'—'}</td>
-    <td>${m.orderCount||0}</td><td>${m.repairCount||0}</td>
-    <td>${m.warrantyExpire?`<span class="badge ${new Date(m.warrantyExpire)>=new Date()?'b-green':'b-gray'}">${m.warrantyExpire}</span>`:'—'}</td>
-    <td><span class="badge b-blue">${m.level||'一般會員'}</span></td>
-    <td class="cd">${ts(m.regDate)}</td></tr>`).join('');
+    <tr>
+      <td><b>${m.name}</b></td><td>${m.phone}</td><td>${m.birth||'—'}</td>
+      <td class="cd" style="max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${m.address||'—'}</td>
+      <td>${m.orderCount||0}</td><td>${m.repairCount||0}</td>
+      <td><span class="cok fw7">${m.points||0}</span></td>
+      <td>${m.warrantyExpire?`<span class="badge ${new Date(m.warrantyExpire)>=new Date()?'b-green':'b-gray'}">${m.warrantyExpire}</span>`:'—'}</td>
+      <td><span class="badge ${levelColor(m.level||'一般會員')}">${m.level||'一般會員'}</span></td>
+      <td class="cd">${ts(m.regDate)}</td>
+      <td><button class="icon-btn" onclick="openMemEdit('${m.lineId}')">⚙️</button></td>
+    </tr>`).join('');
 }
-function filterMems(){ const q=g('memSearch').value.toLowerCase(); renderMemTbl(S.allMems.filter(m=>(m.name||'').toLowerCase().includes(q)||(m.phone||'').includes(q))); }
+function filterMems(){
+  const q=g('memSearch').value.toLowerCase(), lv=g('memLevelFilter').value;
+  renderMemTbl(S.allMems.filter(m=>(!q||(m.name||'').toLowerCase().includes(q)||(m.phone||'').includes(q))&&(!lv||m.level===lv)));
+}
+function exportMemCSV(){
+  const rows=[['姓名','電話','生日','地址','訂單數','維修數','積分','保固至','等級','加入日'],...S.allMems.map(m=>[m.name,m.phone,m.birth||'',m.address||'',m.orderCount||0,m.repairCount||0,m.points||0,m.warrantyExpire||'',m.level||'一般會員',ts(m.regDate)])];
+  const csv=rows.map(r=>r.join(',')).join('\n');
+  const a=document.createElement('a'); a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
+  a.download='UBOX_會員資料_'+ts(new Date().toISOString())+'.csv'; a.click();
+  toast('✅ 會員資料已匯出','success');
+}
+function openMemEdit(lineId){
+  S.currentEditMemId=lineId;
+  const m=S.allMems.find(x=>x.lineId===lineId)||{};
+  g('memEditInfo').innerHTML=`<div class="card" style="background:var(--bg3)"><b>${m.name}</b> ｜ ${m.phone}<br/><span class="badge ${levelColor(m.level||'一般會員')}">${m.level||'一般會員'}</span> <span class="cok fsm ml8">積分：${m.points||0}</span></div>`;
+  g('memEditLevel').value=m.level||'一般會員';
+  g('memEditPoints').value=0; g('memEditNote').value=''; g('memMsgInput').value='';
+  openModal('memEditMod');
+}
+async function saveMemberEdit(){
+  const level=g('memEditLevel').value, pts=parseInt(g('memEditPoints').value)||0, note=g('memEditNote').value;
+  try{
+    const r=await postGAS('editMember',{lineId:S.currentEditMemId,level,pointsAdj:pts,note});
+    if(r.success){ closeModal('memEditMod'); loadMems(); toast('✅ 會員資料已更新','success'); }
+    else toast(r.message,'error');
+  } catch(e){ toast('連線失敗：'+e.message,'error'); }
+}
+async function sendMemberMsg(){
+  const msg=g('memMsgInput').value.trim(); if(!msg){toast('請輸入訊息','warn');return;}
+  try{
+    const r=await postGAS('pushToMember',{lineId:S.currentEditMemId,message:msg});
+    if(r.success) toast('✅ 訊息已發送','success'); else toast(r.message,'error');
+  } catch(e){ toast('發送失敗：'+e.message,'error'); }
+}
+function filterProdsAdm(){
+  const q=g('prodSearch').value.toLowerCase();
+  const filtered=S.prods.filter(p=>(p.name||'').toLowerCase().includes(q)||(p.model||'').toLowerCase().includes(q));
+  g('admProdList').innerHTML=filtered.map(p=>prodAdmItem(p)).join('');
+}
 
+// 訂單
 async function loadOrds(){
-  try{ const r=await callGAS('getAllOrders'); if(r.success){ S.allOrds=r.data||[]; renderOrdTbl(S.allOrds); } }
+  try{ const r=await callGAS('getAllOrders'); if(r.success){S.allOrds=r.data||[];renderOrdTbl(S.allOrds);} }
   catch(e){ toast(e.message,'error'); }
 }
 function renderOrdTbl(data){
   g('ordTbody').innerHTML=data.map(o=>`
     <tr>
       <td><b class="cp">${o.orderId}</b></td><td>${o.memberName}</td>
-      <td class="cd" style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${o.items}">${(o.items||'').slice(0,16)}…</td>
+      <td class="cd" style="max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${o.items}">${(o.items||'').slice(0,14)}…</td>
       <td><b class="ca">$${parseInt(o.total||0).toLocaleString()}</b></td>
       <td><span class="badge b-blue">${o.shipping==='delivery'?'🚚 宅配':'🏪 7-11'}</span></td>
-      <td class="cd" style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.address||'—'}</td>
+      <td class="cd" style="max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.address||'—'}</td>
       <td>${o.warrantyExpire?`<span class="badge b-green fxs">${o.warrantyExpire}</span>`:'—'}</td>
       <td class="cd">${ts(o.date)}</td>
-      <td><select onchange="updOrdStatus('${o.orderId}',this.value)" style="background:var(--bg3);color:var(--t);border:1px solid var(--bds);border-radius:8px;padding:4px 6px;font-size:.75rem;cursor:pointer">
+      <td><select onchange="updOrdStatus('${o.orderId}',this.value)" style="background:var(--bg3);color:var(--t);border:1px solid var(--bds);border-radius:8px;padding:3px 6px;font-size:.74rem;cursor:pointer">
         ${['處理中','已出貨','已到店','已完成','已取消'].map(s=>`<option${o.status===s?' selected':''}>${s}</option>`).join('')}
       </select></td>
     </tr>`).join('');
 }
-function filterOrds(){ const q=g('ordSearch').value.toLowerCase(); renderOrdTbl(S.allOrds.filter(o=>(o.orderId||'').toLowerCase().includes(q)||(o.memberName||'').toLowerCase().includes(q))); }
+function filterOrds(){
+  const q=g('ordSearch').value.toLowerCase(),st=g('ordStatusFilter').value;
+  renderOrdTbl(S.allOrds.filter(o=>(!q||(o.orderId||'').toLowerCase().includes(q)||(o.memberName||'').toLowerCase().includes(q))&&(!st||o.status===st)));
+}
 async function updOrdStatus(orderId,status){ try{ await postGAS('updateOrderStatus',{orderId,status}); toast('訂單狀態已更新','success'); }catch(e){ toast(e.message,'error'); } }
 
+// 維修
 async function loadReps(){
-  try{ const r=await callGAS('getAllRepairs'); if(r.success){ S.allReps=r.data||[]; renderRepTbl(S.allReps); } }
+  try{ const r=await callGAS('getAllRepairs'); if(r.success){S.allReps=r.data||[];renderRepTbl(S.allReps);} }
   catch(e){ toast(e.message,'error'); }
 }
 function renderRepTbl(data){
@@ -1719,44 +1977,30 @@ function filterReps(){
   renderRepTbl(S.allReps.filter(r=>((r.repairId||'').toLowerCase().includes(q)||(r.phone||'').includes(q))&&(!st||r.status===st)));
 }
 function openRepMod(id){
-  S.currentRepId=id;
-  const r=S.allReps.find(x=>x.repairId===id)||{};
-  g('repModInfo').innerHTML=`
-    <div class="card" style="background:var(--bg3)">
-      <div class="flex jb mb8"><span class="cp fw7">${id}</span><span class="badge ${rbc(r.status)}">${r.status}</span></div>
-      <div class="fsm"><b>${r.name}</b> ｜ ${r.phone}</div>
-      <div class="fsm cm mt4">問題：${r.problem||'—'}</div>
-      <div class="fsm cm mt4">序號：${r.serial} ｜ 型號：${r.model||'—'}</div>
-      <div class="fsm cm mt4">取件門市：${r.store||'—'}</div>
-      <div class="mt4"><span class="badge ${r.inWarranty?'b-green':'b-gray'}">${r.inWarranty?'✅ 保固內':'❌ 保固外'}</span></div>
-    </div>`;
-  g('repStatusSel').value=r.status||'待寄件';
-  g('repShipCode').value=r.shipCode||''; g('repNote').value='';
+  S.currentRepId=id; const r=S.allReps.find(x=>x.repairId===id)||{};
+  g('repModInfo').innerHTML=`<div class="card" style="background:var(--bg3)"><div class="flex jb mb8"><span class="cp fw7">${id}</span><span class="badge ${rbc(r.status)}">${r.status}</span></div><div class="fsm"><b>${r.name}</b> ｜ ${r.phone}</div><div class="fsm cm mt4">問題：${r.problem||'—'}</div><div class="fsm cm mt4">序號：${r.serial} ｜ ${r.model||'—'}</div><div class="mt4"><span class="badge ${r.inWarranty?'b-green':'b-gray'}">${r.inWarranty?'✅ 保固內':'❌ 保固外'}</span></div></div>`;
+  g('repStatusSel').value=r.status||'待寄件'; g('repShipCode').value=r.shipCode||''; g('repNote').value='';
   openModal('repMod');
 }
 async function updateRepair(){
   try{
     const r=await postGAS('updateRepairStatus',{repairId:S.currentRepId,status:g('repStatusSel').value,shipCode:g('repShipCode').value,note:g('repNote').value});
-    if(r.success){ closeModal('repMod'); loadReps(); toast('✅ 已更新並通知客戶 LINE','success'); }
-    else toast(r.message,'error');
-  } catch(e){ toast(e.message,'error'); }
+    if(r.success){closeModal('repMod');loadReps();toast('✅ 已更新並通知','success');}else toast(r.message,'error');
+  }catch(e){toast(e.message,'error');}
 }
 
-// ── RETURNS ADMIN ──────────────────────────────────
+// 退貨
 async function loadRets(){
-  try{
-    const r=await callGAS('getAllReturns');
-    if(r.success){ S.allRets=r.data||[]; renderRetTbl(S.allRets); }
-  } catch(e){ toast(e.message,'error'); }
+  try{ const r=await callGAS('getAllReturns'); if(r.success){S.allRets=r.data||[];renderRetTbl(S.allRets);} }
+  catch(e){ toast(e.message,'error'); }
 }
 function renderRetTbl(data){
   g('retTbody').innerHTML=data.map(r=>`
     <tr>
-      <td><b class="ca">${r.returnId}</b></td>
-      <td><span class="cp fsm">${r.orderId}</span></td>
+      <td><b class="ca">${r.returnId}</b></td><td><span class="cp fsm">${r.orderId}</span></td>
       <td>${r.memberName}</td><td>${r.phone}</td>
-      <td class="cd" style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.reasonType}：${r.detail}">${r.reasonType}</td>
-      <td><button class="btn btn-g btn-sm" onclick="viewRetPhotos('${r.returnId}')">📷 查看</button></td>
+      <td class="cd" style="max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.reasonType}</td>
+      <td><button class="btn btn-g btn-sm" onclick="viewRetPhotos('${r.returnId}')">📷</button></td>
       <td>${r.returnCode?`<span class="wtag">${r.returnCode}</span>`:'—'}</td>
       <td><span class="badge ${retbc(r.status)}">${r.status}</span></td>
       <td class="cd">${ts(r.date)}</td>
@@ -1769,64 +2013,52 @@ function filterRets(){
 }
 function viewRetPhotos(retId){
   const r=S.allRets.find(x=>x.returnId===retId); if(!r) return;
-  let photos=[];
-  try{ photos=JSON.parse(r.photos||'[]'); }catch{}
-  if(!photos.length){ toast('無照片記錄','warn'); return; }
-  // Open overlay with photos
-  const overlay=document.createElement('div');
-  overlay.style='position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.9);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;padding:20px;cursor:pointer';
-  overlay.innerHTML=photos.map(p=>`<img src="${p}" style="max-width:280px;max-height:280px;border-radius:12px;object-fit:contain"/>`).join('');
-  overlay.onclick=()=>document.body.removeChild(overlay);
-  document.body.appendChild(overlay);
+  let photos=[]; try{photos=JSON.parse(r.photos||'[]');}catch{}
+  if(!photos.length){toast('無照片記錄','warn');return;}
+  const ov=document.createElement('div');
+  ov.style='position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.92);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;padding:20px;cursor:pointer';
+  ov.innerHTML=photos.map(p=>`<img src="${p}" style="max-width:260px;max-height:260px;border-radius:12px;object-fit:contain"/>`).join('');
+  ov.onclick=()=>document.body.removeChild(ov);
+  document.body.appendChild(ov);
 }
 function openRetAdminMod(id){
-  S.currentRetId=id;
-  const r=S.allRets.find(x=>x.returnId===id)||{};
-  g('retAdminInfo').innerHTML=`
-    <div class="card" style="background:var(--bg3)">
-      <div class="flex jb mb8"><span class="ca fw7">${id}</span><span class="badge ${retbc(r.status)}">${r.status}</span></div>
-      <div class="fsm">訂單：<b class="cp">${r.orderId}</b> ｜ ${r.memberName}（${r.phone}）</div>
-      <div class="fsm cm mt4">原因：${r.reasonType}</div>
-      <div class="fsm cm mt4" style="line-height:1.7">${r.detail}</div>
-    </div>`;
-  g('retStatusSel').value=r.status||'待審核';
-  g('retAdminCode').value=r.returnCode||'';
-  g('retAdminNote').value='';
+  S.currentRetId=id; const r=S.allRets.find(x=>x.returnId===id)||{};
+  g('retAdminInfo').innerHTML=`<div class="card" style="background:var(--bg3)"><div class="flex jb mb8"><span class="ca fw7">${id}</span><span class="badge ${retbc(r.status)}">${r.status}</span></div><div class="fsm">訂單：<b class="cp">${r.orderId}</b> ｜ ${r.memberName}（${r.phone}）</div><div class="fsm cm mt4">原因：${r.reasonType}</div><div class="fsm cm mt4" style="line-height:1.7">${r.detail}</div></div>`;
+  g('retStatusSel').value=r.status||'待審核'; g('retAdminCode').value=r.returnCode||''; g('retAdminNote').value='';
   openModal('retAdminMod');
 }
 async function updateReturn(){
-  const status=g('retStatusSel').value;
-  const code=g('retAdminCode').value.trim();
-  const note=g('retAdminNote').value.trim();
-  if(status==='審核通過'&&!code){ toast('審核通過時請填寫退貨代碼','error'); return; }
+  const status=g('retStatusSel').value, code=g('retAdminCode').value.trim(), note=g('retAdminNote').value;
+  if(status==='審核通過'&&!code){toast('請填寫退貨代碼','error');return;}
   try{
     const r=await postGAS('updateReturn',{returnId:S.currentRetId,status,returnCode:code,note});
-    if(r.success){ closeModal('retAdminMod'); loadRets(); loadOverview(); toast('✅ 退貨審核已更新','success'); }
-    else toast(r.message,'error');
-  } catch(e){ toast(e.message,'error'); }
+    if(r.success){closeModal('retAdminMod');loadRets();loadOverview();toast('✅ 退貨審核已更新','success');}else toast(r.message,'error');
+  }catch(e){toast(e.message,'error');}
 }
 
-// ── PRODUCTS ADMIN ─────────────────────────────────
+// 商品
 function loadProdsAdm(){
-  g('admProdList').innerHTML=S.prods.map(p=>`
-    <div class="prod-a-item">
-      <div class="prod-a-thumb">${p.img?`<img src="${p.img}" onerror="this.src=''">`:(p.emoji||'📺')}</div>
-      <div class="prod-a-info"><div class="prod-a-name">${p.name}</div><div class="prod-a-meta">${p.model} ｜ NT$ ${p.price.toLocaleString()} ｜ 庫存${p.stock} ${p.ncc?'｜ NCC:'+p.ncc:''}</div></div>
-      <div class="act-row"><button class="icon-btn" onclick="editProd('${p.id}')">✏️</button><button class="icon-btn" onclick="delProd('${p.id}')">🗑️</button></div>
-    </div>`).join('');
+  g('admProdList').innerHTML=S.prods.map(p=>prodAdmItem(p)).join('');
+}
+function prodAdmItem(p){
+  return `<div class="prod-a-item">
+    <div class="prod-a-thumb">${p.img?`<img src="${p.img}" onerror="this.src=''">`:(p.emoji||'📺')}</div>
+    <div class="prod-a-info"><div class="prod-a-name">${p.name} ${p.hot?'🔥':''}</div><div class="prod-a-meta">${p.model} ｜ NT$${p.price.toLocaleString()} ｜ 庫存${p.stock} ${p.ncc?'｜ '+p.ncc:''}</div></div>
+    <div class="act-row"><button class="icon-btn" onclick="editProd('${p.id}')">✏️</button><button class="icon-btn" onclick="delProd('${p.id}')">🗑️</button></div>
+  </div>`;
 }
 function openProdMod(id){
   S.editProdId=id||null; const p=id?S.prods.find(x=>x.id===id):null;
   g('prodModTitle').textContent=p?'編輯商品':'新增商品';
   ['pm_name','pm_model','pm_price','pm_stock','pm_ncc','pm_spec','pm_desc','pm_img','pm_emoji'].forEach(fid=>g(fid).value='');
-  if(p){ g('pm_name').value=p.name||''; g('pm_model').value=p.model||''; g('pm_price').value=p.price||''; g('pm_stock').value=p.stock||0; g('pm_ncc').value=p.ncc||''; g('pm_spec').value=p.spec||''; g('pm_desc').value=p.desc||''; g('pm_img').value=p.img||''; g('pm_emoji').value=p.emoji||'📺'; g('pm_cat').value=p.cat||'box'; }
+  if(p){ g('pm_name').value=p.name||''; g('pm_model').value=p.model||''; g('pm_price').value=p.price||''; g('pm_stock').value=p.stock||0; g('pm_ncc').value=p.ncc||''; g('pm_spec').value=p.spec||''; g('pm_desc').value=p.desc||''; g('pm_img').value=p.img||''; g('pm_emoji').value=p.emoji||'📺'; g('pm_cat').value=p.cat||'box'; g('pm_hot').value=p.hot?'true':'false'; }
   openModal('prodMod');
 }
 function editProd(id){ openProdMod(id); }
 async function saveProduct(){
-  const name=g('pm_name').value.trim(),price=parseInt(g('pm_price').value);
-  if(!name||!price){ toast('請填寫商品名稱和定價','error'); return; }
-  const data={id:S.editProdId||'P'+Date.now(),name,model:g('pm_model').value.trim(),cat:g('pm_cat').value,price,stock:parseInt(g('pm_stock').value)||0,ncc:g('pm_ncc').value.trim(),spec:g('pm_spec').value.trim(),desc:g('pm_desc').value.trim(),img:g('pm_img').value.trim(),emoji:g('pm_emoji').value||'📺'};
+  const name=g('pm_name').value.trim(), price=parseInt(g('pm_price').value);
+  if(!name||!price){toast('請填寫商品名稱和定價','error');return;}
+  const data={id:S.editProdId||'P'+Date.now(),name,model:g('pm_model').value.trim(),cat:g('pm_cat').value,price,stock:parseInt(g('pm_stock').value)||0,ncc:g('pm_ncc').value.trim(),spec:g('pm_spec').value.trim(),desc:g('pm_desc').value.trim(),img:g('pm_img').value.trim(),emoji:g('pm_emoji').value||'📺',hot:g('pm_hot').value==='true'};
   if(S.editProdId) S.prods=S.prods.map(p=>p.id===data.id?data:p); else S.prods.push(data);
   saveProds();
   try{ await postGAS('saveProduct',data); }catch{}
@@ -1834,18 +2066,18 @@ async function saveProduct(){
   toast('✅ 商品已儲存','success');
 }
 function delProd(id){
-  if(!confirm('確定刪除此商品？')) return;
+  if(!confirm('確定刪除？')) return;
   S.prods=S.prods.filter(p=>p.id!==id); saveProds();
   postGAS('deleteProduct',{id}).catch(()=>{});
-  loadProdsAdm(); renderHomeProds(); toast('商品已刪除');
+  loadProdsAdm(); renderHomeProds(); toast('已刪除');
 }
 
-// ── PARTS ADMIN ─────────────────────────────────────
+// 零件
 function loadPartsAdm(){
   g('admPartList').innerHTML=S.parts.map(pt=>`
     <div class="prod-a-item">
       <div class="prod-a-thumb">${pt.img?`<img src="${pt.img}" onerror="this.src=''">`:(pt.emoji||catIcon[pt.cat]||'🔩')}</div>
-      <div class="prod-a-info"><div class="prod-a-name">${pt.name}</div><div class="prod-a-meta">${catName[pt.cat]||pt.cat} ｜ NT$ ${pt.price.toLocaleString()} ｜ 庫存${pt.stock}</div></div>
+      <div class="prod-a-info"><div class="prod-a-name">${pt.name}</div><div class="prod-a-meta">${catName[pt.cat]||pt.cat} ｜ NT$${pt.price.toLocaleString()} ｜ 庫存${pt.stock}</div></div>
       <div class="act-row"><button class="icon-btn" onclick="editPart('${pt.id}')">✏️</button><button class="icon-btn" onclick="delPart('${pt.id}')">🗑️</button></div>
     </div>`).join('');
 }
@@ -1853,103 +2085,66 @@ function openPartMod(id){
   S.editPartId=id||null; const pt=id?S.parts.find(x=>x.id===id):null;
   g('partModTitle').textContent=pt?'編輯零件':'新增零件';
   ['pt_name','pt_price','pt_stock','pt_spec','pt_img','pt_emoji'].forEach(fid=>g(fid).value='');
-  if(pt){ g('pt_name').value=pt.name||''; g('pt_price').value=pt.price||''; g('pt_stock').value=pt.stock||0; g('pt_spec').value=pt.spec||''; g('pt_img').value=pt.img||''; g('pt_emoji').value=pt.emoji||'🔩'; g('pt_cat').value=pt.cat||'other'; }
+  if(pt){g('pt_name').value=pt.name||'';g('pt_price').value=pt.price||'';g('pt_stock').value=pt.stock||0;g('pt_spec').value=pt.spec||'';g('pt_img').value=pt.img||'';g('pt_emoji').value=pt.emoji||'🔩';g('pt_cat').value=pt.cat||'other';}
   openModal('partMod');
 }
 function editPart(id){ openPartMod(id); }
 async function savePart(){
-  const name=g('pt_name').value.trim(),price=parseInt(g('pt_price').value);
-  if(!name||!price){ toast('請填寫零件名稱和定價','error'); return; }
+  const name=g('pt_name').value.trim(), price=parseInt(g('pt_price').value);
+  if(!name||!price){toast('請填寫名稱和定價','error');return;}
   const data={id:S.editPartId||'PT'+Date.now(),name,cat:g('pt_cat').value,price,stock:parseInt(g('pt_stock').value)||0,spec:g('pt_spec').value.trim(),img:g('pt_img').value.trim(),emoji:g('pt_emoji').value||catIcon[g('pt_cat').value]||'🔩'};
   if(S.editPartId) S.parts=S.parts.map(p=>p.id===data.id?data:p); else S.parts.push(data);
   saveParts();
-  try{ await postGAS('savePart',data); }catch{}
+  try{await postGAS('savePart',data);}catch{}
   closeModal('partMod'); loadPartsAdm();
   toast('✅ 零件已儲存','success');
 }
 function delPart(id){
-  if(!confirm('確定刪除此零件？')) return;
+  if(!confirm('確定刪除？')) return;
   S.parts=S.parts.filter(p=>p.id!==id); saveParts();
   postGAS('deletePart',{id}).catch(()=>{});
-  loadPartsAdm(); toast('零件已刪除');
+  loadPartsAdm(); toast('已刪除');
 }
 
-// ── COUPONS ─────────────────────────────────────────
+// 優惠碼
 async function loadCoupons(){
   try{
     const r=await callGAS('getAllCoupons');
     if(r.success) g('cpnTbody').innerHTML=(r.data||[]).map(c=>`
-      <tr>
-        <td><b class="cp">${c.code}</b></td>
-        <td><span class="badge b-blue">${c.type==='fixed'?'固定折扣':'百分比'}</span></td>
-        <td>${c.type==='fixed'?'-$'+c.value:'折'+c.value+'%'}</td>
-        <td>${c.expire||'無限期'}</td>
-        <td>${c.usedCount||0} / ${c.maxCount||'∞'}</td>
-        <td><span class="badge ${c.active?'b-green':'b-gray'}">${c.active?'啟用':'停用'}</span></td>
-        <td><button class="btn btn-g btn-sm" onclick="toggleCpn('${c.code}',${!c.active})">${c.active?'停用':'啟用'}</button></td>
-      </tr>`).join('');
-  } catch(e){ toast(e.message,'error'); }
+      <tr><td><b class="cp">${c.code}</b></td><td><span class="badge b-blue">${c.type==='fixed'?'固定':'百分比'}</span></td>
+      <td>${c.type==='fixed'?'-$'+c.value:'折'+c.value+'%'}</td><td>${c.expire||'無限期'}</td>
+      <td>${c.usedCount||0}/${c.maxCount||'∞'}</td>
+      <td><span class="badge ${c.active?'b-green':'b-gray'}">${c.active?'啟用':'停用'}</span></td>
+      <td><button class="btn btn-g btn-sm" onclick="toggleCpn('${c.code}',${!c.active})">${c.active?'停用':'啟用'}</button></td></tr>`).join('');
+  }catch(e){toast(e.message,'error');}
 }
 function openCpnMod(){ openModal('cpnMod'); }
 async function saveCoupon(){
   const code=g('cm_code').value.trim().toUpperCase(),val=parseFloat(g('cm_value').value);
-  if(!code||!val){ toast('請填寫優惠碼和折扣值','error'); return; }
+  if(!code||!val){toast('請填寫優惠碼和折扣值','error');return;}
   try{
     const r=await postGAS('createCoupon',{code,type:g('cm_type').value,value:val,expire:g('cm_expire').value,maxCount:parseInt(g('cm_max').value)||0,active:true});
-    if(r.success){ closeModal('cpnMod'); loadCoupons(); toast('✅ 優惠碼已建立','success'); }
-    else toast(r.message,'error');
-  } catch(e){ toast(e.message,'error'); }
+    if(r.success){closeModal('cpnMod');loadCoupons();toast('✅ 優惠碼已建立','success');}else toast(r.message,'error');
+  }catch(e){toast(e.message,'error');}
 }
-async function toggleCpn(code,active){ try{ await postGAS('updateCoupon',{code,active}); loadCoupons(); }catch(e){ toast(e.message,'error'); } }
+async function toggleCpn(code,active){try{await postGAS('updateCoupon',{code,active});loadCoupons();}catch(e){toast(e.message,'error');}}
 
-// ── SETTINGS ────────────────────────────────────────
-function saveShipSettings(){
-  S.settings.enableDelivery=g('tog_delivery').checked;
-  S.settings.enableCvs=g('tog_cvs').checked;
-  localStorage.setItem('ubox_settings',JSON.stringify(S.settings));
-  applySettings();
-  postGAS('saveSettings',S.settings).catch(()=>{});
-  toast('配送設定已更新','success');
-}
-function saveSettings(){
-  S.settings.deliveryFee=parseInt(g('set_d').value)||150;
-  S.settings.cvsFee=parseInt(g('set_c').value)||80;
-  S.settings.enableDelivery=g('tog_delivery').checked;
-  S.settings.enableCvs=g('tog_cvs').checked;
-  localStorage.setItem('ubox_settings',JSON.stringify(S.settings));
-  applySettings(); postGAS('saveSettings',S.settings).catch(()=>{});
-  toast('✅ 運費設定已儲存','success');
-}
-async function changePass(){
-  const np=g('set_np').value,cp=g('set_cp').value;
-  if(!np){ toast('請輸入新密碼','error'); return; }
-  if(np!==cp){ toast('兩次密碼不一致','error'); return; }
-  try{ await postGAS('changeAdminPass',{phone:CFG.ADMIN_PHONE,pass:np}); toast('✅ 密碼已更新','success'); g('set_np').value=''; g('set_cp').value=''; }
-  catch(e){ toast(e.message,'error'); }
-}
-function saveSys(){
-  const u=g('set_gas').value.trim();
-  if(u){ localStorage.setItem('ubox_gas',u); toast('✅ GAS URL 已儲存','success'); }
-}
+// 設定
+function saveShipSettings(){ S.settings.enableDelivery=g('tog_delivery').checked; S.settings.enableCvs=g('tog_cvs').checked; localStorage.setItem('ubox_settings',JSON.stringify(S.settings)); applySettings(); postGAS('saveSettings',S.settings).catch(()=>{}); toast('配送設定已更新','success'); }
+function saveSettings(){ S.settings.deliveryFee=parseInt(g('set_d').value)||150; S.settings.cvsFee=parseInt(g('set_c').value)||80; S.settings.enableDelivery=g('tog_delivery').checked; S.settings.enableCvs=g('tog_cvs').checked; localStorage.setItem('ubox_settings',JSON.stringify(S.settings)); applySettings(); postGAS('saveSettings',S.settings).catch(()=>{}); toast('✅ 運費設定已儲存','success'); }
+function savePointsSettings(){ S.settings.ptsRate=parseInt(g('set_pts_rate').value)||100; S.settings.ptsRedeem=parseInt(g('set_pts_redeem').value)||2; localStorage.setItem('ubox_settings',JSON.stringify(S.settings)); postGAS('saveSettings',S.settings).catch(()=>{}); toast('✅ 積分設定已儲存','success'); }
+async function changePass(){ const np=g('set_np').value,cp=g('set_cp').value; if(!np){toast('請輸入新密碼','error');return;} if(np!==cp){toast('兩次密碼不一致','error');return;} try{await postGAS('changeAdminPass',{phone:CFG.ADMIN_PHONE,pass:np});toast('✅ 密碼已更新','success');g('set_np').value='';g('set_cp').value='';}catch(e){toast(e.message,'error');} }
+function saveSys(){ const u=g('set_gas').value.trim(); if(u){localStorage.setItem('ubox_gas',u);toast('✅ GAS URL 已儲存','success');} }
 
-// ── ANNOUNCE ────────────────────────────────────────
-function saveAnn(){ const t=g('annInput').value.trim(); localStorage.setItem('ubox_ann',t); loadAnn(); toast('✅ 公告已發布','success'); }
+// 公告
+function saveAnn(){ const t=g('annInput').value.trim(); S.annLink=g('annLink').value||''; localStorage.setItem('ubox_ann',t); localStorage.setItem('ubox_ann_link',S.annLink); loadAnn(); toast('✅ 公告已發布','success'); }
 function clearAnn(){ localStorage.removeItem('ubox_ann'); g('annInput').value=''; loadAnn(); }
-function loadAnn(){
-  const t=localStorage.getItem('ubox_ann')||'';
-  const bar=g('annBar');
-  if(t){ g('annTxt').textContent=t; bar.style.display='block'; } else bar.style.display='none';
-}
-async function sendBC(){
-  const msg=g('bcMsg').value.trim(); if(!msg){ toast('請輸入訊息','error'); return; }
-  if(!confirm(`確定廣播以下訊息給所有用戶？\n\n${msg}`)) return;
-  try{
-    const r=await postGAS('broadcastMessage',{message:msg});
-    if(r.success){ toast('✅ 廣播已送出','success'); g('bcMsg').value=''; } else toast(r.message,'error');
-  } catch(e){ toast(e.message,'error'); }
-}
+function loadAnn(){ const t=localStorage.getItem('ubox_ann')||''; const bar=g('annBar'); S.annLink=localStorage.getItem('ubox_ann_link')||''; if(t){g('annTxt').textContent=t;bar.style.display='block';}else bar.style.display='none'; }
+function handleAnnClick(){ if(S.annLink) showPage(S.annLink); }
+async function sendBC(){ const msg=g('bcMsg').value.trim(); if(!msg){toast('請輸入訊息','error');return;} if(!confirm(`確定廣播給所有用戶？\n\n${msg}`)) return; try{const r=await postGAS('broadcastMessage',{message:msg});if(r.success){toast('✅ 廣播已送出','success');g('bcMsg').value='';}else toast(r.message,'error');}catch(e){toast(e.message,'error');} }
+async function sendTargetPush(){ const target=g('targetGroup').value, msg=g('targetMsg').value.trim(); if(!msg){toast('請輸入推播訊息','error');return;} if(!confirm(`確定對「${g('targetGroup').options[g('targetGroup').selectedIndex].text}」發送推播？`)) return; try{const r=await postGAS('targetPush',{target,message:msg});if(r.success){toast('✅ 指定推播已發送','success');g('targetMsg').value='';}else toast(r.message,'error');}catch(e){toast(e.message,'error');} }
 
-function openLine(){ window.open(`https://line.me/R/ti/p/${CFG.LINE_OA}`,'_blank'); }
+function openLine(){ window.open(`https://line.me/R/ti/p/${CFG.LINE_OA}`, '_blank'); }
 init();
 </script>
 </body>
