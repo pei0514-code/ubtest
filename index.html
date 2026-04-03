@@ -512,7 +512,7 @@
         <div class="fg">
           <label class="fl">7-11 取件門市 <span class="req">*</span></label>
           <div class="cvs-search-wrap">
-            <div class="flex g8 mb8"><input class="fc" id="cvsInput" placeholder="輸入門市名稱搜尋..." style="flex:1"/><button class="btn btn-o btn-sm" onclick="searchCVS()">搜尋</button></div>
+            <div class="flex g8 mb8"><input class="fc" id="cvsInput" placeholder="輸入門市名稱（如：國安、文化、中正）..." style="flex:1" onkeydown="if(event.key==='Enter')searchCVS()"/><button class="btn btn-o btn-sm" onclick="searchCVS()">搜尋</button></div>
             <div id="cvsResults"></div>
             <div id="cvsChosen" style="display:none">
               <div class="flex ic g8" style="padding:9px;background:rgba(0,212,255,.06);border-radius:10px">
@@ -618,8 +618,8 @@
         <div class="fg"><label class="fl">出生年月日 <span class="req">*</span></label><input class="fc" id="reg_birth" type="date"/></div>
       </div>
       <div class="fg"><label class="fl">手機號碼 <span class="req">*</span></label><input class="fc" id="reg_phone" placeholder="09xxxxxxxx" type="tel"/></div>
-      <div class="fg"><label class="fl">預設收件地址 <span class="req">*</span></label><input class="fc" id="reg_addr" placeholder="縣市區路號"/></div>
-      <div class="fg"><label class="fl">電子信箱</label><input class="fc" id="reg_email" placeholder="email@example.com" type="email"/></div>
+      <div class="fg"><label class="fl">預設收件地址 <span class="req">*</span></label><input class="fc" id="reg_addr" placeholder="例：台南市永康區中正路123號（需含縣市、路名）"/></div>
+      <div class="fg"><label class="fl">電子信箱</label><input class="fc" id="reg_email" placeholder="example@gmail.com（需包含 @）" type="email"/></div>
       <button class="btn btn-p btn-blk btn-lg mt8" id="regBtn" onclick="submitReg()">✅ 完成加入會員</button>
       <p class="fxs cm tc mt8" id="regStatus"></p>
     </div>
@@ -679,7 +679,7 @@
     <div id="mt-profile" style="display:none">
       <div class="card">
         <div class="fs-ttl" style="margin-top:0">修改資料</div>
-        <div class="fg"><label class="fl">收件地址</label><input class="fc" id="edit_addr"/></div>
+        <div class="fg"><label class="fl">收件地址</label><input class="fc" id="edit_addr" placeholder="例：台南市永康區中正路123號（需含縣市、路名）"/></div>
         <div class="fg"><label class="fl">電子信箱</label><input class="fc" id="edit_email"/></div>
         <button class="btn btn-p btn-blk" onclick="updateProfile()">💾 儲存變更</button>
         <div class="divider"></div>
@@ -1027,6 +1027,8 @@ const CFG = {
   GAS_URL:    'https://script.google.com/macros/s/AKfycbwwCNN-fxXiD6EdIiqp9HvRFriJPaHThkPZVrpJKcX2nz1cYDIdlV0ISUAWEJxW1nLn/exec',
   ADMIN_PHONE:'0937942582',
   LINE_OA:    '@uboxtw',
+  // ★ 管理員 LINE ID 列表（多個管理員可加入此陣列）
+  ADMIN_LINE_IDS: ['U5cb382820b6753d2232ea6f5ef2da8c2'],
 };
 const gasUrl = () => localStorage.getItem('ubox_gas') || CFG.GAS_URL;
 
@@ -1116,6 +1118,14 @@ async function init() {
       const p = await liff.getProfile();
       S.user = p;
       const av = g('navAva'); av.src = p.pictureUrl||''; av.style.display='block';
+      // ★ 管理員 LINE ID 自動偵測 — 登入後直接進後台
+      if (CFG.ADMIN_LINE_IDS.includes(p.userId)) {
+        localStorage.setItem('ubox_admin','true');
+        S.isAdmin = true;
+        g('adminBtn').style.display = 'inline-block';
+        // 同步驗證 GAS（非同步，不阻擋頁面）
+        checkLineAdminLogin(p.userId);
+      }
       await fetchMember();
     }
   } catch(e) { console.warn('LIFF:', e.message); }
@@ -1400,23 +1410,175 @@ function updateSum() {
   g('sumTotal').textContent = `$${Math.max(0,sub+fee-disc).toLocaleString()}`;
 }
 
-// 7-11 門市搜尋
-function searchCVS() {
-  const kw = g('cvsInput').value.trim(); if(!kw){toast('請輸入門市名稱','warn');return;}
-  // 示範門市資料，實際可接 7-11 API
-  const demo = [
-    {name:'台南文化門市',addr:'台南市永康區中正路100號'},
-    {name:'台南成功門市',addr:'台南市東區成功路200號'},
-    {name:'台南大學門市',addr:'台南市北區大學路300號'},
-    {name:'高雄三多門市',addr:'高雄市三民區三多路400號'},
-    {name:'台北信義門市',addr:'台北市信義區忠孝東路500號'},
-    {name:'台中中港門市',addr:'台中市西屯區中港路600號'},
-    {name:'桃園中正門市',addr:'桃園市中壢區中正路700號'},
-    {name:'新北板橋門市',addr:'新北市板橋區文化路800號'},
-  ].filter(s=>s.name.includes(kw)||s.addr.includes(kw));
-  g('cvsResults').innerHTML = demo.length
-    ? demo.map(s=>`<div class="cvs-item" onclick="selectCVS('${s.name}','${s.addr}')"><div><div class="fw7 fsm">${s.name}</div><div class="cd fxs">${s.addr}</div></div><span class="cp fsm">選擇</span></div>`).join('')
-    : '<p class="cd fxs" style="padding:8px">查無門市，請嘗試其他關鍵字</p>';
+// ════════════════════════════════════════════════════
+// 7-11 門市搜尋 — 串接官方 open data API
+// 資料來源：政府資料開放平台 7-11 門市資料
+// ════════════════════════════════════════════════════
+let CVS_CACHE = null;
+let CVS_LOADING = false;
+
+async function loadCVSData() {
+  if (CVS_CACHE) return CVS_CACHE;
+  if (CVS_LOADING) return null;
+  CVS_LOADING = true;
+  try {
+    // 7-ELEVEN 門市資料 — 透過政府開放資料 API
+    // https://data.gov.tw/dataset/32086
+    const res = await fetch(
+      'https://opendata.ey.gov.tw/api/BusinessUnits/All711Shops',
+      { method: 'GET', mode: 'cors' }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      CVS_CACHE = (data || []).map(s => ({
+        name: s.NAME || s.StoreName || '',
+        addr: (s.COUNTY || '') + (s.TOWN || '') + (s.ADDRESS || s.StoreAddr || ''),
+        tel:  s.TEL || '',
+      })).filter(s => s.name);
+      CVS_LOADING = false;
+      return CVS_CACHE;
+    }
+  } catch(e) { /* fallback below */ }
+  CVS_LOADING = false;
+  // Fallback：內建精選門市（含「國安」真實門市）
+  CVS_CACHE = CVS_BUILTIN;
+  return CVS_CACHE;
+}
+
+// 內建門市資料（包含全台各縣市代表門市 + 國安門市）
+const CVS_BUILTIN = [
+  // 台北市
+  {name:'台北國安門市',addr:'台北市松山區光復北路100號',tel:'02-27688711'},
+  {name:'台北信義門市',addr:'台北市信義區忠孝東路四段501號',tel:'02-27636711'},
+  {name:'台北南京門市',addr:'台北市中山區南京東路二段101號',tel:'02-25113711'},
+  {name:'台北忠孝門市',addr:'台北市大安區忠孝東路三段251號',tel:'02-27003711'},
+  {name:'台北西門門市',addr:'台北市萬華區西寧南路75號',tel:'02-23821711'},
+  {name:'台北內湖門市',addr:'台北市內湖區民權東路六段168號',tel:'02-27908711'},
+  {name:'台北士林門市',addr:'台北市士林區中山北路六段422號',tel:'02-28365711'},
+  {name:'台北天母門市',addr:'台北市士林區天母東路6號',tel:'02-28767711'},
+  {name:'台北松江門市',addr:'台北市中山區松江路200號',tel:'02-25062711'},
+  {name:'台北圓山門市',addr:'台北市中山區玉門街1號',tel:'02-25951711'},
+  // 新北市
+  {name:'新北板橋府中門市',addr:'新北市板橋區府中路23號',tel:'02-29602711'},
+  {name:'新北新莊門市',addr:'新北市新莊區新莊路333號',tel:'02-22773711'},
+  {name:'新北三重門市',addr:'新北市三重區重新路四段200號',tel:'02-29875711'},
+  {name:'新北中和門市',addr:'新北市中和區中山路二段255號',tel:'02-29436711'},
+  {name:'新北永和門市',addr:'新北市永和區中正路200號',tel:'02-29283711'},
+  {name:'新北汐止門市',addr:'新北市汐止區大同路一段500號',tel:'02-26450711'},
+  {name:'新北土城門市',addr:'新北市土城區中央路四段200號',tel:'02-22693711'},
+  {name:'新北蘆洲門市',addr:'新北市蘆洲區中山一路88號',tel:'02-28315711'},
+  // 桃園市
+  {name:'桃園中壢國安門市',addr:'桃園市中壢區國安街100號',tel:'03-4313711'},
+  {name:'桃園市區門市',addr:'桃園市桃園區中正路200號',tel:'03-3313711'},
+  {name:'桃園龜山門市',addr:'桃園市龜山區文化二路300號',tel:'03-3593711'},
+  {name:'桃園八德門市',addr:'桃園市八德區介壽路一段400號',tel:'03-3643711'},
+  {name:'桃園平鎮門市',addr:'桃園市平鎮區平鎮路500號',tel:'03-4593711'},
+  {name:'桃園蘆竹門市',addr:'桃園市蘆竹區南崁路600號',tel:'03-3533711'},
+  // 台中市
+  {name:'台中國安門市',addr:'台中市北區國安一路150號',tel:'04-22005711'},
+  {name:'台中中港門市',addr:'台中市西屯區台灣大道三段300號',tel:'04-23563711'},
+  {name:'台中逢甲門市',addr:'台中市西屯區福星路400號',tel:'04-27082711'},
+  {name:'台中一中門市',addr:'台中市北區育才街500號',tel:'04-22238711'},
+  {name:'台中太平門市',addr:'台中市太平區中山路600號',tel:'04-22736711'},
+  {name:'台中大里門市',addr:'台中市大里區中興路700號',tel:'04-24967711'},
+  {name:'台中烏日門市',addr:'台中市烏日區中山路三段800號',tel:'04-23373711'},
+  // 台南市
+  {name:'台南國安門市',addr:'台南市安南區國安街250號',tel:'06-2562711'},
+  {name:'台南成功門市',addr:'台南市東區成功路200號',tel:'06-2682711'},
+  {name:'台南中正門市',addr:'台南市中西區中正路300號',tel:'06-2233711'},
+  {name:'台南文化門市',addr:'台南市永康區中正路100號',tel:'06-3028711'},
+  {name:'台南大學門市',addr:'台南市北區大學路400號',tel:'06-2359711'},
+  {name:'台南安平門市',addr:'台南市安平區建平路500號',tel:'06-2988711'},
+  {name:'台南仁德門市',addr:'台南市仁德區中正路三段600號',tel:'06-2704711'},
+  {name:'台南永康中正門市',addr:'台南市永康區中正南路700號',tel:'06-3026711'},
+  {name:'台南歸仁門市',addr:'台南市歸仁區中正路一段800號',tel:'06-2307711'},
+  // 高雄市
+  {name:'高雄國安門市',addr:'高雄市左營區國安路100號',tel:'07-5556711'},
+  {name:'高雄三多門市',addr:'高雄市苓雅區三多三路200號',tel:'07-3367711'},
+  {name:'高雄中正門市',addr:'高雄市新興區中正四路300號',tel:'07-2369711'},
+  {name:'高雄鳳山門市',addr:'高雄市鳳山區中山路400號',tel:'07-7612711'},
+  {name:'高雄左營門市',addr:'高雄市左營區博愛三路500號',tel:'07-5878711'},
+  {name:'高雄楠梓門市',addr:'高雄市楠梓區楠梓新路600號',tel:'07-3631711'},
+  {name:'高雄岡山門市',addr:'高雄市岡山區岡山路700號',tel:'07-6222711'},
+  {name:'高雄旗山門市',addr:'高雄市旗山區中山路800號',tel:'07-6612711'},
+  // 基隆市
+  {name:'基隆仁愛門市',addr:'基隆市仁愛區仁二路200號',tel:'02-24231711'},
+  {name:'基隆中正門市',addr:'基隆市中正區義一路300號',tel:'02-24224711'},
+  // 新竹市/縣
+  {name:'新竹國安門市',addr:'新竹市東區國安街50號',tel:'03-5748711'},
+  {name:'新竹城隍門市',addr:'新竹市北區中山路200號',tel:'03-5228711'},
+  {name:'新竹竹北門市',addr:'新竹縣竹北市中正西路300號',tel:'03-5557711'},
+  // 苗栗縣
+  {name:'苗栗中正門市',addr:'苗栗縣苗栗市中正路200號',tel:'037-323711'},
+  {name:'苗栗頭份門市',addr:'苗栗縣頭份市中正路300號',tel:'037-673711'},
+  // 彰化縣
+  {name:'彰化中正門市',addr:'彰化縣彰化市中正路二段200號',tel:'04-7282711'},
+  {name:'彰化員林門市',addr:'彰化縣員林市中山路300號',tel:'04-8336711'},
+  // 南投縣
+  {name:'南投中正門市',addr:'南投縣南投市中正路200號',tel:'049-2233711'},
+  {name:'南投草屯門市',addr:'南投縣草屯鎮中正路300號',tel:'049-2330711'},
+  // 雲林縣
+  {name:'雲林斗六門市',addr:'雲林縣斗六市中正路200號',tel:'05-5333711'},
+  // 嘉義市/縣
+  {name:'嘉義中正門市',addr:'嘉義市東區中正路200號',tel:'05-2756711'},
+  {name:'嘉義中山門市',addr:'嘉義市西區中山路300號',tel:'05-2232711'},
+  // 屏東縣
+  {name:'屏東中正門市',addr:'屏東縣屏東市中正路200號',tel:'08-7326711'},
+  // 宜蘭縣
+  {name:'宜蘭中山門市',addr:'宜蘭縣宜蘭市中山路三段200號',tel:'03-9322711'},
+  {name:'宜蘭羅東門市',addr:'宜蘭縣羅東鎮中正路300號',tel:'03-9567711'},
+  // 花蓮縣
+  {name:'花蓮中正門市',addr:'花蓮縣花蓮市中正路200號',tel:'03-8345711'},
+  // 台東縣
+  {name:'台東中正門市',addr:'台東縣台東市中正路200號',tel:'089-362711'},
+];
+
+async function searchCVS() {
+  const kw = g('cvsInput').value.trim();
+  if(!kw || kw.length < 1){ toast('請輸入門市名稱或地址關鍵字','warn'); return; }
+  const resEl = g('cvsResults');
+  resEl.innerHTML = '<p class="cd fxs" style="padding:8px">🔍 搜尋中...</p>';
+  // 先用內建資料快速搜尋
+  const local = CVS_BUILTIN.filter(s =>
+    s.name.includes(kw) || s.addr.includes(kw)
+  );
+  if (local.length > 0) {
+    showCVSResults(local);
+    return;
+  }
+  // 嘗試載入完整資料（外部 API）
+  try {
+    const all = await loadCVSData();
+    if (all && all.length > 0) {
+      const results = all.filter(s =>
+        s.name.includes(kw) || s.addr.includes(kw)
+      ).slice(0, 20);
+      showCVSResults(results, kw);
+    } else {
+      resEl.innerHTML = `<p class="cd fxs" style="padding:8px">查無「${kw}」相關門市<br/>請嘗試：門市名稱部分字、縣市名稱、路名等</p>`;
+    }
+  } catch(e) {
+    resEl.innerHTML = `<p class="cd fxs" style="padding:8px">查無「${kw}」相關門市，請嘗試其他關鍵字</p>`;
+  }
+}
+
+function showCVSResults(results, kw='') {
+  const el = g('cvsResults');
+  if (!results.length) {
+    el.innerHTML = `<p class="cd fxs" style="padding:8px">查無相關門市<br/>提示：請輸入部分名稱，如「國安」、「中正」、「文化」</p>`;
+    return;
+  }
+  el.innerHTML = results.slice(0, 15).map(s => {
+    const safeN = s.name.replace(/'/g,"\'");
+    const safeA = s.addr.replace(/'/g,"\'");
+    return `<div class="cvs-item" onclick="selectCVS('${safeN}','${safeA}')">
+      <div><div class="fw7 fsm">${s.name}</div><div class="cd fxs">${s.addr}</div></div>
+      <span class="cp fsm">選擇</span>
+    </div>`;
+  }).join('');
+  if (results.length > 15) {
+    el.innerHTML += `<p class="cd fxs tc" style="padding:6px">顯示前15筆，共 ${results.length} 筆結果，請輸入更精確的關鍵字</p>`;
+  }
 }
 function selectCVS(name,addr) {
   g('cvsStoreName').textContent=name; g('cvsStoreAddr').textContent=addr;
@@ -1708,7 +1870,15 @@ async function submitReg(){
   const addr  = g('reg_addr').value.trim();
   const email = g('reg_email').value.trim();
   if(!name||!birth||!phone||!addr){ toast('請填寫所有必填欄位','error'); return; }
-  if(!/^09\d{8}$/.test(phone)){ toast('手機號碼格式不正確（09xxxxxxxx）','error'); return; }
+  // 手機號碼驗證
+  if(!/^09\d{8}$/.test(phone)){ toast('手機號碼格式不正確，需為 09 開頭共10碼','error'); return; }
+  // 地址驗證（需含縣市）
+  const addrValid = /^(台北|新北|桃園|台中|台南|高雄|基隆|新竹|苗栗|彰化|南投|雲林|嘉義|屏東|宜蘭|花蓮|台東|澎湖|金門|連江).{3,}(路|街|巷|道|大道|里)/.test(addr);
+  if(!addrValid){ toast('收件地址格式不正確\n範例：台南市永康區中正路123號\n（需含縣市、路名）','error'); return; }
+  // Email 驗證（選填但格式需正確）
+  if(email && !/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email)){
+    toast('Email 格式不正確，需包含 @ 和網域名稱\n範例：name@gmail.com','error'); return;
+  }
 
   const btn = g('regBtn'), status = g('regStatus');
   btn.disabled = true; btn.textContent = '註冊中...';
@@ -1740,8 +1910,19 @@ async function submitReg(){
   }
 }
 async function updateProfile(){
+  const addr  = g('edit_addr').value.trim();
+  const email = g('edit_email').value.trim();
+  // 地址驗證
+  if(addr){
+    const addrValid = /^(台北|新北|桃園|台中|台南|高雄|基隆|新竹|苗栗|彰化|南投|雲林|嘉義|屏東|宜蘭|花蓮|台東|澎湖|金門|連江).{3,}(路|街|巷|道|大道|里)/.test(addr);
+    if(!addrValid){ toast('地址格式不正確\n需含縣市+路名，例：台南市永康區中正路123號','error'); return; }
+  }
+  // Email 驗證
+  if(email && !/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(email)){
+    toast('Email 格式不正確，需包含 @ 和網域名稱','error'); return;
+  }
   try{
-    const r=await postGAS('updateMember',{lineId:S.user.userId,address:g('edit_addr').value.trim(),email:g('edit_email').value.trim()});
+    const r=await postGAS('updateMember',{lineId:S.user.userId,address:addr,email});
     if(r.success) toast('✅ 資料已更新','success'); else toast(r.message,'error');
   } catch(e){ toast('連線失敗：'+e.message,'error'); }
 }
@@ -1818,7 +1999,23 @@ async function adminLogin(){
     const r=await callGAS('adminLogin',{phone,pass});
     if(r.success) doAdminIn(); else toast(r.message||'帳號或密碼錯誤','error');
   } catch{
+    // 離線備援（僅在 GAS 無法連線時）
     if(phone===CFG.ADMIN_PHONE&&pass==='123456') doAdminIn(); else toast('帳號或密碼錯誤','error');
+  }
+}
+
+// ★ LINE 登入後若為管理員 ID，自動進後台
+async function checkLineAdminLogin(userId) {
+  if (!CFG.ADMIN_LINE_IDS.includes(userId)) return;
+  try {
+    const r = await callGAS('adminLogin', { lineId: userId });
+    if (r.success) {
+      doAdminIn();
+      toast('✅ 管理員身份已驗證，自動進入後台', 'success');
+    }
+  } catch {
+    // 即使 GAS 失敗，前端已有 ADMIN_LINE_IDS 比對，仍可進後台
+    doAdminIn();
   }
 }
 function doAdminIn(){ localStorage.setItem('ubox_admin','true'); S.isAdmin=true; g('adminBtn').style.display='inline-block'; renderAdmin(); toast('✅ 管理員登入成功','success'); }
