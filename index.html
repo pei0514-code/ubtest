@@ -243,6 +243,7 @@
     .ship-opt.disabled{opacity:.35;cursor:not-allowed;pointer-events:none}
     .s-icon{font-size:1.6rem;margin-bottom:4px}.s-name{font-weight:700;font-size:.83rem;margin-bottom:2px}.s-fee{color:var(--tm);font-size:.74rem}.s-only{font-size:.66rem;color:var(--p);margin-top:2px}
     .cvs-search-wrap{background:var(--bg3);border:1px solid var(--bds);border-radius:var(--rl);padding:12px;margin-top:10px}
+    .cvs-link-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
     .cvs-item{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--bds);cursor:pointer}
     .cvs-item:last-child{border-bottom:none}
     .cvs-item:hover{background:rgba(0,212,255,.04);padding-left:6px}
@@ -411,15 +412,16 @@
     </div>
     <div class="nav-links">
       <button class="nav-btn active" onclick="showPage('home')">🏠 <span>首頁</span></button>
-      <button class="nav-btn" onclick="showPage('shop')">🛒 <span>商城</span></button>
+      <button class="nav-btn" onclick="showPage('shop')">📺 <span>商城</span></button>
       <button class="nav-btn" onclick="showPage('repair')">🔧 <span>維修</span></button>
       <button class="nav-btn" onclick="showPage('member')">👤 <span>會員</span></button>
     </div>
     <div class="nav-r">
       <button id="navCart" class="nav-cart" onclick="showPage('cart')">🛒<span class="nav-cart-badge" id="cartBadge">0</span></button>
-      <button id="adminBtn" onclick="showPage('admin')">⚙️ 管理</button>
       <img id="navAva" class="nav-ava" src="" alt=""/>
     </div>
+    <!-- adminBtn 隱藏在會員頁姓名旁，不在導航列 -->
+    <button id="adminBtn" style="display:none" onclick="showPage('admin')">⚙️ 管理</button>
   </div>
 </nav>
 
@@ -445,7 +447,7 @@
     </div>
   </div>
   <div class="feat-grid">
-    <div class="feat-card" onclick="showPage('shop')"><div class="feat-icon">📦</div><div class="feat-title">正品銷售</div><div class="feat-desc">UBOX 全系列正品，加入會員即可選購。</div><div class="feat-arr">→</div></div>
+    <div class="feat-card" onclick="showPage('shop')"><div class="feat-icon">📺</div><div class="feat-title">正品銷售</div><div class="feat-desc">UBOX 全系列正品，加入會員即可選購。</div><div class="feat-arr">→</div></div>
     <div class="feat-card" onclick="showPage('parts')"><div class="feat-icon">🔩</div><div class="feat-title">零件選購</div><div class="feat-desc">電源、HDMI、遙控器、滑鼠等原廠配件，商城內零件tab選購。</div><div class="feat-arr">→</div></div>
     <div class="feat-card" onclick="showPage('repair')"><div class="feat-icon">🔧</div><div class="feat-title">超商寄修</div><div class="feat-desc">7-11 超商取件，寄件免費，維修含來回運費。</div><div class="feat-arr">→</div></div>
     <div class="feat-card" onclick="showPage('member')"><div class="feat-icon">🛡️</div><div class="feat-title">一年保固</div><div class="feat-desc">購機起算一年原廠保固，保固內零件費全免。</div><div class="feat-arr">→</div></div>
@@ -536,18 +538,28 @@
         <div class="fg"><label class="fl">聯絡電話 <span class="req">*</span></label><input class="fc" id="cPhone" placeholder="09xxxxxxxx" type="tel"/></div>
         <div class="fg">
           <label class="fl">7-11 取件門市 <span class="req">*</span></label>
-          <div class="cvs-search-wrap">
-            <div class="flex g8 mb8"><input class="fc" id="cvsInput" placeholder="輸入門市名稱（如：國安、文化、中正）..." style="flex:1" onkeydown="if(event.key==='Enter')searchCVS()"/><button class="btn btn-o btn-sm" onclick="searchCVS()">搜尋</button></div>
-            <div id="cvsResults"></div>
-            <div id="cvsChosen" style="display:none">
-              <div class="flex ic g8" style="padding:9px;background:rgba(0,212,255,.06);border-radius:10px">
-                <span>🏪</span>
-                <div style="flex:1"><div class="fw7 fsm" id="cvsStoreName"></div><div class="cd fxs" id="cvsStoreAddr"></div></div>
-                <button class="btn btn-g btn-sm" onclick="clearCVS()">重選</button>
-              </div>
+          <!-- 7-11 門市查詢外連結 -->
+          <div class="cvs-link-bar">
+            <span class="cm fsm">不知道門市名稱？</span>
+            <a href="https://www.ibon.com.tw/retail_inquiry.aspx" target="_blank" class="btn btn-o btn-sm" style="text-decoration:none">
+              🔍 前往 7-11 門市查詢
+            </a>
+            <a href="https://emap.pcsc.com.tw" target="_blank" class="btn btn-g btn-sm" style="text-decoration:none">
+              🗺️ 7-11 地圖
+            </a>
+          </div>
+          <div class="flex g8 mt8">
+            <input class="fc" id="cvsManualInput" placeholder="查好後在此貼入門市名稱，例：台南文化門市" style="flex:1"
+              onchange="applyCVSManual()" oninput="applyCVSManual()"/>
+          </div>
+          <div id="cvsChosen" style="display:none;margin-top:8px">
+            <div class="flex ic g8" style="padding:9px;background:rgba(0,212,255,.06);border-radius:10px">
+              <span>🏪</span>
+              <div style="flex:1"><div class="fw7 fsm" id="cvsStoreName"></div><div class="cd fxs" id="cvsStoreAddr"></div></div>
+              <button class="btn btn-g btn-sm" onclick="clearCVS()">清除</button>
             </div>
           </div>
-          <p class="fh">⚠️ 超商取貨付款恕不更改取件門市，請確認正確</p>
+          <p class="fh mt6">⚠️ 超商取貨付款恕不更改取件門市，請確認門市名稱正確後再下單</p>
         </div>
       </div>
       <div class="fg"><label class="fl">訂單備注</label><textarea class="fc" id="orderNote" rows="2" placeholder="特殊需求請備注"></textarea></div>
@@ -1151,8 +1163,10 @@ const S = {
 // ════════════════════════════════════════════════════
 const g   = id => document.getElementById(id);
 const ts  = d  => String(d||'').slice(0,10);
-const rbc = s  => ({待寄件:'b-yellow',已寄件:'b-blue',維修中:'b-orange',待取件:'b-purple',已完成:'b-green',無法維修:'b-red'}[s]||'b-gray');
+const rbc   = s => ({待寄件:'b-yellow',已寄件:'b-blue',維修中:'b-orange',待取件:'b-purple',已完成:'b-green',無法維修:'b-red'}[s]||'b-gray');
 const retbc = s => ({待審核:'b-yellow',審核通過:'b-blue',已退貨:'b-orange',退貨完成:'b-green',審核拒絕:'b-red'}[s]||'b-gray');
+// 訂單狀態顏色
+const obc   = s => ({處理中:'b-yellow',已出貨:'b-blue',已到店:'b-purple',已完成:'b-green',已取消:'b-red'}[s]||'b-gray');
 const levelColor = l => ({一般會員:'b-blue',銀卡會員:'b-gray',金卡會員:'b-yellow',鑽石會員:'b-purple'}[l]||'b-blue');
 
 function toast(msg, type=''){
@@ -1904,7 +1918,7 @@ async function submitOrder() {
     rName=g('dName').value.trim(); rPhone=g('dPhone').value.trim(); address=g('dAddr').value.trim();
   } else {
     rName=g('cName').value.trim(); rPhone=g('cPhone').value.trim();
-    address=g('cvsStoreName').textContent;
+    address=g('cvsManualInput')?.value.trim() || g('cvsStoreName')?.textContent || '';
   }
   if(!rName||!rPhone||!address){ toast('請填寫完整收件資訊','error'); return; }
   if(!/^09\d{8}$/.test(rPhone)){ toast('手機號碼格式錯誤','error'); return; }
@@ -2148,31 +2162,50 @@ function copyRefCode(){
 }
 
 async function loadMemOrders(){
-  if(!S.user) return;
-  const el=g('memOrdList'); el.innerHTML='<p class="cd tc fsm" style="padding:12px">載入中...</p>';
-  try{
-    const r = await callGAS('getMemberOrders',{lineId:S.user.userId});
-    if(r.success&&r.data?.length){
-      el.innerHTML = r.data.map(o=>`
-        <div class="ord-card">
+  if(!S.user){ console.warn('loadMemOrders: no user'); return; }
+  const el = g('memOrdList');
+  if (!el) return;
+  el.innerHTML = '<p class="cd tc fsm" style="padding:16px">📦 載入訂單中...</p>';
+  try {
+    const r = await callGAS('getMemberOrders', { lineId: S.user.userId });
+    if (!r) { el.innerHTML = '<div class="empty"><div class="empty-icon">⚠️</div><p>無法取得回應</p><button class="btn btn-g btn-sm mt10" onclick="loadMemOrders()">重試</button></div>'; return; }
+    if (r.success && Array.isArray(r.data) && r.data.length > 0) {
+      el.innerHTML = r.data.map(o => {
+        const status  = o.status || '處理中';
+        const items   = o.items  || '—';
+        const total   = parseInt(o.total || 0);
+        const dateStr = ts(o.date);
+        const ship    = o.shipping === 'delivery' ? '🚚 宅配' : '🏪 7-11超商';
+        const safeOid = (o.orderId || '').replace(/'/g, '');
+        const safeItm = items.replace(/'/g, '').replace(/`/g, '');
+        return `<div class="ord-card">
           <div class="ord-card-head">
-            <span class="badge b-blue mono">${o.orderId}</span>
-            <span class="badge ${rbc(o.status)}">${o.status||'處理中'}</span>
+            <span class="badge b-blue mono" style="font-size:.72rem">${o.orderId || '—'}</span>
+            <span class="badge ${obc(status)}">${status}</span>
           </div>
-          <div class="fsm mb8">${o.items}</div>
-          <div class="flex jb">
-            <span class="cd fxs">${ts(o.date)} ｜ ${o.shipping==='delivery'?'🚚 宅配':'🏪 7-11超商'}</span>
-            <span class="ca fw7">NT$ ${parseInt(o.total||0).toLocaleString()}</span>
+          <div class="fsm mb8" style="color:var(--t)">${items}</div>
+          <div class="flex jb ic">
+            <span class="cd fxs">${dateStr} ｜ ${ship}</span>
+            <span class="ca fw7">NT$ ${total.toLocaleString()}</span>
           </div>
-          ${o.inWarranty?'<div class="mt8"><span class="wtag">🛡️ 保固中</span></div>':''}
+          ${o.inWarranty ? '<div class="mt8"><span class="wtag">🛡️ 保固中</span></div>' : ''}
           <div class="ord-actions">
-            ${(o.status==='已完成'||o.status==='已到店')&&!o.hasReturn
-              ?`<button class="btn btn-warn btn-sm" onclick="openReturnModal('${o.orderId}','${(o.items||'').replace(/'/g,'')}')">↩️ 申請退貨</button>`:''}
-            ${o.returnId?`<span class="badge ${retbc(o.returnStatus)}" style="padding:6px 10px">↩️ 退貨${o.returnStatus}</span>`:''}
+            ${(status === '已完成' || status === '已到店') && !o.hasReturn
+              ? `<button class="btn btn-warn btn-sm" onclick="openReturnModal('${safeOid}','${safeItm}')">↩️ 申請退貨</button>`
+              : ''}
+            ${o.returnId ? `<span class="badge ${retbc(o.returnStatus || '')}" style="padding:6px 10px">↩️ 退貨${o.returnStatus}</span>` : ''}
           </div>
-        </div>`).join('');
-    } else el.innerHTML='<div class="empty"><div class="empty-icon">📦</div><p>尚無訂單</p><button class="btn btn-p mt12" onclick="showPage(\'shop\')">去購物</button></div>';
-  } catch(e){ el.innerHTML=`<div class="empty"><div class="empty-icon">⚠️</div><p class="cer">${e.message}</p><button class="btn btn-g btn-sm mt10" onclick="loadMemOrders()">重試</button></div>`; }
+        </div>`;
+      }).join('');
+    } else if (r.success) {
+      el.innerHTML = '<div class="empty"><div class="empty-icon">📦</div><p class="cm">尚無訂單記錄</p><button class="btn btn-p mt12" onclick="showPage(&quot;shop&quot;)">去選購</button></div>';
+    } else {
+      el.innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><p class="cer fsm">${r.message || '載入失敗'}</p><button class="btn btn-g btn-sm mt10" onclick="loadMemOrders()">重試</button></div>`;
+    }
+  } catch(e) {
+    console.error('loadMemOrders error:', e);
+    el.innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><p class="cer fsm">${e.message}</p><button class="btn btn-g btn-sm mt10" onclick="loadMemOrders()">重試</button></div>`;
+  }
 }
 async function loadMemRepairs(){
   if(!S.member) return;
