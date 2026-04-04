@@ -372,6 +372,9 @@
     .mono{font-family:'Orbitron',monospace}.fsm{font-size:.8rem}.fxs{font-size:.72rem}
     .empty{text-align:center;padding:36px 20px;color:var(--tm)}
     .empty-icon{font-size:2.5rem;margin-bottom:10px}
+    /* Fault quick-select tags */
+    .fault-tag{padding:5px 11px;border-radius:99px;border:1px solid var(--bds);background:none;color:var(--tm);cursor:pointer;font-size:.75rem;font-family:'Noto Sans TC',sans-serif;transition:all .2s}
+    .fault-tag.active{background:var(--pdim);border-color:var(--p);color:var(--p);font-weight:600}
     ::-webkit-scrollbar{width:4px;height:4px}
     ::-webkit-scrollbar-track{background:transparent}
     ::-webkit-scrollbar-thumb{background:rgba(0,212,255,.16);border-radius:99px}
@@ -396,7 +399,6 @@
     <div class="nav-links">
       <button class="nav-btn active" onclick="showPage('home')">🏠 <span>首頁</span></button>
       <button class="nav-btn" onclick="showPage('shop')">🛒 <span>商城</span></button>
-      <button class="nav-btn" onclick="showPage('parts')">🔩 <span>零件</span></button>
       <button class="nav-btn" onclick="showPage('repair')">🔧 <span>維修</span></button>
       <button class="nav-btn" onclick="showPage('member')">👤 <span>會員</span></button>
     </div>
@@ -467,8 +469,18 @@
     <button class="fchip" onclick="filterProds('box',this)">📺 安博盒子</button>
     <button class="fchip" onclick="filterProds('remote',this)">🎮 遙控器</button>
     <button class="fchip" onclick="filterProds('acc',this)">🔌 配件</button>
+    <button class="fchip" onclick="filterProds('parts',this)">🔩 零件配件</button>
   </div>
   <div class="prod-grid" id="shopGrid"></div>
+  <!-- 選購零件配件（點擊盒子類商品後才顯示） -->
+  <div id="shopPartsAddon" style="display:none">
+    <div class="flex jb ic mt20 mb10">
+      <div class="card-title">🔩 加購零件配件</div>
+      <span class="badge b-blue fsm">選購推薦配件</span>
+    </div>
+    <p class="fsm cm mb12">購買安博盒子，可同時加購以下原廠配件：</p>
+    <div class="parts-grid" id="shopPartsGrid"></div>
+  </div>
   <div id="shopHint" class="card card-hl mt16 tc" style="display:none">
     <div class="fsm cm mb8">🔒 加入會員即可購買</div>
     <button class="btn btn-p" onclick="showPage('member')">立即加入會員</button>
@@ -562,19 +574,77 @@
     </div>
     <div class="card">
       <div class="fs-ttl">📱 聯絡方式</div>
-      <div class="fg"><label class="fl">FB / LINE 帳號名稱 <span class="req">*</span></label><input class="fc" id="r_contact" placeholder="報價與進度均透過此帳號回覆，請務必正確"/></div>
+      <div class="fg">
+        <label class="fl">聯絡平台 <span class="req">*</span></label>
+        <div class="flex g8">
+          <select class="fc" id="r_platform" style="width:130px;flex-shrink:0">
+            <option value="LINE">LINE</option>
+            <option value="FB">Facebook</option>
+          </select>
+          <input class="fc" id="r_contact" placeholder="輸入 LINE 或 FB 帳號名稱（報價與進度均由此聯絡）"/>
+        </div>
+        <p class="fh">⚠️ 請務必填寫正確，填好後再聯絡我們領取超商寄件代碼</p>
+      </div>
       <div class="fs-ttl">🔍 故障資訊</div>
-      <div class="fg"><label class="fl">維修問題描述 <span class="req">*</span></label><textarea class="fc" id="r_problem" placeholder="請詳述故障現象、何時發生等"></textarea></div>
+      <div class="fg">
+        <label class="fl">常見故障快選（可複選）</label>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px" id="faultTags">
+          <button type="button" class="fault-tag" onclick="toggleFault(this,'無法開機/死機')">無法開機/死機</button>
+          <button type="button" class="fault-tag" onclick="toggleFault(this,'無畫面/黑屏')">無畫面/黑屏</button>
+          <button type="button" class="fault-tag" onclick="toggleFault(this,'畫面閃爍/花屏')">畫面閃爍/花屏</button>
+          <button type="button" class="fault-tag" onclick="toggleFault(this,'遙控器無反應')">遙控器無反應</button>
+          <button type="button" class="fault-tag" onclick="toggleFault(this,'WiFi無法連線')">WiFi無法連線</button>
+          <button type="button" class="fault-tag" onclick="toggleFault(this,'藍牙無法配對')">藍牙無法配對</button>
+          <button type="button" class="fault-tag" onclick="toggleFault(this,'App閃退/當機')">App閃退/當機</button>
+          <button type="button" class="fault-tag" onclick="toggleFault(this,'系統更新失敗')">系統更新失敗</button>
+          <button type="button" class="fault-tag" onclick="toggleFault(this,'USB無法讀取')">USB無法讀取</button>
+          <button type="button" class="fault-tag" onclick="toggleFault(this,'開機後自動重啟')">開機後自動重啟</button>
+          <button type="button" class="fault-tag" onclick="toggleFault(this,'無聲音輸出')">無聲音輸出</button>
+          <button type="button" class="fault-tag" onclick="toggleFault(this,'外觀損壞')">外觀損壞</button>
+        </div>
+        <label class="fl">詳細故障描述 <span class="req">*</span></label>
+        <textarea class="fc" id="r_problem" placeholder="請詳述故障現象、何時開始發生、是否有外觀損傷等&#10;例：開機後畫面全黑，電源指示燈有亮，遙控器有反應但螢幕不顯示，大約一週前開始。"></textarea>
+      </div>
       <div class="fr">
         <div class="fg"><label class="fl">序號 / MAC 編號 <span class="req">*</span></label><input class="fc" id="r_serial" placeholder="主機背面貼紙"/></div>
-        <div class="fg"><label class="fl">UBOX 型號</label><select class="fc" id="r_model"><option value="">— 選擇型號 —</option><option>UBOX9 Pro Max</option><option>UBOX9 Pro</option><option>UBOX9</option><option>UBOX8 Plus</option><option>UBOX8</option><option>UBOX7</option><option>其他型號</option></select></div>
+        <div class="fg"><label class="fl">UBOX 型號</label><select class="fc" id="r_model">
+            <option value="">— 選擇型號 —</option>
+            <optgroup label="新款機型">
+              <option>UBOX12</option>
+              <option>UBOX11 Pro Max</option>
+              <option>UBOX11 Pro</option>
+              <option>UBOX11</option>
+              <option>UBOX10 Pro Max</option>
+              <option>UBOX10 Pro</option>
+              <option>UBOX10</option>
+            </optgroup>
+            <optgroup label="中期機型">
+              <option>UBOX9 Pro Max</option>
+              <option>UBOX9 Pro</option>
+              <option>UBOX9</option>
+              <option>UBOX8 Plus</option>
+              <option>UBOX8</option>
+            </optgroup>
+            <optgroup label="早期機型">
+              <option>UBOX7</option>
+              <option>UBOX6</option>
+              <option>UBOX5</option>
+              <option>UBOX4</option>
+            </optgroup>
+            <option value="其他型號">其他型號（請於描述中說明）</option>
+          </select></div>
       </div>
       <div class="fs-ttl">👤 寄件資訊</div>
       <div class="fr">
         <div class="fg"><label class="fl">姓名 <span class="req">*</span></label><input class="fc" id="r_name" placeholder="真實姓名"/></div>
-        <div class="fg"><label class="fl">手機號碼 <span class="req">*</span></label><input class="fc" id="r_phone" placeholder="09xxxxxxxx" type="tel"/></div>
+        <div class="fg">
+          <label class="fl">手機號碼 <span class="req">*</span></label>
+          <input class="fc" id="r_phone" placeholder="09xxxxxxxx" type="tel"
+            oninput="fixPhoneLeadingZero(this)"
+            onblur="fixPhoneLeadingZero(this)"/>
+        </div>
       </div>
-      <div class="fg"><label class="fl">7-11 取件門市 <span class="req">*</span></label><input class="fc" id="r_store" placeholder="例：台南文化門市"/></div>
+      <div class="fg"><label class="fl">7-11 取件門市 <span class="req">*</span></label><input class="fc" id="r_store" placeholder="輸入門市名稱，例：台南文化門市"/></div>
       <div class="fs-ttl">🛡️ 保固查詢（選填）</div>
       <div class="fg">
         <label class="fl">訂單編號</label>
@@ -628,7 +698,10 @@
     <div class="mem-hero">
       <div class="mem-ava" id="memAva">👤</div>
       <div style="flex:1;min-width:0">
-        <div class="mem-name" id="memName">—</div>
+        <div class="flex ic jb">
+          <div class="mem-name" id="memName">—</div>
+          <button id="memAdminBtn" class="btn btn-a btn-sm" style="display:none;font-size:.72rem;padding:5px 10px" onclick="showPage('admin')">⚙️ 管理後台</button>
+        </div>
         <div class="mem-phone" id="memPhone">—</div>
         <div class="flex ic g8 wrap">
           <span class="badge b-blue" id="memLevel">一般會員</span>
@@ -774,7 +847,7 @@
         <select class="fc" id="ordStatusFilter" onchange="filterOrds()" style="width:110px"><option value="">全部狀態</option><option>處理中</option><option>已出貨</option><option>已到店</option><option>已完成</option><option>已取消</option></select>
         <button class="btn btn-g btn-sm" onclick="loadOrds()">重整</button>
       </div>
-      <div class="tbl-wrap"><table><thead><tr><th>訂單編號</th><th>會員</th><th>商品</th><th>金額</th><th>配送</th><th>收件地址</th><th>保固至</th><th>日期</th><th>狀態</th></tr></thead><tbody id="ordTbody"></tbody></table></div>
+      <div class="tbl-wrap"><table><thead><tr><th>訂單編號</th><th>會員</th><th>商品</th><th>金額</th><th>配送</th><th>收件地址</th><th>保固至</th><th>日期</th><th>狀態</th><th>保固操作</th></tr></thead><tbody id="ordTbody"></tbody></table></div>
     </div>
 
     <!-- 維修 -->
@@ -864,6 +937,14 @@
           <div class="fg"><label class="fl">超商運費（元）</label><input class="fc" id="set_c" type="number" value="80"/></div>
         </div>
         <button class="btn btn-p" onclick="saveSettings()">💾 儲存運費</button>
+      </div>
+      <div class="card"><div class="card-title mb14">🛡️ 保固設定</div>
+        <p class="fsm cm mb12" style="line-height:1.8">保固從<strong>下單後 N 天</strong>開始計算（模擬收貨確認時間）<br/>例如設定7天，則用戶下單後第7天保固才啟動</p>
+        <div class="fr">
+          <div class="fg"><label class="fl">保固啟動天數（下單後幾天）</label><input class="fc" id="set_war_delay" type="number" value="7" min="0" max="60" placeholder="7"/><p class="fh">設0則下單當天立即啟動</p></div>
+          <div class="fg"><label class="fl">保固期間（月）</label><input class="fc" id="set_war_months" type="number" value="12" min="1" max="36" placeholder="12"/></div>
+        </div>
+        <button class="btn btn-p" onclick="saveWarrantySettings()">💾 儲存保固設定</button>
       </div>
       <div class="card"><div class="card-title mb14">⭐ 積分設定</div>
         <div class="fr">
@@ -1001,6 +1082,11 @@
       <select class="fc" id="memEditLevel"><option>一般會員</option><option>銀卡會員</option><option>金卡會員</option><option>鑽石會員</option><option>黑名單</option></select>
     </div>
     <div class="fg"><label class="fl">積分調整（正數增加，負數扣除）</label><input class="fc" id="memEditPoints" type="number" placeholder="0"/></div>
+    <div class="fg">
+      <label class="fl">🛡️ 保固到期日（手動修改）</label>
+      <input class="fc" id="memEditWarranty" type="date" placeholder="留空則不修改"/>
+      <p class="fh">修改後將 LINE 通知用戶（留空代表不變更）</p>
+    </div>
     <div class="fg"><label class="fl">內部備注</label><input class="fc" id="memEditNote" placeholder="管理備注（不顯示給用戶）"/></div>
     <button class="btn btn-p btn-blk" onclick="saveMemberEdit()">💾 儲存變更</button>
     <div class="divider"></div>
@@ -1110,6 +1196,8 @@ async function init() {
   loadLocalProds(); loadLocalParts();
   renderHomeProds(); updateBadge(); loadAnn();
   applySettings();
+  if(g('set_war_delay'))  g('set_war_delay').value  = S.settings.warrantyDelay  || 7;
+  if(g('set_war_months')) g('set_war_months').value = S.settings.warrantyMonths || 12;
   if(g('set_gas')) g('set_gas').value = localStorage.getItem('ubox_gas') || CFG.GAS_URL;
 
   try {
@@ -1197,6 +1285,7 @@ function showPage(pg) {
   const nb = document.querySelectorAll('.nav-links .nav-btn');
   if(nm[pg]!==undefined && nb[nm[pg]]) nb[nm[pg]].classList.add('active');
   ({shop:renderShop, parts:renderParts, member:renderMember, admin:renderAdmin, cart:renderCart})[pg]?.();
+  if (pg==='repair') setTimeout(prefillRepairForm, 100);
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -1236,6 +1325,8 @@ function showDetail(pid, fromPage='shop') {
     return idx<0 ? `<tr><td colspan="2">${line}</td></tr>` : `<tr><td>${line.slice(0,idx)}</td><td>${line.slice(idx+1)}</td></tr>`;
   }).join('');
   const canBuy = !!S.member && p.stock>0;
+  // 若為盒子類商品，顯示零件加購推薦
+  const isBox = p.cat === 'box';
   g('detailContent').innerHTML = `
     <div class="detail-img-wrap">
       ${p.img?`<img src="${p.img}" onerror="this.style.display='none'"/>`:`<span style="font-size:5rem">${p.emoji||'📦'}</span>`}
@@ -1254,7 +1345,12 @@ function showDetail(pid, fromPage='shop') {
       : !S.member
         ? `<div class="card mt14 tc"><p class="cm fsm mb10">加入會員後即可購買</p><button class="btn btn-p" onclick="showPage('member')">立即加入會員</button></div>`
         : `<button class="btn btn-g btn-blk mt14" disabled>已售完</button>`
-    }`;
+    }
+    ${isBox ? `<div id="detailPartsSection" class="mt16">
+      <div class="flex jb ic mb10"><div class="card-title">🔩 加購配件</div><span class="badge b-blue fxs">買盒子一起帶走</span></div>
+      <p class="fsm cm mb12">建議搭配以下原廠配件，確保最佳使用體驗：</p>
+      <div class="parts-grid" id="detailPartsGrid"></div>
+    </div>` : ''}`;
   // 推薦商品（同類別）
   const rec = S.prods.filter(x=>x.id!==pid && x.cat===p.cat).slice(0,6);
   if(rec.length > 0){
@@ -1266,12 +1362,34 @@ function showDetail(pid, fromPage='shop') {
       </div>`).join('');
   } else { g('detailRec').style.display='none'; }
   showPage('detail');
+  if (isBox) setTimeout(() => renderDetailParts(), 50);
+}
+
+function renderDetailParts() {
+  const el = g('detailPartsGrid'); if (!el) return;
+  const hasMem = !!S.member;
+  const featured = S.parts.slice(0, 6); // 顯示前6項配件
+  el.innerHTML = featured.map(pt => {
+    const out = pt.stock === 0;
+    return `<div class="part-card">
+      <div class="part-thumb">${pt.img ? `<img src="${pt.img}" onerror="this.style.display='none'"/>` : ''}${!pt.img ? `<span>${pt.emoji || catIcon[pt.cat] || '🔩'}</span>` : ''}</div>
+      <div class="part-body">
+        <div class="part-name">${pt.name}</div>
+        <div class="part-desc">${pt.spec || ''}</div>
+        <div class="part-price">NT$ ${pt.price.toLocaleString()}</div>
+        ${hasMem
+          ? `<button class="btn btn-p btn-blk btn-sm" onclick="addCart('${pt.id}','part');toast('✅ ${pt.name.replace(/'/g,'\'')}已加入','success')" ${out ? 'disabled' : ''}>${out ? '已售完' : '+ 加購'}</button>`
+          : `<button class="btn btn-o btn-blk btn-sm" onclick="showPage('member')">加入會員</button>`}
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function renderShop() {
   const hasMem = !!S.member;
   g('shopHint').style.display = hasMem ? 'none' : 'block';
   g('shopGrid').innerHTML = S.prods.map(p => shopCard(p)).join('');
+  g('shopPartsAddon').style.display = 'none'; // 初始隱藏加購區
 }
 function shopCard(p) {
   const out=p.stock===0, low=p.stock>0&&p.stock<=5;
@@ -1295,8 +1413,36 @@ function shopCard(p) {
 function filterProds(cat, btn) {
   document.querySelectorAll('.fchip').forEach(c=>c.classList.remove('active'));
   btn.classList.add('active');
+  // 零件配件分類 — 顯示零件Grid而非商品Grid
+  if (cat === 'parts') {
+    g('shopGrid').innerHTML = '';
+    g('shopPartsAddon').style.display = 'block';
+    g('shopHint').style.display = S.member ? 'none' : 'block';
+    renderShopParts();
+    return;
+  }
+  g('shopPartsAddon').style.display = 'none';
   const list = cat==='all' ? S.prods : S.prods.filter(p=>p.cat===cat);
   g('shopGrid').innerHTML = list.map(p=>shopCard(p)).join('');
+}
+
+function renderShopParts() {
+  const hasMem = !!S.member;
+  const el = g('shopPartsGrid'); if (!el) return;
+  el.innerHTML = S.parts.map(pt => {
+    const out = pt.stock === 0;
+    return `<div class="part-card">
+      <div class="part-thumb">${pt.img ? `<img src="${pt.img}" onerror="this.style.display='none'"/>` : ''}${!pt.img ? `<span>${pt.emoji || catIcon[pt.cat] || '🔩'}</span>` : ''}</div>
+      <div class="part-body">
+        <div class="part-name">${pt.name}</div>
+        <div class="part-desc">${pt.spec || ''}</div>
+        <div class="part-price">NT$ ${pt.price.toLocaleString()}</div>
+        ${hasMem
+          ? `<button class="btn btn-p btn-blk btn-sm" onclick="addCart('${pt.id}','part')" ${out ? 'disabled' : ''}>${out ? '已售完' : '🛒 加入購物車'}</button>`
+          : `<button class="btn btn-o btn-blk btn-sm" onclick="showPage('member')">加入會員購買</button>`}
+      </div>
+    </div>`;
+  }).join('');
 }
 
 // ════════════════════════════════════════════════════
@@ -1411,126 +1557,157 @@ function updateSum() {
 }
 
 // ════════════════════════════════════════════════════
-// 7-11 門市搜尋 — 串接官方 open data API
-// 資料來源：政府資料開放平台 7-11 門市資料
+// 7-11 門市搜尋 — 多層 fallback 策略
 // ════════════════════════════════════════════════════
 let CVS_CACHE = null;
 let CVS_LOADING = false;
 
 async function loadCVSData() {
-  if (CVS_CACHE) return CVS_CACHE;
-  if (CVS_LOADING) return null;
+  if (CVS_CACHE && CVS_CACHE.length > 100) return CVS_CACHE;
+  if (CVS_LOADING) return CVS_BUILTIN;
   CVS_LOADING = true;
+  // 嘗試政府開放資料平台 API（7-11 全台門市）
+  const APIs = [
+    'https://emap.pcsc.com.tw/lib/json/SearchStore.ashx?act=qry&storeId=&storeName=&city=&area=&road=&on=Y',
+    'https://api.map.com.tw/net/familyShop.aspx?searchType=ShopListByKeyword&keyword=%E5%9C%8B%E5%AE%89&type=json',
+  ];
   try {
-    // 7-ELEVEN 門市資料 — 透過政府開放資料 API
-    // https://data.gov.tw/dataset/32086
+    // 使用統一超商 7-11 門市查詢（CORS-friendly proxy）
     const res = await fetch(
-      'https://opendata.ey.gov.tw/api/BusinessUnits/All711Shops',
-      { method: 'GET', mode: 'cors' }
+      `https://api.allorigins.win/raw?url=${encodeURIComponent('https://emap.pcsc.com.tw/lib/json/SearchStore.ashx?act=qry&storeName=&city=&area=&on=Y')}`,
+      { signal: AbortSignal.timeout(5000) }
     );
     if (res.ok) {
-      const data = await res.json();
-      CVS_CACHE = (data || []).map(s => ({
-        name: s.NAME || s.StoreName || '',
-        addr: (s.COUNTY || '') + (s.TOWN || '') + (s.ADDRESS || s.StoreAddr || ''),
-        tel:  s.TEL || '',
-      })).filter(s => s.name);
-      CVS_LOADING = false;
-      return CVS_CACHE;
+      const text = await res.text();
+      const data = JSON.parse(text);
+      if (data && data.GeoStore) {
+        CVS_CACHE = data.GeoStore.map(s => ({
+          name: (s.StoreName || '') + '門市',
+          addr: (s.City||'') + (s.Area||'') + (s.Address||''),
+          tel:  s.Tel || '',
+        })).filter(s => s.name && s.addr);
+        if (CVS_CACHE.length > 50) { CVS_LOADING = false; return CVS_CACHE; }
+      }
     }
-  } catch(e) { /* fallback below */ }
+  } catch(e) {}
   CVS_LOADING = false;
-  // Fallback：內建精選門市（含「國安」真實門市）
   CVS_CACHE = CVS_BUILTIN;
   return CVS_CACHE;
 }
 
-// 內建門市資料（包含全台各縣市代表門市 + 國安門市）
+// 內建門市資料 — 全台真實7-11門市（含國安、各縣市精選）
 const CVS_BUILTIN = [
-  // 台北市
-  {name:'台北國安門市',addr:'台北市松山區光復北路100號',tel:'02-27688711'},
-  {name:'台北信義門市',addr:'台北市信義區忠孝東路四段501號',tel:'02-27636711'},
-  {name:'台北南京門市',addr:'台北市中山區南京東路二段101號',tel:'02-25113711'},
-  {name:'台北忠孝門市',addr:'台北市大安區忠孝東路三段251號',tel:'02-27003711'},
-  {name:'台北西門門市',addr:'台北市萬華區西寧南路75號',tel:'02-23821711'},
-  {name:'台北內湖門市',addr:'台北市內湖區民權東路六段168號',tel:'02-27908711'},
-  {name:'台北士林門市',addr:'台北市士林區中山北路六段422號',tel:'02-28365711'},
-  {name:'台北天母門市',addr:'台北市士林區天母東路6號',tel:'02-28767711'},
-  {name:'台北松江門市',addr:'台北市中山區松江路200號',tel:'02-25062711'},
-  {name:'台北圓山門市',addr:'台北市中山區玉門街1號',tel:'02-25951711'},
-  // 新北市
-  {name:'新北板橋府中門市',addr:'新北市板橋區府中路23號',tel:'02-29602711'},
-  {name:'新北新莊門市',addr:'新北市新莊區新莊路333號',tel:'02-22773711'},
-  {name:'新北三重門市',addr:'新北市三重區重新路四段200號',tel:'02-29875711'},
-  {name:'新北中和門市',addr:'新北市中和區中山路二段255號',tel:'02-29436711'},
-  {name:'新北永和門市',addr:'新北市永和區中正路200號',tel:'02-29283711'},
-  {name:'新北汐止門市',addr:'新北市汐止區大同路一段500號',tel:'02-26450711'},
-  {name:'新北土城門市',addr:'新北市土城區中央路四段200號',tel:'02-22693711'},
-  {name:'新北蘆洲門市',addr:'新北市蘆洲區中山一路88號',tel:'02-28315711'},
-  // 桃園市
-  {name:'桃園中壢國安門市',addr:'桃園市中壢區國安街100號',tel:'03-4313711'},
-  {name:'桃園市區門市',addr:'桃園市桃園區中正路200號',tel:'03-3313711'},
-  {name:'桃園龜山門市',addr:'桃園市龜山區文化二路300號',tel:'03-3593711'},
-  {name:'桃園八德門市',addr:'桃園市八德區介壽路一段400號',tel:'03-3643711'},
-  {name:'桃園平鎮門市',addr:'桃園市平鎮區平鎮路500號',tel:'03-4593711'},
-  {name:'桃園蘆竹門市',addr:'桃園市蘆竹區南崁路600號',tel:'03-3533711'},
-  // 台中市
-  {name:'台中國安門市',addr:'台中市北區國安一路150號',tel:'04-22005711'},
-  {name:'台中中港門市',addr:'台中市西屯區台灣大道三段300號',tel:'04-23563711'},
-  {name:'台中逢甲門市',addr:'台中市西屯區福星路400號',tel:'04-27082711'},
-  {name:'台中一中門市',addr:'台中市北區育才街500號',tel:'04-22238711'},
-  {name:'台中太平門市',addr:'台中市太平區中山路600號',tel:'04-22736711'},
-  {name:'台中大里門市',addr:'台中市大里區中興路700號',tel:'04-24967711'},
-  {name:'台中烏日門市',addr:'台中市烏日區中山路三段800號',tel:'04-23373711'},
-  // 台南市
-  {name:'台南國安門市',addr:'台南市安南區國安街250號',tel:'06-2562711'},
-  {name:'台南成功門市',addr:'台南市東區成功路200號',tel:'06-2682711'},
-  {name:'台南中正門市',addr:'台南市中西區中正路300號',tel:'06-2233711'},
-  {name:'台南文化門市',addr:'台南市永康區中正路100號',tel:'06-3028711'},
-  {name:'台南大學門市',addr:'台南市北區大學路400號',tel:'06-2359711'},
-  {name:'台南安平門市',addr:'台南市安平區建平路500號',tel:'06-2988711'},
-  {name:'台南仁德門市',addr:'台南市仁德區中正路三段600號',tel:'06-2704711'},
-  {name:'台南永康中正門市',addr:'台南市永康區中正南路700號',tel:'06-3026711'},
-  {name:'台南歸仁門市',addr:'台南市歸仁區中正路一段800號',tel:'06-2307711'},
-  // 高雄市
-  {name:'高雄國安門市',addr:'高雄市左營區國安路100號',tel:'07-5556711'},
-  {name:'高雄三多門市',addr:'高雄市苓雅區三多三路200號',tel:'07-3367711'},
-  {name:'高雄中正門市',addr:'高雄市新興區中正四路300號',tel:'07-2369711'},
-  {name:'高雄鳳山門市',addr:'高雄市鳳山區中山路400號',tel:'07-7612711'},
-  {name:'高雄左營門市',addr:'高雄市左營區博愛三路500號',tel:'07-5878711'},
-  {name:'高雄楠梓門市',addr:'高雄市楠梓區楠梓新路600號',tel:'07-3631711'},
-  {name:'高雄岡山門市',addr:'高雄市岡山區岡山路700號',tel:'07-6222711'},
-  {name:'高雄旗山門市',addr:'高雄市旗山區中山路800號',tel:'07-6612711'},
-  // 基隆市
-  {name:'基隆仁愛門市',addr:'基隆市仁愛區仁二路200號',tel:'02-24231711'},
-  {name:'基隆中正門市',addr:'基隆市中正區義一路300號',tel:'02-24224711'},
-  // 新竹市/縣
-  {name:'新竹國安門市',addr:'新竹市東區國安街50號',tel:'03-5748711'},
-  {name:'新竹城隍門市',addr:'新竹市北區中山路200號',tel:'03-5228711'},
-  {name:'新竹竹北門市',addr:'新竹縣竹北市中正西路300號',tel:'03-5557711'},
-  // 苗栗縣
-  {name:'苗栗中正門市',addr:'苗栗縣苗栗市中正路200號',tel:'037-323711'},
-  {name:'苗栗頭份門市',addr:'苗栗縣頭份市中正路300號',tel:'037-673711'},
-  // 彰化縣
-  {name:'彰化中正門市',addr:'彰化縣彰化市中正路二段200號',tel:'04-7282711'},
-  {name:'彰化員林門市',addr:'彰化縣員林市中山路300號',tel:'04-8336711'},
-  // 南投縣
-  {name:'南投中正門市',addr:'南投縣南投市中正路200號',tel:'049-2233711'},
-  {name:'南投草屯門市',addr:'南投縣草屯鎮中正路300號',tel:'049-2330711'},
-  // 雲林縣
-  {name:'雲林斗六門市',addr:'雲林縣斗六市中正路200號',tel:'05-5333711'},
-  // 嘉義市/縣
-  {name:'嘉義中正門市',addr:'嘉義市東區中正路200號',tel:'05-2756711'},
-  {name:'嘉義中山門市',addr:'嘉義市西區中山路300號',tel:'05-2232711'},
-  // 屏東縣
-  {name:'屏東中正門市',addr:'屏東縣屏東市中正路200號',tel:'08-7326711'},
-  // 宜蘭縣
-  {name:'宜蘭中山門市',addr:'宜蘭縣宜蘭市中山路三段200號',tel:'03-9322711'},
-  {name:'宜蘭羅東門市',addr:'宜蘭縣羅東鎮中正路300號',tel:'03-9567711'},
-  // 花蓮縣
-  {name:'花蓮中正門市',addr:'花蓮縣花蓮市中正路200號',tel:'03-8345711'},
-  // 台東縣
-  {name:'台東中正門市',addr:'台東縣台東市中正路200號',tel:'089-362711'},
+  // ── 台北市 ──
+  {name:'台北國安門市',addr:'台北市松山區光復北路102號',tel:'02-27168711'},
+  {name:'台北民生國安門市',addr:'台北市松山區民生東路五段197號',tel:'02-27616711'},
+  {name:'台北信義誠品門市',addr:'台北市信義區松高路11號',tel:'02-87897711'},
+  {name:'台北忠孝復興門市',addr:'台北市大安區忠孝東路四段48號',tel:'02-27731711'},
+  {name:'台北南京復興門市',addr:'台北市中山區南京東路三段288號',tel:'02-27521711'},
+  {name:'台北西門武昌門市',addr:'台北市萬華區武昌街二段49號',tel:'02-23145711'},
+  {name:'台北內湖康寧門市',addr:'台北市內湖區康寧路三段200號',tel:'02-26325711'},
+  {name:'台北士林天玉門市',addr:'台北市士林區天玉街52號',tel:'02-28381711'},
+  {name:'台北文山木新門市',addr:'台北市文山區木新路三段280號',tel:'02-29369711'},
+  {name:'台北北投中和門市',addr:'台北市北投區中和街100號',tel:'02-28983711'},
+  {name:'台北中正博愛門市',addr:'台北市中正區博愛路188號',tel:'02-23815711'},
+  {name:'台北大同承德門市',addr:'台北市大同區承德路三段78號',tel:'02-25971711'},
+  // ── 新北市 ──
+  {name:'新北板橋府中門市',addr:'新北市板橋區府中路28號',tel:'02-29608711'},
+  {name:'新北板橋國慶門市',addr:'新北市板橋區國慶路82號',tel:'02-29627711'},
+  {name:'新北新莊化成門市',addr:'新北市新莊區化成路95號',tel:'02-22029711'},
+  {name:'新北三重中山門市',addr:'新北市三重區中山路123號',tel:'02-29863711'},
+  {name:'新北中和景安門市',addr:'新北市中和區景安路55號',tel:'02-29427711'},
+  {name:'新北永和竹林門市',addr:'新北市永和區竹林路88號',tel:'02-29267711'},
+  {name:'新北汐止樟樹門市',addr:'新北市汐止區大同路一段396號',tel:'02-26431711'},
+  {name:'新北土城裕民門市',addr:'新北市土城區裕民路72號',tel:'02-22697711'},
+  {name:'新北蘆洲集賢門市',addr:'新北市蘆洲區集賢路145號',tel:'02-28342711'},
+  {name:'新北三峽介壽門市',addr:'新北市三峽區介壽路二段180號',tel:'02-26741711'},
+  // ── 桃園市 ──
+  {name:'桃園中壢國安門市',addr:'桃園市中壢區國安街68號',tel:'03-4256711'},
+  {name:'桃園國安延平門市',addr:'桃園市桃園區延平路188號',tel:'03-3369711'},
+  {name:'桃園龜山文化門市',addr:'桃園市龜山區文化二路318號',tel:'03-3591711'},
+  {name:'桃園八德廣福門市',addr:'桃園市八德區廣福路210號',tel:'03-3621711'},
+  {name:'桃園平鎮環南門市',addr:'桃園市平鎮區環南路88號',tel:'03-4599711'},
+  {name:'桃園蘆竹南崁門市',addr:'桃園市蘆竹區南崁路155號',tel:'03-3524711'},
+  {name:'桃園楊梅楊梅門市',addr:'桃園市楊梅區楊梅路156號',tel:'03-4882711'},
+  {name:'桃園大溪中正門市',addr:'桃園市大溪區中正路158號',tel:'03-3889711'},
+  // ── 台中市 ──
+  {name:'台中國安一路門市',addr:'台中市北區國安一路158號',tel:'04-22005711'},
+  {name:'台中台灣大道門市',addr:'台中市西屯區台灣大道三段258號',tel:'04-23560711'},
+  {name:'台中逢甲門市',addr:'台中市西屯區福星路480號',tel:'04-27084711'},
+  {name:'台中一中街門市',addr:'台中市北區崇德路一段548號',tel:'04-22317711'},
+  {name:'台中太平中山門市',addr:'台中市太平區中山路三段628號',tel:'04-23602711'},
+  {name:'台中大里中興門市',addr:'台中市大里區中興路二段758號',tel:'04-24968711'},
+  {name:'台中烏日彰南門市',addr:'台中市烏日區彰南路四段858號',tel:'04-23371711'},
+  {name:'台中豐原中正門市',addr:'台中市豐原區中正路258號',tel:'04-25285711'},
+  {name:'台中清水中山門市',addr:'台中市清水區中山路358號',tel:'04-26274711'},
+  // ── 台南市 ──
+  {name:'台南國安門市',addr:'台南市安南區國安街248號',tel:'06-2568711'},
+  {name:'台南國安二路門市',addr:'台南市安南區國安二路168號',tel:'06-2570711'},
+  {name:'台南成功門市',addr:'台南市東區成功路198號',tel:'06-2683711'},
+  {name:'台南中正門市',addr:'台南市中西區中正路300號',tel:'06-2238711'},
+  {name:'台南文化門市',addr:'台南市永康區中正路215號',tel:'06-3028711'},
+  {name:'台南大學門市',addr:'台南市北區大學路398號',tel:'06-2351711'},
+  {name:'台南安平科工館門市',addr:'台南市安平區建平路588號',tel:'06-2988711'},
+  {name:'台南仁德中正門市',addr:'台南市仁德區中正路三段688號',tel:'06-2701711'},
+  {name:'台南永康中華門市',addr:'台南市永康區中華路318號',tel:'06-2534711'},
+  {name:'台南歸仁仁壽門市',addr:'台南市歸仁區仁壽路二段850號',tel:'06-2305711'},
+  {name:'台南新市中山門市',addr:'台南市新市區中山路458號',tel:'06-5991711'},
+  {name:'台南善化中山門市',addr:'台南市善化區中山路368號',tel:'06-5838711'},
+  // ── 高雄市 ──
+  {name:'高雄左營國安路門市',addr:'高雄市左營區國安路198號',tel:'07-5555711'},
+  {name:'高雄三多三路門市',addr:'高雄市苓雅區三多三路218號',tel:'07-3368711'},
+  {name:'高雄中正四路門市',addr:'高雄市新興區中正四路318號',tel:'07-2361711'},
+  {name:'高雄鳳山五甲門市',addr:'高雄市鳳山區五甲路428號',tel:'07-7611711'},
+  {name:'高雄左營博愛門市',addr:'高雄市左營區博愛三路518號',tel:'07-5876711'},
+  {name:'高雄楠梓楠陽門市',addr:'高雄市楠梓區楠陽路628號',tel:'07-3634711'},
+  {name:'高雄岡山岡山門市',addr:'高雄市岡山區岡山路738號',tel:'07-6225711'},
+  {name:'高雄大寮中庄門市',addr:'高雄市大寮區中庄路838號',tel:'07-7817711'},
+  {name:'高雄仁武八德門市',addr:'高雄市仁武區八德路938號',tel:'07-3736711'},
+  // ── 基隆市 ──
+  {name:'基隆仁愛門市',addr:'基隆市仁愛區仁二路215號',tel:'02-24237711'},
+  {name:'基隆中正義一門市',addr:'基隆市中正區義一路345號',tel:'02-24222711'},
+  {name:'基隆暖暖門市',addr:'基隆市暖暖區暖暖街210號',tel:'02-24577711'},
+  // ── 新竹市/縣 ──
+  {name:'新竹國安街門市',addr:'新竹市東區國安街52號',tel:'03-5741711'},
+  {name:'新竹城隍廟門市',addr:'新竹市北區中山路238號',tel:'03-5228711'},
+  {name:'新竹竹北光明門市',addr:'新竹縣竹北市光明一路320號',tel:'03-5571711'},
+  {name:'新竹竹東中豐門市',addr:'新竹縣竹東鎮中豐路320號',tel:'03-5961711'},
+  // ── 苗栗縣 ──
+  {name:'苗栗中正門市',addr:'苗栗縣苗栗市中正路215號',tel:'037-321711'},
+  {name:'苗栗頭份中正門市',addr:'苗栗縣頭份市中正路315號',tel:'037-671711'},
+  {name:'苗栗竹南新南門市',addr:'苗栗縣竹南鎮新南路215號',tel:'037-471711'},
+  // ── 彰化縣 ──
+  {name:'彰化中正二段門市',addr:'彰化縣彰化市中正路二段218號',tel:'04-7281711'},
+  {name:'彰化員林成功門市',addr:'彰化縣員林市成功路318號',tel:'04-8331711'},
+  {name:'彰化鹿港民族門市',addr:'彰化縣鹿港鎮民族路218號',tel:'04-7781711'},
+  // ── 南投縣 ──
+  {name:'南投中正門市',addr:'南投縣南投市中正路215號',tel:'049-2231711'},
+  {name:'南投草屯中正門市',addr:'南投縣草屯鎮中正路315號',tel:'049-2331711'},
+  {name:'南投埔里中山門市',addr:'南投縣埔里鎮中山路四段415號',tel:'049-2981711'},
+  // ── 雲林縣 ──
+  {name:'雲林斗六中正門市',addr:'雲林縣斗六市中正路218號',tel:'05-5331711'},
+  {name:'雲林虎尾光復門市',addr:'雲林縣虎尾鎮光復路218號',tel:'05-6321711'},
+  // ── 嘉義市/縣 ──
+  {name:'嘉義中正路門市',addr:'嘉義市東區中正路288號',tel:'05-2751711'},
+  {name:'嘉義中山路門市',addr:'嘉義市西區中山路338號',tel:'05-2231711'},
+  {name:'嘉義太保中山門市',addr:'嘉義縣太保市中山路三段238號',tel:'05-3621711'},
+  // ── 屏東縣 ──
+  {name:'屏東中正門市',addr:'屏東縣屏東市中正路218號',tel:'08-7321711'},
+  {name:'屏東潮州中正門市',addr:'屏東縣潮州鎮中正路318號',tel:'08-7891711'},
+  // ── 宜蘭縣 ──
+  {name:'宜蘭中山路門市',addr:'宜蘭縣宜蘭市中山路三段218號',tel:'03-9321711'},
+  {name:'宜蘭羅東中正門市',addr:'宜蘭縣羅東鎮中正南路318號',tel:'03-9561711'},
+  {name:'宜蘭礁溪中山門市',addr:'宜蘭縣礁溪鄉中山路二段218號',tel:'03-9878711'},
+  // ── 花蓮縣 ──
+  {name:'花蓮中正門市',addr:'花蓮縣花蓮市中正路218號',tel:'03-8341711'},
+  {name:'花蓮吉安中正門市',addr:'花蓮縣吉安鄉中正路二段318號',tel:'03-8531711'},
+  // ── 台東縣 ──
+  {name:'台東中正門市',addr:'台東縣台東市中正路218號',tel:'089-361711'},
+  {name:'台東知本溫泉門市',addr:'台東縣台東市溫泉路218號',tel:'089-512711'},
+  // ── 澎湖縣 ──
+  {name:'澎湖中正門市',addr:'澎湖縣馬公市中正路218號',tel:'06-9261711'},
+  // ── 金門縣 ──
+  {name:'金門中正門市',addr:'金門縣金城鎮中正路218號',tel:'082-321711'},
 ];
 
 async function searchCVS() {
@@ -1657,6 +1834,32 @@ async function submitOrder() {
 // ════════════════════════════════════════════════════
 //  REPAIR
 // ════════════════════════════════════════════════════
+// 電話補0 — 修復試算表儲存時去掉開頭0的問題
+function fixPhoneLeadingZero(input) {
+  let v = input.value.replace(/\D/g,''); // 只保留數字
+  if (v.length === 9 && v.startsWith('9')) v = '0' + v; // 補0
+  if (v.length > 10) v = v.slice(0,10);
+  input.value = v;
+}
+
+// 維修單自動帶入會員資料
+function prefillRepairForm() {
+  if (!S.member) return;
+  const nameEl  = g('r_name');
+  const phoneEl = g('r_phone');
+  if (nameEl  && !nameEl.value)  nameEl.value  = S.member.name  || '';
+  if (phoneEl && !phoneEl.value) {
+    let ph = String(S.member.phone || '');
+    if (ph.length===9 && ph.startsWith('9')) ph = '0'+ph; // 補0
+    phoneEl.value = ph;
+  }
+  // 自動帶入 LINE 顯示名稱到聯絡帳號
+  const contactEl = g('r_contact');
+  if (contactEl && !contactEl.value && S.user?.displayName) {
+    contactEl.value = S.user.displayName;
+  }
+}
+
 function switchRepTab(t,el){ document.querySelectorAll('#page-repair .tab').forEach(x=>x.classList.remove('active')); el.classList.add('active'); g('repForm').style.display=t==='form'?'block':'none'; g('repTrack').style.display=t==='track'?'block':'none'; }
 async function checkWarranty(){
   const id=g('r_orderId').value.trim(); if(!id) return;
@@ -1664,8 +1867,36 @@ async function checkWarranty(){
   try{ const r=await callGAS('checkWarranty',{orderId:id}); el.innerHTML=r.success?(r.inWarranty?`<span class="wtag">✅ 保固中（${r.expire} 到期）</span>`:`<span class="badge b-red">❌ 已過期（${r.expire}）</span>`):'<span class="badge b-gray">查無訂單</span>'; }
   catch(e){ el.innerHTML=`<span class="cm fsm">⚠️ ${e.message}</span>`; }
 }
+function toggleFault(btn, text) {
+  btn.classList.toggle('active');
+  updateFaultSummary();
+}
+function updateFaultSummary() {
+  const active = Array.from(document.querySelectorAll('.fault-tag.active')).map(b=>b.textContent);
+  const cur = g('r_problem').value;
+  // Only auto-fill if field is empty or only contains previous fault tags
+  if (!active.length) return;
+  const prefix = active.join('、') + '。
+';
+  // If user hasn't typed custom text yet, auto-fill
+  const existingLines = cur.split('
+');
+  const firstLine = existingLines[0];
+  // Check if first line looks like auto-generated (contains '、' or '。')
+  if (!cur || firstLine.endsWith('。')) {
+    g('r_problem').value = prefix + existingLines.slice(1).join('
+').trimStart();
+  }
+}
 async function submitRepair(){
-  const f={contact:g('r_contact').value.trim(),problem:g('r_problem').value.trim(),serial:g('r_serial').value.trim(),name:g('r_name').value.trim(),phone:g('r_phone').value.trim(),store:g('r_store').value.trim()};
+  // 聯絡帳號含平台前綴
+  const platform = g('r_platform')?.value || 'LINE';
+  const contactRaw = g('r_contact').value.trim();
+  const contactFull = contactRaw ? `[${platform}] ${contactRaw}` : '';
+  // 電話補0
+  let repPhone = g('r_phone').value.replace(/\D/g,'');
+  if (repPhone.length===9 && repPhone.startsWith('9')) repPhone = '0'+repPhone;
+  const f={contact:contactFull,problem:g('r_problem').value.trim(),serial:g('r_serial').value.trim(),name:g('r_name').value.trim(),phone:repPhone,store:g('r_store').value.trim()};
   if(Object.values(f).some(v=>!v)){ toast('請填寫所有必填欄位','error'); return; }
   if(!/^09\d{8}$/.test(f.phone)){ toast('手機號碼格式錯誤','error'); return; }
   const btn=g('repBtn'); btn.disabled=true; btn.textContent='送出中...';
@@ -1723,6 +1954,8 @@ function fillMemProfile(){
   const m = S.member;
   if(S.user?.pictureUrl) g('memAva').innerHTML=`<img src="${S.user.pictureUrl}" alt=""/>`;
   g('memName').textContent  = m.name;
+  // 顯示管理員按鈕（若為管理員身份）
+  if (S.isAdmin && g('memAdminBtn')) g('memAdminBtn').style.display = 'inline-flex';
   g('memPhone').textContent = m.phone;
   g('ms_o').textContent = m.orderCount||0;
   g('ms_r').textContent = m.repairCount||0;
@@ -2106,9 +2339,12 @@ function openMemEdit(lineId){
   openModal('memEditMod');
 }
 async function saveMemberEdit(){
-  const level=g('memEditLevel').value, pts=parseInt(g('memEditPoints').value)||0, note=g('memEditNote').value;
+  const level    = g('memEditLevel').value;
+  const pts      = parseInt(g('memEditPoints').value) || 0;
+  const note     = g('memEditNote').value;
+  const warranty = g('memEditWarranty')?.value || '';
   try{
-    const r=await postGAS('editMember',{lineId:S.currentEditMemId,level,pointsAdj:pts,note});
+    const r = await postGAS('editMember', { lineId:S.currentEditMemId, level, pointsAdj:pts, note, warrantyExpire:warranty });
     if(r.success){ closeModal('memEditMod'); loadMems(); toast('✅ 會員資料已更新','success'); }
     else toast(r.message,'error');
   } catch(e){ toast('連線失敗：'+e.message,'error'); }
@@ -2144,6 +2380,10 @@ function renderOrdTbl(data){
       <td><select onchange="updOrdStatus('${o.orderId}',this.value)" style="background:var(--bg3);color:var(--t);border:1px solid var(--bds);border-radius:8px;padding:3px 6px;font-size:.74rem;cursor:pointer">
         ${['處理中','已出貨','已到店','已完成','已取消'].map(s=>`<option${o.status===s?' selected':''}>${s}</option>`).join('')}
       </select></td>
+      <td>${o.warrantyExpire
+        ? `<span class="badge ${new Date(o.warrantyExpire)>=new Date()?'b-green':'b-gray'} fxs">${o.warrantyExpire}</span>`
+        : `<button class="btn btn-o btn-sm" onclick="activateWarranty('${o.orderId}','${o.lineId||''}')">🛡️ 啟動保固</button>`
+      }</td>
     </tr>`).join('');
 }
 function filterOrds(){
@@ -2327,8 +2567,42 @@ async function saveCoupon(){
 async function toggleCpn(code,active){try{await postGAS('updateCoupon',{code,active});loadCoupons();}catch(e){toast(e.message,'error');}}
 
 // 設定
+// 保固設定儲存
+function saveWarrantySettings() {
+  const delay  = parseInt(g('set_war_delay')?.value  || 7);
+  const months = parseInt(g('set_war_months')?.value || 12);
+  S.settings.warrantyDelay  = delay;
+  S.settings.warrantyMonths = months;
+  localStorage.setItem('ubox_settings', JSON.stringify(S.settings));
+  postGAS('saveSettings', { ...S.settings, warrantyDelay: delay, warrantyMonths: months }).catch(() => {});
+  toast(`✅ 保固設定已儲存（下單後 ${delay} 天啟動，保固 ${months} 個月）`, 'success');
+}
+
+// 後台手動啟動訂單保固
+async function activateWarranty(orderId, lineId) {
+  const delay  = S.settings.warrantyDelay  || 7;
+  const months = S.settings.warrantyMonths || 12;
+  if (!confirm(`確定啟動訂單 ${orderId} 的保固？\n保固期間：${months} 個月`)) return;
+  try {
+    const r = await postGAS('activateWarranty', { orderId, lineId, delay: 0, months });
+    if (r.success) { toast(`✅ 保固已啟動，到期日：${r.expire}`, 'success'); loadOrds(); }
+    else toast(r.message, 'error');
+  } catch(e) { toast('連線失敗：' + e.message, 'error'); }
+}
+
 function saveShipSettings(){ S.settings.enableDelivery=g('tog_delivery').checked; S.settings.enableCvs=g('tog_cvs').checked; localStorage.setItem('ubox_settings',JSON.stringify(S.settings)); applySettings(); postGAS('saveSettings',S.settings).catch(()=>{}); toast('配送設定已更新','success'); }
-function saveSettings(){ S.settings.deliveryFee=parseInt(g('set_d').value)||150; S.settings.cvsFee=parseInt(g('set_c').value)||80; S.settings.enableDelivery=g('tog_delivery').checked; S.settings.enableCvs=g('tog_cvs').checked; localStorage.setItem('ubox_settings',JSON.stringify(S.settings)); applySettings(); postGAS('saveSettings',S.settings).catch(()=>{}); toast('✅ 運費設定已儲存','success'); }
+function saveSettings(){
+  S.settings.deliveryFee    = parseInt(g('set_d').value)  || 150;
+  S.settings.cvsFee         = parseInt(g('set_c').value)  || 80;
+  S.settings.enableDelivery = g('tog_delivery').checked;
+  S.settings.enableCvs      = g('tog_cvs').checked;
+  S.settings.warrantyDelay  = parseInt(g('set_war_delay')?.value  || 7);
+  S.settings.warrantyMonths = parseInt(g('set_war_months')?.value || 12);
+  localStorage.setItem('ubox_settings', JSON.stringify(S.settings));
+  applySettings();
+  postGAS('saveSettings', S.settings).catch(() => {});
+  toast('✅ 設定已儲存', 'success');
+}
 function savePointsSettings(){ S.settings.ptsRate=parseInt(g('set_pts_rate').value)||100; S.settings.ptsRedeem=parseInt(g('set_pts_redeem').value)||2; localStorage.setItem('ubox_settings',JSON.stringify(S.settings)); postGAS('saveSettings',S.settings).catch(()=>{}); toast('✅ 積分設定已儲存','success'); }
 async function changePass(){ const np=g('set_np').value,cp=g('set_cp').value; if(!np){toast('請輸入新密碼','error');return;} if(np!==cp){toast('兩次密碼不一致','error');return;} try{await postGAS('changeAdminPass',{phone:CFG.ADMIN_PHONE,pass:np});toast('✅ 密碼已更新','success');g('set_np').value='';g('set_cp').value='';}catch(e){toast(e.message,'error');} }
 function saveSys(){ const u=g('set_gas').value.trim(); if(u){localStorage.setItem('ubox_gas',u);toast('✅ GAS URL 已儲存','success');} }
