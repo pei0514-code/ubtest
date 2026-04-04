@@ -1977,19 +1977,14 @@ function toggleFault(btn, text) {
 }
 function updateFaultSummary() {
   const active = Array.from(document.querySelectorAll('.fault-tag.active')).map(b=>b.textContent);
-  const cur = g('r_problem').value;
-  // Only auto-fill if field is empty or only contains previous fault tags
   if (!active.length) return;
-  const prefix = active.join('、') + '。
-';
-  // If user hasn't typed custom text yet, auto-fill
-  const existingLines = cur.split('
-');
-  const firstLine = existingLines[0];
-  // Check if first line looks like auto-generated (contains '、' or '。')
+  const cur = g('r_problem').value.trim();
+  const summary = active.join('、') + '。';
+  // 若欄位空白，或第一行是上一次自動生成的，就覆蓋
+  const firstLine = cur.split('\n')[0] || '';
   if (!cur || firstLine.endsWith('。')) {
-    g('r_problem').value = prefix + existingLines.slice(1).join('
-').trimStart();
+    const rest = cur.includes('\n') ? '\n' + cur.split('\n').slice(1).join('\n').trimStart() : '';
+    g('r_problem').value = summary + rest;
   }
 }
 async function submitRepair(){
