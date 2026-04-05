@@ -1622,11 +1622,13 @@ function renderCart() {
     </div>`).join('');
   // 自動帶入會員資料
   if(S.member){
-    if(g('dName')&&!g('dName').value)   g('dName').value  = S.member.name||'';
-    if(g('dPhone')&&!g('dPhone').value) g('dPhone').value = S.member.phone||'';
-    if(g('dAddr')&&!g('dAddr').value)   g('dAddr').value  = S.member.address||'';
-    if(g('cName')&&!g('cName').value)   g('cName').value  = S.member.name||'';
-    if(g('cPhone')&&!g('cPhone').value) g('cPhone').value = S.member.phone||'';
+    const fixPh = p => { const s=String(p||'').replace(/\D/g,''); return s.length===9&&s.startsWith('9')?'0'+s:s; };
+    const mPhone = fixPh(S.member.phone);
+    if(g('dName') &&!g('dName').value)  g('dName').value  = S.member.name||'';
+    if(g('dPhone')&&!g('dPhone').value) g('dPhone').value = mPhone;
+    if(g('dAddr') &&!g('dAddr').value)  g('dAddr').value  = S.member.address||'';
+    if(g('cName') &&!g('cName').value)  g('cName').value  = S.member.name||'';
+    if(g('cPhone')&&!g('cPhone').value) g('cPhone').value = mPhone;
   }
   applyShipUI(); updateSum();
 }
@@ -1939,11 +1941,31 @@ async function submitOrder() {
       note:g('orderNote').value,
     });
     if(r.success){
+      // 先存好訂單商品資訊再清空購物車
+      const confirmedItems = S.cart.map(i=>`${i.name} ×${i.qty}`).join('、');
       S.cart=[]; S.coupon=null; S.pointsDiscount=0; saveCart(); updateBadge();
-      toast(`🎉 訂單成功！${r.orderId}`, 'success');
       addNotif('📦 訂單建立成功', `訂單編號 ${r.orderId}，金額 NT$${total.toLocaleString()}`, 'order');
-      try{ if(liff.isInClient()) await liff.sendMessages([{type:'text',text:`📦 我已下單！\n訂單編號：${r.orderId}\n金額：NT$${total.toLocaleString()}`}]); }catch{}
-      setTimeout(()=>showPage('member'),1200);
+      // 用戶自行傳送訂單確認到 LINE 對話（節省 LIFF Messaging API 用量）
+      const orderMsg = [
+        '📦 UBOX 訂單確認',
+        '━━━━━━━━━━━━━━━━',
+        `訂單編號：${r.orderId}`,
+        `購買商品：${confirmedItems}`,
+        `訂單金額：NT$ ${total.toLocaleString()}`,
+        `配送方式：${S.shipMode==='delivery'?'🚚 宅配到府':'🏪 7-11超商取貨'}`,
+        `收件地址：${rName} / ${address}`,
+        `聯絡電話：${rPhone}`,
+        r.warrantyExpire ? `🛡️ 保固至：${r.warrantyExpire}` : '',
+        '━━━━━━━━━━━━━━━━',
+        '感謝您的訂購！我們將盡快聯絡確認。',
+      ].filter(Boolean).join('\n');
+      try {
+        if (typeof liff !== 'undefined' && liff.isInClient()) {
+          await liff.sendMessages([{ type:'text', text: orderMsg }]);
+        }
+      } catch(e2) { console.warn('sendMessages:', e2.message); }
+      toast(`🎉 訂單送出成功！${r.orderId}`, 'success');
+      setTimeout(()=>showPage('member'), 800);
     } else toast(r.message||'下單失敗','error');
   } catch(e){ toast('連線失敗：'+e.message,'error'); }
   finally{ btn.disabled=false; btn.textContent='✅ 確認下單（貨到付款）'; }
@@ -2085,7 +2107,14 @@ function fillMemProfile(){
   g('memPoints').style.display = 'inline-flex';
   g('ptsBadge').textContent = `${pts} 點`;
   // 等級進度條
-  const levels = [{name:'一般會員',min:0,max:999},{name:'銀卡會員',min:1000,max:2999},{name:'金卡會員',min:3000,max:9999},{name:'鑽石會員',min:10000,max:Infinity}];
+  // 等級依消費水準：盒子每台約5000
+  // 一般: 0~9999 (未滿2台), 銀卡: 10000~19999 (約2台), 金卡: 20000~39999 (約4台), 鑽石: 40000+ (約8台)
+  const levels = [
+    {name:'一般會員', min:0,     max:9999,  label:'（消費未滿 NT$10,000）'},
+    {name:'銀卡會員', min:10000, max:19999, label:'（消費滿 NT$10,000 約2台盒子）'},
+    {name:'金卡會員', min:20000, max:39999, label:'（消費滿 NT$20,000 約4台盒子）'},
+    {name:'鑽石會員', min:40000, max:Infinity, label:'（消費滿 NT$40,000 約8台盒子）'},
+  ];
   const spend = parseInt(m.totalSpend||0);
   const curLv = levels.findIndex((l,i)=>spend<l.max)||(levels.length-1);
   const lv = levels[Math.min(curLv,levels.length-1)];
@@ -2097,7 +2126,7 @@ function fillMemProfile(){
     g('levelBarWrap').style.display='block';
     g('levelBarFill').style.width = pct+'%';
     g('levelCur').textContent = lv.name;
-    g('levelNext').textContent = `${nextLv.name} (NT$${(nextLv.min-spend).toLocaleString()} 可升級)`;
+    g('levelNext').textContent = `升級至${nextLv.name} (再消費 NT$${(nextLv.min-spend).toLocaleString()})`;
   }
   if(g('edit_addr')) g('edit_addr').value = m.address||'';
   if(g('edit_email')) g('edit_email').value = m.email||'';
